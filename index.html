@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antara Innovations — Technology for a more human future</title>
+<meta name="description" content="Antara Innovations builds and publishes at the intersection of AI, governance and human behaviour: the Keel, Sentinel and Soundings frameworks, the Awakened Intelligence newsletter, and Antara Wellness.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="frameworks/index.html">Frameworks</a>
+      <a href="newsletter/index.html">Newsletter</a>
+      <a href="wellness/index.html">Antara Wellness</a>
+      <a href="about/index.html">About</a>
+      <a class="cta" href="mailto:hello@antarainnovations.com">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <img src="assets/hero-brand.png" alt="Antara Innovations — Human Potential, Amplified">
+</div>
+
+<div class="wrap hero-cap">
+  <span class="eyebrow">People / Technology / Wellbeing</span>
+  <span class="eyebrow">Zurich · London · Remote</span>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Antara Innovations</p>
+    <p class="lede">We work where artificial intelligence meets human judgement. Governance frameworks for organisations bringing AI into real decisions. A weekly read on what that shift does to how people think and lead. And a wellbeing product built on the same conviction, that <em>technology should restore what it has taken, not just speed up what's left.</em></p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <p class="kicker">What we do</p>
+    <h2 class="h">Three things, one conviction</h2>
+    <div class="grid grid-3" style="margin-top:28px">
+      <div class="card">
+        <div class="tag">Governance</div>
+        <h3>Frameworks</h3>
+        <p>Keel, Sentinel and Soundings. Built from real AI incidents, not policy templates, for organisations that need agentic AI to be governable before it's fast.</p>
+        <a class="link" href="frameworks/index.html">Explore the frameworks &rarr;</a>
+      </div>
+      <div class="card">
+        <div class="tag">Publishing</div>
+        <h3>The Awakened Intelligence</h3>
+        <p>A weekly newsletter on how AI changes human judgement, and what organisations should actually do about it. Written for banking, insurance and risk leaders first.</p>
+        <a class="link" href="newsletter/index.html">Read the newsletter &rarr;</a>
+      </div>
+      <div class="card">
+        <div class="tag">Wellbeing</div>
+        <h3>Antara Wellness</h3>
+        <p>The world's first psychological and psychosomatic wellbeing app, built on the same principle that runs through everything here, that being understood works better than being analysed.</p>
+        <a class="link" href="wellness/index.html">Visit Antara Wellness &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap" style="display:flex; gap:48px; flex-wrap:wrap; align-items:center; justify-content:space-between">
+    <div style="max-width:640px">
+      <p class="kicker">The territory</p>
+      <h2 class="h">AI governance, minus the theatre</h2>
+      <p>Most AI governance stops at what a system is allowed to access. Antara Innovations' work starts from what it can actually cause, whether that can be reconstructed afterwards, and whether the person meant to be supervising it still knows when not to trust it. That's the thread running through the frameworks, the newsletter and the wellbeing work: technology examined for what it does to human judgement, not just what it can do.</p>
+      <a class="btn btn-gold" href="about/index.html">About Abhinav Gaurav</a>
+    </div>
+    <div style="min-width:260px">
+      <div class="pillars" style="color:rgba(247,243,234,.6)">
+        <span>Governance</span><span>Cyberpsychology</span><span>Applied AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 class="h">For organisations</h3>
+        <p>If you're building an AI Centre of Excellence, or trying to work out whether your agents are governed properly rather than just monitored, start with Keel and Soundings.</p>
+        <a class="link" href="frameworks/index.html">See the frameworks &rarr;</a>
+      </div>
+      <div class="card">
+        <h3 class="h">For individuals</h3>
+        <p>If you want the weekly read, or you're curious about the wellbeing product built on the psychology behind all of this, start with the newsletter or with Antara Wellness.</p>
+        <a class="link" href="newsletter/index.html">Subscribe on LinkedIn &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand" style="margin-bottom:10px">
+        <img src="assets/logo.png" alt="Antara Innovations">
+        <span class="word">Antara <sup>Innovations</sup></span>
+      </div>
+      <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+    </div>
+    <div class="foot-links">
+      <a href="frameworks/index.html">Frameworks</a>
+      <a href="newsletter/index.html">Newsletter</a>
+      <a href="wellness/index.html">Antara Wellness</a>
+      <a href="about/index.html">About</a>
+      <a href="mailto:hello@antarainnovations.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('navToggle').addEventListener('click',function(){
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
