@@ -76,7 +76,20 @@ p{line-height:1.75; color:var(--muted); margin:0 0 16px}
 /* Sections */
 section{padding:64px 0}
 .section-tight{padding:36px 0}
-.lede{font-family:'Playfair Display',serif; font-size:28px; line-height:1.5; color:var(--forest); font-weight:500; max-width:none}
+.lede{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  line-height:1.5;
+  color:var(--forest);
+  font-weight:500;
+  max-width:none;
+  text-align:justify;
+}
+
+.lede + .lede{
+  margin-top:28px;
+  text-align:left;
+}
 .lede em{color:var(--gold); font-style:italic}
 .rule{border:none; border-top:1px solid var(--line); margin:0}
 .kicker{color:var(--gold); font-weight:600; letter-spacing:1.6px; text-transform:uppercase; font-size:12px}
