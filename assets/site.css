@@ -83,14 +83,19 @@ section{padding:64px 0}
   color:var(--forest);
   font-weight:500;
   max-width:none;
-  text-align:justify;
+  margin-bottom:24px;
 }
 
-.lede + .lede{
-  margin-top:28px;
-  text-align:left;
+.lede em{
+  color:var(--gold);
+  font-style:italic;
 }
-.lede em{color:var(--gold); font-style:italic}
+
+.lede:last-child{
+  margin-top:32px;
+  margin-bottom:0;
+}
+
 .rule{border:none; border-top:1px solid var(--line); margin:0}
 .kicker{color:var(--gold); font-weight:600; letter-spacing:1.6px; text-transform:uppercase; font-size:12px}
 h2.h{font-size:32px; color:var(--forest); margin:10px 0 18px}
