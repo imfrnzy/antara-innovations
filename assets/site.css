@@ -243,3 +243,9 @@ small.copy{color:var(--muted); font-size:12.5px}
     transition:none !important;
   }
 }
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--line); padding:22px 0}
+.faq-item:first-of-type{border-top:1px solid var(--line)}
+.faq-item h3{font-size:16px; color:var(--navy); margin:0 0 8px}
+.faq-item p{margin-bottom:0; font-size:14.5px}
