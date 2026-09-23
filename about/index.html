@@ -3,90 +3,438 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About — Antara Innovations</title>
-<meta name="description" content="Abhinav Gaurav — founder of Antara Innovations, author of Pixelated Souls, cyberpsychologist and AI governance strategist.">
+
+<title>About — Abhinav Gaurav | Antara Innovations</title>
+
+<meta name="description" content="Abhinav Gaurav — founder of Antara Innovations, author of Pixelated Souls, cyberpsychologist and AI strategist working across AI, human behaviour, governance and transformation.">
+
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
+
+<style>
+.about-hero{
+  padding:64px 0 56px;
+}
+
+.about-hero-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 360px;
+  align-items:center;
+  gap:72px;
+}
+
+.about-hero-copy{
+  max-width:760px;
+}
+
+.about-hero-copy .lede{
+  max-width:none;
+}
+
+.about-hero-copy > p:not(.kicker){
+  max-width:680px;
+}
+
+.about-portrait{
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center top;
+  border:2px solid var(--gold);
+  padding:5px;
+  background:var(--cream);
+}
+
+.about-divider{
+  border:none;
+  border-top:1px solid var(--line);
+  margin:0;
+}
+
+.about-section{
+  padding:72px 0;
+}
+
+.about-section + .about-section{
+  padding-top:0;
+}
+
+.about-work-grid{
+  margin-top:30px;
+}
+
+@media (max-width:820px){
+
+  .about-hero{
+    padding:48px 0 52px;
+  }
+
+  .about-hero-inner{
+    grid-template-columns:1fr;
+    gap:38px;
+  }
+
+  .about-portrait{
+    width:260px;
+    height:260px;
+    justify-self:start;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .about-portrait{
+    width:220px;
+    height:220px;
+  }
+
+}
+</style>
+
 </head>
+
 <body>
 
 <header class="site-header">
+
   <div class="nav">
+
     <a class="brand" href="../index.html">
       <img src="../assets/logo.png" alt="Antara Innovations">
       <span class="word">Antara <sup>Innovations</sup></span>
     </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      &#9776;
+    </button>
+
     <nav class="nav-links" id="navLinks">
       <a href="../frameworks/index.html">Frameworks</a>
       <a href="../newsletter/index.html">Newsletter</a>
       <a href="../wellness/index.html">Antara Wellness</a>
       <a href="../about/index.html">About</a>
-      <a class="cta" href="mailto:hello@antarainnovations.com">Get in touch</a>
+      <a class="cta" href="mailto:hello@antarainnovations.com">
+        Get in touch
+      </a>
     </nav>
+
   </div>
+
 </header>
 
-<section class="section-tight">
-  <div class="wrap">
-    <p class="kicker">About</p>
-    <h1 class="lede" style="font-size:36px">Abhinav Gaurav</h1>
-    <p style="max-width:640px; font-size:16px; margin-top:8px">Founder, Antara Innovations. Author, <em>Pixelated Souls</em>. Cyberpsychologist working hands-on in AI strategy and governance.</p>
-  </div>
-</section>
 
-<hr class="rule">
+<!-- ABOUT HERO -->
 
-<section>
-  <div class="wrap">
-    <div class="grid grid-2">
-      <div>
-        <h2 class="h">The territory</h2>
-        <p>Abhinav's work sits where AI, human behaviour and governance meet, a combination that most AI commentary treats as three separate conversations. He writes and advises from the position that the interesting risk in AI was never really about the model. It's about what happens to human judgement once the model is trusted to carry more of it.</p>
-        <p>That lens comes from a background most people in AI strategy don't have: training in cyberpsychology, sitting alongside years of hands-on enterprise AI and transformation work in financial services and technology.</p>
-      </div>
-      <div>
-        <h2 class="h">The work</h2>
-        <p>Founder of Antara Innovations and Antara Wellness, the psychological and psychosomatic wellbeing app built on the same underlying conviction, that people change when they feel understood, not analysed.</p>
-        <p>Author of <em>Pixelated Souls</em>. Creator of the Keel, Sentinel, Soundings and HALO frameworks. Writer of The Awakened Intelligence, a weekly newsletter for banking, insurance and risk leaders on how AI changes judgement, and what to do about it.</p>
-      </div>
+<section class="about-hero">
+
+  <div class="wrap about-hero-inner">
+
+    <div class="about-hero-copy">
+
+      <p class="kicker">About</p>
+
+      <h1 class="lede" style="font-size:36px;">
+        Abhinav Gaurav
+      </h1>
+
+      <p style="font-size:16px; margin-top:18px;">
+        Founder, Antara Innovations. Author, <em>Pixelated Souls</em>.
+        Cyberpsychologist working hands-on in AI strategy and governance.
+      </p>
+
     </div>
+
+
+    <img
+      class="about-portrait"
+      src="../assets/abhinav.jpg"
+      alt="Abhinav Gaurav, founder of Antara Innovations"
+    >
+
   </div>
+
 </section>
+
+
+<hr class="about-divider">
+
+
+<!-- TERRITORY -->
+
+<section class="about-section">
+
+  <div class="wrap">
+
+    <div class="grid grid-2">
+
+      <div>
+
+        <p class="kicker">The territory</p>
+
+        <h2 class="h">
+          Where technology meets human judgement
+        </h2>
+
+        <p>
+          Abhinav's work sits at the intersection of AI, human behaviour
+          and governance. Rather than treating these as separate disciplines,
+          he examines what happens when they collide inside real organisations.
+        </p>
+
+        <p>
+          The central concern is not simply what an AI system can do. It is
+          whether people understand what it is doing, whether they know when
+          to trust it, whether its decisions can be reconstructed, and whether
+          accountability survives when intelligence becomes increasingly
+          automated.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <p class="kicker">The perspective</p>
+
+        <h2 class="h">
+          Technology changes people, too
+        </h2>
+
+        <p>
+          AI is often discussed as a technology problem: models, data,
+          infrastructure, security and deployment. Abhinav's work looks at
+          the other side of the equation.
+        </p>
+
+        <p>
+          How does technology change judgement? How does repeated reliance
+          on intelligent systems change behaviour? What happens to trust,
+          responsibility and decision-making when the machine becomes part
+          of the cognitive loop?
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- THE WORK -->
+
+<section class="about-section">
+
+  <div class="wrap">
+
+    <p class="kicker">The work</p>
+
+    <h2 class="h">
+      Ideas that become systems
+    </h2>
+
+
+    <div class="grid grid-2 about-work-grid">
+
+      <div class="card">
+
+        <span class="tag">Antara Innovations</span>
+
+        <h3 class="h">
+          AI strategy &amp; governance
+        </h3>
+
+        <p>
+          Advisory work focused on helping organisations understand,
+          govern, secure and scale AI without losing sight of the people
+          responsible for using and supervising it.
+        </p>
+
+        <a class="link" href="../frameworks/index.html">
+          Explore the frameworks →
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <span class="tag">Research &amp; writing</span>
+
+        <h3 class="h">
+          The Awakened Intelligence
+        </h3>
+
+        <p>
+          A weekly publication exploring how intelligent systems reshape
+          judgement, leadership, behaviour and the organisations we build —
+          and what we need to understand before acting.
+        </p>
+
+        <a class="link" href="../newsletter/index.html">
+          Read the newsletter →
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <span class="tag">Author</span>
+
+        <h3 class="h">
+          <em>Pixelated Souls</em>
+        </h3>
+
+        <p>
+          An exploration of the relationship between technology, identity
+          and human behaviour — and what happens when the digital becomes
+          part of how we understand ourselves.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <span class="tag">Technology &amp; wellbeing</span>
+
+        <h3 class="h">
+          Antara Wellness
+        </h3>
+
+        <p>
+          A psychological and psychosomatic wellbeing technology built
+          around the idea that people respond differently when they feel
+          understood, rather than simply assessed.
+        </p>
+
+        <a class="link" href="../wellness/index.html">
+          Explore Antara Wellness →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FRAMEWORKS -->
 
 <section class="band">
-  <div class="wrap" style="text-align:center">
-    <p class="kicker">Get in touch</p>
-    <h2 class="h">Speaking, advisory, or press</h2>
-    <p style="max-width:520px; margin:0 auto 20px">For AI governance advisory, speaking enquiries or press, reach out directly.</p>
-    <a class="btn btn-gold" href="mailto:hello@antarainnovations.com">hello@antarainnovations.com</a>
+
+  <div class="wrap">
+
+    <p class="kicker">A body of work</p>
+
+    <h2 class="h">
+      Four frameworks. One underlying question.
+    </h2>
+
+    <p style="max-width:760px;">
+      How do we make increasingly intelligent technology understandable,
+      governable and compatible with human judgement?
+    </p>
+
+    <div class="pillars" style="margin-top:28px; color:rgba(247,243,234,.72);">
+      <span>Soundings</span>
+      <span>Sentinel</span>
+      <span>Keel</span>
+      <span>HALO</span>
+    </div>
+
+    <div style="margin-top:30px;">
+      <a class="btn btn-gold" href="../frameworks/index.html">
+        Explore the frameworks →
+      </a>
+    </div>
+
   </div>
+
 </section>
 
+
+<!-- CONTACT -->
+
+<section>
+
+  <div class="wrap" style="text-align:center">
+
+    <p class="kicker">Get in touch</p>
+
+    <h2 class="h">
+      Speaking, advisory, research or press
+    </h2>
+
+    <p style="max-width:620px; margin:0 auto 24px">
+      For speaking invitations, advisory work, research collaborations,
+      media enquiries or conversations around AI, governance and human
+      behaviour, get in touch directly.
+    </p>
+
+    <a class="btn btn-solid" href="mailto:hello@antarainnovations.com">
+      hello@antarainnovations.com
+    </a>
+
+  </div>
+
+</section>
+
+
 <footer>
+
   <div class="wrap foot-grid">
+
     <div>
+
       <div class="brand" style="margin-bottom:10px">
+
         <img src="../assets/logo.png" alt="Antara Innovations">
-        <span class="word">Antara <sup>Innovations</sup></span>
+
+        <span class="word">
+          Antara <sup>Innovations</sup>
+        </span>
+
       </div>
-      <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+
+      <small class="copy">
+        &copy; <span id="yr"></span> Antara Innovations.
+        Human Potential, Amplified.
+      </small>
+
     </div>
+
+
     <div class="foot-links">
+
       <a href="../frameworks/index.html">Frameworks</a>
       <a href="../newsletter/index.html">Newsletter</a>
       <a href="../wellness/index.html">Antara Wellness</a>
       <a href="../about/index.html">About</a>
       <a href="mailto:hello@antarainnovations.com">Contact</a>
+
     </div>
+
   </div>
+
 </footer>
 
+
 <script>
-document.getElementById('navToggle').addEventListener('click',function(){
+
+document.getElementById('navToggle').addEventListener('click', function(){
   document.getElementById('navLinks').classList.toggle('open');
 });
+
 document.getElementById('yr').textContent = new Date().getFullYear();
+
 </script>
+
 </body>
 </html>
