@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinel: find out what your AI agents can actually do | Antara Innovations</title>
+<meta name="description" content="A free AI agent security assessment. Sentinel maps what your AI agents are authorised to do, what they can see, and whether their actions can be reconstructed.">
+<link rel="canonical" href="https://www.antara-innovations.com/sentinel/">
+<meta property="og:title" content="Sentinel: a free AI agent security assessment">
+<meta property="og:description" content="Map what your AI agents can actually do, and whether their actions can be reconstructed afterwards.">
+<meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="sentinel.css">
+</head>
+<body>
+<script>
+if (window.self !== window.top) document.documentElement.classList.add("embedded");
+</script>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../">
+      <img src="../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../newsletter/">Newsletter</a>
+      <a href="../wellness/">Antara Wellness</a>
+      <a href="../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Sentinel">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="snd">
+<div class="wrap">
+
+  <!-- 1. Opening -->
+  <section id="s-intro" hidden>
+    <h1>Find out what your AI agents can actually do.</h1>
+    <p class="lead">Every permission looks fine on its own. Someone connects an agent to the CRM, then the payment system, then customer email, and each new tool was one small, reasonable yes. Nobody's watching what all of it adds up to together, until the agent has already acted, not recommended, acted.</p>
+    <p class="lead">Sentinel isn't a network scan. It's not about what an agent is allowed to access, it's about what it can cause, whether that can be proven afterwards, and what changes once it's learned something.</p>
+
+    <div class="situations">
+      <div>
+        <h3>A refund nobody reviewed</h3>
+        <p>An agent can read and write to the CRM, the payment system and customer email. It can issue a refund and confirm it by email, entirely on its own, before anyone outside the team sees it.</p>
+      </div>
+      <div>
+        <h3>A decision that already happened</h3>
+        <p>An agent ranks candidates and auto-rejects anyone below a score. A wrongly rejected person has no record of why, and nobody outside the team reviewed the scoring logic.</p>
+      </div>
+      <div>
+        <h3>The permission nobody remembers granting</h3>
+        <p>A shared service account can reset passwords and unlock accounts, for anyone, based on ticket text alone. It's logged. The permission itself was never the problem, until it was.</p>
+      </div>
+    </div>
+
+    <p>Three different agents, the same gap underneath. Each permission was reasonable in isolation. Nobody had mapped what the combination could actually do.</p>
+
+    <h2>What you'll come away with</h2>
+    <ul class="will">
+      <li>Which agents actually exist</li>
+      <li>What each one is authorised to do</li>
+      <li>What it can see, and whether that source is trusted</li>
+      <li>What it can cause, at worst</li>
+      <li>Whether that can be reconstructed afterwards</li>
+      <li>Where consequence and traceability don't match</li>
+    </ul>
+
+    <p class="small">About ten minutes. The free version covers up to three agents. Name the ones nobody registered too, the map is only useful if it's honest. Please don't type in personal details about individuals, passwords or trade secrets.</p>
+    <div class="row">
+      <button class="btn btn-solid" id="beginBtn">Begin Sentinel</button>
+      <button class="linkish" id="resumeLink" hidden>Continue where I stopped</button>
+    </div>
+  </section>
+
+  <!-- 2. Organisation -->
+  <section id="s-setup" hidden>
+    <h1>First, the organisation.</h1>
+    <p>This shapes the questions. It takes a few seconds.</p>
+    <form id="setupForm" novalidate>
+      <label class="field"><span>Organisation name</span><input name="org" required maxlength="120" autocomplete="organization"></label>
+      <div class="grid2">
+        <label class="field"><span>Industry</span>
+          <select name="industry" required>
+            <option value="">Choose one</option>
+            <option>Financial services</option><option>Insurance</option><option>Healthcare and life sciences</option>
+            <option>Retail and consumer goods</option><option>Luxury</option><option>Technology and software</option>
+            <option>Professional services</option><option>Media and marketing</option><option>Manufacturing</option>
+            <option>Energy and utilities</option><option>Public sector</option><option>Education</option>
+            <option>Charity or non-profit</option><option>Other</option>
+          </select>
+        </label>
+        <label class="field"><span>Number of people</span>
+          <select name="size" required>
+            <option value="">Choose one</option>
+            <option>1 to 49</option><option>50 to 249</option><option>250 to 999</option>
+            <option>1,000 to 4,999</option><option>5,000 or more</option>
+          </select>
+        </label>
+        <label class="field"><span>Your area</span>
+          <select name="role" required>
+            <option value="">Choose one</option>
+            <option>Executive leadership</option><option>Technology</option><option>Data or AI</option>
+            <option>Risk</option><option>Compliance or legal</option><option>Security</option>
+            <option>Operations</option><option>Product</option><option>Marketing</option><option>Other</option>
+          </select>
+        </label>
+      </div>
+      <p class="err" id="setupErr" role="alert"></p>
+      <button class="btn btn-solid" type="submit" id="setupBtn">Start the interview</button>
+    </form>
+  </section>
+
+  <!-- 3. Interview -->
+  <section id="s-interview" hidden>
+    <div class="interview">
+      <div class="line" aria-hidden="true">
+        <svg viewBox="0 0 120 360" id="lineSvg"></svg>
+        <p class="mobile-depth" id="mobileDepth"></p>
+      </div>
+      <div>
+        <p class="question" id="question" aria-live="polite"></p>
+        <p class="why" id="why" hidden></p>
+        <form class="answer" id="answerForm">
+          <label for="answer" class="small" style="display:block;margin-bottom:6px;color:var(--steel)">Your answer</label>
+          <textarea id="answer" maxlength="2000" required></textarea>
+          <div class="row">
+            <button class="btn btn-solid" type="submit" id="sendBtn">Send answer</button>
+            <button class="linkish" type="button" id="whyBtn">Why are you asking this?</button>
+            <span class="thinking" id="thinking" hidden>Reading your answer…</span>
+          </div>
+          <p class="err" id="answerErr" role="alert"></p>
+        </form>
+        <p class="found" id="found"></p>
+        <p class="small"><button class="linkish" id="finishBtn" type="button">Finish now and see my map</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Email gate -->
+  <section id="s-gate" hidden>
+    <h1>Your map is ready.</h1>
+    <p>No account and no password. Just your work email, so we can send you a copy and get in touch if useful.</p>
+    <form id="gateForm" novalidate>
+      <div class="grid2">
+        <label class="field"><span>First name</span><input name="first" required maxlength="60" autocomplete="given-name"></label>
+        <label class="field"><span>Last name</span><input name="last" required maxlength="60" autocomplete="family-name"></label>
+        <label class="field"><span>Work email</span><input name="email" type="email" required maxlength="120" autocomplete="email"></label>
+        <label class="field"><span>Job title</span><input name="title" required maxlength="100" autocomplete="organization-title"></label>
+      </div>
+      <label class="check"><input type="checkbox" name="updates"> You can contact me about this assessment, the detailed report, or Antara's consulting services.</label>
+      <p class="err" id="gateErr" role="alert"></p>
+      <button class="btn btn-solid" type="submit" id="gateBtn">Show my map</button>
+    </form>
+  </section>
+
+  <!-- 5. Results -->
+  <section id="s-results" hidden>
+    <h1 id="resTitle">Your Sentinel map</h1>
+    <p class="headline" id="headline"></p>
+    <div class="counts" id="counts"></div>
+    <div class="mapbox"><svg id="map" viewBox="0 0 640 420" role="img" aria-label="Map of agents by consequence and traceability"></svg></div>
+    <div class="top-finding" id="topFinding" hidden></div>
+    <h2>Every agent we mapped</h2>
+    <ul class="uclist" id="ucList"></ul>
+
+    <div class="locked">
+      <h2>The detailed report</h2>
+      <p>The free map shows where each agent sits. The detailed report shows why, and what to actually change.</p>
+      <ul>
+        <li>Each agent scored on consequence exposure and traceability separately</li>
+        <li>The evidence behind every classification, in your own words</li>
+        <li>Contradictions that came up during the interview</li>
+        <li>Facts still unproven, and who should prove them</li>
+        <li>An ordered remediation plan: what to restrict now, what control to build permanently</li>
+        <li>A one-page summary you can take to the board</li>
+      </ul>
+      <div class="row">
+        <button class="btn btn-gold" id="reportBtn">Get the detailed report</button>
+        <span class="small" id="reportMsg" role="status"></span>
+      </div>
+    </div>
+
+    <div class="locked">
+      <h2>A full Sentinel</h2>
+      <p>This assessment only knows what you know. The riskiest agent in most organisations is the one nobody's mentioned to you, built in a low-code tool, or paid for on a personal card. A full Sentinel starts with an identity sweep across every platform and service account, then interviews your teams directly under the same amnesty, and compares what it finds with what leadership knows.</p>
+      <div class="row">
+        <button class="btn btn-solid" id="fullBtn">Talk to Abhinav about a full Sentinel</button>
+        <span class="small" id="fullMsg" role="status"></span>
+      </div>
+    </div>
+
+    <p class="notice">Sentinel gives a structured view based only on your answers, using a fixed set of rules: the same answers always give the same result. It is not legal advice and not a formal security certification. Where a fact was unknown, the map assumes the worse case and marks it provisional.</p>
+    <p class="small"><button class="linkish" id="newBtn">Start a new assessment</button></p>
+  </section>
+
+  <section id="s-loading"><p class="thinking">Loading…</p></section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <p class="small">© <span id="yr"></span> Antara Innovations. Sentinel is an original framework by Abhinav Gaurav.</p>
+    <div class="foot-links">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../about/">About</a>
+      <a href="mailto:hello@antara-innovations.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+<script>
+const navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
+navToggle.addEventListener('click',function(){const o=navLinks.classList.toggle('open');navToggle.innerHTML=o?'&times;':'&#9776;';navToggle.setAttribute('aria-expanded',o);navToggle.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+/* Sentinel. Sits on top of ../assets/site.css and reuses its tokens. Same shape as Soundings, zone names differ. */
+.snd{padding:48px 0 80px}
+.snd .wrap{max-width:920px}
+.snd h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(30px,4.4vw,44px); line-height:1.15; margin:0 0 22px; letter-spacing:-.01em}
+.snd h2{color:var(--navy); font-size:21px; margin:0 0 12px}
+.snd p{max-width:66ch}
+.snd .lead{font-size:18.5px; color:var(--ink); line-height:1.7}
+.snd .small{font-size:13.5px}
+[hidden]{display:none !important}
+
+.situations{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin:34px 0; border-top:2px solid var(--navy)}
+.situations div{padding:18px 20px 6px 0}
+.situations div + div{padding-left:20px; border-left:1px solid var(--line)}
+.situations h3{font-size:15px; color:var(--navy); margin:0 0 8px}
+.situations p{font-size:14.5px; line-height:1.65}
+@media (max-width:760px){ .situations{grid-template-columns:1fr} .situations div + div{padding-left:0; border-left:0; border-top:1px solid var(--line)} }
+
+.will{margin:8px 0 30px; padding:0; list-style:none; columns:2; column-gap:40px; max-width:640px}
+.will li{padding:7px 0; border-bottom:1px solid var(--line); color:var(--ink); font-size:15px; break-inside:avoid}
+@media (max-width:620px){ .will{columns:1} }
+
+.field{display:block; margin:0 0 16px}
+.field span{display:block; font-size:13px; font-weight:600; color:var(--steel); margin-bottom:6px}
+.field input,.field select,.answer textarea{
+  width:100%; font:inherit; font-size:15.5px; color:var(--ink); background:var(--paper);
+  border:1px solid rgba(15,42,71,.22); border-radius:6px; padding:11px 12px;
+}
+.field input:focus,.field select:focus,.answer textarea:focus,.btn:focus-visible,.linkish:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 18px}
+@media (max-width:620px){ .grid2{grid-template-columns:1fr} }
+.check{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--muted); margin:6px 0 20px}
+.err{color:#9B2C2C; font-size:14px; min-height:20px; margin:6px 0 0}
+.linkish{background:none; border:0; padding:0; font:inherit; font-size:13.5px; color:var(--steel); border-bottom:1px solid var(--gold); cursor:pointer}
+.btn[disabled]{opacity:.55; cursor:progress}
+
+/* The interview. The sounding line is the one memorable thing on the page. */
+.interview{display:grid; grid-template-columns:120px 1fr; gap:40px; align-items:start; min-height:60vh}
+.line{position:sticky; top:96px; height:360px}
+.line svg{width:120px; height:360px; overflow:visible}
+.line .rope{stroke:var(--navy); stroke-width:1.5}
+.line .tick{stroke:var(--steel); stroke-width:1}
+.line .tick-label{font-size:10.5px; fill:var(--muted); font-family:Inter,sans-serif}
+.line .lead-weight{fill:var(--gold); transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.line .depth{font-size:12px; fill:var(--navy); font-weight:600; font-family:Inter,sans-serif}
+@media (prefers-reduced-motion:reduce){ .line .lead-weight{transition:none} }
+@media (max-width:760px){
+  .interview{grid-template-columns:1fr; gap:10px}
+  .line{position:static; height:auto}
+  .line svg{display:none}
+  .line .mobile-depth{display:block}
+}
+.mobile-depth{display:none; font-size:13px; color:var(--steel)}
+.question{font-family:'Playfair Display',Georgia,serif; font-size:clamp(22px,2.8vw,28px); line-height:1.4; color:var(--navy); margin:0 0 14px; min-height:2.8em}
+.why{background:var(--paper); border-left:3px solid var(--gold); padding:10px 14px; font-size:14.5px; color:var(--muted); margin:0 0 18px}
+.answer textarea{min-height:130px; resize:vertical; line-height:1.6}
+.row{display:flex; gap:18px; align-items:center; flex-wrap:wrap; margin-top:14px}
+.found{margin:26px 0 0; font-size:13.5px; color:var(--muted)}
+.found b{color:var(--navy); font-weight:600}
+.thinking{color:var(--steel); font-size:14px}
+
+/* Results */
+.headline{font-size:19px; color:var(--ink); line-height:1.7; max-width:62ch}
+.counts{display:flex; flex-wrap:wrap; gap:0; margin:26px 0 34px; border-top:2px solid var(--navy)}
+.counts div{padding:14px 26px 0 0; margin-right:26px}
+.counts strong{display:block; font-size:30px; color:var(--navy); font-family:'Playfair Display',Georgia,serif}
+.counts span{font-size:13px; color:var(--muted)}
+.mapbox{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:18px}
+.mapbox svg{width:100%; height:auto; display:block}
+.top-finding{margin:34px 0; padding:24px 26px; background:var(--navy); color:#EDF1F5; border-radius:8px}
+.top-finding h2{color:#fff}
+.top-finding p,.top-finding li{color:rgba(237,241,245,.85)}
+.top-finding ul{padding-left:18px; margin:10px 0 0}
+.zone-tag{display:inline-block; font-size:12.5px; font-weight:700; padding:3px 9px; border-radius:4px; margin-right:6px}
+.z-EXPOSURE{background:#F6E1DD; color:#8A2A1C}
+.z-CONTROLLED{background:#DDEBE3; color:#1F5A3A}
+.z-OVERBUILT{background:#F4EAD2; color:#7A5A12}
+.z-LOW_STAKES{background:#E6EAF0; color:#3E5871}
+.uclist{list-style:none; padding:0; margin:0 0 34px}
+.uclist li{padding:12px 0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+.locked{border:1px dashed rgba(15,42,71,.3); border-radius:8px; padding:22px 24px; margin:0 0 26px}
+.locked ul{margin:10px 0 18px; padding-left:18px; color:var(--ink)}
+.locked li{padding:3px 0}
+.notice{font-size:13px; color:var(--muted); margin-top:30px; max-width:70ch}
+.snd [tabindex="-1"]:focus{outline:none}
+.counts strong,.snd h1{font-variant-numeric:lining-nums}
+@media (max-width:620px){ .mapbox{overflow-x:auto; padding:10px} .mapbox svg{min-width:540px} }
+html.embedded .site-header,html.embedded .site-footer{display:none}
+html.embedded .snd{padding-top:22px}
+html.embedded body{background:var(--bg)}
