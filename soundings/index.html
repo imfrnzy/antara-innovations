@@ -103,7 +103,6 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
             <option>1,000 to 4,999</option><option>5,000 or more</option>
           </select>
         </label>
-        <label class="field"><span>Main country</span><input name="country" required maxlength="60" autocomplete="country-name"></label>
         <label class="field"><span>Your area</span>
           <select name="role" required>
             <option value="">Choose one</option>
@@ -147,7 +146,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
   <!-- 4. Email gate -->
   <section id="s-gate" hidden>
     <h1>Your map is ready.</h1>
-    <p>Tell us who you are and it's yours. Your work email also lets you come back to this assessment later.</p>
+    <p>No account and no password. Just your work email, so we can send you a copy and get in touch if useful.</p>
     <form id="gateForm" novalidate>
       <div class="grid2">
         <label class="field"><span>First name</span><input name="first" required maxlength="60" autocomplete="given-name"></label>
@@ -155,7 +154,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
         <label class="field"><span>Work email</span><input name="email" type="email" required maxlength="120" autocomplete="email"></label>
         <label class="field"><span>Job title</span><input name="title" required maxlength="100" autocomplete="organization-title"></label>
       </div>
-      <label class="check"><input type="checkbox" name="updates"> Send me the occasional note on AI governance from Antara Innovations. No more than once a month.</label>
+      <label class="check"><input type="checkbox" name="updates"> You can contact me about this assessment, the detailed report, or Antara's consulting services.</label>
       <p class="err" id="gateErr" role="alert"></p>
       <button class="btn btn-solid" type="submit" id="gateBtn">Show my map</button>
     </form>
