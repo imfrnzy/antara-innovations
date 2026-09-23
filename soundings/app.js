@@ -54,7 +54,7 @@ $("setupForm").onsubmit = async (e) => {
     }
     const uid = session.user.id;
     const { data: org, error: oe } = await sb.from("organisations").insert({
-      created_by: uid, name: vals.org.trim(), industry: vals.industry, size_band: vals.size, country: vals.country.trim(),
+      created_by: uid, name: vals.org.trim(), industry: vals.industry, size_band: vals.size,
     }).select().single();
     if (oe) throw oe;
     const { error: pe } = await sb.from("profiles").upsert({ user_id: uid, role_category: vals.role, organisation_id: org.id });
@@ -173,8 +173,6 @@ $("gateForm").onsubmit = async (e) => {
     };
     const { error } = await sb.from("profiles").upsert(prof);
     if (error) throw error;
-    // Turns the anonymous account into a real one. Supabase emails a confirmation link.
-    sb.auth.updateUser({ email }).catch(() => {});
     await showResults(prof);
   } catch (err) {
     console.error(err);
