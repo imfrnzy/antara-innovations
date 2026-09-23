@@ -99,6 +99,34 @@ section{padding:64px 0}
   margin-top:24px;
 }
 
+.app-badges{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.app-badges a{
+  display:block;
+}
+
+.app-badges img{
+  height:48px;
+  width:auto;
+  display:block;
+}
+
+@media (max-width:480px){
+  .app-badges{
+    gap:10px;
+  }
+
+  .app-badges img{
+    height:44px;
+  }
+}
+
 .rule{border:none; border-top:1px solid var(--line); margin:0}
 .kicker{color:var(--gold); font-weight:600; letter-spacing:1.6px; text-transform:uppercase; font-size:12px}
 h2.h{font-size:32px; color:var(--forest); margin:10px 0 18px}
