@@ -7,6 +7,7 @@
   --navy2:#173B60;
   --steel:#3E5871;
   --gold:#B8923F;
+  --gold-text:#8C6A28;
   --gold-light:#D9B86A;
   --ink:#151B23;
   --muted:#5B6472;
@@ -20,11 +21,12 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;
   background:var(--bg);
   color:var(--ink);
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{font-family:'Inter',system-ui,sans-serif; font-weight:700; letter-spacing:-.01em}
+h1,h2,h3{font-family:'Inter',system-ui,sans-serif; font-weight:700; letter-spacing:-.015em}
 .serif{font-family:'Playfair Display',Georgia,serif}
 a{color:inherit; text-decoration:none}
 img{max-width:100%; display:block}
@@ -84,16 +86,30 @@ p{line-height:1.75; color:var(--muted); margin:0 0 16px}
   max-width:var(--max); margin:0 auto; padding:20px 28px 0;
   display:flex; justify-content:space-between; align-items:baseline; gap:20px; flex-wrap:wrap;
 }
-.eyebrow{text-transform:uppercase; letter-spacing:2.2px; font-size:11px; color:var(--gold); font-weight:700}
+.eyebrow{text-transform:uppercase; letter-spacing:2.2px; font-size:11px; color:var(--gold-text); font-weight:700}
 
 /* Sections */
 section{padding:60px 0}
 .section-tight{padding:34px 0}
+
+/* Display: same size as before, just a distinct typeface for the one hero statement per page */
+.display{
+  font-family:'Playfair Display',Georgia,serif;
+  font-weight:600;
+  font-size:24px;
+  line-height:1.55;
+  letter-spacing:-.01em;
+  color:var(--navy);
+  max-width:none;
+  margin:0 0 20px;
+}
+.display em{color:var(--gold-text); font-style:italic}
+
 .lede{
   font-size:24px; line-height:1.55; color:var(--navy); font-weight:600;
   max-width:none; margin-bottom:20px; letter-spacing:-.01em;
 }
-.lede em{color:var(--gold); font-style:normal; font-weight:700}
+.lede em{color:var(--gold-text); font-style:normal; font-weight:700}
 .lede:last-child{margin-top:28px; margin-bottom:0}
 .band p + p{margin-top:22px}
 
@@ -103,19 +119,19 @@ section{padding:60px 0}
 @media (max-width:480px){ .app-badges{gap:10px} .app-badges img{height:42px} }
 
 .rule{border:none; border-top:1px solid var(--line); margin:0}
-.kicker{color:var(--gold); font-weight:700; letter-spacing:1.4px; text-transform:uppercase; font-size:11.5px}
+.kicker{color:var(--gold-text); font-weight:700; letter-spacing:1.4px; text-transform:uppercase; font-size:11.5px}
 h2.h{font-size:28px; color:var(--navy); margin:8px 0 16px}
 h3.h{font-size:18px; color:var(--navy); margin:0 0 8px}
 
-/* Stat strip */
+/* Stat strip: same sizes, fixed case and spacing so the long labels read cleanly */
 .stat-strip{
   display:flex; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
   margin:34px 0 6px;
 }
-.stat{flex:1; padding:20px 26px; border-right:1px solid var(--line)}
+.stat{flex:1; padding:22px 26px; border-right:1px solid var(--line); text-align:left}
 .stat:last-child{border-right:none}
 .stat .num{font-size:26px; font-weight:800; color:var(--navy); letter-spacing:-.01em}
-.stat .label{font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-top:4px}
+.stat .label{font-size:11.5px; line-height:1.6; color:var(--muted); text-transform:none; letter-spacing:0; margin-top:8px}
 @media (max-width:700px){
   .stat-strip{flex-wrap:wrap}
   .stat{flex:1 1 50%; border-right:1px solid var(--line)}
@@ -133,19 +149,36 @@ h3.h{font-size:18px; color:var(--navy); margin:0 0 8px}
 .card{
   background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:28px;
   box-shadow:var(--shadow);
+  transition:transform .25s ease, box-shadow .25s ease;
 }
-.card .tag{color:var(--gold); font-size:11.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase}
+@media (hover:hover) and (pointer:fine){
+  .card:hover{ transform:translateY(-4px); box-shadow:0 14px 30px rgba(15,42,71,.12); }
+}
+.card .tag{color:var(--gold-text); font-size:11.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase}
 .card h3{margin:10px 0 10px; color:var(--navy)}
 .card p{margin-bottom:14px}
 .card .link{color:var(--navy); font-weight:600; font-size:13.5px; border-bottom:1px solid var(--gold); padding-bottom:2px}
 .card .link:hover{color:var(--gold)}
+
+/* Framework mark icons — thin line, single colour, draw in with the card's reveal */
+.card-icon{width:36px; height:36px; color:var(--navy); margin-bottom:12px; overflow:visible; display:block}
+.card-icon .draw{
+  fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:140; stroke-dashoffset:140;
+  transition:stroke-dashoffset 1s cubic-bezier(.16,1,.3,1);
+  transition-delay:var(--reveal-delay, 0ms);
+}
+.card.is-visible .card-icon .draw{ stroke-dashoffset:0 }
+@media (prefers-reduced-motion: reduce){
+  .card-icon .draw{ stroke-dashoffset:0 !important; transition:none !important; }
+}
 
 /* Issue / archive cards */
 .issue-card{
   background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:26px 28px;
   margin-bottom:16px;
 }
-.issue-card .issue-no{color:var(--gold); font-size:11.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase}
+.issue-card .issue-no{color:var(--gold-text); font-size:11.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase}
 .issue-card h3{margin:8px 0 10px; color:var(--navy); font-size:19px}
 .issue-card p{margin-bottom:12px}
 .issue-card .link{color:var(--navy); font-weight:600; font-size:13.5px; border-bottom:1px solid var(--gold); padding-bottom:2px}
