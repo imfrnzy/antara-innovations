@@ -1,0 +1,83 @@
+/* Soundings tour: silent, animated walkthrough. Reuses ../assets/site.css tokens. */
+body.tour-body{overflow:hidden; height:100vh}
+.tour{position:fixed; inset:0; background:var(--navy); overflow:hidden}
+.tour-top{position:absolute; top:0; left:0; right:0; z-index:5; padding:18px 22px 0}
+.dots{display:flex; gap:5px}
+.dots i{flex:1; height:3px; background:rgba(255,255,255,.22); border-radius:2px; overflow:hidden; position:relative}
+.dots i b{position:absolute; inset:0; width:0; background:var(--gold-light); display:block; transform-origin:left}
+.dots i.done b{width:100%; transition:none}
+.dots i.active b{width:0; animation:fillbar linear forwards}
+@keyframes fillbar{to{width:100%}}
+.tour-brand{display:flex; justify-content:space-between; align-items:center; margin:12px 0 0}
+.tour-brand span{font-family:'Playfair Display',Georgia,serif; color:#fff; font-size:14.5px; opacity:.85}
+.tour-controls{display:flex; gap:14px; align-items:center}
+.tour-controls button{background:none; border:0; color:#fff; opacity:.75; cursor:pointer; font-size:13px; font-family:'Inter',sans-serif; padding:4px}
+.tour-controls button:hover{opacity:1}
+.skip{border-bottom:1px solid rgba(255,255,255,.5)}
+
+.stage{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:90px 24px 70px}
+.scene{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:90px 28px 70px; opacity:0; pointer-events:none; transition:opacity .5s ease}
+.scene.on{opacity:1; pointer-events:auto}
+.scene .inner{max-width:760px; width:100%; text-align:center}
+.scene h2{font-family:'Playfair Display',Georgia,serif; color:#fff; font-weight:600; font-size:clamp(26px,4.4vw,42px); line-height:1.3; margin:0 0 14px; letter-spacing:-.01em}
+.scene .kick{text-transform:none; letter-spacing:.4px; font-size:13px; color:var(--gold-light); font-weight:600; margin:0 0 14px}
+.scene p{color:rgba(237,241,245,.82); font-size:17px; line-height:1.65; max-width:60ch; margin:0 auto}
+.pop{opacity:0; transform:translateY(14px); animation:pop .6s ease forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.35s}.d3{animation-delay:.65s}.d4{animation-delay:.95s}
+@keyframes pop{to{opacity:1; transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){.pop{animation:none; opacity:1; transform:none}}
+
+.sits{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:30px; text-align:left}
+.sits div{padding:0 18px; opacity:.35; transition:opacity .4s ease}
+.sits div + div{border-left:1px solid rgba(255,255,255,.18)}
+.sits div.on{opacity:1}
+.sits h4{color:#fff; font-size:14.5px; margin:0 0 8px}
+.sits p{color:rgba(237,241,245,.72); font-size:13.5px; margin:0; max-width:none}
+@media (max-width:700px){.sits{grid-template-columns:1fr; gap:14px}.sits div + div{border-left:0; border-top:1px solid rgba(255,255,255,.18); padding-top:14px}}
+
+.checklist{display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:26px; text-align:left}
+.checklist div{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:8px; padding:16px 18px}
+.checklist h4{color:var(--gold-light); font-size:12.5px; letter-spacing:.6px; margin:0 0 10px}
+.checklist ul{list-style:none; margin:0; padding:0}
+.checklist li{color:rgba(237,241,245,.85); font-size:14px; padding:5px 0; opacity:0; transform:translateX(-6px)}
+.checklist li.on{animation:slide .4s ease forwards}
+@keyframes slide{to{opacity:1; transform:none}}
+@media (max-width:700px){.checklist{grid-template-columns:1fr}}
+
+.chat{max-width:560px; margin:26px auto 0; text-align:left}
+.bubble{max-width:82%; padding:11px 16px; border-radius:12px; font-size:14.5px; line-height:1.55; margin:0 0 10px; opacity:0; transform:translateY(8px)}
+.bubble.on{animation:slide2 .45s ease forwards}
+@keyframes slide2{to{opacity:1; transform:none}}
+.b-ask{background:rgba(255,255,255,.08); color:#fff; border-bottom-left-radius:3px}
+.b-ans{background:var(--gold-light); color:#3A2E10; margin-left:auto; border-bottom-right-radius:3px}
+.b-why{background:none; border:1px dashed rgba(255,255,255,.35); color:rgba(237,241,245,.7); font-size:12.5px; font-style:italic}
+
+.mapwrap{margin-top:24px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:16px}
+.mapwrap svg{width:100%; height:auto; display:block}
+
+.deliv{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px; text-align:left}
+.deliv div{opacity:0; transform:translateY(10px)}
+.deliv div.on{animation:pop .5s ease forwards}
+.deliv h4{color:#fff; font-size:14.5px; margin:0 0 6px}
+.deliv p{color:rgba(237,241,245,.72); font-size:13px; margin:0}
+@media (max-width:700px){.deliv{grid-template-columns:1fr}}
+
+.end .inner{max-width:600px}
+.end .btnrow{display:flex; gap:14px; justify-content:center; margin-top:30px; flex-wrap:wrap}
+.tourbtn{font:inherit; font-size:14.5px; font-weight:600; padding:13px 26px; border-radius:6px; cursor:pointer; border:1px solid rgba(255,255,255,.5); background:transparent; color:#fff}
+.tourbtn:hover{border-color:#fff}
+.tourbtn.solid{background:var(--gold); border-color:var(--gold); color:#221904}
+.tourbtn.solid:hover{background:var(--gold-light); border-color:var(--gold-light)}
+
+.tour-bottom{position:absolute; bottom:22px; left:0; right:0; display:flex; justify-content:center; gap:26px; z-index:5}
+.navbtn{background:none; border:0; color:rgba(255,255,255,.6); cursor:pointer; font-size:22px; padding:6px 14px; line-height:1}
+.navbtn:hover{color:#fff}
+.navbtn[disabled]{opacity:.25; cursor:default}
+
+/* Modal for the assessment */
+.modalbg{position:fixed; inset:0; background:rgba(15,42,71,.6); backdrop-filter:blur(2px); display:flex; align-items:center; justify-content:center; padding:22px; z-index:50; opacity:0; pointer-events:none; transition:opacity .25s ease}
+.modalbg.on{opacity:1; pointer-events:auto}
+.modalbox{background:var(--bg); width:100%; max-width:760px; height:min(88vh,880px); border-radius:12px; overflow:hidden; position:relative; box-shadow:0 30px 70px rgba(0,0,0,.4); transform:translateY(14px) scale(.98); transition:transform .25s ease}
+.modalbg.on .modalbox{transform:none}
+.modalbox iframe{width:100%; height:100%; border:0; display:block}
+.modalclose{position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%; border:0; background:var(--paper); color:var(--navy); font-size:18px; cursor:pointer; z-index:2; box-shadow:0 2px 8px rgba(0,0,0,.15)}

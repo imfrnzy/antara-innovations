@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soundings: find out what AI is doing in your organisation | Antara Innovations</title>
+<meta name="description" content="A free AI governance assessment. Soundings maps what AI is actually running in your organisation, what it touches, and whether the oversight matches the risk.">
+<link rel="canonical" href="https://www.antara-innovations.com/soundings/">
+<meta property="og:title" content="Soundings: a free AI oversight assessment">
+<meta property="og:description" content="Map what AI is actually running in your organisation, and whether the oversight matches the risk.">
+<meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="soundings.css">
+</head>
+<body>
+<script>
+// Opened inside the tour's assessment modal: drop the site chrome, the modal already frames it.
+if (window.self !== window.top) document.documentElement.classList.add("embedded");
+</script>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../">
+      <img src="../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../newsletter/">Newsletter</a>
+      <a href="../wellness/">Antara Wellness</a>
+      <a href="../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Soundings">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="snd">
+<div class="wrap">
+
+  <!-- 1. Opening -->
+  <section id="s-intro" hidden>
+    <h1>Find out what AI is actually doing inside your organisation.</h1>
+    <p class="lead">AI rarely turns up as a tidy, approved programme. A team has a problem and someone finds a tool. Someone else builds a shortcut because the approved system is too slow. A few months later AI is touching customer data, decisions and emails, and nobody holds the full picture.</p>
+    <p class="lead">Soundings builds that picture from what you tell it. You won't be asked to rate yourself out of ten. We work through what's running, what it touches, what happens when it's wrong, and who is watching.</p>
+
+    <div class="situations">
+      <div>
+        <h3>A customer decision</h3>
+        <p>An AI tool helps decide which customer complaints get escalated. The team calls it an internal productivity tool.</p>
+      </div>
+      <div>
+        <h3>A workaround nobody sees</h3>
+        <p>The approved AI platform goes down for a day. People switch to another tool that IT has never heard of, and don't switch back.</p>
+      </div>
+      <div>
+        <h3>The human check</h3>
+        <p>"Don't worry, a human checks everything." Nobody can show what was checked, when, or what the checker was meant to catch.</p>
+      </div>
+    </div>
+
+    <p>Three very different situations with the same gap underneath. Nobody can trace the path from what the AI produces to what it changes in the real world.</p>
+
+    <h2>What you'll come away with</h2>
+    <ul class="will">
+      <li>Which AI is actually in use</li>
+      <li>What it touches</li>
+      <li>What happens if it's wrong</li>
+      <li>Who knows it exists</li>
+      <li>How it's watched</li>
+      <li>Where the risk and the oversight don't match</li>
+    </ul>
+
+    <p class="small">About ten minutes. The free version covers up to three uses of AI. Name the unofficial ones too, the map is only useful if it's honest. Please don't type in personal details about individuals, passwords or trade secrets.</p>
+    <div class="row">
+      <button class="btn btn-solid" id="beginBtn">Begin Soundings</button>
+      <button class="linkish" id="resumeLink" hidden>Continue where I stopped</button>
+    </div>
+  </section>
+
+  <!-- 2. Organisation -->
+  <section id="s-setup" hidden>
+    <h1>First, the organisation.</h1>
+    <p>This shapes the questions. It takes a few seconds.</p>
+    <form id="setupForm" novalidate>
+      <label class="field"><span>Organisation name</span><input name="org" required maxlength="120" autocomplete="organization"></label>
+      <div class="grid2">
+        <label class="field"><span>Industry</span>
+          <select name="industry" required>
+            <option value="">Choose one</option>
+            <option>Financial services</option><option>Insurance</option><option>Healthcare and life sciences</option>
+            <option>Retail and consumer goods</option><option>Luxury</option><option>Technology and software</option>
+            <option>Professional services</option><option>Media and marketing</option><option>Manufacturing</option>
+            <option>Energy and utilities</option><option>Public sector</option><option>Education</option>
+            <option>Charity or non-profit</option><option>Other</option>
+          </select>
+        </label>
+        <label class="field"><span>Number of people</span>
+          <select name="size" required>
+            <option value="">Choose one</option>
+            <option>1 to 49</option><option>50 to 249</option><option>250 to 999</option>
+            <option>1,000 to 4,999</option><option>5,000 or more</option>
+          </select>
+        </label>
+        <label class="field"><span>Main country</span><input name="country" required maxlength="60" autocomplete="country-name"></label>
+        <label class="field"><span>Your area</span>
+          <select name="role" required>
+            <option value="">Choose one</option>
+            <option>Executive leadership</option><option>Technology</option><option>Data or AI</option>
+            <option>Risk</option><option>Compliance or legal</option><option>Security</option>
+            <option>Operations</option><option>Product</option><option>Marketing</option><option>Other</option>
+          </select>
+        </label>
+      </div>
+      <p class="err" id="setupErr" role="alert"></p>
+      <button class="btn btn-solid" type="submit" id="setupBtn">Start the interview</button>
+    </form>
+  </section>
+
+  <!-- 3. Interview -->
+  <section id="s-interview" hidden>
+    <div class="interview">
+      <div class="line" aria-hidden="true">
+        <svg viewBox="0 0 120 360" id="lineSvg"></svg>
+        <p class="mobile-depth" id="mobileDepth"></p>
+      </div>
+      <div>
+        <p class="question" id="question" aria-live="polite"></p>
+        <p class="why" id="why" hidden></p>
+        <form class="answer" id="answerForm">
+          <label for="answer" class="small" style="display:block;margin-bottom:6px;color:var(--steel)">Your answer</label>
+          <textarea id="answer" maxlength="2000" required></textarea>
+          <div class="row">
+            <button class="btn btn-solid" type="submit" id="sendBtn">Send answer</button>
+            <button class="linkish" type="button" id="whyBtn">Why are you asking this?</button>
+            <span class="thinking" id="thinking" hidden>Reading your answer…</span>
+          </div>
+          <p class="err" id="answerErr" role="alert"></p>
+        </form>
+        <p class="found" id="found"></p>
+        <p class="small"><button class="linkish" id="finishBtn" type="button">Finish now and see my map</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Email gate -->
+  <section id="s-gate" hidden>
+    <h1>Your map is ready.</h1>
+    <p>Tell us who you are and it's yours. Your work email also lets you come back to this assessment later.</p>
+    <form id="gateForm" novalidate>
+      <div class="grid2">
+        <label class="field"><span>First name</span><input name="first" required maxlength="60" autocomplete="given-name"></label>
+        <label class="field"><span>Last name</span><input name="last" required maxlength="60" autocomplete="family-name"></label>
+        <label class="field"><span>Work email</span><input name="email" type="email" required maxlength="120" autocomplete="email"></label>
+        <label class="field"><span>Job title</span><input name="title" required maxlength="100" autocomplete="organization-title"></label>
+      </div>
+      <label class="check"><input type="checkbox" name="updates"> Send me the occasional note on AI governance from Antara Innovations. No more than once a month.</label>
+      <p class="err" id="gateErr" role="alert"></p>
+      <button class="btn btn-solid" type="submit" id="gateBtn">Show my map</button>
+    </form>
+  </section>
+
+  <!-- 5. Results -->
+  <section id="s-results" hidden>
+    <h1 id="resTitle">Your Soundings map</h1>
+    <p class="headline" id="headline"></p>
+    <div class="counts" id="counts"></div>
+    <div class="mapbox"><svg id="map" viewBox="0 0 640 420" role="img" aria-label="Map of AI uses by risk and oversight"></svg></div>
+    <div class="top-finding" id="topFinding" hidden></div>
+    <h2>Every use we mapped</h2>
+    <ul class="uclist" id="ucList"></ul>
+
+    <div class="locked">
+      <h2>The detailed report</h2>
+      <p>The free map shows where each use sits. The detailed report shows why, and what to do about it.</p>
+      <ul>
+        <li>Each use scored separately on regulation, data and reversibility</li>
+        <li>The evidence behind every classification, in your own words</li>
+        <li>Contradictions that came up during the interview</li>
+        <li>Facts still unproven, and who should prove them</li>
+        <li>An ordered action plan, with the review and approval checks each use needs</li>
+        <li>A one-page summary you can take to the board</li>
+      </ul>
+      <div class="row">
+        <button class="btn btn-gold" id="reportBtn">Get the detailed report</button>
+        <span class="small" id="reportMsg" role="status"></span>
+      </div>
+    </div>
+
+    <div class="locked">
+      <h2>A full Soundings</h2>
+      <p>This assessment only knows what you know. The riskiest AI in most organisations is the use nobody has mentioned to you. A full Soundings interviews your teams directly, with an amnesty agreed upfront so people are honest, and compares their answers with yours. The gaps between the two are usually the finding.</p>
+      <div class="row">
+        <button class="btn btn-solid" id="fullBtn">Talk to Abhinav about a full Soundings</button>
+        <span class="small" id="fullMsg" role="status"></span>
+      </div>
+    </div>
+
+    <p class="notice">Soundings gives a structured view based only on your answers, using a fixed set of rules: the same answers always give the same result. It is not legal advice and not a formal regulatory classification. Where a fact was unknown, the map assumes the worse case and marks it provisional.</p>
+    <p class="small"><button class="linkish" id="newBtn">Start a new assessment</button></p>
+  </section>
+
+  <section id="s-loading"><p class="thinking">Loading…</p></section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <p class="small">© <span id="yr"></span> Antara Innovations. Soundings is an original framework by Abhinav Gaurav.</p>
+    <div class="foot-links">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../about/">About</a>
+      <a href="mailto:hello@antara-innovations.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+<script>
+const navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
+navToggle.addEventListener('click',function(){const o=navLinks.classList.toggle('open');navToggle.innerHTML=o?'&times;':'&#9776;';navToggle.setAttribute('aria-expanded',o);navToggle.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Soundings works | Antara Innovations</title>
+<meta name="description" content="A two minute walkthrough of Soundings, the AI oversight diagnostic from Antara Innovations.">
+<link rel="canonical" href="https://www.antara-innovations.com/soundings/tour/">
+<link rel="icon" href="../../assets/favicon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../tour.css">
+</head>
+<body class="tour-body">
+
+<div class="tour" id="tourRoot">
+  <div class="tour-top">
+    <div class="dots" id="dots"></div>
+    <div class="tour-brand">
+      <span>Soundings &middot; how it works</span>
+      <div class="tour-controls">
+        <button id="playBtn" type="button" aria-label="Pause">Pause</button>
+        <button class="skip" id="skipBtn" type="button">Skip to assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+
+    <section class="scene" data-ms="5500">
+      <div class="inner">
+        <p class="kick pop d1">Proprietary framework</p>
+        <h2 class="pop d2">SOUNDINGS</h2>
+        <p class="pop d3">Knowing what's running, and whether it's watched properly, before you build anything.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="5500">
+      <div class="inner">
+        <h2 class="pop d1">Nobody can answer a simple question</h2>
+        <p class="pop d2">Ask five people in the same company whether AI is being used correctly, and you get five different answers. Nobody agreed what correct means.</p>
+      </div>
+    </section>
+
+    <section class="scene sitscene" data-ms="9500">
+      <div class="inner">
+        <h2 class="pop d1">It shows up as three kinds of gap</h2>
+        <div class="sits" id="sits">
+          <div data-t="0"><h4>A customer decision</h4><p>An AI tool helps decide which complaints get escalated. The team calls it an internal productivity tool.</p></div>
+          <div data-t="3200"><h4>A workaround nobody sees</h4><p>The approved platform goes down for a day. People switch to a tool IT has never heard of, and don't switch back.</p></div>
+          <div data-t="6400"><h4>The human check</h4><p>"Don't worry, a human checks everything." Nobody can show what was checked, or when.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="7000">
+      <div class="inner">
+        <h2 class="pop d1">The failure isn't the wrong AI</h2>
+        <p class="pop d2" style="font-size:19px; color:#fff">It's the wrong amount of oversight for what it actually does.</p>
+        <p class="pop d3">High-risk work with no one watching. Low-risk work buried under process so heavy that people build their own workaround. Both point the same direction: nobody set the level of scrutiny on purpose.</p>
+      </div>
+    </section>
+
+    <section class="scene chkscene" data-ms="9500">
+      <div class="inner">
+        <h2 class="pop d1">Soundings scores two things separately</h2>
+        <div class="checklist" id="checklist">
+          <div><h4>RISK</h4><ul>
+            <li data-t="500">Does it touch a regulated decision?</li>
+            <li data-t="1500">What does it see, and where does the data go?</li>
+            <li data-t="2500">If it's wrong, how easily is that put right?</li>
+          </ul></div>
+          <div><h4>OVERSIGHT</h4><ul>
+            <li data-t="4200">Governed &mdash; sanctioned, reviewed, monitored</li>
+            <li data-t="5200">Informal &mdash; known about, nobody checking</li>
+            <li data-t="6200">Invisible &mdash; nobody's agreed it exists</li>
+          </ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="8500">
+      <div class="inner">
+        <h2 class="pop d1">One question at a time</h2>
+        <div class="chat" id="chat1">
+          <div class="bubble b-ask" data-t="300">Which AI tools are people in your organisation actually using?</div>
+          <div class="bubble b-ans" data-t="2200">Mostly Copilot. Marketing also has some custom tools.</div>
+          <div class="bubble b-ask" data-t="4400">You mentioned "some custom tools." What is that one actually doing?</div>
+          <div class="bubble b-ans" data-t="6600">One of them decides which complaints get escalated.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="8500">
+      <div class="inner">
+        <h2 class="pop d1">Every answer gets chased, not just recorded</h2>
+        <div class="chat" id="chat2">
+          <div class="bubble b-ask" data-t="300">Does anyone check the score before it changes what happens to that customer?</div>
+          <div class="bubble b-why" data-t="1600">Why we ask: if nobody's in between, a wrong score reaches the customer straight away.</div>
+          <div class="bubble b-ans" data-t="3600">Team leads spot check some. There's no log of it.</div>
+          <div class="bubble b-ask" data-t="5800">So a review may happen, but there's no record it does. Noted.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene mapscene" data-ms="12000">
+      <div class="inner" style="max-width:660px">
+        <h2 class="pop d1">Then the picture draws itself</h2>
+        <div class="mapwrap"><svg viewBox="0 0 640 380" id="tourMap"></svg></div>
+      </div>
+    </section>
+
+    <section class="scene delscene" data-ms="9000">
+      <div class="inner">
+        <h2 class="pop d1">Three things land on the table</h2>
+        <div class="deliv" id="deliv">
+          <div data-t="400"><h4>The mismatch map</h4><p>Every use, plotted and ranked. Nothing buried in an appendix.</p></div>
+          <div data-t="2000"><h4>A prioritised action list</h4><p>Sequenced by what's actually dangerous, not what's loudest.</p></div>
+          <div data-t="3600"><h4>The inputs Keel needs</h4><p>Operating model and approval-gate decisions, on evidence.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene end" data-ms="0">
+      <div class="inner">
+        <p class="kick pop d1">That's Soundings</p>
+        <h2 class="pop d2">Want to know what's actually running in your organisation?</h2>
+        <p class="pop d3">The free assessment takes about ten minutes and covers up to three uses of AI. Name the unofficial ones too, it's only useful if it's honest.</p>
+        <div class="btnrow pop d4">
+          <button class="tourbtn" id="backBtn" type="button">Back to frameworks</button>
+          <button class="tourbtn solid" id="continueBtn" type="button">Continue to the assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tour-bottom" id="tourBottom">
+    <button class="navbtn" id="prevBtn" type="button" aria-label="Previous">&#8592;</button>
+    <button class="navbtn" id="nextBtn" type="button" aria-label="Next">&#8594;</button>
+  </div>
+</div>
+
+<div class="modalbg" id="modalbg">
+  <div class="modalbox" role="dialog" aria-modal="true" aria-label="Soundings assessment">
+    <button class="modalclose" id="modalClose" aria-label="Close">&times;</button>
+    <iframe id="modalFrame" title="Soundings assessment" src=""></iframe>
+  </div>
+</div>
+
+<script type="module" src="tour.js"></script>
+</body>
+</html>
