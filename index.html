@@ -22,9 +22,12 @@
       <span class="word">Antara <sup>Innovations</sup></span>
     </a>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      &#9776;
-    </button>
+<button
+  class="nav-toggle"
+  id="navToggle"
+  aria-label="Open menu"
+  aria-expanded="false"
+>&#9776;</button>
 
     <nav class="nav-links" id="navLinks">
       <a href="frameworks/index.html">Frameworks</a>
@@ -304,22 +307,28 @@
 
 
 <script>
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
 
-document
-  .getElementById('navToggle')
-  .addEventListener('click', function() {
+navToggle.addEventListener('click', function(){
 
-    document
-      .getElementById('navLinks')
-      .classList
-      .toggle('open');
+  const open = navLinks.classList.toggle('open');
 
-  });
+  navToggle.innerHTML = open ? '&times;' : '&#9776;';
 
+  navToggle.setAttribute(
+    'aria-expanded',
+    open
+  );
 
-document.getElementById('yr').textContent =
-  new Date().getFullYear();
+  navToggle.setAttribute(
+    'aria-label',
+    open ? 'Close menu' : 'Open menu'
+  );
 
+});
+
+document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 
 </body>
