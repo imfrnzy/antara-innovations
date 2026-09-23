@@ -96,7 +96,7 @@ function render(r) {
   $("why").hidden = true;
   $("answer").value = "";
   $("answer").focus();
-  drawLine(r.progress);
+  drawChainProgress(r.progress);
 }
 
 $("whyBtn").onclick = () => { $("why").hidden = !$("why").hidden; };
@@ -124,24 +124,31 @@ $("finishBtn").onclick = async () => {
   finally { busy = false; }
 };
 
-// The sounding line: the weight drops as facts are established. Same visual as Soundings.
-function drawLine(p) {
+// The Sentinel chain: the six links from the framework itself, lighting up as
+// facts are established. Not a literal per-field map, established/possible
+// drives how many links are lit, same underlying signal as Soundings' line,
+// a visual native to this framework instead of a borrowed one.
+const CHAIN_LINKS = [
+  { key: "identity", label: "Identity" },
+  { key: "authority", label: "Authority" },
+  { key: "context", label: "Context" },
+  { key: "action", label: "Action" },
+  { key: "evidence", label: "Evidence" },
+  { key: "adaptation", label: "Adaptation" },
+];
+function drawChainProgress(p) {
   if (!p) return;
   const ratio = Math.min(1, p.established / p.possible);
-  const svg = $("lineSvg");
-  const top = 14, bottom = 330, y = top + ratio * (bottom - top);
-  let ticks = "";
-  for (let i = 0; i <= 6; i++) {
-    const ty = top + (i * (bottom - top)) / 6;
-    ticks += `<line class="tick" x1="52" x2="${i % 2 ? 60 : 66}" y1="${ty}" y2="${ty}"/>`;
-  }
-  svg.innerHTML = `
-    <line class="rope" x1="52" x2="52" y1="0" y2="${y}"/>
-    ${ticks}
-    <g class="lead-weight" style="transform:translate(0px, ${y}px)">
-      <path d="M46 0 h12 l3 16 h-18 z"/>
-    </g>
-    <text class="depth" x="0" y="352">${p.established} of ${p.possible} facts</text>`;
+  const litCount = Math.round(ratio * CHAIN_LINKS.length);
+  const host = $("ichain");
+  let html = "";
+  CHAIN_LINKS.forEach((link, i) => {
+    const lit = i < litCount;
+    const current = i === litCount && litCount < CHAIN_LINKS.length;
+    if (i > 0) html += `<div class="seg${i <= litCount ? " lit" : ""}"></div>`;
+    html += `<div class="node${lit ? " lit" : ""}${current ? " current" : ""}">${i + 1}</div><span class="label">${link.label}</span>`;
+  });
+  host.innerHTML = html;
   $("mobileDepth").textContent = `${p.established} of ${p.possible} facts established · answer ${p.turns_used} of ${p.turns_max}`;
   $("found").innerHTML = p.agents.length
     ? `Agents found so far: <b>${p.agents.map(esc).join("</b>, <b>")}</b>`

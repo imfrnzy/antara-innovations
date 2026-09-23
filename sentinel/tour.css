@@ -216,3 +216,20 @@ body.tour-body{overflow:hidden; height:100vh}
   .chain > div:nth-child(3n)::after{content:""}
   .chain > div::after{display:none}
 }
+
+/* Sentinel's own accent for the tour: steel-teal instead of Soundings' gold. */
+.tour{
+  --gold: #3E96A3;
+  --gold-light: #5BB0BC;
+  --gold-text: #2C6E79;
+}
+
+/* A brief scanning sweep behind the title only, a security tool's opening beat. */
+.scene:first-child::before{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:linear-gradient(100deg, transparent 42%, rgba(62,150,163,.10) 50%, transparent 58%);
+  background-size:250% 100%; background-position:150% 0;
+  animation:sentinel-sweep 2.6s ease-out 1;
+}
+@keyframes sentinel-sweep{0%{background-position:150% 0}100%{background-position:-50% 0}}
+@media (prefers-reduced-motion:reduce){.scene:first-child::before{animation:none; display:none}}
