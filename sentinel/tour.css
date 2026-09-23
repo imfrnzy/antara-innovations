@@ -233,3 +233,21 @@ body.tour-body{overflow:hidden; height:100vh}
 }
 @keyframes sentinel-sweep{0%{background-position:150% 0}100%{background-position:-50% 0}}
 @media (prefers-reduced-motion:reduce){.scene:first-child::before{animation:none; display:none}}
+
+/* Matrix and severity badge styles, shared with the live assessment's own CSS,
+   needed here too since the report-preview scene reuses the same markup. */
+.matrixwrap{overflow-x:auto; background:#fff; border:1px solid rgba(15,42,71,.12); border-radius:6px}
+table.matrix{border-collapse:collapse; width:100%; font-size:11px}
+table.matrix th,table.matrix td{padding:6px 8px; text-align:center; border-bottom:1px solid rgba(15,42,71,.1)}
+table.matrix thead th{font-size:9px; letter-spacing:.4px; text-transform:uppercase; color:#5B6472; font-weight:700; border-bottom:2px solid #0F2A47}
+table.matrix th.rowhead,table.matrix td.rowhead{text-align:left; font-weight:600; color:#0F2A47}
+table.matrix td.divide,table.matrix th.divide{border-left:2px solid #0F2A47}
+.matrix .cell{width:16px; height:16px; border-radius:3px; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:700}
+.matrix .cell.yes{background:#8A2A1C; color:#fff}
+.matrix .cell.no{background:rgba(15,42,71,.1); color:transparent}
+.matrix td.zonecell{text-align:left; padding-left:8px}
+.sevbadge{display:inline-block; font-size:9.5px; font-weight:800; letter-spacing:.4px; text-transform:uppercase; padding:2px 7px; border-radius:3px}
+.sevbadge.sev-EXPOSURE{background:#8A2A1C; color:#fff}
+.sevbadge.sev-CONTROLLED{background:#1F5A3A; color:#fff}
+.sevbadge.sev-OVERBUILT{background:#7A5A12; color:#fff}
+.sevbadge.sev-LOW_STAKES{background:#5B6472; color:#fff}

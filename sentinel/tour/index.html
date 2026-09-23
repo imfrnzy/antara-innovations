@@ -177,9 +177,18 @@
         <p class="pop d2" style="margin:0">Every figure below is illustrative. Yours is built from your own organisation's evidence.</p>
         <div class="reportcard pop d3">
           <div class="rc-top"><span>Sentinel Action Risk Register</span><span class="rc-illustrative">Illustrative</span></div>
+          <p class="rc-h" style="margin-bottom:8px">Access matrix</p>
+          <div class="matrixwrap" style="margin-bottom:16px">
+            <table class="matrix" style="font-size:11px">
+              <thead><tr><th class="rowhead">Agent</th><th>Irrev.</th><th>Data</th><th class="divide">Owner</th><th>Traced</th><th class="divide">Zone</th></tr></thead>
+              <tbody>
+                <tr><td class="rowhead">Refund agent</td><td><span class="cell yes">&#10003;</span></td><td><span class="cell yes">&#10003;</span></td><td class="divide"><span class="cell yes">&#10003;</span></td><td><span class="cell no">&#8211;</span></td><td class="divide zonecell"><span class="sevbadge sev-EXPOSURE">Exposure</span></td></tr>
+                <tr><td class="rowhead">Recruitment screener</td><td><span class="cell yes">&#10003;</span></td><td><span class="cell yes">&#10003;</span></td><td class="divide"><span class="cell no">&#8211;</span></td><td><span class="cell no">&#8211;</span></td><td class="divide zonecell"><span class="sevbadge sev-EXPOSURE">Exposure</span></td></tr>
+                <tr><td class="rowhead">Helpdesk reset agent</td><td><span class="cell yes">&#10003;</span></td><td><span class="cell no">&#8211;</span></td><td class="divide"><span class="cell yes">&#10003;</span></td><td><span class="cell yes">&#10003;</span></td><td class="divide zonecell"><span class="sevbadge sev-CONTROLLED">Controlled</span></td></tr>
+              </tbody>
+            </table>
+          </div>
           <div class="rc-grid">
-            <div class="rc-chart"><svg viewBox="0 0 220 120" id="rcBar"></svg><p>Agents, by zone</p></div>
-            <div class="rc-donut"><svg viewBox="0 0 140 120" id="rcDonut"></svg><div class="rc-legend" id="rcLegend"></div></div>
             <div class="rc-list">
               <p class="rc-h">Priority order</p>
               <div class="rc-row" id="rcRow1"><span class="num" style="background:#8A2A1C">1</span>Refund agent, no approval gate</div>

@@ -115,3 +115,43 @@ html.embedded body{background:var(--bg)}
   .ichain .seg{width:18px; height:2px}
   .ichain .label{display:none}
 }
+
+/* ---- Elevated report styling: access matrix, finding records ---- */
+.rpt-kicker{font-size:12px; letter-spacing:1.6px; text-transform:uppercase; color:var(--gold); font-weight:700; margin:0 0 8px}
+.rpt-h2{font-family:'Playfair Display',Georgia,serif; color:var(--navy); font-size:20px; margin:0 0 4px; padding-top:16px; border-top:2px solid var(--navy)}
+
+/* Access matrix: agents down, checks across, filled cells not scatter dots. */
+.matrixwrap{overflow-x:auto; background:var(--paper); border:1px solid var(--line); border-radius:8px}
+table.matrix{border-collapse:collapse; width:100%; min-width:760px; font-size:12.5px}
+table.matrix th,table.matrix td{padding:10px 10px; text-align:center; border-bottom:1px solid var(--line)}
+table.matrix thead th{font-size:10px; letter-spacing:.4px; text-transform:uppercase; color:var(--steel); font-weight:700; vertical-align:bottom; border-bottom:2px solid var(--navy)}
+table.matrix thead th.rowhead{text-align:left}
+table.matrix td.rowhead{text-align:left; font-weight:600; color:var(--navy); font-size:13px; white-space:nowrap}
+table.matrix td.rowhead .idx{font-family:ui-monospace,'SF Mono',Consolas,monospace; font-size:10.5px; color:var(--muted); display:block; font-weight:400; margin-top:1px}
+.matrix .cell{width:22px; height:22px; border-radius:4px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700}
+.matrix .cell.yes{background:#8A2A1C; color:#fff}
+.matrix .cell.no{background:var(--line); color:transparent}
+.matrix .cell.unknown{background:none; border:1.5px dashed var(--gold); color:var(--gold-text)}
+.matrix td.zonecell{text-align:left; padding-left:14px}
+.matrix col.divider{border-left:2px solid var(--navy)}
+table.matrix td.divide, table.matrix th.divide{border-left:2px solid var(--navy)}
+
+/* Finding records: structured like an audit/pentest finding, not a soft card. */
+.finding{border:1px solid var(--line); border-left:4px solid var(--steel); border-radius:6px; padding:16px 20px; margin:0 0 14px; background:var(--paper)}
+.finding.sev-EXPOSURE{border-left-color:#8A2A1C}
+.finding.sev-CONTROLLED{border-left-color:#1F5A3A}
+.finding.sev-OVERBUILT{border-left-color:#7A5A12}
+.finding.sev-LOW_STAKES{border-left-color:#5B6472}
+.finding-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:8px}
+.finding-id{font-family:ui-monospace,'SF Mono',Consolas,monospace; font-size:11.5px; color:var(--muted); letter-spacing:.3px}
+.finding h3{margin:2px 0 10px; font-size:16px; color:var(--navy)}
+.finding ul{margin:0 0 12px; padding-left:18px}
+.finding li{font-size:13.5px; color:var(--ink); padding:2px 0}
+.finding .action{font-size:13px; background:var(--bg); border-radius:5px; padding:9px 12px; margin:0}
+.finding .action b{color:var(--navy)}
+.sevbadge{display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; padding:3px 9px; border-radius:3px}
+.sevbadge.sev-EXPOSURE{background:#8A2A1C; color:#fff}
+.sevbadge.sev-CONTROLLED{background:#1F5A3A; color:#fff}
+.sevbadge.sev-OVERBUILT{background:#7A5A12; color:#fff}
+.sevbadge.sev-LOW_STAKES{background:#5B6472; color:#fff}
+.finding .provtag{font-size:11px; color:var(--gold-text); font-weight:700; text-transform:uppercase; letter-spacing:.4px}

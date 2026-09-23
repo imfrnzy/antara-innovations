@@ -198,7 +198,7 @@ async function showResults(prof) {
 
   if (!s.total) {
     $("headline").textContent = "We didn't establish enough to map any agents yet. Start a new assessment and name what's actually connected, including the ones nobody registered.";
-    $("counts").innerHTML = ""; $("map").innerHTML = ""; $("ucList").innerHTML = ""; $("topFinding").hidden = true;
+    $("counts").innerHTML = ""; $("map").innerHTML = ""; $("matrixTable").innerHTML = ""; $("findingsList").innerHTML = "";
     return;
   }
 
@@ -213,22 +213,84 @@ async function showResults(prof) {
     [s.exposure, "Exposure"], [s.controlled, "Controlled"], [s.overbuilt, "Overbuilt"], [s.low_stakes, "Low stakes"],
   ].map(([n, l]) => `<div><strong>${n}</strong><span>${l}</span></div>`).join("");
 
+  buildMatrix(s.ordered);
+  buildFindings(s.ordered);
   drawMap(s.ordered);
+}
 
-  const t = s.top;
-  if (t) {
-    const c = t.classification;
-    $("topFinding").hidden = false;
-    $("topFinding").innerHTML = `
-      <p class="small" style="margin:0 0 6px">The first thing we'd look at</p>
-      <h2>${esc(t.name)}</h2>
-      <p><span class="zone-tag z-${c.zone}">${ZONE[c.zone]}</span> Consequence ${c.consequence_exposure.toLowerCase()}, traceability ${c.traceability.toLowerCase()}${c.provisional ? ", provisional" : ""}</p>
-      ${c.reasons.length ? `<ul>${c.reasons.slice(0, 4).map((r) => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}`;
-  }
+// ---------- the access matrix: agents down, every checklist fact across ----------
+const MATRIX_FIELDS = [
+  { key: "C1_irreversible_without_approval", short: "Irrev." },
+  { key: "C2_sees_sensitive_data", short: "Data" },
+  { key: "C3_multi_system_access", short: "Multi-sys" },
+  { key: "C4_writes_system_of_record", short: "Writes" },
+  { key: "T1_named_owner", short: "Owner" },
+  { key: "T2_reconstructable", short: "Traced" },
+  { key: "T3_known_outside_team", short: "Known" },
+];
+function buildMatrix(items) {
+  const head = `<thead><tr>
+    <th class="rowhead">Agent</th>
+    ${MATRIX_FIELDS.map((f, i) => `<th${i === 4 ? ' class="divide"' : ""}>${f.short}</th>`).join("")}
+    <th class="divide">Zone</th>
+  </tr></thead>`;
+  const rows = items.map((u, i) => {
+    const facts = u.facts || {};
+    const cells = MATRIX_FIELDS.map((f, fi) => {
+      const entry = facts[f.key];
+      const v = entry ? entry.value : "unknown";
+      const cls = v === "yes" ? "yes" : v === "no" ? "no" : "unknown";
+      const mark = v === "yes" ? "\u2713" : v === "no" ? "\u2013" : "?";
+      return `<td${fi === 4 ? ' class="divide"' : ""}><span class="cell ${cls}">${mark}</span></td>`;
+    }).join("");
+    const c = u.classification;
+    return `<tr>
+      <td class="rowhead">${esc(u.name)}<span class="idx">SEN-${String(i + 1).padStart(3, "0")}</span></td>
+      ${cells}
+      <td class="divide zonecell"><span class="sevbadge sev-${c.zone}">${ZONE[c.zone]}</span></td>
+    </tr>`;
+  }).join("");
+  $("matrixTable").innerHTML = head + `<tbody>${rows}</tbody>`;
+}
 
-  $("ucList").innerHTML = s.ordered.map((u, i) => `
-    <li><span>${i + 1}. ${esc(u.name)}</span>
-    <span><span class="zone-tag z-${u.classification.zone}">${ZONE[u.classification.zone]}</span>${u.classification.provisional ? '<span class="small">provisional</span>' : ""}</span></li>`).join("");
+// ---------- findings: structured records, with a real recommendation from the playbook's own remediation table ----------
+// Source: Sentinel_Playbook.docx, "The control-by-control remediation table". Picks the
+// single highest-priority applicable action, not a generic line.
+function recommend(facts) {
+  const v = (k) => (facts[k] && facts[k].value) || "unknown";
+  if (v("C1_irreversible_without_approval") === "yes")
+    return "Add a human approval gate before this action executes.";
+  if (v("C3_multi_system_access") === "yes")
+    return "Move to least-privilege, task-scoped authority across every connected system.";
+  if (v("C2_sees_sensitive_data") === "yes")
+    return "Isolate or validate the data source this agent draws from.";
+  if (v("C4_writes_system_of_record") === "yes")
+    return "Queue every write for a named reviewer, regardless of size.";
+  if (v("T1_named_owner") === "no")
+    return "Assign a named agent identity and owner.";
+  if (v("T2_reconstructable") === "no")
+    return "Add action-level logging so any single action is reconstructable within hours.";
+  if (v("T3_known_outside_team") === "no")
+    return "Log this as a lesson and route any control change through governance review.";
+  return "Keep the current monitoring in place. Nothing here needs an immediate change.";
+}
+
+function buildFindings(items) {
+  $("findingsList").innerHTML = items.map((u, i) => {
+    const c = u.classification;
+    const id = `SEN-${String(i + 1).padStart(3, "0")}`;
+    return `<div class="finding sev-${c.zone}">
+      <div class="finding-top">
+        <span class="finding-id">${id}</span>
+        <span class="sevbadge sev-${c.zone}">${ZONE[c.zone]}</span>
+        ${c.provisional ? '<span class="provtag">Provisional</span>' : ""}
+      </div>
+      <h3>${esc(u.name)}</h3>
+      <p class="small" style="margin:0 0 8px">Consequence ${c.consequence_exposure.toLowerCase()}, traceability ${c.traceability.toLowerCase()}.</p>
+      ${c.reasons.length ? `<ul>${c.reasons.slice(0, 4).map((r) => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}
+      <p class="action"><b>Recommended now:</b> ${esc(recommend(u.facts || {}))}</p>
+    </div>`;
+  }).join("");
 }
 
 function drawMap(items) {

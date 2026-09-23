@@ -140,33 +140,6 @@ function drawTourMap() {
 
 // ---------- the report preview: illustrative, not real output ----------
 function drawReportCharts() {
-  const bar = document.getElementById("rcBar");
-  if (bar) {
-    const vals = [{ l: "Exposure", v: 2, c: "#8A2A1C" }, { l: "Controlled", v: 1, c: "#1F5A3A" }, { l: "Overbuilt", v: 3, c: "#7A5A12" }, { l: "Low stakes", v: 4, c: "#3E5871" }];
-    const max = 5, w = 220, bw = 36, gap = 18, base = 92;
-    let g = "";
-    vals.forEach((d, i) => {
-      const x = 10 + i * (bw + gap), bh = (d.v / max) * 62;
-      g += `<rect x="${x}" y="${base}" width="${bw}" height="0" fill="${d.c}"><animate attributeName="height" from="0" to="${bh}" begin="${200 + i * 180}ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/><animate attributeName="y" from="${base}" to="${base - bh}" begin="${200 + i * 180}ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></rect>
-        <text x="${x + bw / 2}" y="${base + 14}" text-anchor="middle" font-size="9" fill="#5B6472">${d.l.split(" ")[0]}</text>
-        <text x="${x + bw / 2}" y="${base - bh - 6}" text-anchor="middle" font-size="10" font-weight="700" fill="#151B23" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${700 + i * 180}ms" dur="300ms" fill="freeze"/>${d.v}</text>`;
-    });
-    bar.innerHTML = `<g font-family="Inter, system-ui, sans-serif">${g}<line x1="6" y1="${base}" x2="${w - 6}" y2="${base}" stroke="#0F2A47"/></g>`;
-  }
-  const donut = document.getElementById("rcDonut");
-  if (donut) {
-    const seg = [{ v: 22, c: "#8A2A1C", label: "Invisible" }, { v: 33, c: "#B8923F", label: "Informal" }, { v: 45, c: "#0F2A47", label: "Governed" }];
-    const cx = 70, cy = 58, r = 42, C = 2 * Math.PI * r;
-    let cum = 0, g = "";
-    seg.forEach((s, i) => {
-      const len = (s.v / 100) * C, offset = -cum;
-      g += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.c}" stroke-width="16" stroke-dashoffset="${offset}" stroke-dasharray="0 ${C}" transform="rotate(-90 ${cx} ${cy})"><animate attributeName="stroke-dasharray" from="0 ${C}" to="${len} ${C - len}" begin="${300 + i * 250}ms" dur="600ms" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></circle>`;
-      cum += len;
-    });
-    donut.innerHTML = `<g>${g}</g>`;
-    const legend = document.getElementById("rcLegend");
-    if (legend) legend.innerHTML = seg.map((s) => `<span><i style="background:${s.c}"></i>${s.label} ${s.v}%</span>`).join("");
-  }
   [["rcRow1", 300], ["rcRow2", 900], ["rcRow3", 1500]].forEach(([id, t]) => {
     const el = document.getElementById(id); if (!el) return; el.classList.remove("on"); clearTimeout(el._t);
     el._t = setTimeout(() => el.classList.add("on"), t);

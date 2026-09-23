@@ -161,17 +161,24 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
   <!-- 5. Results -->
   <section id="s-results" hidden>
-    <h1 id="resTitle">Your Sentinel map</h1>
+    <p class="rpt-kicker">Sentinel Action Risk Register</p>
+    <h1 id="resTitle">Your Sentinel findings</h1>
     <p class="headline" id="headline"></p>
     <div class="counts" id="counts"></div>
+
+    <h2 class="rpt-h2">Access matrix</h2>
+    <p class="small" style="margin:0 0 14px">Every agent against every check. Filled means confirmed yes, dash means confirmed no, amber means still unknown.</p>
+    <div class="matrixwrap"><table class="matrix" id="matrixTable"></table></div>
+
+    <h2 class="rpt-h2" style="margin-top:36px">Findings</h2>
+    <div id="findingsList"></div>
+
+    <h2 class="rpt-h2" style="margin-top:36px">Exposure map</h2>
     <div class="mapbox"><svg id="map" viewBox="0 0 640 420" role="img" aria-label="Map of agents by consequence and traceability"></svg></div>
-    <div class="top-finding" id="topFinding" hidden></div>
-    <h2>Every agent we mapped</h2>
-    <ul class="uclist" id="ucList"></ul>
 
     <div class="locked">
       <h2>The detailed report</h2>
-      <p>The free map shows where each agent sits. The detailed report shows why, and what to actually change.</p>
+      <p>The free register shows every finding. The detailed report shows the full evidence trail and the remediation plan.</p>
       <ul>
         <li>Each agent scored on consequence exposure and traceability separately</li>
         <li>The evidence behind every classification, in your own words</li>
