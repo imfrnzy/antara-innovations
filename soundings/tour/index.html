@@ -25,6 +25,8 @@
   </div>
 
   <div class="stage" id="stage">
+    <p class="exline" id="exline" hidden><span id="exnum">Exhibit 1</span><span>Soundings, an AI readiness audit</span></p>
+    <p class="decknote" id="decknote" hidden>Antara Innovations &middot; proprietary framework &middot; private and confidential</p>
 
     <section class="scene" data-ms="5500">
       <div class="inner">
@@ -60,62 +62,156 @@
       </div>
     </section>
 
-    <section class="scene chkscene" data-ms="9500">
+    <section class="scene sixscene" data-ms="9000">
       <div class="inner">
-        <h2 class="pop d1">Soundings scores two things separately</h2>
-        <div class="checklist" id="checklist">
-          <div><h4>RISK</h4><ul>
-            <li data-t="500">Does it touch a regulated decision?</li>
-            <li data-t="1500">What does it see, and where does the data go?</li>
-            <li data-t="2500">If it's wrong, how easily is that put right?</li>
-          </ul></div>
-          <div><h4>OVERSIGHT</h4><ul>
-            <li data-t="4200">Governed &mdash; sanctioned, reviewed, monitored</li>
-            <li data-t="5200">Informal &mdash; known about, nobody checking</li>
-            <li data-t="6200">Invisible &mdash; nobody's agreed it exists</li>
-          </ul></div>
+        <h2 class="pop d1">Six steps, start to finish</h2>
+        <div class="sixgrid" id="sixgrid">
+          <div data-t="300"><span class="n">01</span><h4>Set the amnesty</h4></div>
+          <div data-t="900"><span class="n">02</span><h4>Run the conversations</h4></div>
+          <div data-t="1500"><span class="n">03</span><h4>Score what you heard</h4></div>
+          <div data-t="2100"><span class="n">04</span><h4>Build the mismatch map</h4></div>
+          <div data-t="2700"><span class="n">05</span><h4>Write the output</h4></div>
+          <div data-t="3300"><span class="n">06</span><h4>Present it without blame</h4></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="8000">
+      <div class="inner">
+        <h2 class="pop d1">It starts with a promise, not a question</h2>
+        <div class="amnesty pop d2">
+          <p>"We're taking stock of how AI is actually being used. Not to catch anyone out. If you're using a tool that wasn't formally approved, that's fine, we need to know, and we won't treat telling us as a problem."</p>
+          <p class="who">Sent by the sponsor, before a single conversation happens</p>
         </div>
       </div>
     </section>
 
     <section class="scene" data-ms="8500">
       <div class="inner">
-        <h2 class="pop d1">One question at a time</h2>
-        <div class="chat" id="chat1">
-          <div class="bubble b-ask" data-t="300">Which AI tools are people in your organisation actually using?</div>
-          <div class="bubble b-ans" data-t="2200">Mostly Copilot. Marketing also has some custom tools.</div>
-          <div class="bubble b-ask" data-t="4400">You mentioned "some custom tools." What is that one actually doing?</div>
-          <div class="bubble b-ans" data-t="6600">One of them decides which complaints get escalated.</div>
+        <h2 class="pop d1">Every conversation covers the same four things</h2>
+        <div class="areas" id="areas">
+          <div data-t="300"><span class="n">01</span><div><h4>What's actually being used</h4><p>Sanctioned or not. What they'd reach for if the approved tool were down.</p></div></div>
+          <div data-t="1800"><span class="n">02</span><div><h4>What it touches</h4><p>Internal drafting, or customer data, figures, a decision about a real person.</p></div></div>
+          <div data-t="3300"><span class="n">03</span><div><h4>What happens if it's wrong</h4><p>Checked before it goes anywhere, or does it go straight out.</p></div></div>
+          <div data-t="4800"><span class="n">04</span><div><h4>Who knows about it</h4><p>Manager, IT, risk, or nobody outside the room.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene chkscene" data-ms="11500">
+      <div class="inner" style="max-width:700px">
+        <h2 class="pop d1">Score by counting, not by feel</h2>
+        <p class="pop d2" style="margin:0">Fixed questions decide the band. Nobody scores by how the room feels that day.</p>
+        <div class="scoregrid" id="scoregrid">
+          <div data-t="500"><h4>Regulatory exposure</h4><p><b>High</b> if it affects a named person's money, job, credit or a legal outcome, or reaches the public unreviewed.</p></div>
+          <div data-t="1500"><h4>Data sensitivity</h4><p><b>High</b> if it sees health data, financial or ID numbers, or credentials. Would it be a bad news story if it leaked.</p></div>
+          <div data-t="2500"><h4>Reversibility</h4><p><b>High</b> if it can't be recalled, an email sent, a decision communicated, money moved.</p></div>
+          <div data-t="3500"><h4>Oversight</h4><p>Three factual questions. <b>Three yeses is Governed.</b> One or two, Informal. <b>Zero is Invisible.</b></p></div>
         </div>
       </div>
     </section>
 
     <section class="scene" data-ms="8500">
       <div class="inner">
-        <h2 class="pop d1">Every answer gets chased, not just recorded</h2>
+        <h2 class="pop d1">One question at a time, chased until it's answered</h2>
         <div class="chat" id="chat2">
           <div class="bubble b-ask" data-t="300">Does anyone check the score before it changes what happens to that customer?</div>
-          <div class="bubble b-why" data-t="1600">Why we ask: if nobody's in between, a wrong score reaches the customer straight away.</div>
-          <div class="bubble b-ans" data-t="3600">Team leads spot check some. There's no log of it.</div>
-          <div class="bubble b-ask" data-t="5800">So a review may happen, but there's no record it does. Noted.</div>
+          <div class="bubble b-why" data-t="1700">Why we ask: if nobody's in between, a wrong score reaches the customer straight away.</div>
+          <div class="bubble b-ans" data-t="3700">Team leads spot check some. There's no log of it.</div>
+          <div class="bubble b-ask" data-t="5900">So a review may happen, but there's no record it does. Noted.</div>
         </div>
       </div>
     </section>
 
-    <section class="scene mapscene" data-ms="12000">
+    <section class="scene mapscene" data-ms="10500">
       <div class="inner" style="max-width:660px">
         <h2 class="pop d1">Then the picture draws itself</h2>
+        <p class="pop d2" style="margin:0 0 6px">This exhibit is what you see, unlocked, the moment the free assessment finishes.</p>
         <div class="mapwrap"><svg viewBox="0 0 640 380" id="tourMap"></svg></div>
       </div>
     </section>
 
-    <section class="scene delscene" data-ms="9000">
+    <section class="scene delscene" data-ms="9500">
       <div class="inner">
-        <h2 class="pop d1">Three things land on the table</h2>
+        <h2 class="pop d1">What you actually get, and where</h2>
         <div class="deliv" id="deliv">
-          <div data-t="400"><h4>The mismatch map</h4><p>Every use, plotted and ranked. Nothing buried in an appendix.</p></div>
-          <div data-t="2000"><h4>A prioritised action list</h4><p>Sequenced by what's actually dangerous, not what's loudest.</p></div>
-          <div data-t="3600"><h4>The inputs Keel needs</h4><p>Operating model and approval-gate decisions, on evidence.</p></div>
+          <div data-t="400"><span class="tagpill tp-free">Free assessment</span><h4>The mismatch map</h4><p>Every use, plotted and ranked. Nothing buried in an appendix.</p></div>
+          <div data-t="2000"><span class="tagpill tp-report">Detailed report</span><h4>A prioritised action list</h4><p>Sequenced by what's actually dangerous, not what's loudest.</p></div>
+          <div data-t="3600"><span class="tagpill tp-report">Detailed report</span><h4>The inputs Keel needs</h4><p>Operating model and approval-gate decisions, on evidence.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene tlscene" data-ms="8500">
+      <div class="inner" style="max-width:720px">
+        <h2 class="pop d1">Ten working days, roughly</h2>
+        <p class="pop d2" style="margin:0 0 4px">That's the facilitated version. The free assessment finishes in one sitting.</p>
+        <div class="timeline">
+          <div class="track"></div>
+          <div class="tl-row" id="tlrow">
+            <div class="tl-item" data-t="400"><span class="tl-dot"></span><div class="d">Day 0</div><div class="w">Amnesty sent, conversations booked</div></div>
+            <div class="tl-item" data-t="1500"><span class="tl-dot"></span><div class="d">Days 1-4</div><div class="w">Conversations run</div></div>
+            <div class="tl-item" data-t="2600"><span class="tl-dot"></span><div class="d">Days 5-6</div><div class="w">Scoring, the map built</div></div>
+            <div class="tl-item" data-t="3700"><span class="tl-dot"></span><div class="d">Days 7-8</div><div class="w">Output written</div></div>
+            <div class="tl-item" data-t="4800"><span class="tl-dot"></span><div class="d">Days 9-10</div><div class="w">Presented, decisions agreed</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="8500">
+      <div class="inner">
+        <h2 class="pop d1">How it lands in the room matters as much as what's in it</h2>
+        <div class="principle pop d2">
+          <p>The exposure zone gets named as a systems problem, not a team problem. The friction zone gets named just as loudly, since it's usually where the room agrees fastest. Every finding ends with a decision someone can act on by Monday, not a general call to take governance seriously.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene reportscene" data-ms="11000">
+      <div class="inner" style="max-width:700px">
+        <h2 class="pop d1">Inside the detailed report</h2>
+        <p class="pop d2" style="margin:0">Every figure below is illustrative. Yours is built from your own organisation's evidence.</p>
+        <div class="reportcard pop d3">
+          <div class="rc-top"><span>Soundings Intelligence Report</span><span class="rc-illustrative">Illustrative</span></div>
+          <div class="rc-grid">
+            <div class="rc-chart"><svg viewBox="0 0 220 120" id="rcBar"></svg><p>Uses of AI, by zone</p></div>
+            <div class="rc-donut"><svg viewBox="0 0 140 120" id="rcDonut"></svg><div class="rc-legend" id="rcLegend"></div></div>
+            <div class="rc-list">
+              <p class="rc-h">Priority order</p>
+              <div class="rc-row" id="rcRow1"><span class="num" style="background:#8A2A1C">1</span>Personal AI accounts handling customer data</div>
+              <div class="rc-row" id="rcRow2"><span class="num" style="background:#8A2A1C">2</span>Complaint escalation scoring</div>
+              <div class="rc-row" id="rcRow3"><span class="num" style="background:#0F2A47">3</span>Copilot for internal emails</div>
+            </div>
+            <div class="rc-evidence">
+              <p class="rc-h">Evidence trail</p>
+              <p id="rcEv1">"There's no log of it."<span>Field: reviewed with record. Status: unconfirmed.</span></p>
+              <p id="rcEv2">"IT have no idea."<span>Field: known to accountable. Status: invisible.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene ladderscene" data-ms="9500">
+      <div class="inner" style="max-width:820px">
+        <h2 class="pop d1">Three ways to go deeper</h2>
+        <div class="ladder" id="ladder">
+          <div data-t="300">
+            <span class="lstep">01</span><h4>Free assessment</h4>
+            <p>The map you just saw. Up to three uses of AI, no cost.</p>
+            <span class="lprice">No charge</span>
+          </div>
+          <div data-t="1900">
+            <span class="lstep">02</span><h4>Detailed report</h4>
+            <p>The evidence trail, contradictions, and an ordered action plan for every use.</p>
+            <span class="lprice" id="ladderPrice">Priced report</span>
+          </div>
+          <div data-t="3500">
+            <span class="lstep">03</span><h4>Full Soundings</h4>
+            <p>Your teams interviewed directly, under amnesty, compared against what leadership knows.</p>
+            <span class="lprice">Engagement, priced individually</span>
+          </div>
         </div>
       </div>
     </section>

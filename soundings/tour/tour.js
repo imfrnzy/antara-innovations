@@ -3,6 +3,11 @@ const dotsEl = document.getElementById("dots");
 const stage = document.getElementById("stage");
 let idx = 0, playing = true, timer = null, elapsed = 0, sceneStart = 0;
 
+import("../config.js").then(({ REPORT_PRICE_LABEL }) => {
+  const el = document.getElementById("ladderPrice");
+  if (el && REPORT_PRICE_LABEL) el.textContent = REPORT_PRICE_LABEL;
+}).catch(() => {});
+
 // Progress dots, one per scene, filling like a story bar.
 scenes.forEach((s, i) => {
   const d = document.createElement("i");
@@ -35,10 +40,12 @@ function armInternals(scene) {
     el._t = setTimeout(() => el.classList.add("on"), t);
   });
   if (scene.classList.contains("mapscene")) drawTourMap();
+  if (scene.classList.contains("reportscene")) drawReportCharts();
 }
 
 function clearInternals(scene) {
   scene.querySelectorAll("[data-t]").forEach((el) => { clearTimeout(el._t); el.classList.remove("on"); });
+  scene.querySelectorAll(".rc-row, .rc-evidence p").forEach((el) => { clearTimeout(el._t); el.classList.remove("on"); });
 }
 
 function showScene(i) {
@@ -50,6 +57,21 @@ function showScene(i) {
   document.getElementById("tourBottom").style.display = last ? "none" : "flex";
   document.getElementById("skipBtn").style.display = last ? "none" : "inline";
   document.getElementById("playBtn").style.display = last ? "none" : "inline";
+  paintExhibit(i, last);
+}
+
+// Content scenes are numbered like the source PDF's own exhibits; title and end screen are not.
+const CONTENT_SCENES = scenes.filter((s) => !s.classList.contains("end"));
+function paintExhibit(i, last) {
+  const scene = scenes[i];
+  const isTitle = i === 0;
+  const show = !isTitle && !last;
+  document.getElementById("exline").hidden = !show;
+  document.getElementById("decknote").hidden = !show;
+  if (show) {
+    const n = CONTENT_SCENES.indexOf(scene); // title excluded above, so scene 2 -> Exhibit 1
+    document.getElementById("exnum").textContent = `Exhibit ${n}`;
+  }
 }
 
 function clearTimer() { clearTimeout(timer); }
@@ -116,7 +138,46 @@ function drawTourMap() {
   svg.innerHTML = g + "</g>";
 }
 
-// ---------- exits ----------
+// ---------- the report preview: illustrative, not real output ----------
+function drawReportCharts() {
+  const bar = document.getElementById("rcBar");
+  if (bar) {
+    const vals = [{ l: "Exposure", v: 2, c: "#8A2A1C" }, { l: "Controlled", v: 1, c: "#1F5A3A" }, { l: "Friction", v: 3, c: "#7A5A12" }, { l: "Low stakes", v: 4, c: "#3E5871" }];
+    const max = 5, w = 220, bw = 36, gap = 18, base = 92;
+    let g = "";
+    vals.forEach((d, i) => {
+      const x = 10 + i * (bw + gap), bh = (d.v / max) * 62;
+      g += `<rect x="${x}" y="${base}" width="${bw}" height="0" fill="${d.c}"><animate attributeName="height" from="0" to="${bh}" begin="${200 + i * 180}ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/><animate attributeName="y" from="${base}" to="${base - bh}" begin="${200 + i * 180}ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></rect>
+        <text x="${x + bw / 2}" y="${base + 14}" text-anchor="middle" font-size="9" fill="#5B6472">${d.l.split(" ")[0]}</text>
+        <text x="${x + bw / 2}" y="${base - bh - 6}" text-anchor="middle" font-size="10" font-weight="700" fill="#151B23" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${700 + i * 180}ms" dur="300ms" fill="freeze"/>${d.v}</text>`;
+    });
+    bar.innerHTML = `<g font-family="Inter, system-ui, sans-serif">${g}<line x1="6" y1="${base}" x2="${w - 6}" y2="${base}" stroke="#0F2A47"/></g>`;
+  }
+  const donut = document.getElementById("rcDonut");
+  if (donut) {
+    const seg = [{ v: 22, c: "#8A2A1C", label: "Invisible" }, { v: 33, c: "#B8923F", label: "Informal" }, { v: 45, c: "#0F2A47", label: "Governed" }];
+    const cx = 70, cy = 58, r = 42, C = 2 * Math.PI * r;
+    let cum = 0, g = "";
+    seg.forEach((s, i) => {
+      const len = (s.v / 100) * C, offset = -cum;
+      g += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.c}" stroke-width="16" stroke-dashoffset="${offset}" stroke-dasharray="0 ${C}" transform="rotate(-90 ${cx} ${cy})"><animate attributeName="stroke-dasharray" from="0 ${C}" to="${len} ${C - len}" begin="${300 + i * 250}ms" dur="600ms" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></circle>`;
+      cum += len;
+    });
+    donut.innerHTML = `<g>${g}</g>`;
+    const legend = document.getElementById("rcLegend");
+    if (legend) legend.innerHTML = seg.map((s) => `<span><i style="background:${s.c}"></i>${s.label} ${s.v}%</span>`).join("");
+  }
+  [["rcRow1", 300], ["rcRow2", 900], ["rcRow3", 1500]].forEach(([id, t]) => {
+    const el = document.getElementById(id); if (!el) return; el.classList.remove("on"); clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.add("on"), t);
+  });
+  [["rcEv1", 2200], ["rcEv2", 2900]].forEach(([id, t]) => {
+    const el = document.getElementById(id); if (!el) return; el.classList.remove("on"); clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.add("on"), t);
+  });
+}
+
+
 document.getElementById("backBtn").onclick = () => { location.href = "../../frameworks/"; };
 document.getElementById("skipBtn").onclick = () => { clearTimer(); goTo(scenes.length - 1); };
 
