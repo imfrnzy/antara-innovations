@@ -1,0 +1,184 @@
+/* Keel. Sits on top of ../assets/site.css and reuses its tokens. Bronze accent, its own identity. */
+.snd{padding:48px 0 80px}
+.snd .wrap{max-width:920px}
+.snd h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(30px,4.4vw,44px); line-height:1.15; margin:0 0 22px; letter-spacing:-.01em}
+.snd h2{color:var(--navy); font-size:21px; margin:0 0 12px}
+.snd p{max-width:66ch}
+.snd .lead{font-size:18.5px; color:var(--ink); line-height:1.7}
+.snd .small{font-size:13.5px}
+[hidden]{display:none !important}
+
+.situations{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin:34px 0; border-top:2px solid var(--navy)}
+.situations div{padding:18px 20px 6px 0}
+.situations div + div{padding-left:20px; border-left:1px solid var(--line)}
+.situations h3{font-size:15px; color:var(--navy); margin:0 0 8px}
+.situations p{font-size:14.5px; line-height:1.65}
+@media (max-width:760px){ .situations{grid-template-columns:1fr} .situations div + div{padding-left:0; border-left:0; border-top:1px solid var(--line)} }
+
+.will{margin:8px 0 30px; padding:0; list-style:none; columns:2; column-gap:40px; max-width:640px}
+.will li{padding:7px 0; border-bottom:1px solid var(--line); color:var(--ink); font-size:15px; break-inside:avoid}
+@media (max-width:620px){ .will{columns:1} }
+
+.field{display:block; margin:0 0 16px}
+.field span{display:block; font-size:13px; font-weight:600; color:var(--steel); margin-bottom:6px}
+.field input,.field select,.answer textarea{
+  width:100%; font:inherit; font-size:15.5px; color:var(--ink); background:var(--paper);
+  border:1px solid rgba(15,42,71,.22); border-radius:6px; padding:11px 12px;
+}
+.field input:focus,.field select:focus,.answer textarea:focus,.btn:focus-visible,.linkish:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 18px}
+@media (max-width:620px){ .grid2{grid-template-columns:1fr} }
+.check{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--muted); margin:6px 0 20px}
+.err{color:#9B2C2C; font-size:14px; min-height:20px; margin:6px 0 0}
+.linkish{background:none; border:0; padding:0; font:inherit; font-size:13.5px; color:var(--steel); border-bottom:1px solid var(--gold); cursor:pointer}
+.btn[disabled]{opacity:.55; cursor:progress}
+
+/* The interview. The sounding line is the one memorable thing on the page. */
+.interview{display:grid; grid-template-columns:120px 1fr; gap:40px; align-items:start; min-height:60vh}
+.line{position:sticky; top:96px; height:360px}
+.line svg{width:120px; height:360px; overflow:visible}
+.line .rope{stroke:var(--navy); stroke-width:1.5}
+.line .tick{stroke:var(--steel); stroke-width:1}
+.line .tick-label{font-size:10.5px; fill:var(--muted); font-family:Inter,sans-serif}
+.line .lead-weight{fill:var(--gold); transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.line .depth{font-size:12px; fill:var(--navy); font-weight:600; font-family:Inter,sans-serif}
+@media (prefers-reduced-motion:reduce){ .line .lead-weight{transition:none} }
+@media (max-width:760px){
+  .interview{grid-template-columns:1fr; gap:10px}
+  .line{position:static; height:auto}
+  .line svg{display:none}
+  .line .mobile-depth{display:block}
+}
+.mobile-depth{display:none; font-size:13px; color:var(--steel)}
+.question{font-family:'Playfair Display',Georgia,serif; font-size:clamp(22px,2.8vw,28px); line-height:1.4; color:var(--navy); margin:0 0 14px; min-height:2.8em}
+.why{background:var(--paper); border-left:3px solid var(--gold); padding:10px 14px; font-size:14.5px; color:var(--muted); margin:0 0 18px}
+.answer textarea{min-height:130px; resize:vertical; line-height:1.6}
+.row{display:flex; gap:18px; align-items:center; flex-wrap:wrap; margin-top:14px}
+.found{margin:26px 0 0; font-size:13.5px; color:var(--muted)}
+.found b{color:var(--navy); font-weight:600}
+.thinking{color:var(--steel); font-size:14px}
+
+/* Results */
+.headline{font-size:19px; color:var(--ink); line-height:1.7; max-width:62ch}
+.counts{display:flex; flex-wrap:wrap; gap:0; margin:26px 0 34px; border-top:2px solid var(--navy)}
+.counts div{padding:14px 26px 0 0; margin-right:26px}
+.counts strong{display:block; font-size:30px; color:var(--navy); font-family:'Playfair Display',Georgia,serif}
+.counts span{font-size:13px; color:var(--muted)}
+.mapbox{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:18px}
+.mapbox svg{width:100%; height:auto; display:block}
+.top-finding{margin:34px 0; padding:24px 26px; background:var(--navy); color:#EDF1F5; border-radius:8px}
+.top-finding h2{color:#fff}
+.top-finding p,.top-finding li{color:rgba(237,241,245,.85)}
+.top-finding ul{padding-left:18px; margin:10px 0 0}
+.zone-tag{display:inline-block; font-size:12.5px; font-weight:700; padding:3px 9px; border-radius:4px; margin-right:6px}
+.z-EXPOSURE{background:#F6E1DD; color:#8A2A1C}
+.z-CONTROLLED{background:#DDEBE3; color:#1F5A3A}
+.z-OVERBUILT{background:#F4EAD2; color:#7A5A12}
+.z-LOW_STAKES{background:#E6EAF0; color:#3E5871}
+.uclist{list-style:none; padding:0; margin:0 0 34px}
+.uclist li{padding:12px 0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+.locked{border:1px dashed rgba(15,42,71,.3); border-radius:8px; padding:22px 24px; margin:0 0 26px}
+.locked ul{margin:10px 0 18px; padding-left:18px; color:var(--ink)}
+.locked li{padding:3px 0}
+.notice{font-size:13px; color:var(--muted); margin-top:30px; max-width:70ch}
+.snd [tabindex="-1"]:focus{outline:none}
+.counts strong,.snd h1{font-variant-numeric:lining-nums}
+@media (max-width:620px){ .mapbox{overflow-x:auto; padding:10px} .mapbox svg{min-width:540px} }
+html.embedded .site-header,html.embedded .site-footer{display:none}
+html.embedded .snd{padding-top:22px}
+html.embedded body{background:var(--bg)}
+
+/* Sentinel's own accent: steel-teal instead of Soundings' gold, scoped to this page only. */
+.snd{
+  --gold: #A6552E;
+  --gold-light: #C17A4F;
+  --gold-text: #7A3F1F;
+}
+
+/* Sentinel's own chain progress replaces Soundings' fixed-height sounding-line wrapper. */
+.snd .line{height:auto}
+.snd .line svg{display:none}
+@media (max-width:760px){.snd .ichain{margin-bottom:4px}}
+
+/* The interview chain: replaces Soundings' sounding-line. Six links, lighting up
+   as facts are established, the same visual language as Sentinel's own deck. */
+.ichain{position:sticky; top:24px; display:flex; flex-direction:column; align-items:center; gap:0}
+.ichain .node{width:34px; height:34px; border-radius:50%; border:1.5px solid rgba(15,42,71,.22); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--muted); background:var(--bg); transition:border-color .4s ease, color .4s ease, box-shadow .4s ease, background .4s ease}
+.ichain .seg{width:2px; height:26px; background:rgba(15,42,71,.16); transition:background .4s ease}
+.ichain .node.lit{border-color:var(--gold); color:#fff; background:var(--gold); box-shadow:0 0 0 4px rgba(44,110,121,.14)}
+.ichain .node.current{animation:ichain-pulse 1.6s ease-in-out infinite}
+.ichain .seg.lit{background:var(--gold)}
+@keyframes ichain-pulse{0%,100%{box-shadow:0 0 0 4px rgba(44,110,121,.14)}50%{box-shadow:0 0 0 8px rgba(44,110,121,.22)}}
+.ichain .label{margin-top:10px; font-size:10px; color:var(--muted); text-align:center; max-width:70px; line-height:1.3}
+@media (max-width:760px){
+  .ichain{flex-direction:row; position:static; margin-bottom:4px}
+  .ichain .seg{width:18px; height:2px}
+  .ichain .label{display:none}
+}
+
+/* ---- Elevated report styling: access matrix, finding records ---- */
+.rpt-kicker{font-size:12px; letter-spacing:1.6px; text-transform:uppercase; color:var(--gold); font-weight:700; margin:0 0 8px}
+.rpt-h2{font-family:'Playfair Display',Georgia,serif; color:var(--navy); font-size:20px; margin:0 0 4px; padding-top:16px; border-top:2px solid var(--navy)}
+
+/* Access matrix: agents down, checks across, filled cells not scatter dots. */
+.matrixwrap{overflow-x:auto; background:var(--paper); border:1px solid var(--line); border-radius:8px}
+table.matrix{border-collapse:collapse; width:100%; min-width:760px; font-size:12.5px}
+table.matrix th,table.matrix td{padding:10px 10px; text-align:center; border-bottom:1px solid var(--line)}
+table.matrix thead th{font-size:10px; letter-spacing:.4px; text-transform:uppercase; color:var(--steel); font-weight:700; vertical-align:bottom; border-bottom:2px solid var(--navy)}
+table.matrix thead th.rowhead{text-align:left}
+table.matrix td.rowhead{text-align:left; font-weight:600; color:var(--navy); font-size:13px; white-space:nowrap}
+table.matrix td.rowhead .idx{font-family:ui-monospace,'SF Mono',Consolas,monospace; font-size:10.5px; color:var(--muted); display:block; font-weight:400; margin-top:1px}
+.matrix .cell{width:22px; height:22px; border-radius:4px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700}
+.matrix .cell.yes{background:#8A2A1C; color:#fff}
+.matrix .cell.no{background:var(--line); color:transparent}
+.matrix .cell.unknown{background:none; border:1.5px dashed var(--gold); color:var(--gold-text)}
+.matrix td.zonecell{text-align:left; padding-left:14px}
+.matrix col.divider{border-left:2px solid var(--navy)}
+table.matrix td.divide, table.matrix th.divide{border-left:2px solid var(--navy)}
+
+/* Finding records: structured like an audit/pentest finding, not a soft card. */
+.finding{border:1px solid var(--line); border-left:4px solid var(--steel); border-radius:6px; padding:16px 20px; margin:0 0 14px; background:var(--paper)}
+.finding.sev-EXPOSURE{border-left-color:#8A2A1C}
+.finding.sev-CONTROLLED{border-left-color:#1F5A3A}
+.finding.sev-OVERBUILT{border-left-color:#7A5A12}
+.finding.sev-LOW_STAKES{border-left-color:#5B6472}
+.finding-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:8px}
+.finding-id{font-family:ui-monospace,'SF Mono',Consolas,monospace; font-size:11.5px; color:var(--muted); letter-spacing:.3px}
+.finding h3{margin:2px 0 10px; font-size:16px; color:var(--navy)}
+.finding ul{margin:0 0 12px; padding-left:18px}
+.finding li{font-size:13.5px; color:var(--ink); padding:2px 0}
+.finding .action{font-size:13px; background:var(--bg); border-radius:5px; padding:9px 12px; margin:0}
+.finding .action b{color:var(--navy)}
+.sevbadge{display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; padding:3px 9px; border-radius:3px}
+.sevbadge.sev-EXPOSURE{background:#8A2A1C; color:#fff}
+.sevbadge.sev-CONTROLLED{background:#1F5A3A; color:#fff}
+.sevbadge.sev-OVERBUILT{background:#7A5A12; color:#fff}
+.sevbadge.sev-LOW_STAKES{background:#5B6472; color:#fff}
+.finding .provtag{font-size:11px; color:var(--gold-text); font-weight:700; text-transform:uppercase; letter-spacing:.4px}
+
+/* ---- Keel-specific: the foundation bar (replaces the interview progress widget) ---- */
+.snd .line{height:auto; position:static; top:auto}
+.foundation{width:100%; max-width:100%}
+.foundation .track{position:relative; height:10px; background:rgba(15,42,71,.08); border-radius:5px; overflow:hidden; margin-bottom:10px}
+.foundation .fill{position:absolute; left:0; top:0; bottom:0; background:var(--gold); border-radius:5px; transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.foundation .ticks{display:flex; justify-content:space-between; margin-bottom:4px}
+.foundation .ticks span{width:6px; height:6px; border-radius:50%; background:rgba(15,42,71,.15); transition:background .4s ease}
+.foundation .ticks span.lit{background:var(--gold)}
+.foundation .caption{font-size:12px; color:var(--muted)}
+@media (max-width:760px){.foundation{margin-bottom:10px} .snd .line{position:static}}
+
+/* ---- Keel-specific badges: operating model and readiness levels, not risk zones ---- */
+.modeltag{display:inline-block; font-size:12.5px; font-weight:700; padding:3px 10px; border-radius:4px; background:var(--gold); color:#fff}
+.readytag{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.3px; padding:2px 8px; border-radius:3px}
+.readytag.r-0{background:#F6E1DD; color:#8A2A1C}
+.readytag.r-1{background:#F4EAD2; color:#7A5A12}
+.readytag.r-2{background:#DDEBE3; color:#1F5A3A}
+
+/* ---- The generated report, rendered from markdown ---- */
+.reportmd{max-width:760px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:28px 32px; margin:20px 0}
+.reportmd h2{font-family:'Playfair Display',Georgia,serif; color:var(--navy); font-size:19px; margin:26px 0 10px; padding-top:16px; border-top:1px solid var(--line)}
+.reportmd h2:first-child{margin-top:0; padding-top:0; border-top:0}
+.reportmd p{margin:0 0 12px; line-height:1.7; font-size:14.5px; color:var(--ink)}
+.reportmd ul,.reportmd ol{margin:0 0 12px; padding-left:20px}
+.reportmd li{margin:4px 0; font-size:14.5px; line-height:1.6}
+.reportmd strong{color:var(--navy)}
