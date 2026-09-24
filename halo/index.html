@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HALO: a leader's own practice, checked properly | Antara Innovations</title>
+<meta name="description" content="A free self-assessment against HALO's own stated minimums for clarity, acknowledgement, repair and AI-aware leadership.">
+<link rel="canonical" href="https://www.antara-innovations.com/halo/">
+<meta property="og:title" content="HALO: a free leadership practice self-assessment">
+<meta property="og:description" content="A short conversation, then a direct report on where your own leadership practice actually stands.">
+<meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="halo.css">
+</head>
+<body>
+<script>
+if (window.self !== window.top) document.documentElement.classList.add("embedded");
+</script>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../">
+      <img src="../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../newsletter/">Newsletter</a>
+      <a href="../wellness/">Antara Wellness</a>
+      <a href="../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=HALO">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="snd">
+<div class="wrap">
+
+  <!-- 1. Opening -->
+  <section id="s-intro" hidden>
+    <h1>Find out where your own leadership practice actually stands.</h1>
+    <p class="lead">Not a personality test. Seven specific, checkable standards, drawn from HALO itself, each with a real number attached, 48 hours, 24 hours, weekly, not a vague scale.</p>
+    <p class="lead">This asks for specific, recent instances, not general impressions, and it presses for a second one before taking the first as proof. A vague answer is itself a finding, not a problem to smooth over.</p>
+
+    <div class="situations">
+      <div>
+        <h3>Fine on the surface</h3>
+        <p>Most leaders believe they're clearer and more responsive than their team actually experiences. This can't close that gap on its own, but it can show you where you'd expect it to be widest.</p>
+      </div>
+      <div>
+        <h3>Silence reads as dismissal</h3>
+        <p>Not because anyone meant it that way. The brain runs a constant check, do I matter here, and no answer defaults to no.</p>
+      </div>
+      <div>
+        <h3>AI can quietly take the decision</h3>
+        <p>Not by malice, by default. If it's never been said out loud, that's already an answer worth knowing.</p>
+      </div>
+    </div>
+
+    <h2>What you'll come away with</h2>
+    <ul class="will">
+      <li>Where you're genuinely strong, with your own evidence as proof</li>
+      <li>Where you're weak, the same way, not a guess</li>
+      <li>One thing to fix this week, specific enough to actually do</li>
+      <li>Whether AI has ever quietly become the deciding word on something sensitive</li>
+      <li>A written report, direct, not hedged</li>
+    </ul>
+
+    <p class="small">About seven to ten minutes. This is about your own practice, not your organisation's systems, answer for yourself. Please don't name anyone else without their consent, general descriptions are fine.</p>
+    <div class="row">
+      <button class="btn btn-solid" id="beginBtn">Begin HALO</button>
+      <button class="linkish" id="resumeLink" hidden>Continue where I stopped</button>
+    </div>
+  </section>
+
+  <!-- 2. About the leader -->
+  <section id="s-setup" hidden>
+    <h1>First, a little context.</h1>
+    <p>This shapes how the questions land. It takes a few seconds.</p>
+    <form id="setupForm" novalidate>
+      <div class="grid2">
+        <label class="field"><span>How many people do you lead directly?</span>
+          <select name="team_size" required>
+            <option value="">Choose one</option>
+            <option>1 to 3</option><option>4 to 8</option><option>9 to 15</option>
+            <option>16 to 30</option><option>More than 30</option>
+          </select>
+        </label>
+        <label class="field"><span>How long in this role?</span>
+          <select name="tenure" required>
+            <option value="">Choose one</option>
+            <option>Less than 6 months</option><option>6 months to 2 years</option>
+            <option>2 to 5 years</option><option>More than 5 years</option>
+          </select>
+        </label>
+      </div>
+      <p class="err" id="setupErr" role="alert"></p>
+      <button class="btn btn-solid" type="submit" id="setupBtn">Start the conversation</button>
+    </form>
+  </section>
+
+  <!-- 3. Interview -->
+  <section id="s-interview" hidden>
+    <div class="interview">
+      <div class="line" aria-hidden="true">
+        <div class="foundation" id="foundation">
+          <div class="track"><div class="fill" id="fFill" style="width:0%"></div></div>
+          <div class="ticks" id="fTicks"></div>
+          <p class="caption" id="fCaption"></p>
+        </div>
+      </div>
+      <div>
+        <p class="question" id="question" aria-live="polite"></p>
+        <p class="why" id="why" hidden></p>
+        <form class="answer" id="answerForm">
+          <label for="answer" class="small" style="display:block;margin-bottom:6px;color:var(--steel)">Your answer</label>
+          <textarea id="answer" maxlength="2000" required placeholder="e.g. I told Priya on Tuesday the budget call came from above me, I had no influence over it."></textarea>
+          <div class="row">
+            <button class="btn btn-solid" type="submit" id="sendBtn">Send answer</button>
+            <button class="linkish" type="button" id="whyBtn">Why are you asking this?</button>
+            <span class="thinking" id="thinking" hidden>Reading your answer…</span>
+          </div>
+          <p class="err" id="answerErr" role="alert"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Email gate -->
+  <section id="s-gate" hidden>
+    <h1>Your report's being written.</h1>
+    <p>No account and no password. Just your work email, so we can send you a copy and get in touch if useful.</p>
+    <form id="gateForm" novalidate>
+      <div class="grid2">
+        <label class="field"><span>First name</span><input name="first" required maxlength="60" autocomplete="given-name"></label>
+        <label class="field"><span>Last name</span><input name="last" required maxlength="60" autocomplete="family-name"></label>
+        <label class="field"><span>Work email</span><input name="email" type="email" required maxlength="120" autocomplete="email"></label>
+        <label class="field"><span>Job title</span><input name="title" required maxlength="100" autocomplete="organization-title"></label>
+      </div>
+      <label class="check"><input type="checkbox" name="updates"> You can contact me about this assessment, the detailed report, or Antara's consulting services.</label>
+      <p class="err" id="gateErr" role="alert"></p>
+      <button class="btn btn-solid" type="submit" id="gateBtn">Show my report</button>
+    </form>
+  </section>
+
+  <!-- 5. Results -->
+  <section id="s-results" hidden>
+    <h1 id="resTitle">Your HALO practice report</h1>
+    <p class="headline" id="headline"></p>
+
+    <h2>All seven, at a glance</h2>
+    <ul class="uclist" id="readyList"></ul>
+
+    <div class="calibration" id="calibrationCard" hidden>
+      <p class="lbl">What you said about your team</p>
+      <p class="body" id="calibrationText"></p>
+    </div>
+
+    <h2>The full report</h2>
+    <div id="reportLoading" class="thinking">Writing your report, this takes a little longer than a score, usually under a minute…</div>
+    <div class="reportmd" id="reportBody" hidden></div>
+
+    <div class="locked">
+      <h2>The formalised version</h2>
+      <p>The free report tells you where you stand and what to fix first. The formalised version makes it something you can act on properly.</p>
+      <ul>
+        <li>A one-page standard for your weakest dimension, written to hand to your own manager</li>
+        <li>A repair script built from your actual situation, not a generic template</li>
+        <li>A written case for why this is leadership work, not HR's, one you could forward as-is</li>
+      </ul>
+      <div class="row">
+        <button class="btn btn-gold" id="reportBtn">Get the formalised version</button>
+        <span class="small" id="reportMsg" role="status"></span>
+      </div>
+    </div>
+
+    <div class="locked">
+      <h2>Find out how your team actually experiences it</h2>
+      <p>You've just told us how you're doing. The real question this can't answer is whether it lands for your team the way you believe it does. An anonymous pulse across your whole team, run properly, answers that directly, and compares it against what you just said.</p>
+      <div class="row">
+        <button class="btn btn-solid" id="fullBtn">Talk to Abhinav about a team pulse</button>
+        <span class="small" id="fullMsg" role="status"></span>
+      </div>
+    </div>
+
+    <p class="notice">HALO scores what you told us against fixed, stated standards: the same answers always produce the same result. It is a leader's own account of their own practice, not a measurement of how their team experiences it, and it is not a clinical or diagnostic tool.</p>
+    <p class="small"><button class="linkish" id="newBtn">Start a new assessment</button></p>
+  </section>
+
+  <section id="s-loading"><p class="thinking">Loading…</p></section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <p class="small">© <span id="yr"></span> Antara Innovations. HALO is an original framework by Abhinav Gaurav.</p>
+    <div class="foot-links">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../about/">About</a>
+      <a href="mailto:hello@antara-innovations.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+<script>
+const navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
+navToggle.addEventListener('click',function(){const o=navLinks.classList.toggle('open');navToggle.innerHTML=o?'&times;':'&#9776;';navToggle.setAttribute('aria-expanded',o);navToggle.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

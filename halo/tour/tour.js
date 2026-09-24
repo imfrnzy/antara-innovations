@@ -105,6 +105,19 @@ document.addEventListener("keydown", (e) => {
 
 
 document.getElementById("backBtn").onclick = () => { location.href = "../../frameworks/"; };
+
+const modalbg = document.getElementById("modalbg");
+const modalFrame = document.getElementById("modalFrame");
+let modalLoaded = false;
+function openModal() {
+  if (!modalLoaded) { modalFrame.src = "../"; modalLoaded = true; }
+  modalbg.classList.add("on");
+  document.getElementById("modalClose").focus();
+}
+function closeModal() { modalbg.classList.remove("on"); }
+document.getElementById("continueBtn").onclick = openModal;
+document.getElementById("modalClose").onclick = closeModal;
+modalbg.addEventListener("click", (e) => { if (e.target === modalbg) closeModal(); });
 document.getElementById("skipBtn").onclick = () => { clearTimer(); goTo(scenes.length - 1); };
 
 
