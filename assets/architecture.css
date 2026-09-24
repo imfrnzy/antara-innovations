@@ -1,0 +1,45 @@
+/* The full Antara architecture: Keel governs, the six-link chain runs the work,
+   Soundings watches. Built natively in the site's own palette, not the source PNG's. */
+
+.arch{margin:44px 0 0}
+.arch-label{text-align:center; font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:var(--steel); font-weight:700; margin:14px 0; position:relative}
+.arch-band{border-radius:8px; padding:22px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap}
+.arch-band .side{font-size:12px; line-height:1.9; color:inherit; opacity:.82}
+.arch-band .mid{text-align:center; flex:1; min-width:220px}
+.arch-band h3{font-family:'Playfair Display',Georgia,serif; font-size:26px; margin:0 0 2px; letter-spacing:.02em}
+.arch-band .role{font-size:12px; letter-spacing:1px; text-transform:uppercase; font-weight:700; opacity:.85; margin:0 0 6px}
+.arch-band .desc{font-size:13px; font-style:italic; opacity:.85; margin:0}
+.arch-band .icon{width:30px; height:30px; opacity:.8}
+
+.arch-band.keel{background:var(--navy); color:#EDF1F5}
+.arch-band.keel .role,.arch-band.keel h3{color:#fff}
+
+.arch-band.soundings{background:#F3ECDD; color:var(--navy)}
+.arch-band.soundings .role{color:var(--gold-text)}
+
+.arch-chain{display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin:0; align-items:stretch}
+.arch-link{background:var(--paper); border:1px solid var(--line); border-top:3px solid var(--navy); border-radius:6px; padding:16px 14px; display:flex; flex-direction:column}
+.arch-link .num{font-family:'Playfair Display',Georgia,serif; font-size:13px; color:var(--muted)}
+.arch-link h4{font-size:15px; color:var(--navy); margin:2px 0 2px}
+.arch-link .q{font-size:11.5px; color:var(--muted); font-style:italic; margin:0 0 10px}
+.arch-link ul{list-style:none; padding:0; margin:0 0 12px; flex:1}
+.arch-link li{font-size:11.5px; color:var(--ink); padding:2px 0; line-height:1.4}
+.arch-link .close{font-size:11.5px; font-weight:700; color:var(--navy); border-top:1px solid var(--line); padding-top:9px; margin:0; line-height:1.4}
+
+.arch-outcomes{display:flex; justify-content:space-between; flex-wrap:wrap; margin:30px 0 0; padding-top:22px; border-top:1px solid var(--line); text-align:center}
+.arch-outcomes div{flex:1; min-width:110px; padding:0 14px; border-left:1px solid var(--line)}
+.arch-outcomes div:first-child{border-left:0}
+.arch-outcomes span{font-size:12.5px; color:var(--navy); font-weight:700; line-height:1.35; display:block}
+
+.arch-principle{text-align:center; font-size:13.5px; color:var(--steel); font-style:italic; margin:24px 0 0}
+.arch-principle b{color:var(--navy); font-style:normal; font-weight:700}
+
+@media (max-width:900px){
+  .arch-chain{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:600px){
+  .arch-chain{grid-template-columns:repeat(2,1fr)}
+  .arch-band{flex-direction:column; text-align:center}
+  .arch-band .side{display:none}
+  .arch-outcomes{justify-content:center}
+}

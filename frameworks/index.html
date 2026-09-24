@@ -21,6 +21,7 @@
 <meta name="twitter:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/architecture.css">
 </head>
 
 <body>
@@ -214,36 +215,100 @@
     </div>
 
 
-    <!-- HOW THEY FIT -->
+    <!-- HOW THEY FIT: THE FULL ARCHITECTURE -->
 
-    <div class="reveal" style="margin-top:42px; max-width:900px">
+    <div class="reveal" style="margin-top:42px" id="architecture">
 
       <p class="kicker">How they fit together</p>
+      <h2 class="h">One system, three parts.</h2>
+      <p style="max-width:640px">Keel sets the policy. The six-link chain is where the actual work happens, and where Sentinel's questions apply. Soundings watches the whole thing and feeds what it sees back into stronger controls.</p>
 
-      <h2 class="h">One system, four lenses.</h2>
+      <div class="arch">
+        <div class="arch-band keel">
+          <div class="side">PEOPLE<br>POLICY<br>ACCOUNTABILITY</div>
+          <div class="mid">
+            <p class="role">Governance</p>
+            <h3>Keel</h3>
+            <p class="desc">Sets policy &middot; approves changes &middot; ensures accountability</p>
+          </div>
+          <div class="side" style="text-align:right">HUMAN JUDGEMENT<br>ORGANISATIONAL TRUST<br>RESPONSIBLE AI</div>
+        </div>
 
-      <p>
-        <strong style="color:var(--forest)">Soundings</strong> finds what AI is actually running, who knows about it, and whether the oversight matches its real risk.
-      </p>
+        <p class="arch-label">&darr; Governance over the chain &darr;</p>
 
-      <p>
-        <strong style="color:var(--forest)">Sentinel</strong> secures what AI agents can see, change and do, and whether their actions can be reconstructed afterwards.
-      </p>
+        <div class="arch-chain">
+          <div class="arch-link">
+            <span class="num">01</span>
+            <h4>Identity</h4>
+            <p class="q">Who is acting?</p>
+            <ul><li>Human user</li><li>AI agent</li><li>Shared or delegated identity</li></ul>
+            <p class="close">Establish and verify identity for every action.</p>
+          </div>
+          <div class="arch-link">
+            <span class="num">02</span>
+            <h4>Authority</h4>
+            <p class="q">What is it authorised to do?</p>
+            <ul><li>Task-level authorisation</li><li>Least privilege by design</li><li>Approval workflows</li></ul>
+            <p class="close">Grant the minimum authority required.</p>
+          </div>
+          <div class="arch-link">
+            <span class="num">03</span>
+            <h4>Context</h4>
+            <p class="q">What does it use?</p>
+            <ul><li>Data sources and access</li><li>External information</li><li>Trust and data quality</li></ul>
+            <p class="close">Control what informs its decisions, and trust it.</p>
+          </div>
+          <div class="arch-link">
+            <span class="num">04</span>
+            <h4>Action &amp; Consequence</h4>
+            <p class="q">What can it cause?</p>
+            <ul><li>Read, write, execute</li><li>Ability to trigger other agents</li><li>Human in the loop, where needed</li></ul>
+            <p class="close">Restrict and monitor real-world impact.</p>
+          </div>
+          <div class="arch-link">
+            <span class="num">05</span>
+            <h4>Evidence</h4>
+            <p class="q">Can we reconstruct it?</p>
+            <ul><li>End-to-end audit logs</li><li>Decision inputs and outputs</li><li>Tamper-resistant records</li></ul>
+            <p class="close">Prove what happened, and why.</p>
+          </div>
+          <div class="arch-link">
+            <span class="num">06</span>
+            <h4>Adaptation</h4>
+            <p class="q">What should change?</p>
+            <ul><li>Incident and near-miss learning</li><li>Control recommendations</li><li>Evolving threat landscape</li></ul>
+            <p class="close">Learn from what happened and propose changes.</p>
+          </div>
+        </div>
 
-      <p>
-        <strong style="color:var(--forest)">Keel</strong> governs how AI is selected, built, deployed and scaled, with the controls needed to keep adoption responsible.
-      </p>
+        <p class="arch-label">&uarr; Learning feedback loop: insights from evidence and adaptation inform stronger controls &uarr;</p>
 
-      <p>
-        <strong style="color:var(--forest)">HALO</strong> keeps humans leading the AI loop, with judgement, trust and accountability at the centre of every decision.
-      </p>
+        <div class="arch-band soundings">
+          <div class="side">VISIBILITY<br>MONITORING<br>INSIGHTS</div>
+          <div class="mid">
+            <p class="role">Observability &amp; Oversight</p>
+            <h3>Soundings</h3>
+            <p class="desc">Sees what is happening &middot; flags anomalies &middot; tracks change over time</p>
+          </div>
+          <div class="side" style="text-align:right">EARLY WARNINGS<br>CONTINUOUS INSIGHT<br>CONFIDENCE TO SCALE</div>
+        </div>
 
-      <p>
-        <strong style="color:var(--forest)">
-          Together, they connect discovery, security, governance and human judgement.
-        </strong>
-      </p>
+        <div class="arch-outcomes">
+          <div><span>Reduced security incidents</span></div>
+          <div><span>Trusted AI adoption</span></div>
+          <div><span>Clear accountability</span></div>
+          <div><span>Regulatory confidence</span></div>
+          <div><span>Safe, scalable innovation</span></div>
+        </div>
 
+        <p class="arch-principle"><b>Key principle:</b> Secure the chain from intelligence to action. And teach it to learn.</p>
+      </div>
+
+    </div>
+
+    <!-- Where Sentinel and HALO sit is described in prose, since only Keel and Soundings hold a fixed band in the architecture above. -->
+    <div class="reveal" style="margin-top:30px; max-width:900px">
+      <p><strong style="color:var(--forest)">Sentinel</strong> is what's actually asking the six questions in the chain above, whether identity, authority and evidence hold up the way Keel's policy assumes they do. <strong style="color:var(--forest)">HALO</strong> sits with Keel, at the human end, keeping judgement and accountability with a person even as the chain runs faster than any person could watch alone.</p>
     </div>
 
   </div>

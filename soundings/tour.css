@@ -200,3 +200,15 @@ body.tour-body{overflow:hidden; height:100vh}
 /* Presenting principle */
 .principle{max-width:600px; margin:22px auto 0; text-align:left}
 .principle p{font-size:15px; line-height:1.7}
+
+/* Condensed architecture strip: where this framework sits in the whole system. */
+.archstrip{max-width:600px; margin:26px auto 0; text-align:left}
+.archstrip .aband{border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:14px 18px; margin-bottom:10px; opacity:0; transform:translateY(8px)}
+.archstrip .aband.on{animation:pop .45s ease forwards}
+.archstrip .aband .role{font-size:10.5px; letter-spacing:.8px; text-transform:uppercase; color:rgba(237,241,245,.5); font-weight:700; margin:0 0 3px}
+.archstrip .aband h4{color:#fff; font-size:15px; margin:0 0 4px}
+.archstrip .aband p{color:rgba(237,241,245,.65); font-size:12.5px; margin:0; max-width:none}
+.archstrip .aband.here{border-color:var(--gold); background:rgba(184,146,63,.08)}
+.archstrip .aband.here .role{color:var(--gold-light)}
+.arch-more{display:block; text-align:center; margin-top:18px; font-size:12.5px; color:rgba(237,241,245,.55)}
+.arch-more a{color:var(--gold-light); border-bottom:1px solid rgba(255,255,255,.3)}
