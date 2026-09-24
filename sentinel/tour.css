@@ -222,7 +222,21 @@ body.tour-body{overflow:hidden; height:100vh}
   --gold: #3E96A3;
   --gold-light: #5BB0BC;
   --gold-text: #2C6E79;
+  background: #0D1B1F;
 }
+.tour::after{
+  background:radial-gradient(ellipse 90% 60% at 50% 0%, rgba(62,150,163,.10), transparent 60%);
+}
+.tour::before{
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:36px 36px;
+}
+.tour .exline{color:rgba(91,176,188,.6)}
+.tour .tp-free{background:rgba(62,150,163,.18); border-color:rgba(62,150,163,.4)}
+.tour .ladder > div:last-child{background:rgba(62,150,163,.07)}
+.tour .chain > div:not(:last-child)::after{color:rgba(91,176,188,.6)}
 
 /* A brief scanning sweep behind the title only, a security tool's opening beat. */
 .scene:first-child::before{
