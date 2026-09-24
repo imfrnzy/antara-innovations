@@ -166,12 +166,13 @@ async function showResults(prof) {
   $("resTitle").textContent = prof?.first_name ? `${prof.first_name}, here's your Keel readiness report` : "Your Keel readiness report";
 
   const cmp = c.comparison;
+  const provisionalNote = c.operating_model.provisional ? " Some answers were still unknown, so treat this as provisional." : "";
   if (cmp && cmp.has_existing && cmp.current_label) {
-    $("headline").textContent = cmp.matches
+    $("headline").textContent = (cmp.matches
       ? `You're running ${cmp.current_label.toLowerCase()}, and that matches what the score says fits.`
-      : `You're running ${cmp.current_label.toLowerCase()}. Based on your answers, ${c.operating_model.label.toLowerCase()} fits better.`;
+      : `You're running ${cmp.current_label.toLowerCase()}. Based on your answers, ${c.operating_model.label.toLowerCase()} fits better.`) + provisionalNote;
   } else {
-    $("headline").textContent = `The recommendation: ${c.operating_model.label.toLowerCase()}${c.operating_model.provisional ? ", provisional, some answers were still unknown" : ""}.`;
+    $("headline").textContent = `The recommendation: ${c.operating_model.label.toLowerCase()}.` + provisionalNote;
   }
 
   if (cmp && cmp.has_existing && cmp.note) {

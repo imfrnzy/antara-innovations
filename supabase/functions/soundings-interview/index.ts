@@ -47,6 +47,7 @@ ASKING RULES
 - One question per turn. Short. Plain British English. No jargon, no acronyms, no em dashes.
 - Build on what they just said, using their own words where you can.
 - Chase the gaps you are given, in that order, unless a contradiction needs clearing first.
+- If an answer wanders into a tangential detail, a name, an unrelated story, acknowledge it in at most one short clause, then return directly to the question you actually need answered. Do not follow a tangent for more than one turn.
 - why_asking is one plain sentence on why this matters.
 - Set done to true only when the gaps list is empty for every use case, or the person says there is nothing more to add.
 
@@ -86,6 +87,21 @@ const TOOL = {
     required: ["facts", "next_question", "why_asking", "done"],
   },
 };
+
+// Defensive: the model occasionally mis-formats its structured reply and a
+// fragment of its own internal tool-call markup (something like `</question>`)
+// ends up inside the text meant for the visitor. This never re-asks the model,
+// it just makes sure nothing that looks like a stray tag ever reaches the screen.
+const TAG_PATTERN = /<\/?[a-zA-Z_][\w-]*(?:\s+[a-zA-Z_][\w-]*="[^"]*")*\s*\/?>/;
+function sanitiseModelText(s) {
+  const m = s.match(TAG_PATTERN);
+  if (!m) return s;
+  const before = s.slice(0, m.index).trim();
+  const after = s.slice(m.index + m[0].length).replace(new RegExp(TAG_PATTERN, "g"), "").trim();
+  if (before.length >= 10) return before;
+  if (after.length >= 10) return after;
+  return s.replace(new RegExp(TAG_PATTERN, "g"), "").trim();
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
@@ -220,13 +236,13 @@ Record what the latest answer establishes, then ask the next question.`;
   }
 
   const allClear = ucs.length > 0 && ucs.every((u) => nextGaps(u.facts ?? {}, 1).length === 0);
-  if (out.done || allClear || a.turn_count + 1 >= MAX_TURNS) {
+  if (allClear || a.turn_count + 1 >= MAX_TURNS) {  // deliberately ignores out.done: only the server-computed gap list or the turn cap may end the interview
     await db.from("interactions").insert({ assessment_id: a.id, user_id: user.id, role: "assistant", content: "That's everything I need for the free assessment.", meta: {} });
     return await finish();
   }
 
-  const q = (out.next_question ?? "").toString().replace(/\u2014/g, ",").slice(0, 600);
-  const why = (out.why_asking ?? "").toString().replace(/\u2014/g, ",").slice(0, 300);
+  const q = sanitiseModelText((out.next_question ?? "").toString()).replace(/\u2014/g, ",").slice(0, 600);
+  const why = sanitiseModelText((out.why_asking ?? "").toString()).replace(/\u2014/g, ",").slice(0, 300);
   await db.from("interactions").insert({ assessment_id: a.id, user_id: user.id, role: "assistant", content: q, meta: { why } });
   return json({ question: q, why, done: false, progress: await progress() });
 
