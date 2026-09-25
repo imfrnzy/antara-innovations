@@ -1,8 +1,8 @@
 /* Instruments hub. Sits on ../assets/site.css, reuses its .card/.grid system. */
 .inst{padding:52px 0 70px}
 .inst .wrap{max-width:1080px}
-.inst h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(30px,4.6vw,46px); line-height:1.18; margin:0 0 20px; max-width:24ch; letter-spacing:-.01em}
-.inst .lead{font-size:17.5px; color:var(--ink); line-height:1.75; max-width:66ch}
+.inst h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(30px,4.6vw,46px); line-height:1.18; margin:0 0 20px;max-width:100%;; letter-spacing:-.01em}
+.inst .lead{font-size:17.5px; color:var(--ink); line-height:1.75; max-width:100%}
 
 .jump{display:flex; flex-wrap:wrap; gap:8px 22px; margin:30px 0 8px; padding:14px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
 .jump a{font-size:14px; font-weight:600; color:var(--steel)}
