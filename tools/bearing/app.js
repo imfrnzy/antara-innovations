@@ -168,11 +168,14 @@ function showQuestion() {
   byId("backBtn").style.visibility = state.position === 0 ? "hidden" : "visible";
 
   const current = state.answers[question.id];
-  byId("qOptions").innerHTML = ANSWER_OPTIONS.map((option) =>
+  const options = question.options || ANSWER_OPTIONS;
+  byId("qOptions").hidden = false;
+  byId("qOptions").innerHTML = options.map((option) =>
     `<button type="button" class="opt" role="radio" aria-checked="${current === option.value}" data-value="${option.value}">${escapeHtml(option.label)}</button>`).join("");
   byId("qOptions").querySelectorAll(".opt").forEach((button) => {
     button.onclick = () => chooseAnswer(button.dataset.value);
   });
+  byId("qSting").hidden = true;
   updateCompass();
   const heading = byId("qText");
   heading.setAttribute("tabindex", "-1");
@@ -191,6 +194,26 @@ function chooseAnswer(value) {
   });
   updateCompass();
   advancing = true;
+
+  // A calibration question with a weaker answer holds the deck here, on
+  // purpose, long enough to actually read, rather than sliding straight
+  // past the one moment it was built to produce.
+  if (question.sting && value !== "evidence") {
+    const stingEl = byId("qSting");
+    stingEl.textContent = question.sting;
+    stingEl.hidden = false;
+    setTimeout(() => {
+      advancing = false;
+      if (state.position < state.questions.length - 1) {
+        state.position = state.position + 1;
+        showQuestion();
+      } else {
+        finishQuestions();
+      }
+    }, 3200);
+    return;
+  }
+
   setTimeout(() => {
     advancing = false;
     if (state.position < state.questions.length - 1) {

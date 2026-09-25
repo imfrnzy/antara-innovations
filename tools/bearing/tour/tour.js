@@ -9,6 +9,9 @@ const PERSONA = {
   bank: {
     painH: "A named person has to answer for the AI, eventually",
     painP: "A regulator, an auditor or your own board asks who's accountable for a specific AI-assisted decision. \u201CSeveral people, informally\u201D is the honest answer at most banks, which in practice means no one, and under SM&CR that answer isn't good enough.",
+    confrontH: "If the FCA called your Senior Manager this afternoon, could the evidence be handed over in two hours?",
+    confrontP: "Not described. Produced. Dated records, not a good memory of what happened.",
+    confrontSource: "The Bank of England and FCA's own survey found most firms name three or more people as accountable for the same AI use. When everyone is accountable, no one actually is.",
     examples: [
       { h: "Named accountability", p: "Is AI written into a Senior Manager's actual Statement of Responsibilities, or just discussed at a steering group." },
       { h: "Evidence of reasonable steps", p: "Minutes, challenges raised, sign-offs. What a supervisor would actually ask to see." },
@@ -19,6 +22,9 @@ const PERSONA = {
   insurer: {
     painH: "Claims and pricing AI gets watched differently to everything else",
     painP: "EIOPA and the FCA both treat AI in claims and underwriting as high-impact, even though it usually isn't classed as \u201Chigh-risk\u201D under the EU AI Act. The gap between those two facts is where most insurers are exposed.",
+    confrontH: "Your claims team is already being tested by this, whether the process has caught up or not.",
+    confrontP: "Insurers detected more than £233m of suspected fraud last year, much of it involving AI-generated documents and images that looked entirely convincing.",
+    confrontSource: "That figure is from Aviva's own 2025 fraud reporting. The techniques it describes are not hypothetical, and they are not aimed only at Aviva.",
     examples: [
       { h: "Claims and underwriting bias checks", p: "Whether AI-assisted claims decisions and fraud flags are checked before they affect a payout." },
       { h: "Customer outcomes", p: "Consumer Duty is judged on outcomes. If AI plays a part, its effect has to show up in what you measure." },
@@ -29,6 +35,9 @@ const PERSONA = {
   default: {
     painH: "Every AI use raises the same question eventually",
     painP: "A supervisor, an auditor or a client asks who's accountable for a specific AI decision. The honest answer is usually \u201Cseveral people, informally\u201D, which in practice means no one.",
+    confrontH: "Would you say your organisation genuinely understands the AI it already runs?",
+    confrontP: "Most firms surveyed by the Bank of England and FCA claim only partial understanding of their own AI systems, not full understanding.",
+    confrontSource: "Just 34% claimed complete understanding. The other two-thirds includes firms that would have answered yes if asked casually.",
     examples: [
       { h: "Named accountability", p: "Whether responsibility for AI sits with a specific person, not a committee." },
       { h: "Knowing what you run", p: "Including AI features inside vendor software, not just the tools you built yourselves." },
@@ -47,6 +56,9 @@ function applyPersona(key) {
   const persona = PERSONA[key] || PERSONA.default;
   document.getElementById("painH").textContent = persona.painH;
   document.getElementById("painP").textContent = persona.painP;
+  document.getElementById("confrontH").textContent = persona.confrontH;
+  document.getElementById("confrontP").textContent = persona.confrontP;
+  document.getElementById("confrontSource").textContent = persona.confrontSource;
   document.getElementById("exH").textContent = key === "bank" || key === "insurer"
     ? "What it actually asks about, for you"
     : "What it actually asks about";

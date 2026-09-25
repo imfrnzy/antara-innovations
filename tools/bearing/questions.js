@@ -98,8 +98,15 @@ export const QUESTIONS = [
   },
   {
     id: "q_reasonable", lenses: ["uk"], onlyIfSector: [], onlyIfUse: [],
-    text: "If the FCA asked that Senior Manager what reasonable steps they've taken over AI, could they show records such as minutes, challenges raised and sign-offs, rather than just describe them?",
-    why: "Under SM&CR the test is what a person did and can show, not what they intended.",
+    text: "Picture the actual scenario: the FCA calls your named Senior Manager this afternoon and asks for everything that shows reasonable steps were taken over your AI use. Could it be handed over within two hours?",
+    why: "Under SM&CR, what counts is what can be produced on request, not what was intended. \"We'd need time to pull it together\" is treated the same as not having it.",
+    options: [
+      { value: "evidence", label: "Yes — a dated record exists and could be pulled together within two hours" },
+      { value: "partly", label: "Something exists, but it would take days to assemble, not hours" },
+      { value: "no", label: "No, nothing like this has been kept" },
+      { value: "unknown", label: "I'm not sure what would even count as evidence here" },
+    ],
+    sting: "The Bank of England and FCA's own survey found most firms name three or more people as accountable for the same AI use. When everyone is accountable, no one actually is, and that split is exactly what a supervisor's question is designed to find.",
   },
   {
     id: "q_outcomes", lenses: ["uk"], onlyIfSector: [], onlyIfUse: [],
@@ -108,8 +115,15 @@ export const QUESTIONS = [
   },
   {
     id: "q_understanding", lenses: ["uk"], onlyIfSector: [], onlyIfUse: [],
-    text: "Have you tested whether customers actually understand communications that AI wrote or helped write?",
-    why: "Clear to the person who wrote it is not the same as understood by the person who reads it.",
+    text: "Take the last AI-assisted letter or message your firm sent to a customer. If the FCA asked ten ordinary customers to explain it back in their own words, how confident are you that it would actually hold up?",
+    why: "Confidence that something is clear is not evidence that it was understood. Consumer Duty is judged on the outcome reaching the customer, not the intention behind the drafting.",
+    options: [
+      { value: "evidence", label: "We've actually tested this with real customers, and it held up" },
+      { value: "partly", label: "We're confident it's clear, but we've never tested it" },
+      { value: "no", label: "We haven't tested it, and honestly, it might not hold up" },
+      { value: "unknown", label: "We've never thought about it this way before" },
+    ],
+    sting: "Firms are consistently more confident their customers understood something than the customers actually did. That gap is exactly what a Consumer Duty file review is built to expose, and it's one of the few Duty failures that surfaces in a customer complaint before it ever reaches an audit.",
   },
   {
     id: "q_mrm", lenses: ["uk"], onlyIfSector: ["bank"], onlyIfUse: [],
@@ -139,8 +153,15 @@ export const QUESTIONS = [
   },
   {
     id: "q_explain", lenses: ["ch"], onlyIfSector: [], onlyIfUse: [],
-    text: "Could you explain a specific AI-assisted result to FINMA, an auditor or a client, in terms they would follow?",
-    why: "FINMA has said it often found results were not understood or explained. This is where it will look.",
+    text: "A client disputes an AI-assisted decision, and FINMA asks your team to explain in writing exactly how that result was reached. Right now, today, could someone in your organisation actually write that explanation?",
+    why: "This is not a hypothetical framed for effect. It is FINMA's own stated finding, applied to your organisation specifically.",
+    options: [
+      { value: "evidence", label: "Yes, a specific named person could write it today, and it would hold up" },
+      { value: "partly", label: "Someone could try, but it would be a reconstruction, not a real explanation" },
+      { value: "no", label: "No, nobody could currently produce this" },
+      { value: "unknown", label: "I don't know who would even own this" },
+    ],
+    sting: "FINMA's own supervisory review found that institutions were often unable to explain their AI-assisted results when asked. That finding came from institutions that, until they were asked, believed they could.",
   },
   {
     id: "q_independent", lenses: ["ch"], onlyIfSector: [], onlyIfUse: [],

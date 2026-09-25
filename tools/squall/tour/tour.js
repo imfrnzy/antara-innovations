@@ -7,6 +7,9 @@ const PERSONA = {
   bank: {
     painH: "The request that skips the process is the one built to work",
     painP: "An urgent payment, a channel that isn't the usual one, an instruction to keep it quiet. None of that proves anything on its own, but together it's the exact shape fraud is built to take, and it works because it's designed to stop you thinking.",
+    confrontH: "That fake CFO message on the next screen isn't a hypothetical.",
+    confrontP: "Urgency, secrecy, an instruction to bypass the usual sign-off, fraud is shaped that way on purpose, because it works on capable people under time pressure, not careless ones.",
+    confrontSource: "The FCA's own review of AI in UK financial services names the amplification of fraud as one of the clearest near-term risks of the technology becoming more capable and more accessible.",
     examples: [
       { h: "The urgent request", p: "A message that creates pressure and secrecy in the same breath, asking you to skip the usual sign-off." },
       { h: "The believable ask", p: "A known supplier, a normal reason, nothing that should trigger a second look, and most requests genuinely are this." },
@@ -17,6 +20,9 @@ const PERSONA = {
   insurer: {
     painH: "A polished claim isn't the same as a genuine one",
     painP: "Inconsistent shadows in a photo, an invoice with a VAT number that doesn't check out, phrasing that's a little too close to another claim filed the same week. Small details carry more signal than the overall impression.",
+    confrontH: "Your claims team is already being tested by this, whether the process has caught up or not.",
+    confrontP: "Insurers detected more than £233m of suspected fraud last year, a rising share of it involving AI-generated photos and documents built to pass a quick look.",
+    confrontSource: "That figure is Aviva's own 2025 reporting. The judgement call it describes looks exactly like the ones on the next screen.",
     examples: [
       { h: "The manipulated image", p: "Photos that look consistent at a glance, until the shadows or reflections don't quite agree with each other." },
       { h: "The genuine but messy one", p: "Blurry, badly lit, awkward angle, and entirely real. Imperfection is normal, not suspicious." },
@@ -33,6 +39,9 @@ function applyPersona(key) {
   if (!persona) return;
   document.getElementById("painH").textContent = persona.painH;
   document.getElementById("painP").textContent = persona.painP;
+  document.getElementById("confrontH").textContent = persona.confrontH;
+  document.getElementById("confrontP").textContent = persona.confrontP;
+  document.getElementById("confrontSource").textContent = persona.confrontSource;
   document.getElementById("exH").textContent = "What you're actually judging";
   document.getElementById("endKick").textContent = persona.endKick;
   const exampleEls = document.querySelectorAll("#examples > div");

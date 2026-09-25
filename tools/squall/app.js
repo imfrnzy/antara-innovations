@@ -101,6 +101,7 @@ function startRound(index) {
   byId("roundCount").textContent = `Scenario ${index + 1} of ${state.set.length}`;
   byId("scenarioText").textContent = scenario.text;
   byId("timedOutNote").hidden = true;
+  byId("roundSting").hidden = true;
   byId("confWrap").hidden = true;
 
   byId("decisionOptions").innerHTML = DECISIONS.map((option) =>
@@ -151,11 +152,29 @@ function onDecision(value) {
   byId("confWrap").hidden = false;
 }
 
+const OVERCONFIDENT_STINGS = [
+  "Wrong, and marked high confidence. That combination, not the error itself, is the expensive one, because nothing about how you felt would have told you to double-check.",
+  "That was incorrect, held with high confidence. In a live situation, confidence is the thing that stops a second look from ever happening.",
+  "Wrong, and sure of it. The scenarios built to be uncertain exist precisely because guessing with conviction is indistinguishable, from the inside, from being right.",
+];
+let overconfidentStingIndex = 0;
+
 function onConfidence(value) {
   byId("confOptions").querySelectorAll("button").forEach((button) => {
     button.setAttribute("aria-checked", String(button.dataset.value === value));
   });
-  recordResponse({ scenarioId: state.set[state.index].id, decision: state.currentDecision, confidence: value, timedOut: false });
+  const scenario = state.set[state.index];
+  const wasWrong = state.currentDecision !== scenario.truth;
+  recordResponse({ scenarioId: scenario.id, decision: state.currentDecision, confidence: value, timedOut: false });
+
+  if (wasWrong && value === "high") {
+    const stingEl = byId("roundSting");
+    stingEl.textContent = OVERCONFIDENT_STINGS[overconfidentStingIndex % OVERCONFIDENT_STINGS.length];
+    overconfidentStingIndex = overconfidentStingIndex + 1;
+    stingEl.hidden = false;
+    setTimeout(advance, 3200);
+    return;
+  }
   setTimeout(advance, 260);
 }
 

@@ -123,3 +123,10 @@ html.embedded .brg{padding-top:22px}
   .lens{break-inside:avoid}
   body{background:#fff}
 }
+
+/* The sting: a brief, unavoidable callout shown after a weaker answer to
+   one of the calibration questions, before the deck moves on. It is not
+   decorative, it is meant to be read before the next question loads. */
+.sting{max-width:560px; margin:16px 0 0; padding:14px 16px; background:#FBEDEA; border-left:3px solid var(--notyet); border-radius:0 4px 4px 0; font-size:15px; line-height:1.6; color:var(--ink); font-weight:500; animation:stingIn .35s ease}
+@keyframes stingIn{ from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none} }
+@media (prefers-reduced-motion:reduce){ .sting{animation:none} }
