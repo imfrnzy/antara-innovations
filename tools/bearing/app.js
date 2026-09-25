@@ -53,7 +53,7 @@ function escapeHtml(text) {
 
 // ---------- start-up ----------
 async function boot() {
-  byId("reportBtn").textContent = `Get the full report (${REPORT_PRICE_LABEL})`;
+  byId("reportBtn").textContent = `Request the full report (${REPORT_PRICE_LABEL})`;
   buildSetupForm();
   if (!state.assessmentId) {
     show("s-intro");
@@ -111,11 +111,11 @@ byId("setupForm").onsubmit = (event) => {
   const sector = form.get("sector");
   const size = form.get("size");
   if (jurisdictions.length === 0) {
-    byId("setupErr").textContent = "Pick at least one place where you operate.";
+    byId("setupErr").textContent = "Select at least one location where you operate.";
     return;
   }
   if (!sector || !size) {
-    byId("setupErr").textContent = "Choose your type of firm and size.";
+    byId("setupErr").textContent = "Select your type of firm and size.";
     return;
   }
   byId("setupErr").textContent = "";
@@ -261,15 +261,15 @@ byId("gateForm").onsubmit = async (event) => {
   const email = String(values.email || "").trim();
   const required = [values.first, values.last, values.title, values.company];
   if (required.some((value) => !String(value || "").trim())) {
-    byId("gateErr").textContent = "Fill in every field to continue.";
+    byId("gateErr").textContent = "Complete every field to continue.";
     return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    byId("gateErr").textContent = "That email doesn't look right.";
+    byId("gateErr").textContent = "Enter a valid email address.";
     return;
   }
   if (FREE_MAIL.test(email)) {
-    byId("gateErr").textContent = "Use your work email. Bearing is built for people inside regulated firms.";
+    byId("gateErr").textContent = "Use your work email address. Bearing is intended for individuals within regulated firms.";
     return;
   }
   byId("gateErr").textContent = "";
@@ -293,7 +293,7 @@ byId("gateForm").onsubmit = async (event) => {
     showResults(profile);
   } catch (error) {
     console.error(error);
-    byId("gateErr").textContent = "Couldn't save your details. Check your connection and try again.";
+    byId("gateErr").textContent = "Your details could not be saved. Check your connection and try again.";
   } finally {
     byId("gateBtn").disabled = false;
   }
@@ -304,15 +304,15 @@ function summarySentence(result) {
   const parts = result.lenses.map((lens) => `${lens.label} ${lens.percent}%`);
   const weakest = result.lenses.slice().sort((first, second) => first.percent - second.percent)[0];
   if (result.lenses.length === 1) {
-    return `You're ${weakest.band.toLowerCase()} for ${weakest.label}: ${weakest.readyCount} of ${weakest.obligations.length} obligations are fully in place.`;
+    return `This assessment is ${weakest.band.toLowerCase()} for ${weakest.label}: ${weakest.readyCount} of ${weakest.obligations.length} obligations are fully in place.`;
   }
-  return `Readiness by jurisdiction: ${parts.join(", ")}. The most work is in ${weakest.lens === "uk" ? "the UK" : weakest.label}.`;
+  return `Readiness by jurisdiction: ${parts.join(", ")}. ${weakest.lens === "uk" ? "The UK" : weakest.label} requires the most attention.`;
 }
 
 function showResults(profile) {
   const result = state.result;
   show("s-results");
-  byId("resTitle").textContent = profile && profile.first_name ? `${profile.first_name}, here's your Bearing readout` : "Your Bearing readout";
+  byId("resTitle").textContent = profile && profile.first_name ? `${profile.first_name}, your Bearing result` : "Bearing: assessment result";
   byId("resSummary").textContent = summarySentence(result);
   byId("resMeta").textContent = `Based on ${result.questionCount} answers, checked against ${result.obligationCount} obligations.`;
 
@@ -332,16 +332,16 @@ function showResults(profile) {
 
   const notes = [];
   if (result.partlyCount > 0) {
-    notes.push(`${result.partlyCount === 1 ? "Once" : result.partlyCount + " times"} you said something was only partly in place, or that you'd struggle to show it. That's the gap supervisors find first: the control exists in people's heads but not in a record.`);
+    notes.push(`In ${result.partlyCount === 1 ? "one instance" : result.partlyCount + " instances"}, a control was reported as only partly in place, or one the firm would struggle to evidence. This is typically the first gap a supervisor identifies: the control is understood informally but not recorded.`);
   }
   if (result.unknownCount > 0) {
-    notes.push(`You didn't know the answer ${result.unknownCount === 1 ? "once" : result.unknownCount + " times"}. That isn't a failing of yours, but it is a finding: if the person filling this in can't tell, a supervisor asking the same question won't get a clear answer either.`);
+    notes.push(`${result.unknownCount === 1 ? "One question" : result.unknownCount + " questions"} could not be answered with confidence. This is a finding in its own right: if the person completing this assessment cannot say, a supervisor asking the same question is unlikely to receive a clear answer.`);
   }
   byId("evidenceNote").hidden = notes.length === 0;
   byId("evidenceNote").innerHTML = notes.map((text) => `<p style="margin:0 0 8px">${escapeHtml(text)}</p>`).join("");
 
   if (result.topGaps.length === 0) {
-    byId("gapList").innerHTML = `<li><h3>No gaps on your answers</h3><p>Everything you were asked about is in place and evidenced. The full report would test whether that evidence would hold up to a supervisor's questions.</p></li>`;
+    byId("gapList").innerHTML = `<li><h3>No priority gaps identified</h3><p>Every obligation assessed is in place and evidenced. The full report would test whether that evidence would withstand a supervisor's questions.</p></li>`;
   } else {
     byId("gapList").innerHTML = result.topGaps.map((gap) => `
       <li><h3>${escapeHtml(gap.title)}</h3>
@@ -377,11 +377,11 @@ byId("reportBtn").onclick = async () => {
       location.href = paymentUrl.toString();
       return;
     }
-    byId("reportMsg").textContent = "Requested. We'll email you within two working days to confirm scope and payment.";
+    byId("reportMsg").textContent = "Request received. We will email you within two working days to confirm scope and payment.";
   } catch (error) {
     console.error(error);
     byId("reportBtn").disabled = false;
-    byId("reportMsg").innerHTML = `Couldn't send that. Email <a href="mailto:${CONTACT_EMAIL}?subject=Bearing%20full%20report">${CONTACT_EMAIL}</a> instead.`;
+    byId("reportMsg").innerHTML = `That request could not be sent. Email <a href="mailto:${CONTACT_EMAIL}?subject=Bearing%20full%20report">${CONTACT_EMAIL}</a> instead.`;
   }
 };
 
@@ -389,11 +389,11 @@ byId("consultBtn").onclick = async () => {
   byId("consultBtn").disabled = true;
   try {
     await logRequest("consulting");
-    byId("reportMsg").innerHTML = `Noted. Abhinav will be in touch, or email <a href="mailto:${CONTACT_EMAIL}?subject=Bearing" style="border-bottom:1px solid var(--chart)">${CONTACT_EMAIL}</a> now.`;
+    byId("reportMsg").innerHTML = `Request received. Abhinav will be in touch, or email <a href="mailto:${CONTACT_EMAIL}?subject=Bearing" style="border-bottom:1px solid var(--chart)">${CONTACT_EMAIL}</a> directly.`;
   } catch (error) {
     console.error(error);
     byId("consultBtn").disabled = false;
-    byId("reportMsg").innerHTML = `Couldn't send that. Email <a href="mailto:${CONTACT_EMAIL}?subject=Bearing">${CONTACT_EMAIL}</a> instead.`;
+    byId("reportMsg").innerHTML = `That request could not be sent. Email <a href="mailto:${CONTACT_EMAIL}?subject=Bearing">${CONTACT_EMAIL}</a> instead.`;
   }
 };
 

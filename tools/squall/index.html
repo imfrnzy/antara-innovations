@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Squall: judgement-under-pressure assessment | Antara Innovations</title>
+<meta name="description" content="A free assessment of judgement under time pressure, for claims, payments and customer-facing teams. Six scenarios, timed, scored for accuracy and overconfidence.">
+<link rel="canonical" href="https://www.antara-innovations.com/tools/squall/">
+<meta property="og:title" content="Squall: judgement-under-pressure assessment">
+<meta property="og:description" content="Six timed scenarios. An assessment of whether your process holds up under pressure, not only whether detection software would.">
+<meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<link rel="icon" href="../../assets/favicon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="squall.css">
+</head>
+<body>
+<script>
+if (window.self !== window.top) document.documentElement.classList.add("embedded");
+</script>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../../">
+      <img src="../../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../../newsletter/">Newsletter</a>
+      <a href="../../wellness/">Antara Wellness</a>
+      <a href="../../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Squall">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="sqi">
+<div class="wrap">
+
+  <!-- 1. Opening -->
+  <section id="s-intro" hidden>
+    <p class="crumb"><a href="../">Instruments</a> / Squall</p>
+    <h1 id="introH1">An assessment of judgement under time pressure.</h1>
+    <p class="lead" id="introLead">Six short scenarios, each timed. Decide whether it is genuine, fake or manipulated, or escalate it, in the way the situation would actually require. The assessment takes approximately five minutes.</p>
+
+    <div class="points">
+      <div>
+        <h3>Escalation is scored as correct</h3>
+        <p>Certain scenarios are deliberately constructed to be genuinely uncertain. Guessing on these is scored as the error, not the honest response.</p>
+      </div>
+      <div>
+        <h3>Confidence is assessed separately</h3>
+        <p>An incorrect answer is one finding. A confidently incorrect answer is a distinct and more significant one.</p>
+      </div>
+      <div>
+        <h3>No confidential information is requested</h3>
+        <p>Every scenario is a fictional example. The assessment does not ask about your actual customers or claims.</p>
+      </div>
+    </div>
+
+    <h2>Included in the free assessment</h2>
+    <ul class="will">
+      <li>An overall accuracy score and rating</li>
+      <li>Areas of relative strength and weakness</li>
+      <li>Whether overconfidence is present in your responses</li>
+      <li>A copy you can save and circulate to your team</li>
+    </ul>
+
+    <button class="btn btn-solid" id="beginBtn" type="button">Begin the assessment</button>
+    <p class="small note">A single run reflects one individual's judgement, not the team's. Circulate the link and compare results.</p>
+  </section>
+
+  <!-- 2. Setup -->
+  <section id="s-setup" hidden>
+    <p class="crumb"><a href="../">Instruments</a> / Squall</p>
+    <h1>Select the relevant scenario set.</h1>
+    <form id="setupForm" novalidate>
+      <fieldset class="group">
+        <legend>Select one</legend>
+        <div class="choices" id="moduleChoices"></div>
+      </fieldset>
+      <p class="err" id="setupErr" role="alert"></p>
+      <button class="btn btn-solid" id="setupBtn" type="submit">Begin</button>
+    </form>
+  </section>
+
+  <!-- 3. Rounds -->
+  <section id="s-round" hidden>
+    <div class="roundhead">
+      <span class="roundcount" id="roundCount"></span>
+      <span class="roundcount" id="roundTimer"></span>
+    </div>
+    <div class="timerwrap"><div class="timerbar" id="timerBar"></div></div>
+
+    <h2 class="scenario" id="scenarioText"></h2>
+
+    <div class="decisions" id="decisionOptions" role="radiogroup" aria-labelledby="scenarioText"></div>
+
+    <div class="confwrap" id="confWrap" hidden>
+      <p>Rate your confidence in this decision.</p>
+      <div class="confrow" id="confOptions" role="radiogroup"></div>
+    </div>
+
+    <div class="timedoutnote" id="timedOutNote" hidden>No decision was made within the time allowed. In practice, that delay is itself a finding.</div>
+  </section>
+
+  <!-- 4. Details before results -->
+  <section id="s-gate" hidden>
+    <h1>Your result is ready.</h1>
+    <p class="lead">Provide your details so we can save a copy of your result for future reference.</p>
+    <form id="gateForm" novalidate>
+      <div class="grid2">
+        <label class="field"><span>First name</span><input name="first" autocomplete="given-name"></label>
+        <label class="field"><span>Last name</span><input name="last" autocomplete="family-name"></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Work email</span><input name="email" type="email" autocomplete="email"></label>
+        <label class="field"><span>Job title</span><input name="title" autocomplete="organization-title"></label>
+      </div>
+      <label class="field"><span>Organisation</span><input name="company" autocomplete="organization"></label>
+      <label class="check"><input type="checkbox" name="updates"> Send me occasional updates on AI and fraud risk from Antara Innovations. You can stop them at any time.</label>
+      <p class="err" id="gateErr" role="alert"></p>
+      <button class="btn btn-solid" id="gateBtn" type="submit">View my result</button>
+    </form>
+  </section>
+
+  <!-- 5. Results -->
+  <section id="s-results" hidden>
+    <p class="crumb noprint"><a href="../">Instruments</a> / Squall</p>
+    <h1 id="resTitle">Squall: assessment result</h1>
+
+    <div class="scorehead">
+      <div class="big"><strong id="resPercent"></strong><span class="band" id="resBand"></span></div>
+      <p class="small" id="resMeta" style="color:var(--muted); margin-top:8px"></p>
+    </div>
+
+    <ul class="catlist" id="catList"></ul>
+
+    <div class="evidence-note" id="evidenceNote" hidden></div>
+
+    <h2>Round by round</h2>
+    <ul class="rowlist" id="rowList"></ul>
+
+    <div class="locked noprint">
+      <h2>The full version</h2>
+      <p>Scenarios constructed from your own claims or payment types, deployment across your full team, and an aggregate view of where the actual gaps sit, rather than one individual's result.</p>
+      <div class="actions">
+        <button class="btn btn-solid" id="reportBtn" type="button">Request the full report</button>
+        <button class="btn" id="consultBtn" type="button">Discuss a team rollout</button>
+      </div>
+      <p class="small" id="reportMsg" role="status"></p>
+    </div>
+
+    <div class="actions noprint">
+      <button class="linkish" id="printBtn" type="button">Save or print this result</button>
+      <button class="linkish" id="againBtn" type="button">Start a new assessment</button>
+    </div>
+    <p class="small note">All scenarios are fictional. This assessment measures judgement under time pressure and does not constitute a live fraud check.</p>
+  </section>
+
+  <section id="s-loading" hidden><p class="lead">Scoring your run&hellip;</p></section>
+
+</div>
+</main>
+
+<footer class="noprint">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand" style="margin-bottom:10px">
+        <img src="../../assets/logo.png" alt="Antara Innovations">
+        <span class="word">Antara <sup>Innovations</sup></span>
+      </div>
+      <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+    </div>
+    <div class="foot-links">
+      <a href="../../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../../newsletter/">Newsletter</a>
+      <a href="../../about/">About</a>
+      <a href="mailto:hello@antara-innovations.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', function(){
+  const open = navLinks.classList.toggle('open');
+  navToggle.innerHTML = open ? '&times;' : '&#9776;';
+  navToggle.setAttribute('aria-expanded', open);
+});
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

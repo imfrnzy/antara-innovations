@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bearing: AI regulatory readiness for UK, Swiss and EU financial firms | Antara Innovations</title>
-<meta name="description" content="A free check of where your firm stands against SM&CR and Consumer Duty, FINMA Guidance 08/2024 and the EU AI Act. About ten minutes, scored in your browser.">
+<title>Bearing: AI regulatory readiness assessment for financial services | Antara Innovations</title>
+<meta name="description" content="A free assessment of your firm's position against SM&CR and Consumer Duty, FINMA Guidance 08/2024, and the EU AI Act. Approximately ten minutes, scored in your browser.">
 <link rel="canonical" href="https://www.antara-innovations.com/tools/bearing/">
-<meta property="og:title" content="Bearing: free AI regulatory readiness check">
-<meta property="og:description" content="UK, Swiss and EU AI rules in one check. See what's ready, what isn't, and your three biggest gaps.">
+<meta property="og:title" content="Bearing: AI regulatory readiness assessment">
+<meta property="og:description" content="UK, Swiss and EU AI regulation assessed in a single pass. A clear view of what is ready, what is not, and where to focus first.">
 <meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <link rel="icon" href="../../assets/favicon.png">
 <link rel="stylesheet" href="../../assets/site.css">
@@ -42,43 +42,43 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
   <!-- 1. Opening -->
   <section id="s-intro" hidden>
     <p class="crumb"><a href="../">Instruments</a> / Bearing</p>
-    <h1 id="introH1">Find out where your firm stands against the AI rules that actually apply to it.</h1>
-    <p class="lead" id="introLead">Tell Bearing where you operate. It then asks only the questions that apply, across the FCA and SM&amp;CR in the UK, FINMA's guidance in Switzerland, and the EU AI Act. It takes about ten minutes.</p>
+    <h1 id="introH1">An assessment of your firm's position against the AI regulation that applies to it.</h1>
+    <p class="lead" id="introLead">Specify where you operate. The assessment is then scoped to the FCA and SM&amp;CR in the UK, FINMA's guidance in Switzerland, and the EU AI Act. It takes approximately ten minutes.</p>
 
     <div class="points">
       <div>
-        <h3>Three rulebooks, one pass</h3>
-        <p>Many firms answer to more than one regulator. Where the UK, Swiss and EU rules ask the same thing, you answer it once.</p>
+        <h3>Three regulatory regimes, one assessment</h3>
+        <p>Many firms answer to more than one regulator. Where the UK, Swiss and EU requirements overlap, they are assessed once, not three times.</p>
       </div>
       <div>
-        <h3>Having it is not the same as showing it</h3>
-        <p>Every answer separates "we do this" from "we could prove it". Supervisors ask for the second, and that's where most firms come up short.</p>
+        <h3>Readiness and evidence are assessed separately</h3>
+        <p>Every question distinguishes between what a firm does and what it can demonstrate. Supervisors ask for the latter, and that is where most firms fall short.</p>
       </div>
       <div>
-        <h3>Your answers stay out of AI models</h3>
-        <p>Bearing scores your answers in your browser against fixed rules. It never asks for customer data, model code or anything confidential.</p>
+        <h3>No data leaves your browser</h3>
+        <p>Responses are scored locally, against fixed criteria. The assessment does not request customer data, model code or any confidential information.</p>
       </div>
     </div>
 
-    <h2>What you get, free</h2>
+    <h2>Included in the free assessment</h2>
     <ul class="will">
       <li>A readiness score for each jurisdiction</li>
-      <li>Ready, partly, not yet, for every obligation</li>
-      <li>Your three biggest gaps, and why they matter</li>
-      <li>A copy you can save and forward internally</li>
+      <li>A ready, partly ready, or not yet ready rating for every obligation</li>
+      <li>The three priority areas identified from your responses</li>
+      <li>A copy you can save and circulate internally</li>
     </ul>
 
-    <button class="btn btn-solid" id="beginBtn" type="button">Start the check</button>
-    <p class="small note">Bearing gives a readiness view. It is not legal advice or a compliance certificate. Rules as of September 2026.</p>
+    <button class="btn btn-solid" id="beginBtn" type="button">Begin the assessment</button>
+    <p class="small note">Bearing provides a readiness assessment. It does not constitute legal advice or a compliance certification. Rules current as of September 2026.</p>
   </section>
 
   <!-- 2. Setup -->
   <section id="s-setup" hidden>
     <p class="crumb"><a href="../">Instruments</a> / Bearing</p>
-    <h1>First, where you operate and what you use AI for.</h1>
+    <h1>Tell us about your organisation.</h1>
     <form id="setupForm" novalidate>
       <fieldset class="group">
-        <legend>Where do you serve customers or hold a licence? Pick all that apply.</legend>
+        <legend>Where do you serve customers or hold a licence? Select all that apply.</legend>
         <div class="choices" id="jurisdictionChoices"></div>
       </fieldset>
 
@@ -92,7 +92,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       </div>
 
       <fieldset class="group">
-        <legend>Where do you use AI today, even informally? Pick any that apply, or none.</legend>
+        <legend>Where is AI currently in use, including informal use? Select any that apply, or none.</legend>
         <div class="choices two-col" id="useChoices"></div>
       </fieldset>
 
@@ -121,7 +121,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
         <p class="lenses" id="qLenses"></p>
         <h2 class="question" id="qText"></h2>
         <div class="options" id="qOptions" role="radiogroup" aria-labelledby="qText"></div>
-        <button class="linkish" id="whyBtn" type="button">Why are we asking this?</button>
+        <button class="linkish" id="whyBtn" type="button">Why this is relevant</button>
         <p class="why" id="qWhy" hidden></p>
         <div class="qnav">
           <button class="linkish" id="backBtn" type="button">Back</button>
@@ -134,8 +134,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
   <!-- 4. Details before results -->
   <section id="s-gate" hidden>
-    <h1>Your readout is ready.</h1>
-    <p class="lead">Tell us who it's for. We'll keep a copy so you can come back to it, and we won't pass your details to anyone.</p>
+    <h1>Your result is ready.</h1>
+    <p class="lead">Provide your details so we can save a copy of your result for future reference. Your information will not be shared with third parties.</p>
     <form id="gateForm" novalidate>
       <div class="grid2">
         <label class="field"><span>First name</span><input name="first" autocomplete="given-name"></label>
@@ -148,14 +148,14 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <label class="field"><span>Organisation</span><input name="company" autocomplete="organization"></label>
       <label class="check"><input type="checkbox" name="updates"> Send me occasional updates on AI regulation from Antara Innovations. You can stop them at any time.</label>
       <p class="err" id="gateErr" role="alert"></p>
-      <button class="btn btn-solid" id="gateBtn" type="submit">Show my readout</button>
+      <button class="btn btn-solid" id="gateBtn" type="submit">View my result</button>
     </form>
   </section>
 
   <!-- 5. Results -->
   <section id="s-results" hidden>
     <p class="crumb noprint"><a href="../">Instruments</a> / Bearing</p>
-    <h1 id="resTitle">Your Bearing readout</h1>
+    <h1 id="resTitle">Bearing: assessment result</h1>
     <p class="lead" id="resSummary"></p>
     <p class="small" id="resMeta"></p>
 
@@ -163,27 +163,27 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <div class="evidence-note" id="evidenceNote" hidden></div>
 
-    <h2>Your three biggest gaps</h2>
+    <h2>Priority areas</h2>
     <ol class="gaps" id="gapList"></ol>
 
     <div class="locked noprint">
-      <h2>What the full report adds</h2>
-      <p>For each of your <strong id="lockedCount"></strong> obligations: what a supervisor would ask to see, what good looks like, the fix, who should own it, and a realistic timeline. Written by Abhinav Gaurav from your answers, and returned within five working days.</p>
+      <h2>The full report</h2>
+      <p>For each of your <strong id="lockedCount"></strong> obligations: the evidence a supervisor would expect to see, the standard to meet, the required remediation, ownership, and a realistic timeline. Prepared by Abhinav Gaurav from your responses and delivered within five working days.</p>
       <div class="actions">
-        <button class="btn btn-solid" id="reportBtn" type="button">Get the full report</button>
-        <button class="btn" id="consultBtn" type="button">Talk to us about closing the gaps</button>
+        <button class="btn btn-solid" id="reportBtn" type="button">Request the full report</button>
+        <button class="btn" id="consultBtn" type="button">Arrange a consultation</button>
       </div>
       <p class="small" id="reportMsg" role="status"></p>
     </div>
 
     <div class="actions noprint">
-      <button class="linkish" id="printBtn" type="button">Save or print this readout</button>
-      <button class="linkish" id="againBtn" type="button">Start a new check</button>
+      <button class="linkish" id="printBtn" type="button">Save or print this result</button>
+      <button class="linkish" id="againBtn" type="button">Start a new assessment</button>
     </div>
-    <p class="small note">A readiness view based on your own answers, not legal advice or a compliance certificate. Rules as of September 2026.</p>
+    <p class="small note">This result is a readiness assessment based on your own responses. It does not constitute legal advice or a compliance certification. Rules current as of September 2026.</p>
   </section>
 
-  <section id="s-loading" hidden><p class="lead">Loading your readout&hellip;</p></section>
+  <section id="s-loading" hidden><p class="lead">Preparing your result&hellip;</p></section>
 
 </div>
 </main>

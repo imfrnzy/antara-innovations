@@ -1,0 +1,103 @@
+/* Squall. Sits on ../../assets/site.css. Its own accent is a storm-grey
+   teal, distinct from Bearing's magenta, evoking a sudden squall at sea. */
+:root{
+  --storm:#2E6B78;
+  --storm-soft:#E8F1F2;
+  --right:#2F6B4F;
+  --wrong:#9B2C2C;
+  --timeout:#8C6A28;
+}
+[hidden]{display:none !important}
+
+.sqi{padding:44px 0 80px}
+.sqi .wrap{max-width:900px}
+.sqi h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(28px,4.2vw,42px); line-height:1.18; margin:0 0 20px; letter-spacing:-.01em; max-width:24ch}
+.sqi h1:focus,.sqi .scenario:focus{outline:none}
+.sqi h2{color:var(--navy); font-size:20px; margin:34px 0 12px}
+.sqi p{max-width:66ch}
+.sqi .lead{font-size:18px; color:var(--ink); line-height:1.7}
+.sqi .small{font-size:13.5px}
+.sqi .note{margin-top:18px; color:var(--muted)}
+.crumb{font-size:13px; color:var(--muted); margin:0 0 18px}
+.crumb a{color:var(--storm); border-bottom:1px solid currentColor}
+
+.points{display:grid; grid-template-columns:repeat(3,1fr); margin:30px 0 8px; border-top:2px solid var(--storm)}
+.points div{padding:18px 20px 4px 0}
+.points div + div{padding-left:20px; border-left:1px solid var(--line)}
+.points h3{font-size:15px; color:var(--navy); margin:0 0 8px}
+.points p{font-size:14.5px; line-height:1.65}
+@media (max-width:760px){ .points{grid-template-columns:1fr} .points div + div{padding-left:0; border-left:0; border-top:1px solid var(--line)} }
+
+.will{margin:4px 0 28px; padding:0; list-style:none; columns:2; column-gap:40px; max-width:640px}
+.will li{padding:7px 0; border-bottom:1px solid var(--line); font-size:15px; break-inside:avoid}
+@media (max-width:620px){ .will{columns:1} }
+
+.group{border:0; padding:0; margin:0 0 26px}
+.group legend{font-size:15px; font-weight:600; color:var(--navy); margin-bottom:12px}
+.choices{display:flex; flex-wrap:wrap; gap:10px}
+.pill{display:flex; align-items:center; gap:10px; background:var(--paper); border:1px solid rgba(15,42,71,.2); border-radius:6px; padding:11px 14px; font-size:14.5px; cursor:pointer}
+.pill:has(input:checked){border-color:var(--storm); background:var(--storm-soft)}
+.pill input{accent-color:var(--storm); margin:0}
+.field{display:block; margin:0 0 18px}
+.field span{display:block; font-size:13px; font-weight:600; color:var(--steel); margin-bottom:6px}
+.field input,.field select{width:100%; font:inherit; font-size:15.5px; color:var(--ink); background:var(--paper); border:1px solid rgba(15,42,71,.22); border-radius:6px; padding:11px 12px}
+.field input:focus,.field select:focus,.btn:focus-visible,.linkish:focus-visible,.opt:focus-visible,.pill:focus-within{outline:2px solid var(--storm); outline-offset:2px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 18px}
+@media (max-width:620px){ .grid2{grid-template-columns:1fr} }
+.check{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--muted); margin:6px 0 18px}
+.err{color:var(--wrong); font-size:14px; min-height:20px; margin:6px 0 0}
+.linkish{background:none; border:0; padding:0; font:inherit; font-size:13.5px; color:var(--steel); border-bottom:1px solid var(--storm); cursor:pointer}
+.btn[disabled]{opacity:.55; cursor:progress}
+
+/* Round screen: the countdown is the one memorable thing on the page. */
+.roundhead{display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-bottom:6px}
+.roundcount{font-size:12.5px; color:var(--storm); font-weight:700}
+.timerwrap{height:6px; background:rgba(15,42,71,.1); border-radius:3px; overflow:hidden; margin:0 0 26px}
+.timerbar{height:100%; background:var(--storm); width:100%; transform-origin:left}
+.timerbar.running{animation:shrink linear forwards}
+@keyframes shrink{ to{ transform:scaleX(0) } }
+.timerbar.low{background:var(--wrong)}
+@media (prefers-reduced-motion:reduce){ .timerbar.running{animation:none; transform:scaleX(0)} }
+
+.scenario{font-family:'Playfair Display',Georgia,serif; font-weight:600; font-size:clamp(19px,2.4vw,23px); line-height:1.5; color:var(--navy); margin:0 0 26px; max-width:56ch}
+.decisions{display:grid; gap:10px; margin:0 0 8px; max-width:560px}
+.opt{text-align:left; font:inherit; font-size:15.5px; color:var(--ink); background:var(--paper); border:1px solid rgba(15,42,71,.2); border-radius:6px; padding:13px 16px; cursor:pointer}
+.opt:hover{border-color:var(--navy)}
+.opt[aria-checked="true"]{border-color:var(--storm); background:var(--storm-soft); color:var(--navy); font-weight:600}
+.confwrap{margin-top:22px; max-width:560px}
+.confwrap p{font-size:13.5px; font-weight:600; color:var(--steel); margin:0 0 8px; max-width:none}
+.confrow{display:flex; gap:8px}
+.confrow button{flex:1; font:inherit; font-size:14px; padding:10px; border-radius:6px; border:1px solid rgba(15,42,71,.2); background:var(--paper); color:var(--ink); cursor:pointer}
+.confrow button[aria-checked="true"]{border-color:var(--storm); background:var(--storm-soft); font-weight:600; color:var(--navy)}
+.timedoutnote{max-width:560px; background:var(--storm-soft); border-left:3px solid var(--storm); padding:12px 14px; font-size:14.5px; margin:0 0 20px}
+
+/* Results */
+.scorehead{border-top:2px solid var(--navy); padding:18px 0 10px; margin-top:20px}
+.scorehead .big{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap}
+.scorehead strong{font-size:44px; color:var(--navy); font-weight:800; letter-spacing:-.01em}
+.scorehead .band{font-size:16px; color:var(--steel)}
+.catlist{list-style:none; margin:22px 0 0; padding:0; max-width:640px}
+.catlist li{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:15px}
+.catlist .pct{font-weight:700; color:var(--navy)}
+.rowlist{list-style:none; margin:0; padding:0; max-width:720px}
+.rowlist li{padding:12px 0; border-bottom:1px solid var(--line)}
+.rowlist .rmeta{display:flex; gap:10px; align-items:center; font-size:13px; margin-bottom:4px}
+.tag{font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:4px; border:1px solid currentColor}
+.tag.right{color:var(--right)}
+.tag.wrong{color:var(--wrong)}
+.tag.timeout{color:var(--timeout); border-style:dashed}
+.rowlist p{font-size:14px; margin:0; color:var(--muted); max-width:none}
+
+.evidence-note{margin:26px 0 0; padding:16px 18px; background:var(--storm-soft); border-left:3px solid var(--storm); font-size:15px; line-height:1.65; max-width:760px}
+.locked{margin:40px 0 10px; padding:24px 26px; border:1px solid var(--navy); border-radius:8px; background:var(--paper)}
+.locked h2{margin-top:0}
+.actions{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:18px 0 6px}
+
+html.embedded .site-header, html.embedded footer{display:none}
+html.embedded .sqi{padding-top:22px}
+
+@media print{
+  .site-header, .noprint, footer{display:none !important}
+  .sqi{padding:0}
+  body{background:#fff}
+}
