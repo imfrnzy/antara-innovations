@@ -19,7 +19,7 @@
 
 .closing{margin-top:56px; padding:26px 28px; background:var(--navy); border-radius:8px; color:#EDF1F5}
 .closing h2{color:#fff; font-size:21px; margin:0 0 8px}
-.closing p{color:rgba(237,241,245,.8); margin:0 0 16px; max-width:60ch}
+.closing p{color:rgba(237,241,245,.8); margin:0 0 16px; max-width:100%}
 
 @media (max-width:760px){
   .grid-2{grid-template-columns:1fr}
