@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Bearing works | Antara Innovations</title>
+<meta name="description" content="A two minute walkthrough of Bearing, the AI regulatory readiness instrument from Antara Innovations.">
+<link rel="canonical" href="https://www.antara-innovations.com/tools/bearing/tour/">
+<link rel="icon" href="../../../assets/favicon.png">
+<link rel="stylesheet" href="../../../assets/site.css">
+<link rel="stylesheet" href="../tour.css">
+</head>
+<body class="tour-body">
+
+<div class="tour" id="tourRoot">
+  <div class="tour-top">
+    <div class="dots" id="dots"></div>
+    <div class="tour-brand">
+      <span>Bearing &middot; how it works</span>
+      <div class="tour-controls">
+        <button id="playBtn" type="button" aria-label="Pause">Pause</button>
+        <button class="skip" id="skipBtn" type="button">Skip to assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <p class="exline" id="exline" hidden><span id="exnum">Exhibit 1</span><span>Bearing, an AI regulatory readiness instrument</span></p>
+    <p class="decknote" id="decknote" hidden>Antara Innovations &middot; proprietary instrument &middot; private and confidential</p>
+
+    <section class="scene" data-ms="5000">
+      <div class="inner">
+        <p class="kick pop d1">Proprietary instrument</p>
+        <h2 class="pop d2">BEARING</h2>
+        <p class="pop d3">Ready is not the same as able to prove it.</p>
+      </div>
+    </section>
+
+    <!-- The one interactive scene. No auto-advance: everything after this is
+         built from what gets picked here, so the deck waits for an answer. -->
+    <section class="scene pickscene" data-ms="0">
+      <div class="inner" style="max-width:780px">
+        <h2 class="pop d1">Which of these is closest to you?</h2>
+        <p class="pop d2" style="margin:0 0 6px">This decides the pain point, the examples, and later the questions you're actually asked.</p>
+        <div class="picker" id="picker">
+          <button type="button" data-persona="bank"><h4>Banking</h4><p>A bank, building society or payments firm.</p></button>
+          <button type="button" data-persona="insurer"><h4>Insurance</h4><p>An insurer, MGA or broker.</p></button>
+          <button type="button" data-persona="other"><h4>Another financial firm</h4><p>Wealth or asset management, or something else regulated.</p></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Persona pain point: content set by tour.js once a choice is made -->
+    <section class="scene" data-ms="7500">
+      <div class="inner">
+        <h2 class="pop d1" id="painH">Every AI use raises the same question eventually</h2>
+        <p class="pop d2" id="painP">A supervisor, an auditor or a client asks who's accountable for a specific AI decision. The honest answer is usually "several people, informally", which in practice means no one.</p>
+      </div>
+    </section>
+
+    <section class="scene sitscene" data-ms="9000">
+      <div class="inner">
+        <h2 class="pop d1">One pass, three rulebooks</h2>
+        <div class="sits" id="sits">
+          <div data-t="0"><h4>United Kingdom</h4><p>SM&amp;CR wants a named senior manager and evidence of reasonable steps. Consumer Duty wants the outcome, not just the intention.</p></div>
+          <div data-t="3000"><h4>Switzerland</h4><p>FINMA's guidance wants governance, an inventory, and someone who can explain a result, not just produce one.</p></div>
+          <div data-t="6000"><h4>European Union</h4><p>The AI Act wants classification, transparency, and specific duties where AI touches credit or life and health pricing.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="8500">
+      <div class="inner">
+        <h2 class="pop d1">Having it isn't the same as showing it</h2>
+        <div class="chat" id="chat1">
+          <div class="bubble b-ask" data-t="300">Is AI output checked by a person before it reaches a customer?</div>
+          <div class="bubble b-ans" data-t="2300">Yes, someone reviews it.</div>
+          <div class="bubble b-why" data-t="3800">Why we ask twice: a belief and a record are different things.</div>
+          <div class="bubble b-ask" data-t="5600">Could you show what was checked, by whom, and when?</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene chkscene" data-ms="10000">
+      <div class="inner" style="max-width:700px">
+        <h2 class="pop d1">Every answer earns a status, not a guess</h2>
+        <p class="pop d2" style="margin:0">The same fixed rule applies to everyone, so two people answering honestly land in the same place.</p>
+        <div class="scoregrid" id="scoregrid">
+          <div data-t="500"><h4>Ready</h4><p>You have it, and you could show the evidence, on every question behind that obligation.</p></div>
+          <div data-t="1500"><h4>Partly</h4><p>Some of it's there, or you have it but couldn't show it under questioning.</p></div>
+          <div data-t="2500"><h4>Not yet</h4><p>It isn't in place. Not a verdict on you, a starting point for the work.</p></div>
+          <div data-t="3500"><h4>Can't tell yet</h4><p>You didn't know. That's a finding too: if you can't tell, a supervisor won't either.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Persona-relevant examples: content set by tour.js -->
+    <section class="scene sitscene" data-ms="9500">
+      <div class="inner">
+        <h2 class="pop d1" id="exH">What it actually asks about</h2>
+        <div class="sits" id="examples">
+          <div data-t="0"></div>
+          <div data-t="3000"></div>
+          <div data-t="6000"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="7000">
+      <div class="inner">
+        <h2 class="pop d1">Only the questions that apply to you</h2>
+        <p class="pop d2">Where you operate, your type of firm and where you actually use AI decide which of roughly twenty obligations get asked. A Swiss wealth manager sees far fewer than a bank licensed in all three places.</p>
+      </div>
+    </section>
+
+    <section class="scene ladderscene" data-ms="9500">
+      <div class="inner" style="max-width:820px">
+        <h2 class="pop d1">Three ways to go deeper</h2>
+        <div class="ladder" id="ladder">
+          <div data-t="300">
+            <span class="lstep">01</span><h4>Free readout</h4>
+            <p>A score per jurisdiction, ready or not for every obligation, and your three biggest gaps. About ten minutes.</p>
+            <span class="lprice">No charge</span>
+          </div>
+          <div data-t="1900">
+            <span class="lstep">02</span><h4>Full report</h4>
+            <p>What a supervisor would ask to see, what good looks like, the fix, who should own it.</p>
+            <span class="lprice" id="ladderPrice">Priced report</span>
+          </div>
+          <div data-t="3500">
+            <span class="lstep">03</span><h4>Implementation</h4>
+            <p>We close the gaps with you, as a fixed-scope sprint, so nothing is left open-ended.</p>
+            <span class="lprice">Engagement, priced individually</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene end" data-ms="0">
+      <div class="inner">
+        <p class="kick pop d1" id="endKick">That's Bearing</p>
+        <h2 class="pop d2">Find out where your firm actually stands.</h2>
+        <p class="pop d3">About ten minutes. Nothing confidential is asked, only how your organisation is set up to handle AI.</p>
+        <div class="btnrow pop d4">
+          <button class="tourbtn" id="backBtn" type="button">Back to instruments</button>
+          <button class="tourbtn solid" id="continueBtn" type="button">Continue to the assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tour-bottom" id="tourBottom">
+    <button class="navbtn" id="prevBtn" type="button" aria-label="Previous">&#8592;</button>
+    <button class="navbtn" id="nextBtn" type="button" aria-label="Next">&#8594;</button>
+  </div>
+</div>
+
+<div class="modalbg" id="modalbg">
+  <div class="modalbox" role="dialog" aria-modal="true" aria-label="Bearing assessment">
+    <button class="modalclose" id="modalClose" aria-label="Close">&times;</button>
+    <iframe id="modalFrame" title="Bearing assessment" src=""></iframe>
+  </div>
+</div>
+
+<script type="module" src="tour.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+/* Bearing. Sits on ../../assets/site.css. Its own accent is chart magenta,
+   the colour sea charts use for bearings and navigation marks. */
+:root{
+  --chart:#9B2F63;
+  --chart-soft:#F4E9EF;
+  --ready:#2F6B4F;
+  --partly:#8C6A28;
+  --notyet:#9B2C2C;
+  --unknown:#5B6472;
+}
+[hidden]{display:none !important}
+
+.brg{padding:44px 0 80px}
+.brg .wrap{max-width:900px}
+.brg section{padding:0}
+.brg h1:focus,.brg .question:focus{outline:none}
+.brg h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(28px,4.2vw,42px); line-height:1.18; margin:0 0 20px; letter-spacing:-.01em; max-width:24ch}
+.brg h2{color:var(--navy); font-size:20px; margin:34px 0 12px}
+.brg p{max-width:66ch}
+.brg .lead{font-size:18px; color:var(--ink); line-height:1.7}
+.brg .small{font-size:13.5px}
+.brg .note{margin-top:18px; color:var(--muted)}
+.crumb{font-size:13px; color:var(--muted); margin:0 0 18px}
+.crumb a{color:var(--chart); border-bottom:1px solid currentColor}
+
+.points{display:grid; grid-template-columns:repeat(3,1fr); margin:30px 0 8px; border-top:2px solid var(--chart)}
+.points div{padding:18px 20px 4px 0}
+.points div + div{padding-left:20px; border-left:1px solid var(--line)}
+.points h3{font-size:15px; color:var(--navy); margin:0 0 8px}
+.points p{font-size:14.5px; line-height:1.65}
+@media (max-width:760px){ .points{grid-template-columns:1fr} .points div + div{padding-left:0; border-left:0; border-top:1px solid var(--line)} }
+
+.will{margin:4px 0 28px; padding:0; list-style:none; columns:2; column-gap:40px; max-width:640px}
+.will li{padding:7px 0; border-bottom:1px solid var(--line); font-size:15px; break-inside:avoid}
+@media (max-width:620px){ .will{columns:1} }
+
+/* Forms */
+.group{border:0; padding:0; margin:0 0 26px}
+.group legend{font-size:15px; font-weight:600; color:var(--navy); margin-bottom:12px; padding:0}
+.choices{display:flex; flex-wrap:wrap; gap:10px}
+.choices.two-col{display:grid; grid-template-columns:1fr 1fr; gap:8px 12px}
+@media (max-width:620px){ .choices.two-col{grid-template-columns:1fr} }
+.pill{display:flex; align-items:center; gap:10px; background:var(--paper); border:1px solid rgba(15,42,71,.2); border-radius:6px; padding:11px 14px; font-size:14.5px; cursor:pointer}
+.pill:has(input:checked){border-color:var(--chart); background:var(--chart-soft)}
+.pill input{accent-color:var(--chart); margin:0}
+.field{display:block; margin:0 0 18px}
+.field span{display:block; font-size:13px; font-weight:600; color:var(--steel); margin-bottom:6px}
+.field input,.field select{width:100%; font:inherit; font-size:15.5px; color:var(--ink); background:var(--paper); border:1px solid rgba(15,42,71,.22); border-radius:6px; padding:11px 12px}
+.field input:focus,.field select:focus,.btn:focus-visible,.linkish:focus-visible,.opt:focus-visible,.pill:focus-within{outline:2px solid var(--chart); outline-offset:2px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 18px}
+@media (max-width:620px){ .grid2{grid-template-columns:1fr} }
+.check{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--muted); margin:6px 0 18px}
+.err{color:#9B2C2C; font-size:14px; min-height:20px; margin:6px 0 0}
+.linkish{background:none; border:0; padding:0; font:inherit; font-size:13.5px; color:var(--steel); border-bottom:1px solid var(--chart); cursor:pointer}
+.btn[disabled]{opacity:.55; cursor:progress}
+
+/* Questions. The compass is the one memorable thing on the page. */
+.qlayout{display:grid; grid-template-columns:170px 1fr; gap:48px; align-items:start; min-height:56vh}
+.compass{position:sticky; top:100px; text-align:center}
+.compass svg{width:170px; height:170px; display:block}
+.compass .ring{fill:var(--paper); stroke:var(--navy); stroke-width:1.2}
+.compass .tick{stroke:rgba(15,42,71,.25); stroke-width:1.6; stroke-linecap:round}
+.compass .tick.done{stroke:var(--chart)}
+.compass .needle{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.compass .needle-n{fill:var(--chart)}
+.compass .needle-s{fill:var(--navy); opacity:.25}
+.compass .hub{fill:var(--navy)}
+.compass-cap{font-size:12.5px; color:var(--steel); margin:12px auto 0; font-weight:600}
+@media (prefers-reduced-motion:reduce){ .compass .needle{transition:none} }
+
+.lenses{font-size:12.5px; color:var(--chart); font-weight:600; margin:0 0 10px}
+.brg .question{font-family:'Playfair Display',Georgia,serif; font-weight:600; font-size:clamp(21px,2.6vw,26px); line-height:1.4; color:var(--navy); margin:0 0 24px; max-width:32ch}
+.options{display:grid; gap:10px; margin:0 0 20px; max-width:560px}
+.opt{text-align:left; font:inherit; font-size:15.5px; color:var(--ink); background:var(--paper); border:1px solid rgba(15,42,71,.2); border-radius:6px; padding:13px 16px; cursor:pointer}
+.opt:hover{border-color:var(--navy)}
+.opt[aria-checked="true"]{border-color:var(--chart); background:var(--chart-soft); color:var(--navy); font-weight:600}
+.why{background:var(--chart-soft); border-left:3px solid var(--chart); padding:12px 14px; font-size:14.5px; margin:12px 0 0}
+.qnav{display:flex; justify-content:space-between; align-items:center; margin-top:28px; max-width:560px}
+.mobile-count{display:none; margin:0}
+@media (max-width:760px){
+  .qlayout{grid-template-columns:1fr; gap:6px}
+  .compass{display:none}
+  .mobile-count{display:block}
+}
+
+/* Results */
+.lens{border-top:2px solid var(--navy); padding:18px 0 8px; margin-top:30px}
+.lens-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap}
+.lens-head h2{margin:0; font-size:21px}
+.lens-score{font-size:15px; color:var(--steel)}
+.lens-score strong{font-size:28px; color:var(--navy); font-weight:800; margin-right:6px}
+.bar{position:relative; height:8px; background:rgba(15,42,71,.1); border-radius:4px; margin:14px 0 16px; max-width:640px}
+.bar span{position:absolute; left:0; top:0; bottom:0; background:var(--navy); border-radius:4px}
+.bar i{position:absolute; top:-5px; width:3px; height:18px; background:var(--chart)}
+.obls{list-style:none; margin:0; padding:0; max-width:760px}
+.obls li{display:flex; justify-content:space-between; gap:16px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:15px}
+.obls .src{display:block; font-size:12.5px; color:var(--muted)}
+.chip{flex:none; font-size:12.5px; font-weight:700; padding:4px 10px; border-radius:4px; border:1px solid currentColor; white-space:nowrap}
+.chip.s-ready{color:var(--ready)}
+.chip.s-partly{color:var(--partly)}
+.chip.s-notyet{color:var(--notyet)}
+.chip.s-unknown{color:var(--unknown); border-style:dashed}
+
+.evidence-note{margin:30px 0 0; padding:16px 18px; background:var(--chart-soft); border-left:3px solid var(--chart); font-size:15px; line-height:1.65; max-width:760px}
+.gaps{margin:0; padding:0 0 0 22px; max-width:760px}
+.gaps li{padding:10px 0 12px; border-bottom:1px solid var(--line)}
+.gaps li::marker{color:var(--chart); font-weight:700}
+.gaps h3{font-size:16px; color:var(--navy); margin:0 0 4px}
+.gaps .tag{font-size:12.5px; color:var(--muted); font-weight:600; margin:0 0 6px}
+.gaps p{font-size:14.5px; margin:0}
+
+.locked{margin:40px 0 10px; padding:24px 26px; border:1px solid var(--navy); border-radius:8px; background:var(--paper)}
+.locked h2{margin-top:0}
+.actions{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:18px 0 6px}
+
+/* Embedded in a modal: drop the site chrome. */
+html.embedded .site-header, html.embedded footer{display:none}
+html.embedded .brg{padding-top:22px}
+
+@media print{
+  .site-header, .noprint, footer{display:none !important}
+  .brg{padding:0}
+  .lens{break-inside:avoid}
+  body{background:#fff}
+}

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bearing: AI regulatory readiness for UK, Swiss and EU financial firms | Antara Innovations</title>
+<meta name="description" content="A free check of where your firm stands against SM&CR and Consumer Duty, FINMA Guidance 08/2024 and the EU AI Act. About ten minutes, scored in your browser.">
+<link rel="canonical" href="https://www.antara-innovations.com/tools/bearing/">
+<meta property="og:title" content="Bearing: free AI regulatory readiness check">
+<meta property="og:description" content="UK, Swiss and EU AI rules in one check. See what's ready, what isn't, and your three biggest gaps.">
+<meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<link rel="icon" href="../../assets/favicon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="bearing.css">
+</head>
+<body>
+<script>
+if (window.self !== window.top) document.documentElement.classList.add("embedded");
+</script>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../../">
+      <img src="../../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../../newsletter/">Newsletter</a>
+      <a href="../../wellness/">Antara Wellness</a>
+      <a href="../../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Bearing">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="brg">
+<div class="wrap">
+
+  <!-- 1. Opening -->
+  <section id="s-intro" hidden>
+    <p class="crumb"><a href="../">Instruments</a> / Bearing</p>
+    <h1 id="introH1">Find out where your firm stands against the AI rules that actually apply to it.</h1>
+    <p class="lead" id="introLead">Tell Bearing where you operate. It then asks only the questions that apply, across the FCA and SM&amp;CR in the UK, FINMA's guidance in Switzerland, and the EU AI Act. It takes about ten minutes.</p>
+
+    <div class="points">
+      <div>
+        <h3>Three rulebooks, one pass</h3>
+        <p>Many firms answer to more than one regulator. Where the UK, Swiss and EU rules ask the same thing, you answer it once.</p>
+      </div>
+      <div>
+        <h3>Having it is not the same as showing it</h3>
+        <p>Every answer separates "we do this" from "we could prove it". Supervisors ask for the second, and that's where most firms come up short.</p>
+      </div>
+      <div>
+        <h3>Your answers stay out of AI models</h3>
+        <p>Bearing scores your answers in your browser against fixed rules. It never asks for customer data, model code or anything confidential.</p>
+      </div>
+    </div>
+
+    <h2>What you get, free</h2>
+    <ul class="will">
+      <li>A readiness score for each jurisdiction</li>
+      <li>Ready, partly, not yet, for every obligation</li>
+      <li>Your three biggest gaps, and why they matter</li>
+      <li>A copy you can save and forward internally</li>
+    </ul>
+
+    <button class="btn btn-solid" id="beginBtn" type="button">Start the check</button>
+    <p class="small note">Bearing gives a readiness view. It is not legal advice or a compliance certificate. Rules as of September 2026.</p>
+  </section>
+
+  <!-- 2. Setup -->
+  <section id="s-setup" hidden>
+    <p class="crumb"><a href="../">Instruments</a> / Bearing</p>
+    <h1>First, where you operate and what you use AI for.</h1>
+    <form id="setupForm" novalidate>
+      <fieldset class="group">
+        <legend>Where do you serve customers or hold a licence? Pick all that apply.</legend>
+        <div class="choices" id="jurisdictionChoices"></div>
+      </fieldset>
+
+      <div class="grid2">
+        <label class="field"><span>Type of firm</span>
+          <select name="sector" id="sectorSelect" required><option value="">Choose one</option></select>
+        </label>
+        <label class="field"><span>Size</span>
+          <select name="size" id="sizeSelect" required><option value="">Choose one</option></select>
+        </label>
+      </div>
+
+      <fieldset class="group">
+        <legend>Where do you use AI today, even informally? Pick any that apply, or none.</legend>
+        <div class="choices two-col" id="useChoices"></div>
+      </fieldset>
+
+      <p class="err" id="setupErr" role="alert"></p>
+      <button class="btn btn-solid" id="setupBtn" type="submit">Continue</button>
+    </form>
+  </section>
+
+  <!-- 3. Questions -->
+  <section id="s-questions" hidden>
+    <div class="qlayout">
+      <div class="compass" aria-hidden="true">
+        <svg viewBox="-70 -70 140 140" id="compassSvg">
+          <circle r="60" class="ring"></circle>
+          <g id="compassTicks"></g>
+          <g id="needle" class="needle">
+            <path d="M0,-48 L6,0 L0,8 L-6,0 Z" class="needle-n"></path>
+            <path d="M0,48 L6,0 L0,-8 L-6,0 Z" class="needle-s"></path>
+          </g>
+          <circle r="3.5" class="hub"></circle>
+        </svg>
+        <p class="compass-cap" id="compassCap"></p>
+      </div>
+
+      <div class="qbody">
+        <p class="lenses" id="qLenses"></p>
+        <h2 class="question" id="qText"></h2>
+        <div class="options" id="qOptions" role="radiogroup" aria-labelledby="qText"></div>
+        <button class="linkish" id="whyBtn" type="button">Why are we asking this?</button>
+        <p class="why" id="qWhy" hidden></p>
+        <div class="qnav">
+          <button class="linkish" id="backBtn" type="button">Back</button>
+          <p class="small mobile-count" id="mobileCount"></p>
+        </div>
+        <p class="err" id="qErr" role="alert"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Details before results -->
+  <section id="s-gate" hidden>
+    <h1>Your readout is ready.</h1>
+    <p class="lead">Tell us who it's for. We'll keep a copy so you can come back to it, and we won't pass your details to anyone.</p>
+    <form id="gateForm" novalidate>
+      <div class="grid2">
+        <label class="field"><span>First name</span><input name="first" autocomplete="given-name"></label>
+        <label class="field"><span>Last name</span><input name="last" autocomplete="family-name"></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Work email</span><input name="email" type="email" autocomplete="email"></label>
+        <label class="field"><span>Job title</span><input name="title" autocomplete="organization-title"></label>
+      </div>
+      <label class="field"><span>Organisation</span><input name="company" autocomplete="organization"></label>
+      <label class="check"><input type="checkbox" name="updates"> Send me occasional updates on AI regulation from Antara Innovations. You can stop them at any time.</label>
+      <p class="err" id="gateErr" role="alert"></p>
+      <button class="btn btn-solid" id="gateBtn" type="submit">Show my readout</button>
+    </form>
+  </section>
+
+  <!-- 5. Results -->
+  <section id="s-results" hidden>
+    <p class="crumb noprint"><a href="../">Instruments</a> / Bearing</p>
+    <h1 id="resTitle">Your Bearing readout</h1>
+    <p class="lead" id="resSummary"></p>
+    <p class="small" id="resMeta"></p>
+
+    <div id="lensBlocks"></div>
+
+    <div class="evidence-note" id="evidenceNote" hidden></div>
+
+    <h2>Your three biggest gaps</h2>
+    <ol class="gaps" id="gapList"></ol>
+
+    <div class="locked noprint">
+      <h2>What the full report adds</h2>
+      <p>For each of your <strong id="lockedCount"></strong> obligations: what a supervisor would ask to see, what good looks like, the fix, who should own it, and a realistic timeline. Written by Abhinav Gaurav from your answers, and returned within five working days.</p>
+      <div class="actions">
+        <button class="btn btn-solid" id="reportBtn" type="button">Get the full report</button>
+        <button class="btn" id="consultBtn" type="button">Talk to us about closing the gaps</button>
+      </div>
+      <p class="small" id="reportMsg" role="status"></p>
+    </div>
+
+    <div class="actions noprint">
+      <button class="linkish" id="printBtn" type="button">Save or print this readout</button>
+      <button class="linkish" id="againBtn" type="button">Start a new check</button>
+    </div>
+    <p class="small note">A readiness view based on your own answers, not legal advice or a compliance certificate. Rules as of September 2026.</p>
+  </section>
+
+  <section id="s-loading" hidden><p class="lead">Loading your readout&hellip;</p></section>
+
+</div>
+</main>
+
+<footer class="noprint">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand" style="margin-bottom:10px">
+        <img src="../../assets/logo.png" alt="Antara Innovations">
+        <span class="word">Antara <sup>Innovations</sup></span>
+      </div>
+      <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+    </div>
+    <div class="foot-links">
+      <a href="../../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../../newsletter/">Newsletter</a>
+      <a href="../../about/">About</a>
+      <a href="mailto:hello@antara-innovations.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', function(){
+  const open = navLinks.classList.toggle('open');
+  navToggle.innerHTML = open ? '&times;' : '&#9776;';
+  navToggle.setAttribute('aria-expanded', open);
+});
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
