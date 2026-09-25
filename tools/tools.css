@@ -10,7 +10,7 @@
 
 .inst section.domain{padding:44px 0 0; scroll-margin-top:90px}
 .inst section.domain > h2{font-size:23px; color:var(--navy); margin:0 0 6px}
-.inst section.domain > p{max-width:68ch; margin:0 0 22px}
+.inst section.domain > p{max-width:100%; margin:0 0 22px}
 
 /* Soon-state: same card shape, quieter, no link, a small pill instead. */
 .card.is-soon{opacity:.82}
