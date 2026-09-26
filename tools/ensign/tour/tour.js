@@ -52,6 +52,15 @@ function showScene(i) {
   document.getElementById("skipBtn").style.display = last ? "none" : "inline";
   document.getElementById("playBtn").style.display = last ? "none" : "inline";
   paintExhibit(i, last);
+
+  const stamp = document.getElementById("wfaStamp");
+  if (stamp) {
+    stamp.classList.remove("landed");
+    if (scenes[i].contains(stamp)) {
+      void stamp.offsetWidth;
+      setTimeout(() => stamp.classList.add("landed"), 200);
+    }
+  }
 }
 
 const CONTENT_SCENES = scenes.filter((s) => !s.classList.contains("end"));

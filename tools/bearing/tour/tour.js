@@ -12,7 +12,7 @@ const PERSONA = {
     confrontH: "If the FCA called your Senior Manager this afternoon, could the evidence be handed over in two hours?",
     confrontP: "Not described. Produced. Dated records, not a good memory of what happened.",
     confrontSource: "The Bank of England and FCA's own survey found most firms name three or more people as accountable for the same AI use. When everyone is accountable, no one actually is.",
-    examples: [
+    visual: null,    examples: [
       { h: "Named accountability", p: "Is AI written into a Senior Manager's actual Statement of Responsibilities, or just discussed at a steering group." },
       { h: "Evidence of reasonable steps", p: "Minutes, challenges raised, sign-offs. What a supervisor would actually ask to see." },
       { h: "Model risk management", p: "Whether AI and machine learning sit inside the same validation discipline as any other model." },
@@ -25,6 +25,7 @@ const PERSONA = {
     confrontH: "Your claims team is already being tested by this, whether the process has caught up or not.",
     confrontP: "Insurers detected more than £233m of suspected fraud last year, much of it involving AI-generated documents and images that looked entirely convincing.",
     confrontSource: "That figure is from Aviva's own 2025 fraud reporting. The techniques it describes are not hypothetical, and they are not aimed only at Aviva.",
+    visual: { type: "readout", target: 233, prefix: "\u00A3", suffix: "m", caption: "suspected fraud, last year" },
     examples: [
       { h: "Claims and underwriting bias checks", p: "Whether AI-assisted claims decisions and fraud flags are checked before they affect a payout." },
       { h: "Customer outcomes", p: "Consumer Duty is judged on outcomes. If AI plays a part, its effect has to show up in what you measure." },
@@ -38,6 +39,7 @@ const PERSONA = {
     confrontH: "A client complains after a loss. They ask who actually reviewed the AI's reasoning before the position went in.",
     confrontP: "13% of investment firms currently use AI tools, in house or through a vendor. That rises to 45% within the next twelve months, most of it arriving faster than the oversight built to check it.",
     confrontSource: "Both figures are the FCA's own, from its September 2026 review of the wealth and investment management sector.",
+    visual: { type: "gauge2", from: 13, to: 45, caption: "of investment firms now using AI" },
     examples: [
       { h: "Human oversight of AI-flagged positions", p: "Whether a named person actually reviewed the reasoning before an AI-flagged position went into a model portfolio." },
       { h: "Third-party AI dependency", p: "The FCA has flagged buy-side reliance on outsourced AI and data providers as a specific concentration risk." },
@@ -51,6 +53,7 @@ const PERSONA = {
     confrontH: "Would you say your organisation genuinely understands the AI it already runs?",
     confrontP: "Most firms surveyed by the Bank of England and FCA claim only partial understanding of their own AI systems, not full understanding.",
     confrontSource: "Just 34% claimed complete understanding. The other two-thirds includes firms that would have answered yes if asked casually.",
+    visual: { type: "gauge", value: 34, caption: "claim complete understanding" },
     examples: [
       { h: "Named accountability", p: "Whether responsibility for AI sits with a specific person, not a committee." },
       { h: "Knowing what you run", p: "Including AI features inside vendor software, not just the tools you built yourselves." },
@@ -65,8 +68,97 @@ const PERSONA = {
 // until they say so, or the deck reaches the picker scene and they choose.
 let chosenPersona = "";
 
+// ---------- the instrument: gauge and readout ----------
+const GAUGE_START = -144;   // degrees, matches the arc path's bottom-left opening
+const GAUGE_SWEEP = 288;    // degrees, full sweep of the arc
+const ARC_LENGTH = 402;     // approximate path length of the drawn arc, for stroke-dashoffset
+
+function buildGaugeTicks() {
+  const g = document.getElementById("gaugeTicks");
+  if (g.childElementCount) return; // build once
+  const count = 8;
+  for (let i = 0; i <= count; i++) {
+    const deg = GAUGE_START + (GAUGE_SWEEP * i) / count;
+    const rad = (deg * Math.PI) / 180;
+    const x1 = 100 + 74 * Math.sin(rad), y1 = 100 - 74 * Math.cos(rad);
+    const x2 = 100 + 82 * Math.sin(rad), y2 = 100 - 82 * Math.cos(rad);
+    const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    tick.setAttribute("x1", x1.toFixed(1)); tick.setAttribute("y1", y1.toFixed(1));
+    tick.setAttribute("x2", x2.toFixed(1)); tick.setAttribute("y2", y2.toFixed(1));
+    tick.setAttribute("class", "tick");
+    g.appendChild(tick);
+  }
+}
+
+function setGaugeTo(percent) {
+  const deg = GAUGE_START + (GAUGE_SWEEP * Math.max(0, Math.min(100, percent))) / 100;
+  document.getElementById("needle").style.transform = `rotate(${deg}deg)`;
+  const offset = ARC_LENGTH * (1 - percent / 100);
+  document.getElementById("arcFill").style.strokeDashoffset = String(offset);
+}
+
+function animatePlainNumber(el, target, ms) {
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / ms);
+    el.textContent = Math.round((1 - Math.pow(1 - t, 3)) * target) + "%";
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function showGauge() { document.getElementById("gauge").removeAttribute("hidden"); }
+function hideGauge() { document.getElementById("gauge").setAttribute("hidden", ""); }
+
+function runVisual(persona) {
+  const gaugeReadout = document.getElementById("gaugeReadout");
+  const gaugeCaption = document.getElementById("gaugeCaption");
+  const readout = document.getElementById("confrontReadout");
+  const readoutCaption = document.getElementById("readoutCaption");
+  hideGauge(); gaugeReadout.hidden = true; gaugeCaption.hidden = true;
+  readout.hidden = true; readoutCaption.hidden = true;
+
+  const v = persona.visual;
+  if (!v) return;
+
+  if (v.type === "readout") {
+    readout.hidden = false; readoutCaption.hidden = false;
+    readout.style.opacity = "1"; readoutCaption.style.opacity = "1";
+    readoutCaption.textContent = v.caption;
+    readout.textContent = v.prefix + "0";
+    const start = performance.now();
+    const ms = 1500;
+    function tick(now) {
+      const t = Math.min(1, (now - start) / ms);
+      readout.textContent = v.prefix + Math.round((1 - Math.pow(1 - t, 3)) * v.target) + v.suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    return;
+  }
+
+  buildGaugeTicks();
+  showGauge(); gaugeReadout.hidden = false; gaugeCaption.hidden = false;
+  const gauge = document.getElementById("gauge");
+  gauge.style.opacity = "1"; gauge.style.transform = "none";
+  gaugeReadout.style.opacity = "1"; gaugeCaption.style.opacity = "1";
+  gaugeCaption.textContent = v.caption;
+  setGaugeTo(0);
+  gaugeReadout.textContent = "0%";
+
+  if (v.type === "gauge") {
+    setTimeout(() => { setGaugeTo(v.value); animatePlainNumber(gaugeReadout, v.value, 1500); }, 150);
+  } else if (v.type === "gauge2") {
+    setTimeout(() => { setGaugeTo(v.from); animatePlainNumber(gaugeReadout, v.from, 1200); }, 150);
+    setTimeout(() => { setGaugeTo(v.to); animatePlainNumber(gaugeReadout, v.to, 1200); }, 1900);
+  }
+}
+
+let currentPersona = null;
+
 function applyPersona(key) {
   const persona = PERSONA[key] || PERSONA.default;
+  currentPersona = persona;
   document.getElementById("painH").textContent = persona.painH;
   document.getElementById("painP").textContent = persona.painP;
   document.getElementById("confrontH").textContent = persona.confrontH;
@@ -159,6 +251,11 @@ function showScene(i) {
   document.getElementById("skipBtn").style.display = last ? "none" : "inline";
   document.getElementById("playBtn").style.display = last ? "none" : "inline";
   paintExhibit(i, last);
+
+  const confrontH = document.getElementById("confrontH");
+  if (scenes[i].contains(confrontH) && currentPersona) {
+    runVisual(currentPersona);
+  }
 }
 
 const CONTENT_SCENES = scenes.filter((s) => !s.classList.contains("end"));

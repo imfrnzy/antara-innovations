@@ -65,6 +65,22 @@
       <div class="inner" style="max-width:680px">
         <p class="kick pop d1" id="confrontKick">One thing worth knowing first</p>
         <h2 class="pop d2" id="confrontH" style="font-size:clamp(24px,3.4vw,32px)">Ask yourself this now, honestly, not in the assessment.</h2>
+
+        <svg class="gauge pop d3" id="gauge" viewBox="0 0 200 200" hidden>
+          <path class="arc-track" d="M 34 148 A 80 80 0 1 1 166 148"/>
+          <path class="arc-fill" id="arcFill" d="M 34 148 A 80 80 0 1 1 166 148"/>
+          <g id="gaugeTicks"></g>
+          <g id="needle" class="needle">
+            <path d="M100,32 L106,100 L100,110 L94,100 Z" class="needle-n"/>
+          </g>
+          <circle cx="100" cy="100" r="4" class="hub"/>
+        </svg>
+        <p class="gauge-readout pop d3" id="gaugeReadout" hidden></p>
+        <p class="gauge-caption pop d3" id="gaugeCaption" hidden></p>
+
+        <p class="readout pop d3" id="confrontReadout" hidden>&pound;0</p>
+        <p class="readout-caption pop d3" id="readoutCaption" hidden></p>
+
         <p class="pop d3" id="confrontP" style="font-size:19px; color:#fff; margin-top:14px"></p>
         <p class="pop d4" id="confrontSource" style="margin-top:14px"></p>
       </div>
