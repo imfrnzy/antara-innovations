@@ -1,4 +1,7 @@
-/* Soundings tour: silent, animated walkthrough. Reuses ../assets/site.css tokens. */
+/* Bearing tour: silent, animated walkthrough. Reuses ../assets/site.css tokens,
+   with the deck's gold accent replaced by Bearing's own magenta, so this
+   tour reads as Bearing's, not a reskin of the others. */
+:root{ --gold:#9B2F63; --gold-light:#D98FB3; }
 body.tour-body{overflow:hidden; height:100vh}
 .tour{position:fixed; inset:0; background:var(--navy); overflow:hidden}
 .tour-top{position:absolute; top:0; left:0; right:0; z-index:5; padding:18px 22px 0}

@@ -1,4 +1,6 @@
-/* Soundings tour: silent, animated walkthrough. Reuses ../assets/site.css tokens. */
+/* Squall tour: silent, animated walkthrough. Reuses ../assets/site.css tokens,
+   with the deck's gold accent replaced by Squall's own storm teal. */
+:root{ --gold:#2E6B78; --gold-light:#8FCBD6; }
 body.tour-body{overflow:hidden; height:100vh}
 .tour{position:fixed; inset:0; background:var(--navy); overflow:hidden}
 .tour-top{position:absolute; top:0; left:0; right:0; z-index:5; padding:18px 22px 0}

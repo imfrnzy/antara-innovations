@@ -1,4 +1,7 @@
-/* Soundings tour: silent, animated walkthrough. Reuses ../assets/site.css tokens. */
+/* Ensign tour: silent, animated walkthrough. Reuses ../assets/site.css tokens,
+   with the deck's gold accent shifted to Ensign's own signal amber, warmer
+   and more saturated than the shared gold, so it reads as its own thing. */
+:root{ --gold:#A8631A; --gold-light:#E0A868; }
 body.tour-body{overflow:hidden; height:100vh}
 .tour{position:fixed; inset:0; background:var(--navy); overflow:hidden}
 .tour-top{position:absolute; top:0; left:0; right:0; z-index:5; padding:18px 22px 0}
