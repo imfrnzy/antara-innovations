@@ -38,6 +38,9 @@ const RUBRICS: Record<string, { standard: string }> = {
   q_understanding: {
     standard: `Consumer Duty is judged on customer comprehension, not drafting quality. A strong answer describes an actual test of comprehension with real customers or a close proxy, such as user testing, complaint-pattern analysis showing confusion, or readability testing against a defined standard, and what it found. A weak answer asserts the writing is "clear" or "in plain English" based on the firm's own judgement, with no test of whether a customer actually understood it.`,
   },
+  q_investment_oversight: {
+    standard: `The FCA's stated position is that firms cannot rely on "the black box made the decision" as a defence for an AI-influenced investment decision. A strong answer names who reviewed the AI-flagged position, roughly when, and what they actually checked, the reasoning behind the flag, the data behind it, or its fit against the client's mandate, with something that could be produced as a record. A weak answer describes a general review process with no named reviewer or record tied to this specific kind of decision, asserts the model is well-tested or validated as a substitute for human review of the individual decision, or implies the position went in without anyone specifically checking it.`,
+  },
 };
 
 Deno.serve(async (req) => {

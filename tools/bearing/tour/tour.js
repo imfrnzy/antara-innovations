@@ -32,6 +32,19 @@ const PERSONA = {
     ],
     endKick: "That's Bearing, for insurers",
   },
+  asset: {
+    painH: "\u201CThe AI flagged it\u201D is not going to be an acceptable answer",
+    painP: "The FCA has said directly that it will not accept a \u201Cthe black box made the decision\u201D defence for an AI-influenced investment decision. Senior managers remain accountable for the outcome, whatever generated the recommendation.",
+    confrontH: "A client complains after a loss. They ask who actually reviewed the AI's reasoning before the position went in.",
+    confrontP: "13% of investment firms currently use AI tools, in house or through a vendor. That rises to 45% within the next twelve months, most of it arriving faster than the oversight built to check it.",
+    confrontSource: "Both figures are the FCA's own, from its September 2026 review of the wealth and investment management sector.",
+    examples: [
+      { h: "Human oversight of AI-flagged positions", p: "Whether a named person actually reviewed the reasoning before an AI-flagged position went into a model portfolio." },
+      { h: "Third-party AI dependency", p: "The FCA has flagged buy-side reliance on outsourced AI and data providers as a specific concentration risk." },
+      { h: "Customer outcomes", p: "Consumer Duty applies here too. If AI shaped a client's outcome, that effect has to show up in what you measure." },
+    ],
+    endKick: "That's Bearing, for asset and investment management",
+  },
   default: {
     painH: "Every AI use raises the same question eventually",
     painP: "A supervisor, an auditor or a client asks who's accountable for a specific AI decision. The honest answer is usually \u201Cseveral people, informally\u201D, which in practice means no one.",
@@ -59,7 +72,7 @@ function applyPersona(key) {
   document.getElementById("confrontH").textContent = persona.confrontH;
   document.getElementById("confrontP").textContent = persona.confrontP;
   document.getElementById("confrontSource").textContent = persona.confrontSource;
-  document.getElementById("exH").textContent = key === "bank" || key === "insurer"
+  document.getElementById("exH").textContent = key === "bank" || key === "insurer" || key === "asset"
     ? "What it actually asks about, for you"
     : "What it actually asks about";
   document.getElementById("endKick").textContent = persona.endKick;
@@ -201,9 +214,9 @@ let modalLoaded = false;
 function openModal() {
   clearTimer(); playing = false;
   if (!modalLoaded) {
-    // The assessment only has tailored entry copy for bank and insurer;
-    // "other" and no-choice both fall through to its generic opening line.
-    const passOn = (chosenPersona === "bank" || chosenPersona === "insurer") ? chosenPersona : "";
+    // The assessment only has tailored entry copy for bank, insurer and
+    // asset; "other" and no-choice both fall through to its generic line.
+    const passOn = (chosenPersona === "bank" || chosenPersona === "insurer" || chosenPersona === "asset") ? chosenPersona : "";
     modalFrame.src = passOn ? `../?from=${passOn}` : "../";
     modalLoaded = true;
   }

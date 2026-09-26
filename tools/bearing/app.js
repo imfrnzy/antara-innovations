@@ -27,6 +27,9 @@ const ENTRY_COPY = {
   insurer: {
     lead: "Tell Bearing where you operate. It then asks only the questions that apply, across Consumer Duty in the UK, FINMA's guidance in Switzerland, and the EU AI Act, for AI in pricing, underwriting and claims. It takes about ten minutes.",
   },
+  asset: {
+    lead: "Tell Bearing where you operate. It then asks only the questions that apply, across Consumer Duty and the FCA's expectations for AI-influenced investment decisions in the UK, and the EU AI Act. It takes about ten minutes.",
+  },
 };
 const entryFrom = new URLSearchParams(location.search).get("from");
 if (entryFrom && ENTRY_COPY[entryFrom]) {

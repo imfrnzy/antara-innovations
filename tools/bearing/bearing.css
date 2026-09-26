@@ -139,3 +139,7 @@ html.embedded .brg{padding-top:22px}
 .written textarea:focus{outline:2px solid var(--chart); outline-offset:1px}
 .writtenRow{display:flex; align-items:center; gap:18px; margin-top:10px}
 .writtenGrading{font-size:14px; color:var(--muted); margin:10px 0 0; font-style:italic}
+
+/* Differentiation and why-free lines on the intro screen. */
+.differentiator{font-size:14.5px; color:var(--steel); line-height:1.65; max-width:64ch; margin:10px 0 0; padding:12px 14px; background:var(--chart-soft); border-left:3px solid var(--chart)}
+.whyfree{font-size:14px; color:var(--muted); line-height:1.6; max-width:62ch; margin:14px 0 20px}

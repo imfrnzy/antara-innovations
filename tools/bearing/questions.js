@@ -130,6 +130,20 @@ export const QUESTIONS = [
     sting: "Firms are consistently more confident their customers understood something than the customers actually did. That gap is exactly what a Consumer Duty file review is built to expose, and it's one of the few Duty failures that surfaces in a customer complaint before it ever reaches an audit.",
   },
   {
+    id: "q_investment_oversight", lenses: ["uk"], onlyIfSector: ["asset"], onlyIfUse: [],
+    type: "written",
+    text: "An AI tool flagged a position for the model portfolio, and it went in. A client complains after a loss and asks who reviewed the AI's reasoning before it was included. Write what you would actually show them.",
+    prompt: "Name who reviewed it, what they actually checked, and what record exists. Not that a process exists in general.",
+    why: "The FCA has been explicit that it will not accept \"the black box made the decision\" as a defence. Senior managers and firms remain accountable for the investment decision, whatever generated the recommendation.",
+    options: [
+      { value: "evidence", label: "Yes, a named reviewer, dated, with their reasoning recorded" },
+      { value: "partly", label: "Someone likely looked at it, but there's no record of who or what they checked" },
+      { value: "no", label: "No, if it was flagged by the tool, it likely went straight in" },
+      { value: "unknown", label: "I don't know how AI-flagged positions get reviewed here" },
+    ],
+    sting: "The FCA's own position is explicit: it will not accept a \"the black box made the decision\" defence. Senior managers remain accountable for the investment decision itself, whatever generated the recommendation.",
+  },
+  {
     id: "q_mrm", lenses: ["uk"], onlyIfSector: ["bank"], onlyIfUse: [],
     text: "Are AI and machine-learning models inside your model risk framework, with validation by someone independent of the people who built them?",
     why: "The PRA's model risk principles expressly cover AI and machine learning.",
@@ -215,6 +229,7 @@ export const OBLIGATIONS = [
   { id: "uk_inventory", lens: "uk", weight: 2, title: "Knowing what AI you run, including vendors'", source: "SYSC, outsourcing", questions: ["q_inventory", "q_vendor"] },
   { id: "uk_outcomes", lens: "uk", weight: 3, title: "Customer outcomes where AI is involved", source: "Consumer Duty", questions: ["q_outcomes"] },
   { id: "uk_understanding", lens: "uk", weight: 2, title: "Customers understand AI-assisted communication", source: "Consumer Duty", questions: ["q_understanding"] },
+  { id: "uk_investment_oversight", lens: "uk", weight: 3, title: "Human oversight of AI-flagged investment decisions", source: "FCA wholesale buy-side priorities", questions: ["q_investment_oversight"] },
   { id: "uk_models", lens: "uk", weight: 2, title: "Model risk management covering AI", source: "PRA SS1/23", questions: ["q_classify", "q_monitor", "q_change", "q_mrm"] },
   { id: "uk_resilience", lens: "uk", weight: 2, title: "AI inside operational resilience", source: "Operational resilience rules", questions: ["q_resilience"] },
   { id: "uk_competence", lens: "uk", weight: 1, title: "Staff know the limits of the AI they use", source: "SYSC, Consumer Duty", questions: ["q_literacy"] },

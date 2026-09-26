@@ -214,7 +214,7 @@ body.tour-body{overflow:hidden; height:100vh}
 .arch-more a{color:var(--gold-light); border-bottom:1px solid rgba(255,255,255,.3)}
 
 /* The industry picker: Bearing's one interactive scene. */
-.pickscene .picker{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:30px}
+.pickscene .picker{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:30px}
 .picker button{font:inherit; text-align:left; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.2); border-radius:8px; padding:20px 18px; color:#fff; cursor:pointer; transition:border-color .2s ease, background .2s ease}
 .picker button:hover{border-color:rgba(255,255,255,.45)}
 .picker button.picked{border-color:var(--gold); background:rgba(184,146,63,.14)}
