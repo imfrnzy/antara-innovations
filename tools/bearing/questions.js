@@ -207,7 +207,7 @@ export const QUESTIONS = [
   {
     id: "q_art50", lenses: ["eu"], onlyIfSector: [], onlyIfUse: ["chatbot", "content"],
     text: "Do customer-facing AI chats tell people they're dealing with AI, and is AI-generated content marked or labelled where the Act requires it?",
-    why: "The transparency duties have applied since 2 August 2026. This is the AI Act deadline that is already live.",
+    why: "The duty to disclose interactive AI and to mark new AI-generated content has applied since 2 August 2026. If your systems predate that date, watermarking them has a short extra runway to 2 December 2026, but the disclosure duty itself is already live either way.",
   },
   {
     id: "q_annex3", lenses: ["eu"], onlyIfSector: [], onlyIfUse: ["credit", "lifehealth"],

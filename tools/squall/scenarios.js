@@ -39,7 +39,7 @@ export const SCENARIOS = [
   {
     id: "bank_bank_details_call", module: "bank", truth: "escalate",
     text: "A customer calls, caller ID matches their usual number, asks to change the bank details on their account \u201Cbecause I've switched banks\u201D, then immediately asks about a large transfer going out today.",
-    why: "Caller ID alone isn't proof any more. A bank-detail change followed immediately by a large transfer is the exact sequence fraud training warns about.",
+    why: "Caller ID is trivially spoofed, so it proves nothing either way. The sequence, a detail change followed immediately by a transfer, is too classic to treat as ordinary and too common in genuine life events to reject outright. The correct move is verifying through a channel the caller didn't choose, a callback on the number already on file, not acting on the call itself and not assuming it's fraud without checking.",
   },
   {
     id: "bank_it_slack", module: "bank", truth: "fake",

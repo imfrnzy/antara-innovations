@@ -47,9 +47,9 @@ export const SCENARIOS = [
     why: "Permission settles the rights question, not the disclosure question. Guidance is explicit that a disclosure buried at the very end of a fast audio spot may not meet the \u201Cclear and distinguishable\u201D bar. Worth a second opinion before it airs, not a confident guess either way.",
   },
   {
-    id: "colour_grade", truth: "escalate",
-    text: "An influencer posts a genuinely enthusiastic, unscripted product review. The agency also used AI to lightly enhance the video's lighting and colour grading before it went live.",
-    why: "The distinction between content that's AI-generated and content that's merely AI-assisted, like colour grading, is still being worked out in the guidance itself. That's precisely why it's worth checking rather than guessing either way.",
+    id: "background_swap", truth: "escalate",
+    text: "A product shot is entirely real, the actual product, unedited. The agency replaced the background behind it with an AI-generated studio setting, since the original backdrop was cluttered.",
+    why: "This is genuinely contested in current guidance: is a real product against an AI-generated backdrop \u201CAI-generated content\u201D because part of the image was synthesised, or \u201CAI-assisted\u201D because the product itself, the actual claim being made, is real and untouched? Reasonable people in this exact debate land on both sides. Worth a second opinion, not a confident guess.",
   },
 ];
 
