@@ -7,6 +7,11 @@ const PERSONA = {
   bank: {
     painH: "The request that skips the process is the one built to work",
     painP: "An urgent payment, a channel that isn't the usual one, an instruction to keep it quiet. None of that proves anything on its own, but together it's the exact shape fraud is built to take, and it works because it's designed to stop you thinking.",
+    confessions: [
+      "\u201CI'd have known straight away, something like that wouldn't get past me.\u201D",
+      "\u201CWe'd never actually process something that fast without checking.\u201D",
+      "\u201COur team's too experienced to fall for that.\u201D",
+    ],
     confrontH: "That fake CFO message on the next screen isn't a hypothetical.",
     confrontP: "Urgency, secrecy, an instruction to bypass the usual sign-off, fraud is shaped that way on purpose, because it works on capable people under time pressure, not careless ones.",
     confrontSource: "The FCA's own review of AI in UK financial services names the amplification of fraud as one of the clearest near-term risks of the technology becoming more capable and more accessible.",
@@ -20,8 +25,14 @@ const PERSONA = {
   insurer: {
     painH: "A polished claim isn't the same as a genuine one",
     painP: "Inconsistent shadows in a photo, an invoice with a VAT number that doesn't check out, phrasing that's a little too close to another claim filed the same week. Small details carry more signal than the overall impression.",
+    confessions: [
+      "\u201CI'd have spotted something off in the photos.\u201D",
+      "\u201COur claims team catches this kind of thing all the time.\u201D",
+      "\u201CWe'd have flagged that invoice straight away.\u201D",
+    ],
     confrontH: "Your claims team is already being tested by this, whether the process has caught up or not.",
-    confrontP: "Insurers detected more than £233m of suspected fraud last year, a rising share of it involving AI-generated photos and documents built to pass a quick look.",
+    confrontNum: 233, confrontSuffix: "m", confrontCaption: "in suspected fraud, last year",
+    confrontP: "A rising share of it involving AI-generated photos and documents built to pass a quick look.",
     confrontSource: "That figure is Aviva's own 2025 reporting. The judgement call it describes looks exactly like the ones on the next screen.",
     examples: [
       { h: "The manipulated image", p: "Photos that look consistent at a glance, until the shadows or reflections don't quite agree with each other." },
@@ -34,14 +45,40 @@ const PERSONA = {
 
 let chosenPersona = "";
 
+function animateCount(el, target, suffix, ms) {
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / ms);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = "\u00A3" + Math.round(eased * target) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
 function applyPersona(key) {
   const persona = PERSONA[key];
   if (!persona) return;
   document.getElementById("painH").textContent = persona.painH;
   document.getElementById("painP").textContent = persona.painP;
+  const lines = ["confessLine1", "confessLine2", "confessLine3"];
+  lines.forEach((id, i) => { document.getElementById(id).textContent = persona.confessions[i]; });
   document.getElementById("confrontH").textContent = persona.confrontH;
   document.getElementById("confrontP").textContent = persona.confrontP;
   document.getElementById("confrontSource").textContent = persona.confrontSource;
+  const numWrap = document.getElementById("confrontNumWrap");
+  const captionEl = document.getElementById("confrontCaption");
+  if (persona.confrontNum) {
+    numWrap.hidden = false;
+    captionEl.hidden = false;
+    captionEl.textContent = persona.confrontCaption;
+    document.getElementById("confrontNum").dataset.target = persona.confrontNum;
+    document.getElementById("confrontNum").dataset.suffix = persona.confrontSuffix || "";
+    document.getElementById("confrontNum").textContent = "\u00A30";
+  } else {
+    numWrap.hidden = true;
+    captionEl.hidden = true;
+  }
   document.getElementById("exH").textContent = "What you're actually judging";
   document.getElementById("endKick").textContent = persona.endKick;
   const exampleEls = document.querySelectorAll("#examples > div");
@@ -123,6 +160,11 @@ function showScene(i) {
   document.getElementById("skipBtn").style.display = last ? "none" : "inline";
   document.getElementById("playBtn").style.display = last ? "none" : "inline";
   paintExhibit(i, last);
+
+  const numEl = document.getElementById("confrontNum");
+  if (scenes[i].contains(numEl) && !document.getElementById("confrontNumWrap").hidden) {
+    animateCount(numEl, Number(numEl.dataset.target || 0), numEl.dataset.suffix || "", 1400);
+  }
 }
 
 const CONTENT_SCENES = scenes.filter((s) => !s.classList.contains("end"));

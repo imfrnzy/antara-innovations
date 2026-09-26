@@ -84,17 +84,22 @@ body.tour-body{overflow:hidden; height:100vh}
 .modalbox iframe{width:100%; height:100%; border:0; display:block}
 .modalclose{position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%; border:0; background:var(--paper); color:var(--navy); font-size:18px; cursor:pointer; z-index:2; box-shadow:0 2px 8px rgba(0,0,0,.15)}
 
-/* Deck gravitas: quiet blueprint grid, exhibit numbering, citation strip. */
+/* Deck gravitas, Squall's own version: a slow-moving pressure front instead
+   of the shared static blueprint grid, so this doesn't read as the same
+   background with a different tint. Built entirely from CSS, no imagery. */
 .tour::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-  background-size:44px 44px;
-  mask-image:radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 85%);
+  background-image:repeating-linear-gradient(115deg, rgba(143,203,214,.05) 0px, rgba(143,203,214,.05) 2px, transparent 2px, transparent 64px);
+  background-size:200% 200%;
+  animation:frontDrift 34s linear infinite;
+  mask-image:radial-gradient(ellipse 85% 75% at 50% 40%, #000 40%, transparent 88%);
 }
+@keyframes frontDrift{ from{ background-position:0% 0%; } to{ background-position:-260px 340px; } }
 .tour::after{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(ellipse 90% 60% at 50% 0%, rgba(184,146,63,.07), transparent 60%);
+  background:radial-gradient(ellipse 100% 65% at 50% 0%, rgba(46,107,120,.16), transparent 62%);
+  animation:pressurePulse 9s ease-in-out infinite;
 }
+@keyframes pressurePulse{ 0%,100%{ opacity:.75 } 50%{ opacity:1 } }
+@media (prefers-reduced-motion:reduce){ .tour::before{animation:none} .tour::after{animation:none} }
 .stage{z-index:2}
 
 .exline{position:absolute; top:96px; left:28px; right:28px; display:flex; justify-content:space-between; align-items:baseline; font-size:11px; letter-spacing:1.6px; text-transform:uppercase; color:rgba(217,184,106,.55); font-weight:700; pointer-events:none}
@@ -224,3 +229,18 @@ body.tour-body{overflow:hidden; height:100vh}
 .picker p{margin:0; font-size:13px; color:rgba(237,241,245,.68); max-width:none}
 .picker button:focus-visible{outline:2px solid var(--gold-light); outline-offset:2px}
 @media (max-width:700px){.pickscene .picker{grid-template-columns:1fr}}
+
+/* The self-recognition scene: three lines that should sound like something
+   the visitor has actually said. Left-aligned, quieter, sequential, on
+   purpose, everything else in this deck is centred and declarative,
+   this one is meant to feel overheard, not presented. */
+.confess{max-width:520px; text-align:left; margin:0 auto}
+.confess .cline{opacity:0; transform:translateX(-10px); font-family:'Playfair Display',Georgia,serif; font-style:italic; font-size:clamp(19px,2.6vw,24px); color:rgba(255,255,255,.92); padding:14px 0 14px 22px; border-left:2px solid rgba(255,255,255,.18); margin-bottom:4px; transition:opacity .6s ease, transform .6s ease}
+.confess .cline.on{opacity:1; transform:none; border-left-color:var(--gold-light)}
+.confess .ctag{display:block; font-family:'Inter',sans-serif; font-style:normal; font-size:12px; letter-spacing:.4px; color:rgba(255,255,255,.4); margin-top:6px}
+.confess .cfoot{opacity:0; margin-top:22px; font-size:15px; color:rgba(255,255,255,.75); transition:opacity .8s ease}
+.confess .cfoot.on{opacity:1}
+
+/* A number that actually counts, instead of sitting still in a sentence. */
+.bignum{font-family:'Playfair Display',Georgia,serif; font-weight:600; font-size:clamp(56px,9vw,96px); color:#fff; line-height:1; letter-spacing:-.01em; text-align:center; margin:0}
+.bignum-caption{text-align:center; font-size:14px; color:rgba(255,255,255,.55); margin:4px 0 0; letter-spacing:.2px}

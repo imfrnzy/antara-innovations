@@ -56,11 +56,25 @@
       </div>
     </section>
 
+    <!-- The self-recognition scene: what people actually say, before the fact lands -->
+    <section class="scene" data-ms="8500">
+      <div class="inner">
+        <div class="confess" id="confess">
+          <p class="cline" data-t="300" id="confessLine1"></p>
+          <p class="cline" data-t="2200" id="confessLine2"></p>
+          <p class="cline" data-t="4100" id="confessLine3"></p>
+          <p class="cfoot" data-t="6300">Everyone says one of these. Before they're actually tested.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- The confrontation: a specific, sourced fact, aimed at the visitor -->
     <section class="scene" data-ms="9500">
       <div class="inner" style="max-width:680px">
         <p class="kick pop d1">Before you're tested on it</p>
         <h2 class="pop d2" id="confrontH" style="font-size:clamp(24px,3.4vw,32px)"></h2>
+        <p class="bignum pop d3" id="confrontNumWrap" hidden><span id="confrontNum">&pound;0</span></p>
+        <p class="bignum-caption pop d3" id="confrontCaption" hidden></p>
         <p class="pop d3" id="confrontP" style="font-size:19px; color:#fff; margin-top:14px"></p>
         <p class="pop d4" id="confrontSource" style="margin-top:14px"></p>
       </div>
