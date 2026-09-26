@@ -166,7 +166,29 @@ function showQuestion() {
   byId("qWhy").hidden = true;
   byId("qErr").textContent = "";
   byId("backBtn").style.visibility = state.position === 0 ? "hidden" : "visible";
+  byId("qSting").hidden = true;
+  byId("qStingContinue").hidden = true;
 
+  if (question.type === "written") {
+    byId("qOptions").hidden = true;
+    byId("qWritten").hidden = false;
+    byId("qWrittenPrompt").textContent = question.prompt || "";
+    byId("qWrittenErr").textContent = "";
+    byId("qWrittenGrading").hidden = true;
+    byId("qWrittenInput").disabled = false;
+    byId("qWrittenSubmit").disabled = false;
+    byId("qWrittenSubmit").hidden = false;
+    byId("qWrittenSkip").hidden = false;
+    const existing = state.answers[question.id];
+    byId("qWrittenInput").value = existing && existing.text ? existing.text : "";
+    updateCompass();
+    const heading = byId("qText");
+    heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+    return;
+  }
+
+  byId("qWritten").hidden = true;
   const current = state.answers[question.id];
   const options = question.options || ANSWER_OPTIONS;
   byId("qOptions").hidden = false;
@@ -175,7 +197,6 @@ function showQuestion() {
   byId("qOptions").querySelectorAll(".opt").forEach((button) => {
     button.onclick = () => chooseAnswer(button.dataset.value);
   });
-  byId("qSting").hidden = true;
   updateCompass();
   const heading = byId("qText");
   heading.setAttribute("tabindex", "-1");
@@ -183,6 +204,16 @@ function showQuestion() {
 }
 
 let advancing = false;
+function goToNext() {
+  advancing = false;
+  if (state.position < state.questions.length - 1) {
+    state.position = state.position + 1;
+    showQuestion();
+  } else {
+    finishQuestions();
+  }
+}
+
 function chooseAnswer(value) {
   if (advancing) {
     return;
@@ -202,27 +233,11 @@ function chooseAnswer(value) {
     const stingEl = byId("qSting");
     stingEl.textContent = question.sting;
     stingEl.hidden = false;
-    setTimeout(() => {
-      advancing = false;
-      if (state.position < state.questions.length - 1) {
-        state.position = state.position + 1;
-        showQuestion();
-      } else {
-        finishQuestions();
-      }
-    }, 3200);
+    setTimeout(goToNext, 3200);
     return;
   }
 
-  setTimeout(() => {
-    advancing = false;
-    if (state.position < state.questions.length - 1) {
-      state.position = state.position + 1;
-      showQuestion();
-    } else {
-      finishQuestions();
-    }
-  }, 280);
+  setTimeout(goToNext, 280);
 }
 
 byId("whyBtn").onclick = () => { byId("qWhy").hidden = !byId("qWhy").hidden; };
@@ -231,6 +246,86 @@ byId("backBtn").onclick = () => {
     state.position = state.position - 1;
     showQuestion();
   }
+};
+
+// ---------- written examination questions ----------
+// These three are graded by an edge function that reads what was actually
+// written and compares it against what the regulator has said good
+// evidence looks like. If the grader can't be reached, the question falls
+// back to the ordinary multiple-choice version rather than getting stuck.
+function showGradedSting(question, band, critique) {
+  byId("qWritten").hidden = true;
+  byId("qOptions").hidden = true;
+  const stingEl = byId("qSting");
+  stingEl.textContent = critique;
+  stingEl.hidden = false;
+  byId("qStingContinue").hidden = false;
+  byId("qStingContinue").onclick = () => {
+    byId("qStingContinue").hidden = true;
+    advancing = false;
+    goToNext();
+  };
+}
+
+function fallBackToChoices(question, message) {
+  byId("qErr").textContent = message;
+  byId("qWritten").hidden = true;
+  byId("qOptions").hidden = false;
+  const options = question.options || ANSWER_OPTIONS;
+  const current = state.answers[question.id];
+  const currentValue = current && typeof current === "object" ? current.value : current;
+  byId("qOptions").innerHTML = options.map((option) =>
+    `<button type="button" class="opt" role="radio" aria-checked="${currentValue === option.value}" data-value="${option.value}">${escapeHtml(option.label)}</button>`).join("");
+  byId("qOptions").querySelectorAll(".opt").forEach((button) => {
+    button.onclick = () => chooseAnswer(button.dataset.value);
+  });
+}
+
+byId("qWrittenSubmit").onclick = async () => {
+  if (advancing) {
+    return;
+  }
+  const question = state.questions[state.position];
+  const text = byId("qWrittenInput").value.trim();
+  if (text.length < 15) {
+    byId("qWrittenErr").textContent = "Write a specific answer, a sentence or two, before submitting.";
+    return;
+  }
+  byId("qWrittenErr").textContent = "";
+  byId("qWrittenSubmit").disabled = true;
+  byId("qWrittenSkip").disabled = true;
+  byId("qWrittenInput").disabled = true;
+  byId("qWrittenGrading").hidden = false;
+
+  try {
+    const session = await ensureSession();
+    const { data, error } = await supabase.functions.invoke("bearing-score", {
+      body: { question_id: question.id, question_text: question.text, response_text: text },
+    });
+    if (error || !data || !data.band) {
+      throw error || new Error("No grading returned");
+    }
+    state.answers[question.id] = { value: data.band, text: text, critique: data.critique };
+    advancing = true;
+    showGradedSting(question, data.band, data.critique);
+  } catch (submitError) {
+    console.error(submitError);
+    byId("qWrittenGrading").hidden = true;
+    byId("qWrittenSubmit").disabled = false;
+    byId("qWrittenSkip").disabled = false;
+    byId("qWrittenInput").disabled = false;
+    fallBackToChoices(question, "Couldn't reach the grader just now. Answer directly instead, or try submitting again in a moment.");
+  }
+};
+
+byId("qWrittenSkip").onclick = () => {
+  if (advancing) {
+    return;
+  }
+  const question = state.questions[state.position];
+  state.answers[question.id] = { value: "unknown", text: "", critique: "" };
+  advancing = true;
+  setTimeout(goToNext, 280);
 };
 
 // ---------- finishing: score, save, then ask who it's for ----------

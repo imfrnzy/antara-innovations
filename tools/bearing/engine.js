@@ -44,9 +44,22 @@ export function selectQuestions(profile) {
   return selected;
 }
 
-function pointsFor(answerValue) {
+// An answer is normally the canonical string value (evidence/partly/no/unknown).
+// The three written-examination questions store a richer object instead,
+// { value, text, critique }, since we keep what was actually written for the
+// full report. Every place that scores an answer reads through this first,
+// so the rest of the engine never needs to know which kind it has.
+function answerValue(rawAnswer) {
+  if (rawAnswer && typeof rawAnswer === "object") {
+    return rawAnswer.value;
+  }
+  return rawAnswer;
+}
+
+function pointsFor(rawAnswer) {
+  const value = answerValue(rawAnswer);
   for (const option of ANSWER_OPTIONS) {
-    if (option.value === answerValue) {
+    if (option.value === value) {
       return option.points;
     }
   }
@@ -178,10 +191,10 @@ export function assess(profile, answers) {
   let partlyCount = 0;
   let unknownCount = 0;
   for (const questionId of applicableIds) {
-    if (answers[questionId] === "partly") {
+    if (answerValue(answers[questionId]) === "partly") {
       partlyCount = partlyCount + 1;
     }
-    if (answers[questionId] === "unknown") {
+    if (answerValue(answers[questionId]) === "unknown") {
       unknownCount = unknownCount + 1;
     }
   }

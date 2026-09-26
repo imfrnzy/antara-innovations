@@ -98,7 +98,9 @@ export const QUESTIONS = [
   },
   {
     id: "q_reasonable", lenses: ["uk"], onlyIfSector: [], onlyIfUse: [],
-    text: "Picture the actual scenario: the FCA calls your named Senior Manager this afternoon and asks for everything that shows reasonable steps were taken over your AI use. Could it be handed over within two hours?",
+    type: "written",
+    text: "The FCA calls your named Senior Manager this afternoon and asks for everything that shows reasonable steps were taken over your AI use. Write, specifically, what would actually be handed over.",
+    prompt: "Name the document, who holds it, and roughly how current it is. Not what should exist, what actually does.",
     why: "Under SM&CR, what counts is what can be produced on request, not what was intended. \"We'd need time to pull it together\" is treated the same as not having it.",
     options: [
       { value: "evidence", label: "Yes — a dated record exists and could be pulled together within two hours" },
@@ -115,7 +117,9 @@ export const QUESTIONS = [
   },
   {
     id: "q_understanding", lenses: ["uk"], onlyIfSector: [], onlyIfUse: [],
-    text: "Take the last AI-assisted letter or message your firm sent to a customer. If the FCA asked ten ordinary customers to explain it back in their own words, how confident are you that it would actually hold up?",
+    type: "written",
+    text: "Take the last AI-assisted letter or message your firm sent a customer. If the FCA asked ten ordinary customers to explain it back in their own words, what actually tells you how many would get it right?",
+    prompt: "Describe the test, if one exists, and what it found. Not how clear the writing seems to you.",
     why: "Confidence that something is clear is not evidence that it was understood. Consumer Duty is judged on the outcome reaching the customer, not the intention behind the drafting.",
     options: [
       { value: "evidence", label: "We've actually tested this with real customers, and it held up" },
@@ -153,7 +157,9 @@ export const QUESTIONS = [
   },
   {
     id: "q_explain", lenses: ["ch"], onlyIfSector: [], onlyIfUse: [],
-    text: "A client disputes an AI-assisted decision, and FINMA asks your team to explain in writing exactly how that result was reached. Right now, today, could someone in your organisation actually write that explanation?",
+    type: "written",
+    text: "A client disputes an AI-assisted decision, and FINMA asks your team to explain in writing exactly how that result was reached. Write what that explanation would actually say.",
+    prompt: "Name who would write it and what it would cover. Not that it's explainable, what the explanation actually is.",
     why: "This is not a hypothetical framed for effect. It is FINMA's own stated finding, applied to your organisation specifically.",
     options: [
       { value: "evidence", label: "Yes, a specific named person could write it today, and it would hold up" },

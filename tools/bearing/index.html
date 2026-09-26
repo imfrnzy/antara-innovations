@@ -121,7 +121,20 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
         <p class="lenses" id="qLenses"></p>
         <h2 class="question" id="qText"></h2>
         <div class="options" id="qOptions" role="radiogroup" aria-labelledby="qText"></div>
+
+        <div class="written" id="qWritten" hidden>
+          <p class="writtenPrompt" id="qWrittenPrompt"></p>
+          <textarea id="qWrittenInput" rows="4" maxlength="1200" placeholder="Write what would actually be produced, specifically."></textarea>
+          <div class="writtenRow">
+            <button class="btn btn-solid" id="qWrittenSubmit" type="button">Submit for grading</button>
+            <button class="linkish" id="qWrittenSkip" type="button">I genuinely don't know</button>
+          </div>
+          <p class="writtenGrading" id="qWrittenGrading" hidden>Grading your answer&hellip;</p>
+          <p class="err" id="qWrittenErr" role="alert"></p>
+        </div>
+
         <div class="sting" id="qSting" hidden></div>
+        <button class="btn btn-solid" id="qStingContinue" type="button" style="margin-top:14px" hidden>Continue</button>
         <button class="linkish" id="whyBtn" type="button">Why this is relevant</button>
         <p class="why" id="qWhy" hidden></p>
         <div class="qnav">
