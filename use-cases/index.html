@@ -6,159 +6,108 @@
 
 <title>Use cases | Antara Innovations</title>
 
-<meta name="description" content="AI use cases from large financial institutions and a readiness lens for consumer goods and retail. Financial crime, credit decisioning, ML platforms, fraud intelligence and AI governance.">
+<meta name="description" content="AI use cases from large financial institutions, each paired with the Antara frameworks and instruments that address the same problem. Financial crime, credit decisioning, ML platforms and fraud intelligence.">
 <meta name="keywords" content="AI use cases, AI in banking, AML machine learning, credit decisioning, AI governance, AI Centre of Excellence, fraud detection, AI readiness, EU AI Act, Antara Innovations">
 <link rel="canonical" href="https://www.antara-innovations.com/use-cases/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Antara Innovations">
 <meta property="og:url" content="https://www.antara-innovations.com/use-cases/">
 <meta property="og:title" content="Use cases | Antara Innovations">
-<meta property="og:description" content="AI use cases from large financial institutions, with measurable outcomes and governance built in.">
+<meta property="og:description" content="AI use cases from large financial institutions, each paired with the frameworks and instruments that address the problem.">
 <meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Use cases | Antara Innovations">
-<meta name="twitter:description" content="AI use cases from large financial institutions, with measurable outcomes and governance built in.">
+<meta name="twitter:description" content="AI use cases from large financial institutions, each paired with the frameworks and instruments that address the problem.">
 <meta name="twitter:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
 
 <style>
-.uc-hero{
-  padding:64px 0 40px;
-}
+.uc-hero{padding:64px 0 36px}
+.uc-hero-copy{max-width:820px}
+.uc-note{margin-top:24px;padding:16px 20px;border-left:3px solid var(--gold);background:var(--paper);border-radius:0 6px 6px 0;max-width:760px}
+.uc-note p{margin:0;font-size:13.5px;line-height:1.65}
+.uc-proof{margin-top:34px}
+a.stat{display:block;transition:background .2s ease}
+a.stat:hover{background:rgba(184,146,63,.07)}
+a.stat:hover .num{color:var(--gold-text)}
+.uc-section{padding:48px 0 8px}
+.uc-divider{border:none;border-top:1px solid var(--line);margin:0}
 
-.uc-hero-copy{
-  max-width:820px;
-}
+/* Matrix */
+.uc-mx-wrap{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 22px 16px;box-shadow:var(--shadow)}
+.uc-mx{width:100%;border-collapse:collapse}
+.uc-mx th,.uc-mx td{padding:0;text-align:center}
+.uc-mx .grp th{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-text);padding:14px 0 8px;border-bottom:1px solid var(--gold)}
+.uc-mx thead tr:nth-child(2) th,.uc-mx thead tr:nth-child(2) td{padding:12px 6px 12px;border-bottom:1px solid var(--line);vertical-align:bottom}
+.uc-mx .corner{text-align:left;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+.uc-mx thead a{display:block}
+.mx-name{display:block;font-size:14px;font-weight:700;color:var(--navy)}
+.mx-verb{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-text);margin-top:2px}
+.uc-mx thead a:hover .mx-name{color:var(--gold-text)}
+.uc-mx tbody th{text-align:left;font-weight:400;padding:15px 12px 15px 0;width:34%}
+.uc-mx tbody tr{border-bottom:1px solid var(--line)}
+.uc-mx tbody tr:last-child{border-bottom:none}
+.uc-mx tbody tr:hover{background:rgba(15,42,71,.035)}
+.uc-mx tbody td{width:10.5%}
+.mx-row{display:block;font-size:15px;font-weight:600;color:var(--navy)}
+.mx-sub{display:block;font-size:12px;color:var(--muted);margin-top:2px;font-weight:400}
+.uc-mx tbody a:hover .mx-row{color:var(--gold-text)}
+.uc-dot{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--navy);vertical-align:middle}
+.uc-legend{margin:14px 0 0;font-size:12px;color:var(--muted);text-align:right}
+.uc-legend .uc-dot{width:9px;height:9px;margin-right:6px}
+.uc-mx-mobile{display:none}
 
-.uc-note{
-  margin-top:26px;
-  padding:16px 20px;
-  border-left:3px solid var(--gold);
-  background:var(--paper);
-  border-radius:0 6px 6px 0;
-  max-width:760px;
-}
+/* Chips */
+.uc-chips,.uc-seenrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0 4px}
+.uc-seenrow{margin:6px 0 14px;padding-top:12px;border-top:1px solid var(--line)}
+.uc-chips-label{font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.uc-chip{display:inline-flex;align-items:baseline;gap:7px;padding:6px 14px;border:1px solid var(--navy);border-radius:999px;background:var(--paper);color:var(--navy);transition:background .2s ease,color .2s ease}
+.uc-chip b{font-size:13px;font-weight:700}
+.uc-chip span{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-text)}
+.uc-chip:hover{background:var(--navy);color:#fff}
+.uc-chip:hover span{color:var(--gold-light)}
+.uc-chip.plain{border-color:var(--line);font-size:12.5px;font-weight:600;padding:4px 12px}
+.uc-chip.plain:hover{border-color:var(--navy)}
 
-.uc-note p{
-  margin:0;
-  font-size:13.5px;
-  line-height:1.65;
-}
+/* Cases */
+.uc-case{margin-bottom:26px;padding:34px;scroll-margin-top:90px}
+.uc-case h3.h{font-size:22px;line-height:1.35;margin:10px 0 14px}
+.uc-label{display:block;color:var(--gold-text);font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 6px}
+.uc-problem{font-size:17px;line-height:1.6;color:var(--navy);font-weight:500;margin:0 0 4px;max-width:860px}
+.uc-case .stat-strip{margin:18px 0 0}
+.uc-case .stat .num{font-size:24px}
+.uc-more{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
+.uc-more summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--navy);list-style:none}
+.uc-more summary::-webkit-details-marker{display:none}
+.uc-more summary::before{content:"+";display:inline-block;width:18px;color:var(--gold-text);font-weight:700}
+.uc-more[open] summary::before{content:"\2212"}
+.uc-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;margin-top:18px}
+.uc-case ul{margin:0;padding-left:18px;color:var(--muted)}
+.uc-case li{line-height:1.7;margin-bottom:8px}
 
-.uc-section{
-  padding:48px 0 8px;
-}
+/* Patterns band */
+.uc-laws{margin-top:30px;display:grid;grid-template-columns:repeat(2,1fr);gap:30px 48px}
+.uc-law .no{color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:1.4px}
+.uc-law h3{font-size:18px;margin:6px 0 8px}
+.uc-law p{margin:0;font-size:14.5px}
 
-.uc-case{
-  margin-bottom:26px;
-  padding:34px;
-}
-
-.uc-case h3.h{
-  font-size:22px;
-  line-height:1.35;
-  margin:10px 0 18px;
-}
-
-.uc-label{
-  color:var(--gold-text);
-  font-size:11.5px;
-  font-weight:700;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  margin:0 0 8px;
-}
-
-.uc-cols{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:36px;
-}
-
-.uc-case ul{
-  margin:0;
-  padding-left:18px;
-  color:var(--muted);
-}
-
-.uc-case li{
-  line-height:1.7;
-  margin-bottom:8px;
-}
-
-.uc-case .stat-strip{
-  margin:26px 0 0;
-}
-
-.uc-case .stat .num{
-  font-size:24px;
-}
-
-.uc-laws{
-  margin-top:30px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:30px 48px;
-}
-
-.uc-law .no{
-  color:var(--gold-light);
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:1.4px;
-}
-
-.uc-law h3{
-  font-size:18px;
-  margin:6px 0 8px;
-}
-
-.uc-law p{
-  margin:0;
-  font-size:14.5px;
-}
-
-.uc-source{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:14px;
-}
-
-.uc-question{
-  font-size:14px;
-  color:var(--navy);
-  border-top:1px solid var(--line);
-  padding-top:12px;
-  margin:6px 0 0;
-}
-
-.uc-divider{
-  border:none;
-  border-top:1px solid var(--line);
-  margin:0;
-}
+/* CPG cards */
+.uc-question{font-size:14px;color:var(--navy);border-top:1px solid var(--line);padding-top:12px;margin:6px 0 0}
 
 @media (max-width:820px){
-
-  .uc-hero{
-    padding:48px 0 32px;
-  }
-
-  .uc-cols,
-  .uc-laws{
-    grid-template-columns:1fr;
-    gap:24px;
-  }
-
-  .uc-case{
-    padding:26px 22px;
-  }
-
-  .uc-case .stat{
-    flex:1 1 50%;
-  }
-
+  .uc-hero{padding:48px 0 28px}
+  .uc-mx-wrap{display:none}
+  .uc-mx-mobile{display:block}
+  .uc-mx-item{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-bottom:12px}
+  .uc-mx-item .uc-chips{margin:10px 0 0}
+  .uc-cols,.uc-laws{grid-template-columns:1fr;gap:24px}
+  .uc-case{padding:26px 22px}
+  .uc-case .stat{flex:1 1 50%}
+  .uc-proof .stat{flex:1 1 50%;min-width:0;padding:18px 16px}
+  .uc-proof .stat .num{font-size:20px}
+  .uc-case .stat .num{font-size:20px}
+  .uc-case .stat{min-width:0;padding:18px 16px}
 }
 </style>
 
@@ -200,225 +149,127 @@
 <!-- HERO -->
 
 <section class="uc-hero">
-
   <div class="wrap">
-
     <div class="uc-hero-copy reveal-load">
-
       <p class="kicker">Use cases</p>
-
       <h1 class="display" style="font-size:36px;">
         AI that reached production, with the governance to keep it there
       </h1>
-
       <p style="font-size:16px; margin-top:18px;">
-        Four mandates at large financial institutions, followed by a readiness
-        lens for consumer goods and retail. Each addresses a problem that carried
-        a measurable cost, and each is described in terms of the outcome it produced.
+        Four mandates at large financial institutions, each paired with the Antara
+        frameworks and instruments that address the same problem.
       </p>
-
-      <div class="uc-note">
-        <p>
-          Client identities are withheld. Descriptions are generalised to protect
-          confidentiality, and outcomes reflect results reported by the
-          organisations concerned.
-        </p>
-      </div>
-
     </div>
-
+    <div class="stat-strip uc-proof reveal-load"><a class="stat" href="#case-aml"><div class="num">60%</div><div class="label">Fewer false-positive AML alerts</div></a><a class="stat" href="#case-credit"><div class="num">50%</div><div class="label">Faster credit policy change</div></a><a class="stat" href="#case-platform"><div class="num">&pound;50M</div><div class="label">AI-attributed value in a single year</div></a><a class="stat" href="#case-fraud"><div class="num">Milliseconds</div><div class="label">Fraud decisions at global card scale</div></a></div>
+    <div class="uc-note reveal-load">
+      <p>
+        Client identities are withheld. Descriptions are generalised to protect
+        confidentiality, and outcomes reflect results reported by the organisations
+        concerned.
+      </p>
+    </div>
   </div>
-
 </section>
 
 
 <hr class="uc-divider">
 
 
+<!-- AT A GLANCE -->
+
+<section class="uc-section" id="glance">
+  <div class="wrap">
+    <p class="kicker reveal">At a glance</p>
+    <h2 class="h reveal">The problem, and what addresses it</h2>
+    <p class="reveal" style="max-width:760px; margin-bottom:26px;">
+      Each problem below is paired with the Antara frameworks and instruments that address it. Select a row to see the work, or a column to see how the framework operates.
+    </p>
+    <div class="uc-mx-wrap reveal">
+      <table class="uc-mx">
+        <thead>
+          <tr class="grp"><td></td><th colspan="4" scope="colgroup">Frameworks</th><th colspan="2" scope="colgroup">Instruments</th></tr>
+          <tr><td class="corner">Problem</td><th scope="col"><a href="../keel/tour/"><span class="mx-name">Keel</span><span class="mx-verb">Govern</span></a></th><th scope="col"><a href="../soundings/tour/"><span class="mx-name">Soundings</span><span class="mx-verb">See</span></a></th><th scope="col"><a href="../sentinel/tour/"><span class="mx-name">Sentinel</span><span class="mx-verb">Secure</span></a></th><th scope="col"><a href="../halo/tour/"><span class="mx-name">HALO</span><span class="mx-verb">Lead</span></a></th><th scope="col"><a href="../tools/bearing/tour/"><span class="mx-name">Bearing</span><span class="mx-verb">Prove</span></a></th><th scope="col"><a href="../tools/squall/tour/"><span class="mx-name">Squall</span><span class="mx-verb">Test</span></a></th></tr>
+        </thead>
+        <tbody><tr><th scope="row"><a href="#case-aml"><span class="mx-row">Financial crime</span><span class="mx-sub">Global bank</span></a></th><td></td><td></td><td><span class="uc-dot" role="img" aria-label="Sentinel addresses Financial crime"></span></td><td><span class="uc-dot" role="img" aria-label="HALO addresses Financial crime"></span></td><td><span class="uc-dot" role="img" aria-label="Bearing addresses Financial crime"></span></td><td></td></tr><tr><th scope="row"><a href="#case-credit"><span class="mx-row">Credit decisioning</span><span class="mx-sub">Major UK lender</span></a></th><td><span class="uc-dot" role="img" aria-label="Keel addresses Credit decisioning"></span></td><td></td><td></td><td><span class="uc-dot" role="img" aria-label="HALO addresses Credit decisioning"></span></td><td><span class="uc-dot" role="img" aria-label="Bearing addresses Credit decisioning"></span></td><td></td></tr><tr><th scope="row"><a href="#case-platform"><span class="mx-row">ML platform and generative AI</span><span class="mx-sub">Major UK retail bank</span></a></th><td><span class="uc-dot" role="img" aria-label="Keel addresses ML platform and generative AI"></span></td><td><span class="uc-dot" role="img" aria-label="Soundings addresses ML platform and generative AI"></span></td><td></td><td><span class="uc-dot" role="img" aria-label="HALO addresses ML platform and generative AI"></span></td><td></td><td></td></tr><tr><th scope="row"><a href="#case-fraud"><span class="mx-row">Fraud intelligence</span><span class="mx-sub">Global payments company</span></a></th><td></td><td></td><td><span class="uc-dot" role="img" aria-label="Sentinel addresses Fraud intelligence"></span></td><td><span class="uc-dot" role="img" aria-label="HALO addresses Fraud intelligence"></span></td><td></td><td><span class="uc-dot" role="img" aria-label="Squall addresses Fraud intelligence"></span></td></tr><tr><th scope="row"><a href="#cpg"><span class="mx-row">Consumer goods and retail</span><span class="mx-sub">Perspective</span></a></th><td></td><td><span class="uc-dot" role="img" aria-label="Soundings addresses Consumer goods and retail"></span></td><td></td><td><span class="uc-dot" role="img" aria-label="HALO addresses Consumer goods and retail"></span></td><td></td><td></td></tr></tbody>
+      </table>
+      <p class="uc-legend"><span class="uc-dot"></span> Addressed by this framework or instrument</p>
+    </div>
+    <div class="uc-mx-mobile reveal"><div class="uc-mx-item"><a class="mx-row" href="#case-aml">Financial crime<span class="mx-sub">Global bank</span></a><div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../sentinel/tour/"><b>Sentinel</b><span>Secure</span></a><a class="uc-chip" href="../tools/bearing/tour/"><b>Bearing</b><span>Prove</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div></div><div class="uc-mx-item"><a class="mx-row" href="#case-credit">Credit decisioning<span class="mx-sub">Major UK lender</span></a><div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../keel/tour/"><b>Keel</b><span>Govern</span></a><a class="uc-chip" href="../tools/bearing/tour/"><b>Bearing</b><span>Prove</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div></div><div class="uc-mx-item"><a class="mx-row" href="#case-platform">ML platform and generative AI<span class="mx-sub">Major UK retail bank</span></a><div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../keel/tour/"><b>Keel</b><span>Govern</span></a><a class="uc-chip" href="../soundings/tour/"><b>Soundings</b><span>See</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div></div><div class="uc-mx-item"><a class="mx-row" href="#case-fraud">Fraud intelligence<span class="mx-sub">Global payments company</span></a><div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../sentinel/tour/"><b>Sentinel</b><span>Secure</span></a><a class="uc-chip" href="../tools/squall/tour/"><b>Squall</b><span>Test</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div></div><div class="uc-mx-item"><a class="mx-row" href="#cpg">Consumer goods and retail<span class="mx-sub">Perspective</span></a><div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../soundings/tour/"><b>Soundings</b><span>See</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div></div></div>
+  </div>
+</section>
+
+
 <!-- FINANCIAL SERVICES -->
 
 <section class="uc-section">
-
   <div class="wrap">
-
     <p class="kicker reveal">Financial services</p>
-
-    <h2 class="h reveal">
-      Four mandates, four different problems
-    </h2>
-
+    <h2 class="h reveal">Four mandates, four different problems</h2>
     <p class="reveal" style="max-width:760px; margin-bottom:34px;">
-      Financial crime, credit decisioning, enterprise machine learning and real-time
-      fraud. The problems differ in every respect except one: in each case a
-      rules-based or fragmented estate had become the ceiling on what the
-      institution could do.
+      Financial crime, credit decisioning, enterprise machine learning and real-time fraud. The problems differ in every respect except one: in each case a rules-based or fragmented estate had become the ceiling on what the institution could do.
     </p>
 
-
-    <!-- CASE 1 -->
-
-    <article class="card uc-case reveal">
-
+    <article class="card uc-case reveal" id="case-aml">
       <span class="tag">Global bank &middot; Financial crime</span>
-
       <h3 class="h">Replacing rules-based AML alerting with a risk-scored model</h3>
-
-      <div class="uc-cols">
-
-        <div>
-          <p class="uc-label">The situation</p>
-          <p>
-            A global bank processing billions of transactions each month relied on
-            static, manually defined monitoring rules. More than 95% of the alerts
-            were false positives. Investigators spent most of their time on cases
-            that led nowhere, and genuine criminal activity was harder to see
-            against that noise.
-          </p>
+      <p class="uc-problem"><span class="uc-label">The problem</span>More than 95% of anti-money-laundering alerts were false positives. Investigators spent their time on noise while genuine crime stayed hidden.</p>
+      <div class="stat-strip"><div class="stat"><div class="num">60%</div><div class="label">Reduction in false-positive alerts</div></div><div class="stat"><div class="num">2 to 4x</div><div class="label">More genuine financial crime detected than the previous system</div></div></div>
+      <div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../sentinel/tour/"><b>Sentinel</b><span>Secure</span></a><a class="uc-chip" href="../tools/bearing/tour/"><b>Bearing</b><span>Prove</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div>
+      <details class="uc-more">
+        <summary>How it was done</summary>
+        <div class="uc-cols">
+          <div><p class="uc-label">The situation</p><p>A global bank processing billions of transactions each month relied on static, manually defined monitoring rules. Investigators spent most of their time on cases that led nowhere, and genuine criminal activity was harder to see against that noise.</p></div>
+          <div><p class="uc-label">The approach</p><ul><li>Replaced rules-based alerting with a machine learning system that produces dynamic customer risk scores in place of binary alerts.</li><li>Trained the models on the bank's own transaction history, customer records, network behaviour and confirmed criminal typologies.</li><li>Built explainability and an audit trail into every output, so that regulatory defensibility was a design requirement from the outset.</li><li>Deployed in phases, starting with the highest-volume markets, on an architecture designed for global rollout.</li></ul></div>
         </div>
-
-        <div>
-          <p class="uc-label">The approach</p>
-          <ul>
-            <li>Replaced rules-based alerting with a machine learning system that produces dynamic customer risk scores in place of binary alerts.</li>
-            <li>Trained the models on the bank's own transaction history, customer records, network behaviour and confirmed criminal typologies.</li>
-            <li>Built explainability and an audit trail into every output, so that regulatory defensibility was a design requirement from the outset.</li>
-            <li>Deployed in phases, starting with the highest-volume markets, on an architecture designed for global rollout.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="stat-strip">
-        <div class="stat"><div class="num">60%</div><div class="label">Reduction in false-positive alerts</div></div>
-        <div class="stat"><div class="num">2 to 4x</div><div class="label">More genuine financial crime detected than the previous system</div></div>
-      </div>
-
+      </details>
     </article>
 
-
-    <!-- CASE 2 -->
-
-    <article class="card uc-case reveal">
-
+    <article class="card uc-case reveal" id="case-credit">
       <span class="tag">Major UK lender &middot; Credit decisioning and AI governance</span>
-
       <h3 class="h">One decisioning layer across lending, with governance built in</h3>
-
-      <div class="uc-cols">
-
-        <div>
-          <p class="uc-label">The situation</p>
-          <p>
-            Mortgages, loans and cards each ran on a separate decisioning platform,
-            with no shared logic or data layer. A credit policy change took at least
-            two weeks, credit limit adjustments were manual, and an ageing,
-            fragmented estate was increasing conduct risk as regulatory expectations
-            tightened.
-          </p>
+      <p class="uc-problem"><span class="uc-label">The problem</span>Three lending platforms with no shared logic. A credit policy change took at least two weeks, and conduct risk was rising.</p>
+      <div class="stat-strip"><div class="stat"><div class="num">50%</div><div class="label">Faster policy change cycles</div></div><div class="stat"><div class="num">Real-time</div><div class="label">Credit limit adjustments</div></div><div class="stat"><div class="num">5</div><div class="label">Products migrated within 12 months</div></div><div class="stat"><div class="num">Zero</div><div class="label">Operational downtime</div></div></div>
+      <div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../keel/tour/"><b>Keel</b><span>Govern</span></a><a class="uc-chip" href="../tools/bearing/tour/"><b>Bearing</b><span>Prove</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div>
+      <details class="uc-more">
+        <summary>How it was done</summary>
+        <div class="uc-cols">
+          <div><p class="uc-label">The situation</p><p>Mortgages, loans and cards each ran on a separate decisioning platform, with no shared logic or data layer. Credit limit adjustments were manual, and an ageing, fragmented estate was increasing conduct risk as regulatory expectations tightened.</p></div>
+          <div><p class="uc-label">The approach</p><ul><li>Consolidated decisioning onto a single platform that unifies logic, data and risk models across lending products.</li><li>Designed the governance architecture alongside the platform: an AI council, a Responsible AI framework and an AI centre of expertise.</li><li>Migrated product by product, keeping the live service running throughout.</li></ul></div>
         </div>
-
-        <div>
-          <p class="uc-label">The approach</p>
-          <ul>
-            <li>Consolidated decisioning onto a single platform that unifies logic, data and risk models across lending products.</li>
-            <li>Designed the governance architecture alongside the platform: an AI council, a Responsible AI framework and an AI centre of expertise.</li>
-            <li>Migrated product by product, keeping the live service running throughout.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="stat-strip">
-        <div class="stat"><div class="num">50%</div><div class="label">Faster policy change cycles</div></div>
-        <div class="stat"><div class="num">Real-time</div><div class="label">Credit limit adjustments</div></div>
-        <div class="stat"><div class="num">5</div><div class="label">Products migrated within 12 months</div></div>
-        <div class="stat"><div class="num">Zero</div><div class="label">Operational downtime</div></div>
-      </div>
-
+      </details>
     </article>
 
-
-    <!-- CASE 3 -->
-
-    <article class="card uc-case reveal">
-
+    <article class="card uc-case reveal" id="case-platform">
       <span class="tag">Major UK retail bank &middot; ML platform and generative AI</span>
-
       <h3 class="h">Unifying hundreds of models on one platform, then scaling the value</h3>
-
-      <div class="uc-cols">
-
-        <div>
-          <p class="uc-label">The situation</p>
-          <p>
-            The bank had invested heavily in AI and had hundreds of models in
-            production, but they ran on a decade-old on-premise platform nearing end
-            of life. The infrastructure limited the ambition, and the data science
-            community was working across fragmented environments.
-          </p>
+      <p class="uc-problem"><span class="uc-label">The problem</span>Hundreds of models in production on a decade-old platform that capped what the bank could do next.</p>
+      <div class="stat-strip"><div class="stat"><div class="num">Days to seconds</div><div class="label">Mortgage income verification</div></div><div class="stat"><div class="num">Minutes to seconds</div><div class="label">Frontline knowledge retrieval</div></div><div class="stat"><div class="num">&pound;50M</div><div class="label">AI-attributed value in a single year</div></div></div>
+      <div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../keel/tour/"><b>Keel</b><span>Govern</span></a><a class="uc-chip" href="../soundings/tour/"><b>Soundings</b><span>See</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div>
+      <details class="uc-more">
+        <summary>How it was done</summary>
+        <div class="uc-cols">
+          <div><p class="uc-label">The situation</p><p>The bank had invested heavily in AI and had hundreds of models in production, but they ran on a decade-old on-premise platform nearing end of life. The data science community was working across fragmented environments.</p></div>
+          <div><p class="uc-label">The approach</p><ul><li><strong>Platform.</strong> Migrated the full machine learning estate to a modern cloud platform and brought the data science teams onto one environment, with no unplanned downtime.</li><li><strong>Customer.</strong> Deployed ML-based income verification for mortgage applications, replacing a multi-day manual review.</li><li><strong>Colleagues.</strong> Built a generative AI assistant drawing on thousands of authorised internal knowledge articles for frontline staff.</li><li><strong>Scale.</strong> Established an AI Centre of Excellence combining engineers, data scientists and AI ethicists, supported by a bank-wide training programme.</li></ul></div>
         </div>
-
-        <div>
-          <p class="uc-label">The approach</p>
-          <ul>
-            <li><strong>Platform.</strong> Migrated the full machine learning estate to a modern cloud platform and brought the data science teams onto one environment, with no unplanned downtime.</li>
-            <li><strong>Customer.</strong> Deployed ML-based income verification for mortgage applications, replacing a multi-day manual review.</li>
-            <li><strong>Colleagues.</strong> Built a generative AI assistant drawing on thousands of authorised internal knowledge articles for frontline staff.</li>
-            <li><strong>Scale.</strong> Established an AI Centre of Excellence combining engineers, data scientists and AI ethicists, supported by a bank-wide training programme.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="stat-strip">
-        <div class="stat"><div class="num">Days to seconds</div><div class="label">Mortgage income verification</div></div>
-        <div class="stat"><div class="num">Minutes to seconds</div><div class="label">Frontline knowledge retrieval</div></div>
-        <div class="stat"><div class="num">&pound;50M</div><div class="label">AI-attributed value in a single year</div></div>
-      </div>
-
+      </details>
     </article>
 
-
-    <!-- CASE 4 -->
-
-    <article class="card uc-case reveal">
-
+    <article class="card uc-case reveal" id="case-fraud">
       <span class="tag">Global payments company &middot; Fraud intelligence</span>
-
       <h3 class="h">Real-time fraud decisioning at global card scale</h3>
-
-      <div class="uc-cols">
-
-        <div>
-          <p class="uc-label">The situation</p>
-          <p>
-            Billions of authorisation decisions each year, each required within
-            milliseconds. A slow decision fails the transaction, frustrates the
-            customer at checkout and costs the company trust as well as revenue.
-          </p>
+      <p class="uc-problem"><span class="uc-label">The problem</span>Billions of fraud decisions a year, each due in milliseconds, with customer trust at stake on every one.</p>
+      <div class="stat-strip"><div class="stat"><div class="num">50x</div><div class="label">Faster than the CPU baseline</div></div><div class="stat"><div class="num">10%</div><div class="label">Engineering time saved</div></div><div class="stat"><div class="num">Milliseconds</div><div class="label">Decision latency at global scale</div></div></div>
+      <div class="uc-chips"><span class="uc-chips-label">Addressed by</span><a class="uc-chip" href="../sentinel/tour/"><b>Sentinel</b><span>Secure</span></a><a class="uc-chip" href="../tools/squall/tour/"><b>Squall</b><span>Test</span></a><a class="uc-chip" href="../halo/tour/"><b>HALO</b><span>Lead</span></a></div>
+      <details class="uc-more">
+        <summary>How it was done</summary>
+        <div class="uc-cols">
+          <div><p class="uc-label">The situation</p><p>Billions of authorisation decisions each year, each required within milliseconds. A slow decision fails the transaction, frustrates the customer at checkout and costs the company trust as well as revenue.</p></div>
+          <div><p class="uc-label">The approach</p><ul><li>A proprietary deep learning fraud model combined with gradient boosting, running on GPU infrastructure to meet latency requirements at global volume.</li><li>A generative AI developer copilot, grounded in internal codebases, deployed across software engineering teams.</li><li>A copilot for customer-facing advisers, so that the person on the other end of the call is better briefed and faster.</li></ul></div>
         </div>
-
-        <div>
-          <p class="uc-label">The approach</p>
-          <ul>
-            <li>A proprietary deep learning fraud model combined with gradient boosting, running on GPU infrastructure to meet latency requirements at global volume.</li>
-            <li>A generative AI developer copilot, grounded in internal codebases, deployed across software engineering teams.</li>
-            <li>A copilot for customer-facing advisers, so that the person on the other end of the call is better briefed and faster.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="stat-strip">
-        <div class="stat"><div class="num">50x</div><div class="label">Faster than the CPU baseline</div></div>
-        <div class="stat"><div class="num">10%</div><div class="label">Engineering time saved</div></div>
-        <div class="stat"><div class="num">Milliseconds</div><div class="label">Decision latency at global scale</div></div>
-      </div>
-
+      </details>
     </article>
 
   </div>
-
 </section>
 
 
@@ -496,45 +347,9 @@
 </section>
 
 
-<!-- SWISS POSITION -->
-
-<section>
-
-  <div class="wrap reveal">
-
-    <p class="kicker">The Swiss position</p>
-
-    <h2 class="h">Capable institutions, slow conversion to production</h2>
-
-    <p style="max-width:760px;">
-      Several Swiss institutions are well advanced. The wider picture is mixed, and
-      the constraints cited most often are familiar from UK programmes: governance
-      gates, data privacy limits, risk aversion and a cultural preference for
-      completing work before making it visible.
-    </p>
-
-    <div class="stat-strip">
-      <div class="stat"><div class="num">17%</div><div class="label">of Swiss financial services AI use cases reach full production, down from 29% in 2024</div></div>
-      <div class="stat"><div class="num">27th</div><div class="label">Global digital maturity rank of Swiss retail banks, from the top five in 2018</div></div>
-      <div class="stat"><div class="num">+27.5%</div><div class="label">Rise in suspicious activity reports filed in Switzerland in 2024</div></div>
-      <div class="stat"><div class="num">22%</div><div class="label">of Swiss employees use AI daily, the lowest of the countries surveyed</div></div>
-    </div>
-
-    <p class="uc-source">
-      Sources: SFTI/OST 2025; Deloitte 2024; MROS 2024; Deloitte Switzerland 2024.
-    </p>
-
-  </div>
-
-</section>
-
-
-<hr class="uc-divider">
-
-
 <!-- CPG AND RETAIL -->
 
-<section class="uc-section">
+<section class="uc-section" id="cpg">
 
   <div class="wrap">
 
@@ -635,6 +450,70 @@
 </section>
 
 
+<hr class="uc-divider">
+
+
+<!-- FRAMEWORKS AND INSTRUMENTS -->
+
+<section class="uc-section">
+  <div class="wrap">
+    <p class="kicker reveal">Frameworks and instruments</p>
+    <h2 class="h reveal">Why each one applies</h2>
+    <p class="reveal" style="max-width:760px; margin-bottom:30px;">
+      The same questions recur across these mandates. What is running, who decides what gets built, what can be shown to a supervisor, and where human judgement sits once the system moves faster than any person can watch.
+    </p>
+    <div class="grid grid-2">
+      <div class="card reveal">
+        <span class="tag">Keel &middot; Governance operating model</span>
+        <h3 class="h">Deciding what to build, fund and stop</h3>
+        <p>Credit decisioning and the ML platform both relied on an AI council, a centre of expertise and clear gates. Keel is the operating model for designing them.</p>
+        <div class="uc-seenrow"><span class="uc-chips-label">Seen in</span><a class="uc-chip plain" href="#case-credit">Credit decisioning</a><a class="uc-chip plain" href="#case-platform">ML platform</a></div>
+        <a class="link" href="../keel/tour/">See how Keel works &rarr;</a>
+      </div>
+      <div class="card reveal">
+        <span class="tag">Soundings &middot; Diagnostic</span>
+        <h3 class="h">Knowing what is running</h3>
+        <p>Maps the AI use cases operating in an organisation and tests whether the oversight around each one matches its real risk. It is also the first step on the AI inventory question in consumer goods.</p>
+        <div class="uc-seenrow"><span class="uc-chips-label">Seen in</span><a class="uc-chip plain" href="#case-platform">ML platform</a><a class="uc-chip plain" href="#cpg">Consumer goods</a></div>
+        <a class="link" href="../soundings/tour/">See how Soundings works &rarr;</a>
+      </div>
+      <div class="card reveal">
+        <span class="tag">Sentinel &middot; AI security</span>
+        <h3 class="h">Reconstructing what the system did</h3>
+        <p>Asks what an agent can see, what it can change and whether its actions can be reconstructed afterwards. Explainability and audit trails were design requirements in financial crime.</p>
+        <div class="uc-seenrow"><span class="uc-chips-label">Seen in</span><a class="uc-chip plain" href="#case-aml">Financial crime</a><a class="uc-chip plain" href="#case-fraud">Fraud</a></div>
+        <a class="link" href="../sentinel/tour/">See how Sentinel works &rarr;</a>
+      </div>
+      <div class="card reveal">
+        <span class="tag">HALO &middot; Leadership operating model</span>
+        <h3 class="h">Keeping people leading the loop</h3>
+        <p>Adoption was strongest where AI was positioned as a colleague. HALO keeps judgement and accountability with a person as the speed of work increases.</p>
+        <div class="uc-seenrow"><span class="uc-chips-label">Seen in</span><a class="uc-chip plain" href="#case-aml">Financial crime</a><a class="uc-chip plain" href="#case-credit">Credit decisioning</a><a class="uc-chip plain" href="#case-platform">ML platform</a><a class="uc-chip plain" href="#case-fraud">Fraud</a><a class="uc-chip plain" href="#cpg">Consumer goods</a></div>
+        <a class="link" href="../halo/tour/">See how HALO works &rarr;</a>
+      </div>
+      <div class="card reveal">
+        <span class="tag">Bearing &middot; AI regulatory readiness</span>
+        <h3 class="h">Showing a supervisor what you can produce</h3>
+        <p>Tests what an organisation could produce today against SM&amp;CR, Consumer Duty, FINMA guidance and the EU AI Act, with every answer graded on what is actually produced.</p>
+        <div class="uc-seenrow"><span class="uc-chips-label">Seen in</span><a class="uc-chip plain" href="#case-aml">Financial crime</a><a class="uc-chip plain" href="#case-credit">Credit decisioning</a></div>
+        <a class="link" href="../tools/bearing/tour/">See how Bearing works &rarr;</a>
+      </div>
+      <div class="card reveal">
+        <span class="tag">Squall &middot; Human judgement under pressure</span>
+        <h3 class="h">Testing the judgement detection leaves behind</h3>
+        <p>Six timed scenarios test whether a team would have caught a fraud, scored for accuracy and for whether confidence matched reality.</p>
+        <div class="uc-seenrow"><span class="uc-chips-label">Seen in</span><a class="uc-chip plain" href="#case-fraud">Fraud</a></div>
+        <a class="link" href="../tools/squall/tour/">See how Squall works &rarr;</a>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:34px; display:flex; gap:14px; flex-wrap:wrap;">
+      <a class="btn btn-solid" href="../frameworks/">Explore the frameworks</a>
+      <a class="btn" href="../tools/">See the instruments</a>
+    </div>
+  </div>
+</section>
+
+
 <!-- CONTACT -->
 
 <section>
@@ -647,9 +526,10 @@
       Facing a similar challenge?
     </h2>
 
-    <p style="max-width:620px; margin:0 auto 24px">
-      For advisory work, an AI readiness conversation or a closer look at any of
-      the above, get in touch directly.
+    <p style="max-width:640px; margin:0 auto 24px">
+      Most conversations begin with a diagnostic of what is already running. Start
+      with Soundings, or get in touch directly to discuss advisory work or an AI
+      readiness conversation.
     </p>
 
     <a class="btn btn-solid" href="mailto:hello@antara-innovations.com?subject=Use%20cases">
@@ -657,8 +537,8 @@
     </a>
 
     <div style="margin-top:16px">
-      <a class="link" href="../frameworks/">
-        Explore the frameworks &rarr;
+      <a class="link" href="../soundings/">
+        Begin with the Soundings diagnostic &rarr;
       </a>
     </div>
 
