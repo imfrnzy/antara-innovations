@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manifest: session-extension reports for therapists and psychologists | Antara Innovations</title>
+<meta name="description" content="Draft a UK insurer session-extension report in minutes. Reliable improvement and recovery calculated using the NHS Talking Therapies method, not guessed by AI. Three free, then a low monthly fee.">
+<link rel="canonical" href="https://www.antara-innovations.com/tools/manifest/">
+<meta property="og:title" content="Manifest: session-extension reports for therapists">
+<meta property="og:description" content="The report your client's insurer needs before treatment can continue, drafted from your own notes, with the clinical numbers calculated properly.">
+<meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<link rel="icon" href="../../assets/favicon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="manifest.css">
+</head>
+<body>
+<script>
+if (window.self !== window.top) document.documentElement.classList.add("embedded");
+</script>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../../">
+      <img src="../../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../../use-cases/">Use cases</a>
+      <a href="../../newsletter/">Newsletter</a>
+      <a href="../../wellness/">Antara Wellness</a>
+      <a href="../../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Manifest">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="tool">
+
+  <!-- ===================== INTRO ===================== -->
+  <section id="s-intro" class="screen on">
+    <div class="wrap narrow">
+      <p class="eyebrow">Clinics and practitioners · Manifest</p>
+      <h1>The report your client's insurer needs before treatment can continue.</h1>
+      <p class="lead">AXA's standard cover is six sessions. After that, and at every renewal point most insurers set, you write a structured progress report or your client's therapy stops being funded. Manifest drafts it from your own session notes in a couple of minutes, with the clinical numbers calculated the way NHS Talking Therapies calculates them, not estimated by a language model guessing at your intent.</p>
+
+      <div class="panel">
+        <p class="panel-label">What it actually does</p>
+        <ul class="check-list">
+          <li>You enter session counts, the goals you set, how things have gone, and any outcome-measure scores you already track.</li>
+          <li>Manifest calculates reliable improvement and recovery itself, using the same point-change thresholds NHS Talking Therapies uses for PHQ-9 and GAD-7. That calculation never comes from the AI.</li>
+          <li>It drafts the report in the structure your insurer actually expects. You read it, edit anything, and send it.</li>
+        </ul>
+      </div>
+
+      <div class="panel quiet">
+        <p class="panel-label">What it never asks for</p>
+        <p>No client name, date of birth, or NHS number, anywhere. You give it a short reference, initials or a case code, nothing that identifies your client if this screen were seen by someone else. You stay the data controller for everything written in the draft.</p>
+      </div>
+
+      <button id="beginBtn" class="btn-primary">Draft your first report, free</button>
+      <p class="fine-print">First three reports free, no card needed. <span id="priceLabel"></span> after that.</p>
+    </div>
+  </section>
+
+  <!-- ===================== FORM ===================== -->
+  <section id="s-form" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow">Manifest</p>
+      <h2>A few details, in your own words where it matters.</h2>
+
+      <form id="reportForm">
+        <label class="field">
+          <span>Which insurer is this for?</span>
+          <select name="insurer" id="insurerSelect">
+            <option value="axa">AXA Health</option>
+            <option value="bupa">Bupa</option>
+            <option value="other">Another insurer</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Client reference</span>
+          <input type="text" name="client_ref" maxlength="40" placeholder="e.g. Client JM, or Case 0417" required>
+          <small>Initials or a case code only. Never a full name.</small>
+        </label>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Sessions completed so far</span>
+            <input type="number" name="sessions_completed" min="0" max="200" required>
+          </label>
+          <label class="field">
+            <span>Further sessions you're requesting</span>
+            <input type="number" name="sessions_requested" min="1" max="52" required>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Presenting issue, briefly</span>
+          <textarea name="presenting_issue" rows="2" maxlength="1500" placeholder="What the client originally came with"></textarea>
+        </label>
+
+        <label class="field">
+          <span>Goals set at the outset</span>
+          <textarea name="goals" rows="3" maxlength="1500" placeholder="What you and the client agreed to work on"></textarea>
+        </label>
+
+        <label class="field">
+          <span>Progress against those goals</span>
+          <textarea name="progress" rows="4" maxlength="1500" placeholder="What's actually changed, in your own clinical judgement" required></textarea>
+        </label>
+
+        <label class="field">
+          <span>Risk or safeguarding concerns</span>
+          <textarea name="risk" rows="2" maxlength="1500" placeholder="Leave blank if none, Manifest will record that plainly"></textarea>
+        </label>
+
+        <fieldset class="panel">
+          <p class="panel-label">Outcome measures, if you track them</p>
+          <p class="panel-note">Leave a measure blank if you don't use it. Manifest only calculates reliable improvement and recovery for measures with both a baseline and a latest score.</p>
+          <div class="field-row">
+            <label class="field small">
+              <span>PHQ-9 baseline</span>
+              <input type="number" name="phq9_baseline" min="0" max="27">
+            </label>
+            <label class="field small">
+              <span>PHQ-9 latest</span>
+              <input type="number" name="phq9_latest" min="0" max="27">
+            </label>
+          </div>
+          <div class="field-row">
+            <label class="field small">
+              <span>GAD-7 baseline</span>
+              <input type="number" name="gad7_baseline" min="0" max="21">
+            </label>
+            <label class="field small">
+              <span>GAD-7 latest</span>
+              <input type="number" name="gad7_latest" min="0" max="21">
+            </label>
+          </div>
+        </fieldset>
+
+        <p id="formError" class="form-error" hidden></p>
+        <button type="submit" class="btn-primary" id="draftBtn">Draft the report</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== LOADING ===================== -->
+  <section id="s-loading" class="screen">
+    <div class="wrap narrow center">
+      <div class="spinner"></div>
+      <p>Calculating reliable change, then drafting the report against your insurer's format.</p>
+    </div>
+  </section>
+
+  <!-- ===================== GATE (limit reached) ===================== -->
+  <section id="s-gate" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow">You've used your three free reports</p>
+      <h2>That's the free tier done. Here's what continuing looks like.</h2>
+      <p class="lead" id="gatePrice"></p>
+      <p>Get in touch and we'll set you up on a paid plan, same tool, no limit.</p>
+      <a id="gateContact" class="btn-primary" href="#">Email us to continue</a>
+    </div>
+  </section>
+
+  <!-- ===================== DRAFT RESULT ===================== -->
+  <section id="s-draft" class="screen">
+    <div class="wrap">
+      <p class="eyebrow">Draft ready · <span id="usedCount"></span></p>
+      <h2>Read it, edit anything, then send it on.</h2>
+
+      <div class="facts-panel" id="factsPanel"></div>
+
+      <label class="field">
+        <span>The draft, fully editable</span>
+        <textarea id="draftText" rows="18"></textarea>
+      </label>
+
+      <div class="draft-actions">
+        <button id="copyBtn" class="btn-secondary">Copy to clipboard</button>
+        <button id="downloadBtn" class="btn-secondary">Download as text file</button>
+        <button id="anotherBtn" class="btn-primary">Draft another report</button>
+      </div>
+      <p class="fine-print">This is a draft. You're the clinician, it's your clinical judgement and your signature that makes it a real report, not Manifest's.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+    <div class="foot-links">
+      <a href="../../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../../about/">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', function(){
+  const open = navLinks.classList.toggle('open');
+  navToggle.innerHTML = open ? '&times;' : '&#9776;';
+  navToggle.setAttribute('aria-expanded', open);
+});
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

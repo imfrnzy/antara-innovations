@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Manifest works | Antara Innovations</title>
+<meta name="description" content="A two minute walkthrough of Manifest, the session-extension report drafting instrument from Antara Innovations.">
+<link rel="canonical" href="https://www.antara-innovations.com/tools/manifest/tour/">
+<link rel="icon" href="../../../assets/favicon.png">
+<link rel="stylesheet" href="../../../assets/site.css">
+<link rel="stylesheet" href="../tour.css">
+</head>
+<body class="tour-body">
+
+<div class="tour" id="tourRoot">
+  <div class="pulse-rings" aria-hidden="true"></div>
+  <div class="tour-top">
+    <div class="dots" id="dots"></div>
+    <div class="tour-brand">
+      <span>Manifest &middot; how it works</span>
+      <div class="tour-controls">
+        <button id="playBtn" type="button" aria-label="Pause">Pause</button>
+        <button class="skip" id="skipBtn" type="button">Skip to the tool</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <p class="exline" id="exline" hidden><span id="exnum">Exhibit 1</span><span>Manifest, a session-extension report instrument</span></p>
+    <p class="decknote" id="decknote" hidden>Antara Innovations &middot; proprietary instrument &middot; private and confidential</p>
+
+    <section class="scene" data-ms="5000">
+      <div class="inner">
+        <p class="kick pop d1">Proprietary instrument</p>
+        <h2 class="pop d2">MANIFEST</h2>
+        <p class="pop d3">A ship's manifest is the record that has to be accurate before the voyage is allowed to continue.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="8000">
+      <div class="inner">
+        <h2 class="pop d1">Six sessions, then a report, or your client's therapy stops.</h2>
+        <p class="pop d2">AXA's standard cover is six sessions. Bupa works the same way. Every extension past that point needs a structured progress report, reviewed before any more sessions are funded. Right now, that report gets written by hand, on your own time, for every client, every few sessions.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="9000">
+      <div class="inner" style="max-width:700px">
+        <h2 class="pop d1">The numbers aren't guessed. They're calculated.</h2>
+        <p class="pop d2">Manifest works out reliable improvement and recovery itself, using the same point-change thresholds NHS Talking Therapies uses for PHQ-9 and GAD-7. A drop of 6 or more on the PHQ-9, 4 or more on the GAD-7, that's reliable improvement, by a fixed rule, not an AI's impression of your notes.</p>
+        <p class="pop d3" style="margin-top:12px">The model only writes the sentences around that number. It never gets to decide what the number means.</p>
+      </div>
+    </section>
+
+    <section class="scene sitscene" data-ms="9500">
+      <div class="inner">
+        <h2 class="pop d1">What actually goes in</h2>
+        <div class="sits">
+          <div data-t="0"><h4>What you already know</h4><p>Session counts, the goals you set, how things have actually gone, in your own words.</p></div>
+          <div data-t="3000"><h4>Scores, if you track them</h4><p>PHQ-9 and GAD-7, baseline and latest. Leave them blank if you don't use them.</p></div>
+          <div data-t="6000"><h4>Never a name</h4><p>A short reference only. Initials, a case code. Nothing identifying, by design.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene ladderscene" data-ms="8500">
+      <div class="inner" style="max-width:720px">
+        <h2 class="pop d1">What it costs</h2>
+        <div class="ladder" id="ladder">
+          <div data-t="300">
+            <span class="lstep">01</span><h4>First three reports</h4>
+            <p>Full drafts, properly calculated, no card needed.</p>
+            <span class="lprice">Free</span>
+          </div>
+          <div data-t="1900">
+            <span class="lstep">02</span><h4>After that</h4>
+            <p>The same tool, no limit, for as long as you're using it.</p>
+            <span class="lprice" id="ladderPrice">Low monthly fee</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene end" data-ms="0">
+      <div class="inner">
+        <p class="kick pop d1">That's Manifest</p>
+        <h2 class="pop d2">Draft your first session-extension report, free.</h2>
+        <p class="pop d3">A couple of minutes, from your own notes, in the format your insurer actually expects.</p>
+        <div class="btnrow pop d4">
+          <button class="tourbtn" id="backBtn" type="button">Back to instruments</button>
+          <button class="tourbtn solid" id="continueBtn" type="button">Start drafting</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tour-bottom" id="tourBottom">
+    <button class="navbtn" id="prevBtn" type="button" aria-label="Previous">&#8592;</button>
+    <button class="navbtn" id="nextBtn" type="button" aria-label="Next">&#8594;</button>
+  </div>
+</div>
+
+<div class="modalbg" id="modalbg">
+  <div class="modalbox" role="dialog" aria-modal="true" aria-label="Manifest">
+    <button class="modalclose" id="modalClose" aria-label="Close">&times;</button>
+    <iframe id="modalFrame" title="Manifest" src=""></iframe>
+  </div>
+</div>
+
+<script type="module" src="tour.js"></script>
+</body>
+</html>
