@@ -64,10 +64,35 @@ byId("reportForm").addEventListener("submit", async (e) => {
   const val = (k) => (fd.get(k) ?? "").toString().trim();
   const num = (k) => (val(k) === "" ? null : Number(val(k)));
 
+  // reportForm carries novalidate (added so the range check below can show
+  // a styled message instead of a silent native block), which also turns
+  // off the native "required" prompts, so this is now the only thing
+  // enforcing those two fields, not just the numeric range check below.
+  if (!val("client_ref")) {
+    errEl.textContent = "Client reference is required.";
+    errEl.hidden = false;
+    return;
+  }
+  if (!val("progress")) {
+    errEl.textContent = "Progress against goals is required.";
+    errEl.hidden = false;
+    return;
+  }
+
   const sessionsCompleted = num("sessions_completed");
   const sessionsRequested = num("sessions_requested");
   if (sessionsCompleted === null || sessionsRequested === null) {
     errEl.textContent = "Sessions completed and sessions requested are both required.";
+    errEl.hidden = false;
+    return;
+  }
+  if (sessionsCompleted < 0 || sessionsCompleted > 200) {
+    errEl.textContent = "Sessions completed so far should be 200 or fewer.";
+    errEl.hidden = false;
+    return;
+  }
+  if (sessionsRequested < 1 || sessionsRequested > 52) {
+    errEl.textContent = "Further sessions requested should be between 1 and 52.";
     errEl.hidden = false;
     return;
   }
