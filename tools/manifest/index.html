@@ -149,6 +149,35 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
     </div>
   </section>
 
+  <!-- ===================== AUTH GATE (email + code) ===================== -->
+  <section id="s-authgate" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow">One quick step</p>
+      <h2>Where should Manifest keep track of your three free reports?</h2>
+      <p class="lead">Your details, your goals and your progress notes are already filled in and waiting, this won't lose any of it. First time here, this creates your account. Used Manifest before, this is just how we recognise you, so your count carries over properly instead of resetting every time you open a new browser.</p>
+
+      <form id="authEmailForm">
+        <label class="field">
+          <span>Your email</span>
+          <input type="email" name="email" placeholder="you@yourpractice.co.uk" required autocomplete="email">
+        </label>
+        <p id="authEmailError" class="form-error" hidden></p>
+        <button type="submit" class="btn-primary" id="authEmailBtn">Send me a code</button>
+      </form>
+
+      <form id="authCodeForm" hidden>
+        <p class="panel quiet" id="authCodeSentTo"></p>
+        <label class="field">
+          <span>The 6-digit code we just sent you</span>
+          <input type="text" name="code" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" required>
+        </label>
+        <p id="authCodeError" class="form-error" hidden></p>
+        <button type="submit" class="btn-primary" id="authCodeBtn">Verify and continue</button>
+        <button type="button" class="btn-secondary" id="authResendBtn">Send it again</button>
+      </form>
+    </div>
+  </section>
+
   <!-- ===================== LOADING ===================== -->
   <section id="s-loading" class="screen">
     <div class="wrap narrow center">
@@ -158,7 +187,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
   </section>
 
   <!-- ===================== GATE (limit reached) ===================== -->
-  <section id="s-gate" class="screen">
+  <section id="s-limitgate" class="screen">
     <div class="wrap narrow">
       <p class="eyebrow">You've used your three free reports</p>
       <h2>That's the free tier done. Here's what continuing looks like.</h2>

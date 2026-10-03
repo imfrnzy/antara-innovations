@@ -72,3 +72,12 @@ fieldset.panel .field-row{margin-bottom:4px}
   .draft-actions{flex-direction:column}
   .draft-actions .btn-primary, .draft-actions .btn-secondary{width:100%; text-align:center}
 }
+
+/* ---- auth gate: email + code ---- */
+#authCodeForm input[name="code"]{
+  font-family:'SF Mono',Consolas,Menlo,monospace; font-size:24px; letter-spacing:10px;
+  text-align:center; max-width:220px; padding:12px;
+}
+#authEmailForm, #authCodeForm{display:flex; flex-direction:column; gap:16px; max-width:420px}
+#authEmailForm[hidden], #authCodeForm[hidden]{display:none !important}
+#authResendBtn{align-self:flex-start}
