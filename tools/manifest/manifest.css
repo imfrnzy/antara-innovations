@@ -75,8 +75,11 @@ fieldset.panel .field-row{margin-bottom:4px}
 
 /* ---- auth gate: email + code ---- */
 #authCodeForm input[name="code"]{
-  font-family:'SF Mono',Consolas,Menlo,monospace; font-size:24px; letter-spacing:10px;
-  text-align:center; max-width:220px; padding:12px;
+  /* Supabase's OTP length is a project setting (6-10 digits), not fixed,
+     so this sizes generously enough to fit the longer end comfortably
+     rather than assuming 6. */
+  font-family:'SF Mono',Consolas,Menlo,monospace; font-size:22px; letter-spacing:7px;
+  text-align:center; max-width:320px; padding:12px;
 }
 #authEmailForm, #authCodeForm{display:flex; flex-direction:column; gap:16px; max-width:420px}
 #authEmailForm[hidden], #authCodeForm[hidden]{display:none !important}

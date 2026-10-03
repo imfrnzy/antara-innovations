@@ -168,8 +168,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <form id="authCodeForm" hidden>
         <p class="panel quiet" id="authCodeSentTo"></p>
         <label class="field">
-          <span>The 6-digit code we just sent you</span>
-          <input type="text" name="code" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" required>
+          <span>The code we just sent you</span>
+          <input type="text" name="code" inputmode="numeric" pattern="[0-9]*" maxlength="10" autocomplete="one-time-code" required>
         </label>
         <p id="authCodeError" class="form-error" hidden></p>
         <button type="submit" class="btn-primary" id="authCodeBtn">Verify and continue</button>

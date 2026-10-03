@@ -152,7 +152,7 @@ byId("authEmailForm").addEventListener("submit", async (e) => {
     const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
     if (error) throw error;
     pendingEmail = email;
-    byId("authCodeSentTo").textContent = `We've sent a 6-digit code to ${email}.`;
+    byId("authCodeSentTo").textContent = `We've sent a code to ${email}.`;
     byId("authEmailForm").hidden = true;
     byId("authCodeForm").hidden = false;
     byId("authCodeForm").querySelector('input[name="code"]').focus();
