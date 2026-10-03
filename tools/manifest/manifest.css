@@ -84,3 +84,14 @@ fieldset.panel .field-row{margin-bottom:4px}
 #authEmailForm, #authCodeForm{display:flex; flex-direction:column; gap:16px; max-width:420px}
 #authEmailForm[hidden], #authCodeForm[hidden]{display:none !important}
 #authResendBtn{align-self:flex-start}
+
+/* ---- query-risk check ---- */
+.flag-item{display:flex; gap:12px; padding:14px 16px; border-radius:4px; margin-bottom:10px; align-items:flex-start}
+.flag-item.red{background:#FBEAEA; border-left:3px solid #C0453F}
+.flag-item.amber{background:#FBF3E4; border-left:3px solid #C98A2C}
+.flag-dot{flex:none; width:8px; height:8px; border-radius:50%; margin-top:6px}
+.flag-item.red .flag-dot{background:#C0453F}
+.flag-item.amber .flag-dot{background:#C98A2C}
+.flag-message{font-size:14.5px; font-weight:600; color:#2A2420; margin:0 0 4px}
+.flag-why{font-size:13px; color:#55504A; margin:0}
+.flag-clean{background:var(--chart-soft); border-left:3px solid var(--chart); padding:16px 18px; border-radius:4px; font-size:14.5px; color:var(--chart-dark)}

@@ -89,11 +89,15 @@ const INSURER_SHAPE = {
 - Why additional sessions are clinically appropriate
 - Risk or safeguarding concerns
 - Number of further sessions requested`,
-  bupa: `Structure the draft under these exact headings, matching Bupa's expected format for a treatment update:
-- Presenting problem and treatment so far
-- Progress against agreed goals
-- Current risk assessment
-- Clinical rationale for continuing treatment
+  bupa: `Structure the draft under these exact headings, matching Bupa's own "Further treatment for a mental health condition" progress form (UNI-113944):
+- Diagnosis or working diagnosis
+- Presenting problem, symptom onset and current medication
+- Outcome measures (state the scores and dates given, or the stated reason none are used)
+- Other professionals involved
+- Therapy modality, and whether it has changed and why
+- Sessions so far, frequency, date of last session, and any break in treatment
+- Risk assessment: date completed, risk level, and the risk management plan
+- Why the sessions requested are clinically appropriate, and whether they are expected to conclude treatment
 - Number of further sessions requested`,
   other: `Structure the draft under these exact headings, a generally applicable format:
 - Presenting problem and treatment so far
@@ -151,6 +155,24 @@ Deno.serve(async (req) => {
   const goals = trim(body.goals, MAX_CHARS);
   const progress = trim(body.progress, MAX_CHARS);
   const risk = trim(body.risk, MAX_CHARS) || "None identified.";
+  const noMeasuresReason = trim(body.no_measures_reason, 200);
+  const deteriorationRationale = trim(body.deterioration_rationale, 800);
+
+  // Bupa-specific fields. Harmless, unused strings for AXA/Other, this
+  // function doesn't branch on insurer to decide whether to read them, the
+  // prompt below only surfaces what each insurer's own heading list asks for.
+  const diagnosis = trim(body.diagnosis, 200);
+  const modality = trim(body.modality, 100);
+  const modalityChangeReason = trim(body.modality_change_reason, 200);
+  const sessionFrequency = trim(body.session_frequency, 60);
+  const lastSessionDate = trim(body.last_session_date, 20);
+  const treatmentBreak = trim(body.treatment_break, 200);
+  const otherProfessionals = trim(body.other_professionals, 200);
+  const concludesTreatment = trim(body.concludes_treatment, 60);
+  const furtherGoals = trim(body.further_goals, 800);
+  const riskAssessmentDate = trim(body.risk_assessment_date, 20);
+  const riskLevel = trim(body.risk_level, 20);
+  const riskPlan = trim(body.risk_plan, 800);
 
   const rawFacts = {
     phq9: (body.phq9_baseline !== undefined && body.phq9_baseline !== null && body.phq9_baseline !== "")
@@ -182,8 +204,28 @@ ${progress || "Not provided."}
 RISK OR SAFEGUARDING (practitioner's own words):
 ${risk}
 
+IF NO OUTCOME MEASURES WERE GIVEN, THE STATED REASON:
+${noMeasuresReason || "No reason given."}
+
+IF PROGRESS IS FLAT OR WORSE, THE PRACTITIONER'S OWN RATIONALE:
+${deteriorationRationale || "No rationale given."}
+
 COMPUTED OUTCOME FACTS (fixed, do not alter, do not recalculate):
 ${facts.join("\n")}
+
+${insurer === "bupa" ? `BUPA-SPECIFIC FIELDS (use these for the headings that ask for them, state plainly whatever is "Not given" rather than inventing it):
+Diagnosis or working diagnosis: ${diagnosis || "Not given."}
+Therapy modality: ${modality || "Not given."}
+Modality change and reason: ${modalityChangeReason || "No change stated."}
+Session frequency: ${sessionFrequency || "Not given."}
+Date of last session: ${lastSessionDate || "Not given."}
+Break in treatment: ${treatmentBreak || "None stated."}
+Other professionals involved: ${otherProfessionals || "None stated."}
+Expected to conclude treatment: ${concludesTreatment || "Not stated."}
+Goals for this further course: ${furtherGoals || "Not given."}
+Risk assessment date: ${riskAssessmentDate || "Not given."}
+Risk level: ${riskLevel || "Not given."}
+Risk management plan: ${riskPlan || "Not given."}` : ""}
 
 ${INSURER_SHAPE[insurer]}
 
@@ -209,6 +251,12 @@ Write the draft now.`;
     insurer, client_ref: clientRef,
     sessions_completed: sessionsCompleted, sessions_requested: sessionsRequested,
     presenting_issue: presentingIssue, goals, progress, risk,
+    no_measures_reason: noMeasuresReason, deterioration_rationale: deteriorationRationale,
+    diagnosis, modality, modality_change_reason: modalityChangeReason,
+    session_frequency: sessionFrequency, last_session_date: lastSessionDate || null,
+    treatment_break: treatmentBreak, other_professionals: otherProfessionals,
+    concludes_treatment: concludesTreatment, further_goals: furtherGoals,
+    risk_assessment_date: riskAssessmentDate || null, risk_level: riskLevel, risk_plan: riskPlan,
     outcome_facts: facts, draft_text: draftText,
   }).select("id, created_at").single();
   if (saveErr) {

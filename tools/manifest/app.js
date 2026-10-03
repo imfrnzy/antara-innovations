@@ -1,6 +1,6 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, FREE_REPORT_LIMIT, PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
-import { assessOutcome, outcomeFacts } from "./engine.js";
+import { assessOutcome, outcomeFacts, assessQueryRisk } from "./engine.js";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const byId = (id) => document.getElementById(id);
@@ -10,7 +10,7 @@ byId("priceLabel").textContent = PRICE_LABEL;
 byId("gatePrice").textContent = PRICE_LABEL + ".";
 byId("gateContact").href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Manifest — continuing past the free tier")}`;
 
-const SCREENS = ["s-intro", "s-form", "s-authgate", "s-loading", "s-limitgate", "s-draft"];
+const SCREENS = ["s-intro", "s-form", "s-riskcheck", "s-authgate", "s-loading", "s-limitgate", "s-draft"];
 function show(id) {
   SCREENS.forEach((s) => byId(s).classList.toggle("on", s === id));
   window.scrollTo(0, 0);
@@ -53,6 +53,10 @@ byId("beginBtn").addEventListener("click", async () => {
     console.error(e);
     alert("Couldn't start a session. Try reloading the page.");
   }
+});
+
+byId("insurerSelect").addEventListener("change", (e) => {
+  byId("bupaFields").hidden = e.target.value !== "bupa";
 });
 
 byId("reportForm").addEventListener("submit", async (e) => {
@@ -110,12 +114,87 @@ byId("reportForm").addEventListener("submit", async (e) => {
     phq9_latest: val("phq9_latest") || null,
     gad7_baseline: val("gad7_baseline") || null,
     gad7_latest: val("gad7_latest") || null,
+    no_measures_reason: val("no_measures_reason"),
+    deterioration_rationale: val("deterioration_rationale"),
+    diagnosis: val("diagnosis"),
+    modality: val("modality"),
+    modality_change_reason: val("modality_change_reason"),
+    session_frequency: val("session_frequency"),
+    last_session_date: val("last_session_date"),
+    treatment_break: val("treatment_break"),
+    other_professionals: val("other_professionals"),
+    concludes_treatment: val("concludes_treatment"),
+    further_goals: val("further_goals"),
+    risk_assessment_date: val("risk_assessment_date"),
+    risk_level: val("risk_level"),
+    risk_plan: val("risk_plan"),
   };
+
+  // The risk check runs entirely here, client side, against fixed rules,
+  // before anything is sent anywhere, so it costs nothing and needs no
+  // session. pendingFormPayload is read by the Continue/Back buttons below.
+  const outcomeForCheck = assessOutcome({
+    phq9: (formPayload.phq9_baseline && formPayload.phq9_latest) ? { baseline: +formPayload.phq9_baseline, latest: +formPayload.phq9_latest } : null,
+    gad7: (formPayload.gad7_baseline && formPayload.gad7_latest) ? { baseline: +formPayload.gad7_baseline, latest: +formPayload.gad7_latest } : null,
+  });
+  const flags = assessQueryRisk(formPayload, outcomeForCheck);
+  pendingFormPayload = formPayload;
+  renderRiskCheck(flags, formPayload.insurer);
+  show("s-riskcheck");
+});
+
+let pendingFormPayload = null;
+
+function renderRiskCheck(flags, insurer) {
+  const insurerLabel = insurer === "axa" ? "AXA" : insurer === "bupa" ? "Bupa" : "this insurer";
+  byId("riskCheckLead").textContent = flags.length === 0
+    ? `Checked against what ${insurerLabel} is documented to ask for. Nothing stood out.`
+    : `Checked against what ${insurerLabel} is documented to ask for, ${flags.length} thing${flags.length === 1 ? "" : "s"} worth a look before this goes anywhere.`;
+
+  const list = byId("riskFlagsList");
+  list.innerHTML = "";
+  if (flags.length === 0) {
+    const clean = document.createElement("p");
+    clean.className = "flag-clean";
+    clean.textContent = "No gaps found against the documented requirements for this insurer. Your own clinical judgement still comes first, this is a check, not a guarantee.";
+    list.appendChild(clean);
+  } else {
+    flags.forEach((f) => {
+      const item = document.createElement("div");
+      item.className = `flag-item ${f.severity}`;
+      const dot = document.createElement("span");
+      dot.className = "flag-dot";
+      const text = document.createElement("div");
+      const msg = document.createElement("p");
+      msg.className = "flag-message";
+      msg.textContent = f.message;
+      const why = document.createElement("p");
+      why.className = "flag-why";
+      why.textContent = f.why;
+      text.appendChild(msg);
+      text.appendChild(why);
+      item.appendChild(dot);
+      item.appendChild(text);
+      list.appendChild(item);
+    });
+  }
+  byId("riskContinueBtn").textContent = flags.length === 0 ? "Continue" : "I've reviewed this, draft it anyway";
+}
+
+byId("riskBackBtn").addEventListener("click", () => {
+  show("s-form");
+});
+
+byId("riskContinueBtn").addEventListener("click", async () => {
+  const formPayload = pendingFormPayload;
+  if (!formPayload) { show("s-form"); return; }
+  const errEl = byId("formError");
 
   try {
     await ensureSession();
   } catch (e2) {
     console.error(e2);
+    show("s-form");
     errEl.textContent = "Couldn't start a session. Try reloading the page.";
     errEl.hidden = false;
     return;

@@ -102,3 +102,111 @@ export function outcomeFacts(outcome) {
   );
   return lines;
 }
+
+// ---- Query-risk check, v1 ----
+// A deterministic check against what AXA and Bupa are actually documented
+// to ask for, run entirely client side, before anything is sent to the AI
+// or to the insurer. Each rule exists because of something specific found
+// in an insurer's own form or published guidance, not a guess at what
+// "might" matter. Flags are "red" (a documented, named requirement is
+// unmet) or "amber" (a gap that commonly invites a query, per the research,
+// but isn't a named hard requirement). This never blocks sending, a
+// clinician's judgement always overrides a flag, it only makes sure
+// nothing gets missed by accident.
+//
+// Sources: Bupa "Further treatment for a mental health condition" patient
+// progress form (UNI-113944, June 2026); AXA session-extension guidance via
+// HelloSelf provider help centre (16 Sept 2025).
+
+function daysSince(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return null;
+  return Math.floor((Date.now() - d.getTime()) / 86400000);
+}
+
+export function assessQueryRisk(data, outcome) {
+  const flags = [];
+  const insurer = data.insurer;
+
+  // Shared across insurers
+  if (!data.sessions_requested || data.sessions_requested < 1) {
+    flags.push({
+      severity: "red",
+      message: "No exact number of further sessions given.",
+      why: "AXA's own guidance says to \"mention the exact number of extra sessions\" requested, not a range or an open-ended ask.",
+    });
+  }
+
+  const hasMeasures = !!(data.phq9_baseline || data.gad7_baseline);
+  if (!hasMeasures && !data.no_measures_reason) {
+    flags.push({
+      severity: "amber",
+      message: "No outcome measure scores given, and no reason stated for that.",
+      why: "Bupa's form asks directly whether outcome measures are collected, and if not, asks why not. Leaving this blank rather than answered is more likely to draw a query than a clear \"not used for this modality\" would be.",
+    });
+  }
+
+  if (outcome && outcome.scored && !outcome.recovery && !outcome.reliableImprovementAny && !data.risk && !data.deterioration_rationale) {
+    flags.push({
+      severity: "amber",
+      message: "Scores show no reliable improvement, with no explanation offered for why.",
+      why: "Insurers reviewing a flat or worsening score without any stated clinical reasoning, a formulation change, a life event, a modality switch, tend to query it. One sentence of rationale here is usually enough to pre-empt that.",
+    });
+  }
+
+  if (insurer === "axa") {
+    if (data.sessions_completed >= 10) {
+      flags.push({
+        severity: "red",
+        message: "10 or more sessions completed on an AXA referral.",
+        why: "AXA's guidance says therapy should pause beyond 10 sessions until written approval is received, and sessions delivered without that approval may not be funded.",
+      });
+    } else if (data.sessions_completed >= 6 && data.sessions_completed < 10) {
+      flags.push({
+        severity: "amber",
+        message: "Past AXA's default 6-session review point.",
+        why: "AXA's cover defaults to 6 sessions before a review is expected. Worth confirming this request is the review itself, not an extra request sitting past it unreviewed.",
+      });
+    }
+  }
+
+  if (insurer === "bupa") {
+    if (!data.diagnosis) {
+      flags.push({ severity: "red", message: "No diagnosis or working diagnosis given.", why: "Bupa's progress form asks for this by name." });
+    }
+    if (!data.modality) {
+      flags.push({ severity: "red", message: "No therapy modality stated.", why: "Bupa's form asks what modality is being used, and whether it has changed." });
+    }
+    const riskDays = daysSince(data.risk_assessment_date);
+    if (!data.risk_assessment_date) {
+      flags.push({
+        severity: "red",
+        message: "No risk assessment date given.",
+        why: "Bupa's form requires the risk assessment to have been completed within the last 7 to 10 days, and asks for that date directly.",
+      });
+    } else if (riskDays !== null && riskDays > 10) {
+      flags.push({
+        severity: "red",
+        message: `Risk assessment is ${riskDays} days old.`,
+        why: "Bupa's form states the risk assessment needs to have been completed within the last 7 to 10 days.",
+      });
+    }
+    if (data.risk_level && data.risk_level !== "none" && !data.risk_plan) {
+      flags.push({
+        severity: "red",
+        message: "A risk level is recorded but no risk management plan is given.",
+        why: "Bupa's form asks for a risk management plan wherever a risk level above none is recorded, and asks why not if there isn't one.",
+      });
+    }
+    if (!data.concludes_treatment) {
+      flags.push({
+        severity: "amber",
+        message: "No answer given on whether these further sessions are expected to conclude treatment.",
+        why: "This is a direct question on Bupa's form. Answering it, even with \"not yet, here's why\", reads as more complete than leaving it open.",
+      });
+    }
+  }
+
+  return flags;
+}

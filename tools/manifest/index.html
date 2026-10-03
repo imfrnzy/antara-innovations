@@ -141,11 +141,117 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
               <input type="number" name="gad7_latest" min="0" max="21">
             </label>
           </div>
+          <label class="field">
+            <span>If you don't use outcome measures, say why</span>
+            <input type="text" name="no_measures_reason" maxlength="200" placeholder="e.g. Not standard practice for this modality">
+          </label>
+        </fieldset>
+
+        <label class="field">
+          <span>If scores haven't improved, or progress has stalled, why</span>
+          <textarea name="deterioration_rationale" rows="2" maxlength="800" placeholder="e.g. Formulation revised after new disclosure in session 5; expect this to show in the next review"></textarea>
+          <small>Optional. Leave blank if progress is positive, this is only for explaining a flat or difficult picture.</small>
+        </label>
+
+        <fieldset class="panel" id="bupaFields" hidden>
+          <p class="panel-label">Bupa's progress form also asks for these</p>
+          <p class="panel-note">Bupa's own form (UNI-113944) asks for all of the below. Filling these in means Manifest can check the draft against what Bupa actually requires before you send it.</p>
+
+          <label class="field">
+            <span>Diagnosis or working diagnosis</span>
+            <input type="text" name="diagnosis" maxlength="200" placeholder="e.g. Moderate depressive episode">
+          </label>
+
+          <div class="field-row">
+            <label class="field">
+              <span>Therapy modality</span>
+              <input type="text" name="modality" maxlength="100" placeholder="e.g. CBT">
+            </label>
+            <label class="field">
+              <span>If the modality changed, why</span>
+              <input type="text" name="modality_change_reason" maxlength="200" placeholder="Leave blank if unchanged">
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span>Session frequency</span>
+              <input type="text" name="session_frequency" maxlength="60" placeholder="e.g. Weekly">
+            </label>
+            <label class="field">
+              <span>Date of last session</span>
+              <input type="date" name="last_session_date">
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Any break in treatment, and how long</span>
+            <input type="text" name="treatment_break" maxlength="200" placeholder="Leave blank if none">
+          </label>
+
+          <label class="field">
+            <span>Other professionals involved</span>
+            <input type="text" name="other_professionals" maxlength="200" placeholder="e.g. GP, psychiatrist, school. Leave blank if none">
+          </label>
+
+          <label class="field">
+            <span>Are these further sessions expected to conclude treatment?</span>
+            <select name="concludes_treatment">
+              <option value="">Not yet answered</option>
+              <option value="yes">Yes</option>
+              <option value="no, further sessions planned">No, further sessions likely after this course</option>
+              <option value="unclear, will reassess">Unclear, will reassess at next review</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Goals for this further course of treatment</span>
+            <textarea name="further_goals" rows="2" maxlength="800" placeholder="What the next block of sessions is actually for"></textarea>
+          </label>
+
+          <p class="panel-label" style="margin-top:18px">Risk assessment</p>
+          <div class="field-row">
+            <label class="field">
+              <span>Date risk assessment completed</span>
+              <input type="date" name="risk_assessment_date">
+              <small>Bupa requires this within the last 7 to 10 days.</small>
+            </label>
+            <label class="field">
+              <span>Risk level</span>
+              <select name="risk_level">
+                <option value="">Not yet answered</option>
+                <option value="none">None identified</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            <span>Risk management plan</span>
+            <textarea name="risk_plan" rows="2" maxlength="800" placeholder="Required if any risk level above none is recorded"></textarea>
+          </label>
         </fieldset>
 
         <p id="formError" class="form-error" hidden></p>
-        <button type="submit" class="btn-primary" id="draftBtn">Draft the report</button>
+        <button type="submit" class="btn-primary" id="draftBtn">Check it over, then draft the report</button>
       </form>
+    </div>
+  </section>
+
+  <!-- ===================== QUERY-RISK CHECK ===================== -->
+  <section id="s-riskcheck" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow">Before this goes anywhere</p>
+      <h2 id="riskCheckHeading">A quick check against what the insurer actually asks for.</h2>
+      <p class="lead" id="riskCheckLead"></p>
+
+      <div id="riskFlagsList"></div>
+
+      <div class="draft-actions" style="margin-top:22px">
+        <button type="button" class="btn-secondary" id="riskBackBtn">Go back and fill these in</button>
+        <button type="button" class="btn-primary" id="riskContinueBtn">I've reviewed this, draft it anyway</button>
+      </div>
     </div>
   </section>
 
