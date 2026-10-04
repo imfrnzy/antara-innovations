@@ -62,12 +62,21 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
       <button id="beginBtn" class="btn-primary">Draft your first report, free</button>
       <p class="fine-print">First three reports free, no card needed. <span id="priceLabel"></span> after that.</p>
+      <p class="returning">
+        <span id="returningLead">Been here before?</span>
+        <button type="button" id="signInBtn" class="link-btn">Sign in to see your reports</button>
+        <button type="button" id="myReportsBtn" class="btn-secondary" hidden>My reports</button>
+      </p>
     </div>
   </section>
 
   <!-- ===================== FORM ===================== -->
   <section id="s-form" class="screen">
     <div class="wrap narrow">
+      <div class="panel prefill-note" id="prefillNote" hidden>
+        <p class="panel-label">Filled in from your last report</p>
+        <p id="prefillNoteText"></p>
+      </div>
       <p class="eyebrow">Manifest</p>
       <h2>A few details, in your own words where it matters.</h2>
 
@@ -259,8 +268,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
   <section id="s-authgate" class="screen">
     <div class="wrap narrow">
       <p class="eyebrow">One quick step</p>
-      <h2>Where should Manifest keep track of your three free reports?</h2>
-      <p class="lead">Your details, your goals and your progress notes are already filled in and waiting, this won't lose any of it. First time here, this creates your account. Used Manifest before, this is just how we recognise you, so your count carries over properly instead of resetting every time you open a new browser.</p>
+      <h2 id="authTitle">Where should Manifest keep track of your three free reports?</h2>
+      <p class="lead" id="authLead">Your details, your goals and your progress notes are already filled in and waiting, this won't lose any of it. First time here, this creates your account. Used Manifest before, this is just how we recognise you, so your count carries over properly instead of resetting every time you open a new browser.</p>
 
       <form id="authEmailForm">
         <label class="field">
@@ -281,6 +290,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
         <button type="submit" class="btn-primary" id="authCodeBtn">Verify and continue</button>
         <button type="button" class="btn-secondary" id="authResendBtn">Send it again</button>
       </form>
+      <p><button type="button" class="link-btn" id="authBackBtn" hidden>Back</button></p>
     </div>
   </section>
 
@@ -300,6 +310,23 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <p class="lead" id="gatePrice"></p>
       <p>Get in touch and we'll set you up on a paid plan, same tool, no limit.</p>
       <a id="gateContact" class="btn-primary" href="#">Email us to continue</a>
+      <button type="button" id="limitMyReportsBtn" class="btn-secondary">My reports</button>
+    </div>
+  </section>
+
+  <!-- ===================== MY REPORTS ===================== -->
+  <section id="s-reports" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow">Your reports</p>
+      <h2>Everything you've drafted, by client.</h2>
+      <p class="lead" id="reportsLead">Open a draft again, or start the next review from the last one so you only change what has moved on.</p>
+      <p id="reportsError" class="form-error" hidden></p>
+      <div id="reportsList"></div>
+      <div class="draft-actions">
+        <button type="button" id="reportsNewBtn" class="btn-primary">Draft a new report</button>
+        <button type="button" id="reportsSignOutBtn" class="btn-secondary">Sign out</button>
+      </div>
+      <p class="fine-print">Signing out only affects this browser.</p>
     </div>
   </section>
 
@@ -319,6 +346,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <div class="draft-actions">
         <button id="copyBtn" class="btn-secondary">Copy to clipboard</button>
         <button id="downloadBtn" class="btn-secondary">Download as text file</button>
+        <button id="draftMyReportsBtn" class="btn-secondary">My reports</button>
         <button id="anotherBtn" class="btn-primary">Draft another report</button>
       </div>
       <p class="fine-print">This is a draft. You're the clinician, it's your clinical judgement and your signature that makes it a real report, not Manifest's.</p>

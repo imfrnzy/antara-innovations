@@ -95,3 +95,27 @@ fieldset.panel .field-row{margin-bottom:4px}
 .flag-message{font-size:14.5px; font-weight:600; color:#2A2420; margin:0 0 4px}
 .flag-why{font-size:13px; color:#55504A; margin:0}
 .flag-clean{background:var(--chart-soft); border-left:3px solid var(--chart); padding:16px 18px; border-radius:4px; font-size:14.5px; color:var(--chart-dark)}
+
+/* ---- returning clinicians: sign in, my reports ---- */
+.returning{margin-top:22px; font-size:14px; color:#4A574F}
+.link-btn{background:none; border:none; padding:0; font:inherit; font-size:14px; font-weight:600; color:var(--chart-dark); text-decoration:underline; cursor:pointer}
+.link-btn:hover{color:var(--chart)}
+.prefill-note{margin-bottom:22px}
+.prefill-note p:last-child{margin:0; font-size:14px; line-height:1.6}
+
+.client-card{border:1px solid #C9D2CC; border-radius:4px; background:#fff; padding:16px 18px; margin:0 0 14px}
+.client-card h3{font-size:16px; margin:0 0 4px; color:var(--navy)}
+.client-meta{font-size:13px; color:#5B6960; margin:0 0 12px}
+.client-actions{display:flex; gap:10px; flex-wrap:wrap}
+.client-card details{margin-top:12px; font-size:13.5px}
+.client-card summary{cursor:pointer; color:#4A574F}
+.earlier-row{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:8px 0; border-top:1px solid #EDF0EE}
+.reports-empty{background:#F6F7F5; border-left:3px solid #C9D2CC; padding:16px 18px; border-radius:2px; font-size:14.5px; margin:0 0 18px}
+@media (max-width:640px){
+  .client-actions{flex-direction:column}
+  .client-actions .btn-primary, .client-actions .btn-secondary{width:100%; text-align:center}
+}
+
+/* Buttons that carry the hidden attribute must stay hidden: the display
+   rules on .btn-primary and .btn-secondary would otherwise override it. */
+.btn-primary[hidden], .btn-secondary[hidden], .link-btn[hidden]{display:none}

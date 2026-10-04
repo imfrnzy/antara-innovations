@@ -10,7 +10,7 @@ byId("priceLabel").textContent = PRICE_LABEL;
 byId("gatePrice").textContent = PRICE_LABEL + ".";
 byId("gateContact").href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Manifest — continuing past the free tier")}`;
 
-const SCREENS = ["s-intro", "s-form", "s-riskcheck", "s-authgate", "s-loading", "s-limitgate", "s-draft"];
+const SCREENS = ["s-intro", "s-form", "s-riskcheck", "s-authgate", "s-loading", "s-limitgate", "s-draft", "s-reports"];
 function show(id) {
   SCREENS.forEach((s) => byId(s).classList.toggle("on", s === id));
   window.scrollTo(0, 0);
@@ -48,6 +48,7 @@ async function upsertProfile(email) {
 byId("beginBtn").addEventListener("click", async () => {
   try {
     await ensureSession();
+    setPrefillNote(null);
     show("s-form");
   } catch (e) {
     console.error(e);
@@ -209,6 +210,7 @@ byId("riskContinueBtn").addEventListener("click", async () => {
     await generateDraft(formPayload, errEl);
   } else {
     sessionStorage.setItem(PENDING_KEY, JSON.stringify(formPayload));
+    setAuthMode("report");
     show("s-authgate");
   }
 });
@@ -292,8 +294,13 @@ byId("authCodeForm").addEventListener("submit", async (e) => {
 
     const pending = sessionStorage.getItem(PENDING_KEY);
     sessionStorage.removeItem(PENDING_KEY);
+    const intent = authIntent;
+    authIntent = "report";
+    refreshReturningUi();
     if (pending) {
       await generateDraft(JSON.parse(pending), null);
+    } else if (intent === "signin") {
+      await openReports();
     } else {
       show("s-form");
     }
@@ -338,7 +345,8 @@ byId("authResendBtn").addEventListener("click", async () => {
 
 function renderDraft(data) {
   byId("draftText").value = data.draft ?? "";
-  byId("usedCount").textContent = `${data.used} of ${FREE_REPORT_LIMIT} free reports used`;
+  const usedLabel = data.used <= FREE_REPORT_LIMIT ? `${data.used} of ${FREE_REPORT_LIMIT} free reports used` : `${data.used} reports`;
+  byId("usedCount").textContent = data.savedOn ? `Saved ${data.savedOn}, ${usedLabel}` : usedLabel;
   const factsPanel = byId("factsPanel");
   factsPanel.innerHTML = "";
   const title = document.createElement("p");
@@ -374,5 +382,226 @@ byId("downloadBtn").addEventListener("click", () => {
 
 byId("anotherBtn").addEventListener("click", () => {
   byId("reportForm").reset();
+  byId("bupaFields").hidden = true;
+  setPrefillNote(null);
   show("s-form");
 });
+
+// ===================================================================
+// Returning clinicians: sign in without filling a form, see every
+// saved report, reopen a draft, or start the next review from the last.
+// Reads only the signed-in person's own rows (row level security).
+// ===================================================================
+const AUTH_DEFAULT = { title: byId("authTitle").textContent, lead: byId("authLead").textContent };
+let authIntent = "report";
+let savedReports = [];
+
+function setAuthMode(mode) {
+  authIntent = mode;
+  const signin = mode === "signin";
+  byId("authTitle").textContent = signin ? "Sign in to see your reports." : AUTH_DEFAULT.title;
+  byId("authLead").textContent = signin
+    ? "Enter the email you used before and we'll send you a code. No password needed."
+    : AUTH_DEFAULT.lead;
+  byId("authBackBtn").hidden = !signin;
+  byId("authEmailForm").hidden = false;
+  byId("authCodeForm").hidden = true;
+}
+
+async function refreshReturningUi() {
+  const real = await isRealSession();
+  byId("signInBtn").hidden = real;
+  byId("myReportsBtn").hidden = !real;
+  byId("returningLead").textContent = real ? "Welcome back." : "Been here before?";
+}
+
+async function startSignIn() {
+  // A parked, half-finished form from an earlier visit must never be turned
+  // into a report by signing in, so it is dropped here.
+  sessionStorage.removeItem(PENDING_KEY);
+  if (await isRealSession()) { await openReports(); return; }
+  setAuthMode("signin");
+  show("s-authgate");
+}
+
+byId("signInBtn").addEventListener("click", startSignIn);
+byId("myReportsBtn").addEventListener("click", () => openReports());
+byId("draftMyReportsBtn").addEventListener("click", () => openReports());
+byId("limitMyReportsBtn").addEventListener("click", () => openReports());
+byId("authBackBtn").addEventListener("click", () => { setAuthMode("report"); show("s-intro"); });
+byId("reportsNewBtn").addEventListener("click", () => {
+  byId("reportForm").reset();
+  byId("bupaFields").hidden = true;
+  setPrefillNote(null);
+  show("s-form");
+});
+byId("reportsSignOutBtn").addEventListener("click", async () => {
+  // scope "local" ends this browser's session only. The default would end
+  // every session for this account, on every device and in every other app
+  // that shares this login.
+  try { await supabase.auth.signOut({ scope: "local" }); } catch (e) { console.error(e); }
+  sessionStorage.removeItem(PENDING_KEY);
+  savedReports = [];
+  await refreshReturningUi();
+  show("s-intro");
+});
+
+refreshReturningUi();
+
+const INSURER_LABEL = { axa: "AXA", bupa: "Bupa", other: "Other insurer" };
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+async function openReports() {
+  if (!(await isRealSession())) { await startSignIn(); return; }
+  const errEl = byId("reportsError");
+  errEl.hidden = true;
+  byId("reportsList").innerHTML = "";
+  show("s-reports");
+  const { data, error } = await supabase
+    .from("manifest_reports")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(300);
+  if (error) {
+    console.error(error);
+    errEl.textContent = "Couldn't load your reports just now. Try again in a moment.";
+    errEl.hidden = false;
+    return;
+  }
+  savedReports = data ?? [];
+  renderReports();
+}
+
+function renderReports() {
+  const list = byId("reportsList");
+  list.innerHTML = "";
+  if (savedReports.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "reports-empty";
+    empty.textContent = "No reports yet on this email. Draft your first one and it will be kept here.";
+    list.appendChild(empty);
+    return;
+  }
+
+  // One card per client reference, newest report first. Case and spacing are
+  // ignored so "A-07" and "a-07 " count as the same client.
+  const groups = new Map();
+  savedReports.forEach((r) => {
+    const key = (r.client_ref || "").trim().toLowerCase();
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(r);
+  });
+
+  groups.forEach((reports) => {
+    const latest = reports[0];
+    const card = document.createElement("div");
+    card.className = "client-card";
+
+    const title = document.createElement("h3");
+    title.textContent = latest.client_ref;
+    card.appendChild(title);
+
+    const meta = document.createElement("p");
+    meta.className = "client-meta";
+    meta.textContent = `${INSURER_LABEL[latest.insurer] ?? "Insurer"}, last report ${fmtDate(latest.created_at)}, ` +
+      `${reports.length} report${reports.length === 1 ? "" : "s"}`;
+    card.appendChild(meta);
+
+    const actions = document.createElement("div");
+    actions.className = "client-actions";
+    const openBtn = document.createElement("button");
+    openBtn.type = "button";
+    openBtn.className = "btn-secondary";
+    openBtn.textContent = "Open latest draft";
+    openBtn.addEventListener("click", () => openSavedReport(latest));
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "btn-primary";
+    nextBtn.textContent = "Update for next review";
+    nextBtn.addEventListener("click", () => prefillFromReport(latest));
+    actions.appendChild(openBtn);
+    actions.appendChild(nextBtn);
+    card.appendChild(actions);
+
+    if (reports.length > 1) {
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+      summary.textContent = `Earlier reports (${reports.length - 1})`;
+      details.appendChild(summary);
+      reports.slice(1).forEach((r) => {
+        const row = document.createElement("div");
+        row.className = "earlier-row";
+        const label = document.createElement("span");
+        label.textContent = fmtDate(r.created_at);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "link-btn";
+        btn.textContent = "Open";
+        btn.addEventListener("click", () => openSavedReport(r));
+        row.appendChild(label);
+        row.appendChild(btn);
+        details.appendChild(row);
+      });
+      card.appendChild(details);
+    }
+    list.appendChild(card);
+  });
+}
+
+function openSavedReport(r) {
+  if (!r.draft_text) {
+    const errEl = byId("reportsError");
+    errEl.textContent = "That report has no saved draft. Use Update for next review to make a fresh one.";
+    errEl.hidden = false;
+    window.scrollTo(0, 0);
+    return;
+  }
+  renderDraft({
+    draft: r.draft_text,
+    used: savedReports.length,
+    facts: Array.isArray(r.outcome_facts) ? r.outcome_facts : [],
+    savedOn: fmtDate(r.created_at),
+  });
+}
+
+function setPrefillNote(text) {
+  byId("prefillNote").hidden = !text;
+  byId("prefillNoteText").textContent = text ?? "";
+}
+
+// Starts the next review from a saved report. What stays true between
+// reviews is carried over. Anything that goes stale (session counts, latest
+// scores, progress, dates, risk) is left empty on purpose: a carried-over
+// risk assessment date would otherwise quietly pass the insurer's "within
+// the last 10 days" check, and a carried-over session count would be wrong.
+function prefillFromReport(r) {
+  const form = byId("reportForm");
+  form.reset();
+  const set = (name, value) => { const el = form.elements[name]; if (el) el.value = value ?? ""; };
+  [
+    "insurer", "client_ref", "presenting_issue", "goals", "no_measures_reason",
+    "deterioration_rationale", "diagnosis", "modality", "modality_change_reason",
+    "session_frequency", "treatment_break", "other_professionals",
+    "concludes_treatment", "further_goals", "risk_plan",
+  ].forEach((k) => set(k, r[k]));
+
+  // Baseline scores are only kept inside the saved calculated facts, in the
+  // fixed wording the engine writes: "PHQ-9: baseline 16, latest 9 (...".
+  const facts = Array.isArray(r.outcome_facts) ? r.outcome_facts : [];
+  facts.forEach((line) => {
+    const m = /^(PHQ-9|GAD-7): baseline (\d+),/.exec(String(line));
+    if (m) set(m[1] === "PHQ-9" ? "phq9_baseline" : "gad7_baseline", m[2]);
+  });
+
+  byId("bupaFields").hidden = form.elements["insurer"].value !== "bupa";
+  setPrefillNote(
+    `Kept from your report of ${fmtDate(r.created_at)}: goals, diagnosis, modality, baseline scores and the other settled details. ` +
+    `Left empty for you, because they change every time: sessions, latest scores, progress, last session date, and the risk fields. ` +
+    `Check the risk management plan still applies.`
+  );
+  show("s-form");
+  const first = form.elements["sessions_completed"];
+  if (first) first.focus();
+}
