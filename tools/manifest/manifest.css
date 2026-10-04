@@ -119,3 +119,39 @@ fieldset.panel .field-row{margin-bottom:4px}
 /* Buttons that carry the hidden attribute must stay hidden: the display
    rules on .btn-primary and .btn-secondary would otherwise override it. */
 .btn-primary[hidden], .btn-secondary[hidden], .link-btn[hidden]{display:none}
+
+/* ---- clients, check-ins, agent flags ---- */
+.check-row{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:#2E3B33}
+.check-row input{margin-top:3px}
+#clientForm, #checkinForm{display:flex; flex-direction:column; gap:16px}
+.danger-zone{display:flex; gap:22px; margin-top:6px}
+.link-btn.danger{color:#9B2F2A}
+.inline-row{display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap}
+.inline-row .field{flex:0 0 220px}
+.funding-bar{height:6px; background:#E3E8E5; border-radius:3px; overflow:hidden; margin:0 0 12px}
+.funding-bar span{display:block; height:100%; background:var(--chart)}
+.funding-bar.low span{background:#C98A2C}
+.funding-bar.out span{background:#C0453F}
+.chip{display:inline-block; font-size:12.5px; line-height:1.4; padding:4px 9px; border-radius:3px; margin:0 6px 6px 0}
+.chip.red{background:#FBEAEA; color:#7A2B26}
+.chip.amber{background:#FBF3E4; color:#6B4A12}
+.session-row{display:flex; gap:14px; justify-content:space-between; align-items:flex-start; padding:10px 0; border-top:1px solid #EDF0EE; font-size:14px}
+.session-row:first-child{border-top:none}
+.session-row .when{flex:none; width:96px; color:#4A574F; font-weight:600}
+.session-row .what{flex:1; color:#2E3B33}
+.session-row .scores{color:#5B6960; font-size:13px}
+.sessions-box{margin:0 0 20px}
+.sessions-box summary{cursor:pointer; font-size:14px; font-weight:600; color:var(--navy); margin-bottom:6px}
+.panel-note{margin-top:0}
+#cdReplyOut{margin-top:16px; display:flex; flex-direction:column; gap:14px}
+#cdReplyOut[hidden]{display:none}
+#cdReplyText, #cdQuery{width:100%}
+.client-card.attention{border-left:3px solid #C98A2C}
+.client-card.attention.red{border-left-color:#C0453F}
+@media (max-width:640px){
+  .inline-row{flex-direction:column; align-items:stretch}
+  .inline-row .field{flex:1}
+  .session-row{flex-direction:column; gap:4px}
+}
+#cdReplyBtn{margin-top:12px}
+#cdReplyError{margin-top:12px}

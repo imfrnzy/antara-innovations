@@ -64,8 +64,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <p class="fine-print">First three reports free, no card needed. <span id="priceLabel"></span> after that.</p>
       <p class="returning">
         <span id="returningLead">Been here before?</span>
-        <button type="button" id="signInBtn" class="link-btn">Sign in to see your reports</button>
-        <button type="button" id="myReportsBtn" class="btn-secondary" hidden>My reports</button>
+        <button type="button" id="signInBtn" class="link-btn">Sign in to see your clients and reports</button>
+        <button type="button" id="myReportsBtn" class="btn-secondary" hidden>My clients</button>
       </p>
     </div>
   </section>
@@ -310,23 +310,141 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <p class="lead" id="gatePrice"></p>
       <p>Get in touch and we'll set you up on a paid plan, same tool, no limit.</p>
       <a id="gateContact" class="btn-primary" href="#">Email us to continue</a>
-      <button type="button" id="limitMyReportsBtn" class="btn-secondary">My reports</button>
+      <button type="button" id="limitMyReportsBtn" class="btn-secondary">My clients</button>
     </div>
   </section>
 
   <!-- ===================== MY REPORTS ===================== -->
   <section id="s-reports" class="screen">
     <div class="wrap narrow">
-      <p class="eyebrow">Your reports</p>
+      <p class="eyebrow">Past reports</p>
       <h2>Everything you've drafted, by client.</h2>
       <p class="lead" id="reportsLead">Open a draft again, or start the next review from the last one so you only change what has moved on.</p>
       <p id="reportsError" class="form-error" hidden></p>
       <div id="reportsList"></div>
       <div class="draft-actions">
+        <button type="button" id="reportsBackBtn" class="btn-secondary">Back to my clients</button>
         <button type="button" id="reportsNewBtn" class="btn-primary">Draft a new report</button>
         <button type="button" id="reportsSignOutBtn" class="btn-secondary">Sign out</button>
       </div>
       <p class="fine-print">Signing out only affects this browser.</p>
+    </div>
+  </section>
+
+  <!-- ===================== MY CLIENTS ===================== -->
+  <section id="s-clients" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow">Your clients</p>
+      <h2>Log each session. Manifest watches the rest.</h2>
+      <p class="lead">Funded sessions are counted for you, and you get an email before they run out. Manifest only ever emails you, never an insurer, and only uses the client code you choose.</p>
+      <p id="clientsError" class="form-error" hidden></p>
+      <div id="clientsAttention"></div>
+      <div id="clientsList"></div>
+      <div id="clientsPastNote" class="panel quiet" hidden></div>
+      <div class="draft-actions">
+        <button type="button" id="addClientBtn" class="btn-primary">Add a client</button>
+        <button type="button" id="pastReportsBtn" class="btn-secondary">Past reports</button>
+        <button type="button" id="clientsSignOutBtn" class="btn-secondary">Sign out</button>
+      </div>
+      <p class="fine-print">Signing out only affects this browser.</p>
+    </div>
+  </section>
+
+  <!-- ===================== CLIENT FORM (add / edit) ===================== -->
+  <section id="s-clientform" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow" id="cfEyebrow">Add a client</p>
+      <h2 id="cfTitle">Set the client up once.</h2>
+      <p class="lead">A short code only, never a name, date of birth or NHS number. Everything except the code and the session numbers is optional, and you can add it later.</p>
+      <form id="clientForm" novalidate>
+        <div class="field-row">
+          <label class="field"><span>Client reference</span><input type="text" name="client_ref" maxlength="40" placeholder="Initials or a case code"><small>Never a full name.</small></label>
+          <label class="field"><span>Insurer</span>
+            <select name="insurer"><option value="axa">AXA Health</option><option value="bupa">Bupa</option><option value="other">Another insurer</option></select></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>Sessions funded in total</span><input type="number" name="sessions_authorised" min="1" max="300" inputmode="numeric"><small>The number the insurer has approved for this client so far, counted from their very first session.</small></label>
+          <label class="field"><span>Sessions already held</span><input type="number" name="sessions_done_before" min="0" max="300" inputmode="numeric"><small>Held before you started logging here. Enter 0 for a brand new client.</small></label>
+        </div>
+        <div class="field-row">
+          <label class="field small"><span>PHQ-9 at the start</span><input type="number" name="phq9_baseline" min="0" max="27" inputmode="numeric"></label>
+          <label class="field small"><span>GAD-7 at the start</span><input type="number" name="gad7_baseline" min="0" max="21" inputmode="numeric"></label>
+        </div>
+        <label class="field"><span>Presenting issue, briefly</span><textarea name="presenting_issue" rows="2" maxlength="1500"></textarea></label>
+        <label class="field"><span>Goals set at the outset</span><textarea name="goals" rows="2" maxlength="1500"></textarea></label>
+        <div class="field-row">
+          <label class="field"><span>Diagnosis or working diagnosis</span><input type="text" name="diagnosis" maxlength="200"></label>
+          <label class="field"><span>Therapy modality</span><input type="text" name="modality" maxlength="100"></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>Session frequency</span><input type="text" name="session_frequency" maxlength="60" placeholder="e.g. weekly"></label>
+          <label class="field"><span>Other professionals involved</span><input type="text" name="other_professionals" maxlength="200" placeholder="e.g. GP aware"></label>
+        </div>
+        <label class="check-row"><input type="checkbox" name="reminders" checked> <span>Email me when funded sessions run low or scores are worth a look</span></label>
+        <p id="clientFormError" class="form-error" hidden></p>
+        <div class="draft-actions">
+          <button type="submit" class="btn-primary" id="clientSaveBtn">Save client</button>
+          <button type="button" class="btn-secondary" id="clientCancelBtn">Cancel</button>
+        </div>
+        <div class="danger-zone" id="clientDanger" hidden>
+          <button type="button" class="link-btn" id="clientCloseBtn">Close this client</button>
+          <button type="button" class="link-btn danger" id="clientDeleteBtn">Delete this client and all their sessions</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== CLIENT DETAIL ===================== -->
+  <section id="s-client" class="screen">
+    <div class="wrap narrow">
+      <p class="eyebrow" id="cdInsurer"></p>
+      <h2 id="cdTitle"></h2>
+      <p class="client-meta" id="cdFunding"></p>
+      <p id="cdError" class="form-error" hidden></p>
+      <div id="cdFlags"></div>
+
+      <div class="panel">
+        <p class="panel-label">Log a session</p>
+        <form id="checkinForm" novalidate>
+          <div class="field-row">
+            <label class="field small"><span>Date</span><input type="date" name="session_date"></label>
+            <label class="field small"><span>PHQ-9</span><input type="number" name="phq9" min="0" max="27" inputmode="numeric"></label>
+            <label class="field small"><span>GAD-7</span><input type="number" name="gad7" min="0" max="21" inputmode="numeric"></label>
+          </div>
+          <label class="field"><span>One line on how it went</span><textarea name="note" rows="2" maxlength="600" placeholder="What you worked on, how they are doing, anything that changed"></textarea></label>
+          <p id="checkinError" class="form-error" hidden></p>
+          <button type="submit" class="btn-primary" id="checkinBtn">Save session</button>
+        </form>
+      </div>
+
+      <div id="cdSessions"></div>
+
+      <div class="panel">
+        <p class="panel-label">Ready for the next extension request?</p>
+        <p class="panel-note">Builds the report form from the client file and the sessions above. You add the risk details, check it, then draft.</p>
+        <div class="inline-row">
+          <label class="field small"><span>Further sessions you're requesting</span><input type="number" id="cdRequested" min="1" max="52" value="6" inputmode="numeric"></label>
+          <button type="button" class="btn-primary" id="cdDraftBtn">Build the report from these sessions</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <p class="panel-label">The insurer has queried a report</p>
+        <p class="panel-note">Paste their query. Manifest drafts a reply from this client's file and tells you what it couldn't find. Take out any client name before pasting. Nothing is sent to the insurer.</p>
+        <label class="field"><span>The insurer's query</span><textarea id="cdQuery" rows="4" maxlength="3000"></textarea></label>
+        <p id="cdReplyError" class="form-error" hidden></p>
+        <button type="button" class="btn-secondary" id="cdReplyBtn">Draft a reply</button>
+        <div id="cdReplyOut" hidden>
+          <div id="cdReplyMissing" class="panel quiet"></div>
+          <label class="field"><span>Draft reply, fully editable</span><textarea id="cdReplyText" rows="10"></textarea></label>
+          <button type="button" class="btn-secondary" id="cdReplyCopy">Copy to clipboard</button>
+        </div>
+      </div>
+
+      <div class="draft-actions">
+        <button type="button" class="btn-secondary" id="cdEditBtn">Edit client details</button>
+        <button type="button" class="btn-secondary" id="cdBackBtn">Back to my clients</button>
+      </div>
     </div>
   </section>
 
@@ -346,8 +464,13 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <div class="draft-actions">
         <button id="copyBtn" class="btn-secondary">Copy to clipboard</button>
         <button id="downloadBtn" class="btn-secondary">Download as text file</button>
-        <button id="draftMyReportsBtn" class="btn-secondary">My reports</button>
+        <button id="draftMyReportsBtn" class="btn-secondary">My clients</button>
         <button id="anotherBtn" class="btn-primary">Draft another report</button>
+      </div>
+      <div class="panel quiet" id="trackCard" hidden>
+        <p class="panel-label">Next time, skip the form</p>
+        <p>Track this client in Manifest. Log each session in about 30 seconds, and Manifest counts your funded sessions and emails you before they run out. The next report builds itself from those sessions.</p>
+        <button type="button" id="trackBtn" class="btn-secondary">Start tracking this client</button>
       </div>
       <p class="fine-print">This is a draft. You're the clinician, it's your clinical judgement and your signature that makes it a real report, not Manifest's.</p>
     </div>
