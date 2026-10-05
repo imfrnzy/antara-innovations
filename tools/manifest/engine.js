@@ -165,8 +165,8 @@ export function assessQueryRisk(data, outcome) {
     } else if (data.sessions_completed >= 6 && data.sessions_completed < 10) {
       flags.push({
         severity: "amber",
-        message: "Past AXA's default 6-session review point.",
-        why: "AXA's cover defaults to 6 sessions before a review is expected. Worth confirming this request is the review itself, not an extra request sitting past it unreviewed.",
+        message: "6 or more sessions completed on an AXA referral.",
+        why: "How many sessions are funded depends on the client's policy, and AXA asks for approval before treatment goes past a set number. Worth confirming how many this client's policy funds, and that the request goes in before they run out.",
       });
     }
   }
