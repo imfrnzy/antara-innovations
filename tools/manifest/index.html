@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Manifest: session-extension reports for therapists and psychologists | Antara Innovations</title>
-<meta name="description" content="Draft a UK insurer session-extension report in minutes. Reliable improvement and recovery calculated using the NHS Talking Therapies method, not guessed by AI. Three free, then a low monthly fee.">
+<title>Manifest: funded-session tracking and insurer reports for therapists and psychologists | Antara Innovations</title>
+<meta name="description" content="Keep a file for each client, get warned before funded sessions run out, and draft the UK insurer session-extension report from your session notes. Reliable improvement and recovery calculated using the NHS Talking Therapies method, not guessed by AI.">
 <link rel="canonical" href="https://www.antara-innovations.com/tools/manifest/">
 <meta property="og:title" content="Manifest: session-extension reports for therapists">
 <meta property="og:description" content="The report your client's insurer needs before treatment can continue, drafted from your own notes, with the clinical numbers calculated properly.">
@@ -44,20 +44,23 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
     <div class="wrap narrow">
       <p class="eyebrow">Clinics and practitioners · Manifest</p>
       <h1>The report your client's insurer needs before treatment can continue.</h1>
-      <p class="lead">AXA's standard cover is six sessions. After that, and at every renewal point most insurers set, you write a structured progress report or your client's therapy stops being funded. Manifest drafts it from your own session notes in a couple of minutes, with the clinical numbers calculated the way NHS Talking Therapies calculates them, not estimated by a language model guessing at your intent.</p>
+      <p class="lead">Insurers fund therapy a block of sessions at a time. Past that point you write a structured progress report, and your client's treatment waits until it is approved. Manifest keeps a simple file for each client, counts the funded sessions for you, emails you before they run out, and drafts the report from the sessions you have logged. The clinical numbers are calculated the way NHS Talking Therapies calculates them, not estimated by a language model guessing at your intent.</p>
 
       <div class="panel">
         <p class="panel-label">What it actually does</p>
         <ul class="check-list">
-          <li>You enter session counts, the goals you set, how things have gone, and any outcome-measure scores you already track.</li>
-          <li>Manifest calculates reliable improvement and recovery itself, using the same point-change thresholds NHS Talking Therapies uses for PHQ-9 and GAD-7. That calculation never comes from the AI.</li>
-          <li>It drafts the report in the structure your insurer actually expects. You read it, edit anything, and send it.</li>
+          <li>You add each client by a short code, with the insurer and how many sessions they have approved. After each session you log the date, any PHQ-9 and GAD-7 scores, and one line on how it went.</li>
+          <li>Manifest counts the funded sessions and emails you when two are left, or when a client's scores have risen past the NHS reliable-change threshold, or have not moved after four scored sessions. It only ever emails you, never an insurer.</li>
+          <li>When a request is due, one button builds the report form from your sessions. Manifest checks it against what the insurer is documented to ask for, drafts it, and you read it, edit it and send it yourself.</li>
+          <li>If the insurer queries a report, paste the query in and Manifest drafts a reply from that client's file, listing anything it could not find.</li>
+          <li>Reliable improvement and recovery use the same point-change thresholds NHS Talking Therapies uses for PHQ-9 and GAD-7. That calculation never comes from the AI.</li>
         </ul>
       </div>
 
       <div class="panel quiet">
         <p class="panel-label">What it never asks for</p>
-        <p>No client name, date of birth, or NHS number, anywhere. You give it a short reference, initials or a case code, nothing that identifies your client if this screen were seen by someone else. You stay the data controller for everything written in the draft.</p>
+        <p>No client name, date of birth, or NHS number, anywhere. You give it a short reference, initials or a case code, nothing that identifies your client if this screen were seen by someone else. You stay the data controller for everything you enter and everything written in the draft.</p>
+        <p>What you enter is stored against your email address so it is there next time, and the text for each draft request goes to an AI service to write the report. Nothing is ever sent to an insurer. You can delete any client and their sessions yourself. Manifest is in early use, so keep identifying detail out of the free-text boxes.</p>
       </div>
 
       <button id="beginBtn" class="btn-primary">Draft your first report, free</button>
