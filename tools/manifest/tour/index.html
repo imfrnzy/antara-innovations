@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How Manifest works | Antara Innovations</title>
-<meta name="description" content="A two minute walkthrough of Manifest, the session-extension report drafting instrument from Antara Innovations.">
+<meta name="description" content="A short walkthrough of Manifest: a client file that counts funded sessions, warns you before they run out, and builds the insurer report from your session notes.">
 <link rel="canonical" href="https://www.antara-innovations.com/tools/manifest/tour/">
 <link rel="icon" href="../../../assets/favicon.png">
 <link rel="stylesheet" href="../../../assets/site.css">
@@ -26,7 +26,7 @@
   </div>
 
   <div class="stage" id="stage">
-    <p class="exline" id="exline" hidden><span id="exnum">Exhibit 1</span><span>Manifest, a session-extension report instrument</span></p>
+    <p class="exline" id="exline" hidden><span id="exnum">Exhibit 1</span><span>Manifest, a client file and funding watch for clinicians</span></p>
     <p class="decknote" id="decknote" hidden>Antara Innovations &middot; proprietary instrument &middot; private and confidential</p>
 
     <section class="scene" data-ms="5000">
@@ -37,14 +37,36 @@
       </div>
     </section>
 
-    <section class="scene" data-ms="8000">
+    <section class="scene" data-ms="9500">
       <div class="inner">
-        <h2 class="pop d1">Six sessions, then a report, or your client's therapy stops.</h2>
-        <p class="pop d2">AXA's standard cover is six sessions. Bupa works the same way. Every extension past that point needs a structured progress report, reviewed before any more sessions are funded. Right now, that report gets written by hand, on your own time, for every client, every few sessions.</p>
+        <h2 class="pop d1">Funding runs out quietly. Then the report is due yesterday.</h2>
+        <p class="pop d2">Insurers fund therapy a block of sessions at a time. Past that point they want a structured progress report before they approve more, and they can take a few working days to decide. Most clinicians find out the funding has run out when the next session is already booked, then write the report from scratch, on their own time.</p>
       </div>
     </section>
 
-    <section class="scene" data-ms="9000">
+    <section class="scene sitscene" data-ms="10500">
+      <div class="inner">
+        <h2 class="pop d1">So Manifest keeps a file for each client</h2>
+        <div class="sits">
+          <div data-t="0"><h4>Add the client once</h4><p>A short code, the insurer, and how many sessions they have approved. Never a name.</p></div>
+          <div data-t="3200"><h4>Log each session</h4><p>The date, PHQ-9 and GAD-7 if you use them, and one line on how it went. About 30 seconds.</p></div>
+          <div data-t="6400"><h4>Come back any time</h4><p>Sign in with your email and everything is there. Nothing to retype.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene sitscene" data-ms="12500">
+      <div class="inner">
+        <h2 class="pop d1">And it watches, so you don't have to</h2>
+        <div class="sits">
+          <div data-t="0"><h4>Counts the funded sessions</h4><p>When two are left it tells you, so the request goes in before there is a gap, not after.</p></div>
+          <div data-t="3800"><h4>Watches the scores</h4><p>It flags a client whose scores have risen past the NHS reliable-change threshold, or have not moved after four scored sessions. It reports the numbers. The judgement is yours.</p></div>
+          <div data-t="7600"><h4>Emails only you</h4><p>A short note with the client code and a headline. No names, no scores, and never to an insurer.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="10000">
       <div class="inner" style="max-width:700px">
         <h2 class="pop d1">The numbers aren't guessed. They're calculated.</h2>
         <p class="pop d2">Manifest works out reliable improvement and recovery itself, using the same point-change thresholds NHS Talking Therapies uses for PHQ-9 and GAD-7. A drop of 6 or more on the PHQ-9, 4 or more on the GAD-7, that's reliable improvement, by a fixed rule, not an AI's impression of your notes.</p>
@@ -52,29 +74,58 @@
       </div>
     </section>
 
-    <section class="scene sitscene" data-ms="9500">
+    <section class="scene" data-ms="11000">
+      <div class="inner" style="max-width:700px">
+        <h2 class="pop d1">When the request is due, the report is half written</h2>
+        <p class="pop d2">One button builds the report form from the client file and the sessions you logged. Your own session lines become the progress section. The session count, latest scores and last session date fill themselves in.</p>
+        <p class="pop d3" style="margin-top:12px">The risk details are left blank on purpose, because they have to be current. Before it drafts, Manifest checks the report against what Bupa and AXA are documented to ask for, so a gap shows up before the insurer finds it. You read it, change anything, and send it yourself.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="9500">
+      <div class="inner" style="max-width:700px">
+        <h2 class="pop d1">If the insurer comes back with a query</h2>
+        <p class="pop d2">Paste their question in. Manifest drafts a reply from that client's file, and lists what it could not find there.</p>
+        <p class="pop d3" style="margin-top:12px">It is told to use only what is in the file. Where the file is silent it leaves a gap for you to fill, and does not guess. Take any client name out of the query before you paste it.</p>
+      </div>
+    </section>
+
+    <section class="scene sitscene" data-ms="11000">
       <div class="inner">
-        <h2 class="pop d1">What actually goes in</h2>
+        <h2 class="pop d1">What it will not do</h2>
         <div class="sits">
-          <div data-t="0"><h4>What you already know</h4><p>Session counts, the goals you set, how things have actually gone, in your own words.</p></div>
-          <div data-t="3000"><h4>Scores, if you track them</h4><p>PHQ-9 and GAD-7, baseline and latest. Leave them blank if you don't use them.</p></div>
-          <div data-t="6000"><h4>Never a name</h4><p>A short reference only. Initials, a case code. Nothing identifying, by design.</p></div>
+          <div data-t="0"><h4>Contact an insurer</h4><p>Nothing is ever sent for you. The report is yours, and you press send.</p></div>
+          <div data-t="3400"><h4>Ask for a name</h4><p>A short reference only. Initials or a case code, nothing that identifies your client.</p></div>
+          <div data-t="6800"><h4>Decide anything clinical</h4><p>It reports numbers against published NHS thresholds. Your clinical judgement comes first, always.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="scene ladderscene" data-ms="8500">
-      <div class="inner" style="max-width:720px">
+    <section class="scene" data-ms="10500">
+      <div class="inner" style="max-width:700px">
+        <h2 class="pop d1">Where what you type goes</h2>
+        <p class="pop d2">It is stored against your email address so it is there next time. When you ask for a draft, the text for that request goes to an AI service to write the report. Nothing goes to an insurer.</p>
+        <p class="pop d3" style="margin-top:12px">You can delete any client and their sessions yourself. Manifest is in early use, so until you are comfortable, use a short code and keep identifying detail out of the free-text boxes.</p>
+      </div>
+    </section>
+
+    <section class="scene ladderscene" data-ms="9000">
+      <div class="inner" style="max-width:760px">
         <h2 class="pop d1">What it costs</h2>
         <div class="ladder" id="ladder">
           <div data-t="300">
-            <span class="lstep">01</span><h4>First three reports</h4>
+            <span class="lstep">01</span><h4>Client file and reminders</h4>
+            <p>Add clients, log sessions, get the funding emails.</p>
+            <span class="lprice">Free today</span>
+          </div>
+          <div data-t="1900">
+            <span class="lstep">02</span><h4>First three reports</h4>
             <p>Full drafts, properly calculated, no card needed.</p>
             <span class="lprice">Free</span>
           </div>
-          <div data-t="1900">
-            <span class="lstep">02</span><h4>After that</h4>
-            <p>The same tool, no limit, for as long as you're using it.</p>
+          <div data-t="3500">
+            <span class="lstep">03</span><h4>After that</h4>
+            <p>The same tool, with no limit on reports.</p>
             <span class="lprice" id="ladderPrice">Low monthly fee</span>
           </div>
         </div>
@@ -84,11 +135,11 @@
     <section class="scene end" data-ms="0">
       <div class="inner">
         <p class="kick pop d1">That's Manifest</p>
-        <h2 class="pop d2">Draft your first session-extension report, free.</h2>
-        <p class="pop d3">A couple of minutes, from your own notes, in the format your insurer actually expects.</p>
+        <h2 class="pop d2">Add your first client, or draft a report straight away.</h2>
+        <p class="pop d3">Know when funding is about to run out, and have the report ready before it does.</p>
         <div class="btnrow pop d4">
           <button class="tourbtn" id="backBtn" type="button">Back to instruments</button>
-          <button class="tourbtn solid" id="continueBtn" type="button">Start drafting</button>
+          <button class="tourbtn solid" id="continueBtn" type="button">Open Manifest</button>
         </div>
       </div>
     </section>
