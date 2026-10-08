@@ -173,6 +173,85 @@ const TOOL = {
   },
 };
 
+// ---- HALO report guard, inlined below. Keep identical to halo/report-check.js ----
+const REPORT_CHECK_VERSION = "halo-report-check-1.0";
+
+const NUM_WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7 };
+
+function squash(s) {
+  return String(s ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+// Returns a list of problems. Empty list means the report passes.
+function checkReport(report, classification, evidenceRows) {
+  const problems = [];
+  const text = String(report ?? "");
+  if (text.trim().length < 200) problems.push("The report is empty or far too short.");
+  if (/[—–]/.test(text)) problems.push("The report contains a dash that is not allowed. Use commas or full stops.");
+
+  // 1. Every longer quoted span must really be something the leader said.
+  const said = (evidenceRows || []).filter((r) => r && r.quote).map((r) => squash(r.quote));
+  const re = /["“]([^"”\n]{20,})["”]/g;
+  let m;
+  while ((m = re.exec(text))) {
+    const q = squash(m[1]);
+    if (q.length >= 20 && !said.some((s) => s.includes(q))) {
+      problems.push(`The quoted text "${m[1].slice(0, 60)}" is not in the evidence. Quote only the evidence lines, word for word, or do not quote.`);
+    }
+  }
+
+  // 2. Counts must match the scored classification.
+  if (classification && typeof classification.established_count === "number") {
+    const countRe = /\b(\d|one|two|three|four|five|six|seven)\s+of\s+(?:the\s+)?(?:7|seven)\b/gi;
+    let c;
+    while ((c = countRe.exec(text))) {
+      const said = /^\d$/.test(c[1]) ? Number(c[1]) : NUM_WORDS[c[1].toLowerCase()];
+      if (said !== classification.established_count) {
+        problems.push(`The report says "${c[0]}" but ${classification.established_count} of 7 standards are established.`);
+      }
+    }
+  }
+
+  // 3. The "fix first" section must name the scored weakest dimension.
+  const weakest = classification?.weakest_dimension;
+  if (weakest && weakest.label && weakest.level < 2) {
+    const i = text.search(/##\s*Fix this one first/i);
+    if (i >= 0) {
+      const rest = text.slice(i + 5);
+      const next = rest.search(/\n##\s/);
+      const section = (next >= 0 ? rest.slice(0, next) : rest).toLowerCase();
+      if (!section.includes(String(weakest.label).toLowerCase())) {
+        problems.push(`The "Fix this one first" section must be about the weakest dimension, ${weakest.label}.`);
+      }
+    } else problems.push('The report is missing the "Fix this one first" section.');
+  }
+  return problems;
+}
+
+// Always accurate, deliberately plain. Used only when the written report fails the check twice.
+function fallbackReport(classification, evidenceRows, firstName) {
+  const c = classification || { readiness: [], established_count: 0, total_dimensions: 7 };
+  const quoteFor = (field) => (evidenceRows || []).find((r) => r.field === field && r.quote)?.quote;
+  const lines = [];
+  lines.push("## Where you stand today");
+  lines.push(`${firstName ? firstName + ", " : ""}${c.established_count} of ${c.total_dimensions} standards are established.`);
+  for (const r of c.readiness || []) {
+    const q = quoteFor(r.field);
+    const status = r.provisional ? "was not covered in the conversation" : r.status.toLowerCase();
+    lines.push(`- **${r.label}**: ${status}.${q ? ` You said: "${q}"` : ""}`);
+  }
+  const w = c.weakest_dimension;
+  if (w && w.level < 2) {
+    lines.push("", "## Fix this one first");
+    lines.push(`The weakest standard is **${w.label}**. Pick one moment this week where it applies and do it deliberately, then ask one person how it landed.`);
+  }
+  lines.push("", "## Then build the rhythm");
+  lines.push("A two-minute signal check each day, and one weekly check-in with each person that has no agenda about their tasks.");
+  return lines.join("\n");
+}
+
+// ---- end report guard ----
+
 // The report-writing prompt. Deliberately separate call from the interview,
 // its only inputs are the scored data and the evidence quotes actually
 // gathered. Direct and confident throughout, never hedged, but "confident"
@@ -199,7 +278,7 @@ Name the single weakest dimension. Give one concrete thing to do this week, spec
 ## Then build the rhythm
 The daily two-minute signal check and the weekly agenda-free check-in, briefly, adapted to what they're already doing versus not.
 
-End with one short, direct paragraph built from their calibration answer. Quote the recorded CALIBRATION evidence directly, in their own words, rather than characterising or paraphrasing it, the same way every other section grounds itself in a direct quote. Do not add any specific detail, story, or example to this paragraph that isn't in the CALIBRATION evidence line itself, nothing from any other field, however tempting a stronger detail might seem. If they said their team might describe things differently, quote that and connect it to what a real answer would need: "You said: '[their exact words]'. That gap is exactly what an anonymous pulse across your team would actually settle." If they said they believe it matches, quote that instead, and note that belief and evidence are different things, an anonymous pulse is what closes that gap either way. This is not a disclaimer about the report's limits, it's the next real finding, delivered the same directness as everything before it.
+End with one short, direct paragraph built from their calibration answer. Quote the recorded CALIBRATION evidence directly, in their own words, rather than characterising or paraphrasing it, the same way every other section grounds itself in a direct quote. Do not add any specific detail, story, or example to this paragraph that isn't in the CALIBRATION evidence line itself, nothing from any other field, however tempting a stronger detail might seem. If they said their team might describe things differently, quote that and connect it to what a real answer would need: "You said: '[their exact words]'. The team link on this page settles that gap, anonymously." If they said they believe it matches, quote that instead, and note that belief and evidence are different things, the team link on this page is what closes that gap either way. This is not a disclaimer about the report's limits, it's the next real finding, delivered the same directness as everything before it.
 
 Keep the whole report under 800 words. This is the free tier, complete and useful on its own, not a teaser withholding the real content.`;
 
@@ -270,20 +349,37 @@ ${evidenceText || "No direct quotes recorded."}
 
 Write the report now, following the structure and rules in your system prompt exactly.`;
 
-    let reportText;
-    try {
+    const generate = async (extra) => {
       const r = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: { "x-api-key": Deno.env.get("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01", "content-type": "application/json" },
-        body: JSON.stringify({ model: REPORT_MODEL, max_tokens: 2000, system: REPORT_SYSTEM, messages: [{ role: "user", content: prompt }] }),
+        body: JSON.stringify({ model: REPORT_MODEL, max_tokens: 2000, system: REPORT_SYSTEM, messages: [{ role: "user", content: prompt + (extra ? `\n\nYour previous draft failed these checks. Fix every one and write the whole report again:\n- ${extra.join("\n- ")}` : "") }] }),
       });
       const data = await r.json();
-      reportText = data?.content?.find((b) => b.type === "text")?.text;
-      if (!reportText) throw new Error(JSON.stringify(data).slice(0, 300));
+      const t = data?.content?.find((b) => b.type === "text")?.text;
+      if (!t) throw new Error(JSON.stringify(data).slice(0, 300));
+      return t;
+    };
+
+    let reportText;
+    let guard = "passed";
+    try {
+      reportText = await generate();
+      let problems = checkReport(reportText, a.classification, evidenceRows ?? []);
+      if (problems.length) {
+        reportText = await generate(problems);
+        problems = checkReport(reportText, a.classification, evidenceRows ?? []);
+        guard = problems.length ? "fallback" : "retried";
+        if (problems.length) {
+          console.error("report failed guard twice", problems);
+          reportText = fallbackReport(a.classification, evidenceRows ?? [], profile?.first_name);
+        }
+      }
     } catch (e) {
       console.error("report generation error", e);
       return json({ error: "Couldn't generate the report just now. Try again." }, 502);
     }
+    console.log("report guard:", guard);
 
     await db.from("halo_assessments").update({ report_md: reportText, report_generated_at: new Date().toISOString() }).eq("id", a.id);
     return json({ report_md: reportText });

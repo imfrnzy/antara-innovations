@@ -344,6 +344,12 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <div id="clientsAttention"></div>
       <div id="clientsList"></div>
       <div id="clientsPastNote" class="panel quiet" hidden></div>
+      <div id="clientsOutcomes" class="panel quiet" hidden>
+        <p class="eyebrow">Your practice at a glance</p>
+        <div id="outcomesLines"></div>
+        <p class="fine-print">Counts use the NHS Talking Therapies point-change thresholds. The download holds client codes, session dates and scores only, with no notes, goals or names. Keep it under your own data-protection rules.</p>
+        <button type="button" id="outcomesBtn" class="btn-secondary">Download outcomes (CSV)</button>
+      </div>
       <div class="draft-actions">
         <button type="button" id="addClientBtn" class="btn-primary">Add a client</button>
         <button type="button" id="pastReportsBtn" class="btn-secondary">Past reports</button>

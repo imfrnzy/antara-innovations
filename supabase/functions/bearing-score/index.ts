@@ -43,6 +43,35 @@ const RUBRICS: Record<string, { standard: string }> = {
   },
 };
 
+
+// The supervisor follow-up. After someone claims "yes, and we could show the evidence" on a
+// plain question, the supervisor asks for one specific document and grades what they say they
+// would hand over. The requests and standards live here, not in the public page source.
+const DOC_REQUESTS: Record<string, { request: string; standard: string }> = {
+  q_inventory: { request: "Send me your current inventory of AI systems. Tell me when it was last updated, who owns it, and show me one AI feature inside a vendor product that is on it.", standard: "A strong answer names the document or register, its owner, a recent update date, and a concrete example of an embedded vendor feature or an unapproved tool that was found and added. A weak answer says a list exists without an owner, a date or an example, or describes only systems the firm built itself." },
+  q_classify: { request: "Show me the written criteria you used to rate AI risk, and the rating you gave one specific AI use. I want to see that the criteria existed before the rating.", standard: "A strong answer names the criteria document, its date, and one rated use with the reasoning. The criteria must predate the rating. A weak answer describes a rating exercise without showing written criteria, or the criteria were written after the ratings." },
+  q_vendor: { request: "Take one AI vendor. Show me which model sits underneath, where our data goes, and what the contract says happens when they change the model.", standard: "A strong answer names a specific vendor and states the underlying model, the data location or processing terms, and the change notification or re-check obligation, ideally pointing to a contract clause or due diligence record. A weak answer refers to the vendor being reputable, or to a questionnaire nobody has read." },
+  q_oversight: { request: "Show me one record of a person checking an AI output: what was checked, by whom, and when.", standard: "A strong answer names a specific record, the person or role, a date and what was actually examined. A weak answer describes a process where checking is expected but nothing is recorded, or relies on the reviewer's memory." },
+  q_literacy: { request: "Send me the training material for people who oversee AI, and the record of who has completed it.", standard: "A strong answer names the training, says what it covers about the limits of AI, and names the completion record with a coverage figure or date. A weak answer describes general awareness, an intranet page, or training with no record of who attended." },
+  q_monitor: { request: "Show me the pre-launch test record for one AI system and the latest monitoring report for it.", standard: "A strong answer names one system, a dated test record with pass criteria, and a monitoring output with a date and an owner. A weak answer says testing is done by the vendor or that monitoring happens informally." },
+  q_change: { request: "The vendor updated a model last month. Show me what triggered a re-check and the record that it happened.", standard: "A strong answer names the trigger (vendor notice, internal alert, scheduled review), who acted, and the record. A weak answer describes an intention to re-check, or admits updates are only noticed when something goes wrong." },
+  q_claims_ai: { request: "Show me the last accuracy and bias check on AI-assisted claims decisions or fraud flags, including what it found and what you did about it.", standard: "A strong answer names the check, its date, the measure used, a finding and an action taken. A weak answer says outcomes are monitored without describing a specific test of fairness across customer groups." },
+  q_smf: { request: "Send me the Statement of Responsibilities of the Senior Manager who owns AI, with the paragraph that covers it.", standard: "A strong answer names the Senior Manager role, the document and the specific wording or responsibility that covers AI, and says when it was last updated. A weak answer says AI sits under general technology or risk responsibilities without specific wording." },
+  q_outcomes: { request: "Show me your latest report on customer outcomes from AI-involved journeys, including customers showing signs of vulnerability.", standard: "A strong answer names a report or dashboard, the period it covers, a measure used and how vulnerable customers are identified in it. A weak answer says outcomes are monitored in general with no AI-specific cut and no view of vulnerable customers." },
+  q_mrm: { request: "Show me the validation report for one AI model, and tell me who validated it and how they are independent of the builders.", standard: "A strong answer names one model, the validation report and date, the validator and the reporting line that makes them independent. A weak answer describes the framework without a validation of an AI model, or the validators are the builders." },
+  q_resilience: { request: "Show me the mapping between one important business service and the AI systems it depends on, with the impact tolerance.", standard: "A strong answer names a service, the AI dependencies on the map, the tolerance, and when the mapping was last reviewed. A weak answer says AI is considered in resilience work without a visible mapping." },
+  q_governance_ch: { request: "Show me the board or executive minute that assigns responsibility for AI risk, and who has the expertise.", standard: "A strong answer names the decision, its date, the body, and the people with their relevant expertise. A weak answer says responsibility is understood, or sits with a committee with no named experts." },
+  q_data: { request: "Show me the documented data quality check for one AI system, including data you do not control.", standard: "A strong answer names the system, the check, the date, and how external data is assessed. A weak answer says data is good because it comes from a trusted source." },
+  q_docs: { request: "Send me the documentation for one important AI application: purpose, data, model choice and known limits.", standard: "A strong answer names the document, the application and its sections, with a date and owner. A weak answer describes documentation as being in progress or held by the vendor." },
+  q_independent: { request: "Show me the independent review of one important AI application: who did it, when, and what they found.", standard: "A strong answer names the application, the reviewer, their independence from the builders or buyers, the date and a finding. A weak answer describes an internal check by the same team." },
+  q_fadp: { request: "Show me the data protection assessment for one AI use of personal data, and the wording that tells people a decision about them is automated.", standard: "A strong answer names the assessment, its date, and the actual notice wording or process. A weak answer says privacy has been considered without an assessment or notice." },
+  q_eu_classify: { request: "Show me the record that places one AI use in an EU AI Act risk category, with the reasoning.", standard: "A strong answer names the use, the category, the reasoning written down and the date. A weak answer states a conclusion with no recorded reasoning." },
+  q_prohibited: { request: "Show me how you checked that nothing you use falls under the prohibited practices, and who signed it off.", standard: "A strong answer names the check, a date, the practices considered and the sign-off. A weak answer says nothing prohibited is in use without a recorded check." },
+  q_art50: { request: "Show me the notice a customer sees when they start an AI chat, and how AI-generated content is marked.", standard: "A strong answer names the actual wording or screen, where it appears and how generated content is labelled. A weak answer says customers know it is AI or that labelling is planned." },
+  q_annex3: { request: "Show me your plan or evidence for the high-risk requirements on credit or life and health pricing: risk management, data governance, logging, oversight and documentation.", standard: "A strong answer names the plan or documents, owners and dates against each requirement. A weak answer says work has started with no artefacts." },
+  q_fria: { request: "Show me the plan for the fundamental rights impact assessment: who, when, and what it will cover.", standard: "A strong answer names an owner, a date, a scope and a method. A weak answer says it will be done when required." },
+};
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return json({ error: "Use POST." }, 405);
@@ -53,13 +82,21 @@ Deno.serve(async (req) => {
   const { data: { user } } = await userClient.auth.getUser();
   if (!user) return json({ error: "Sign in again to continue." }, 401);
 
-  let body: { question_id?: string; question_text?: string; response_text?: string };
+  let body: { mode?: string; question_id?: string; question_text?: string; response_text?: string };
   try { body = await req.json(); } catch { return json({ error: "Bad request." }, 400); }
 
   const questionId = (body.question_id ?? "").toString();
   const questionText = (body.question_text ?? "").toString().slice(0, 600);
   const responseText = (body.response_text ?? "").toString().trim().slice(0, MAX_CHARS);
-  const rubric = RUBRICS[questionId];
+  const mode = (body.mode ?? "grade").toString();
+  if (mode === "ask") {
+    const doc = DOC_REQUESTS[questionId];
+    if (!doc) return json({ error: "Unknown question." }, 400);
+    return json({ request: doc.request });
+  }
+  const supervisor = mode === "supervisor";
+  if (mode !== "grade" && !supervisor) return json({ error: "Unknown mode." }, 400);
+  const rubric = supervisor ? DOC_REQUESTS[questionId] : RUBRICS[questionId];
   if (!rubric) return json({ error: "Unknown question." }, 400);
   if (responseText.length < 15) return json({ error: "Write a specific answer first." }, 400);
 
@@ -92,7 +129,8 @@ Write one to two sentences, direct and specific to what they actually wrote, not
     },
   };
 
-  const prompt = `QUESTION ASKED\n${questionText}\n\nPERSON'S WRITTEN ANSWER\n${responseText}\n\nGrade this now.`;
+  const askedText = supervisor ? DOC_REQUESTS[questionId].request : questionText;
+  const prompt = `QUESTION ASKED\n${askedText}\n\nPERSON'S WRITTEN ANSWER\n${responseText}\n\nGrade this now.`;
 
   try {
     const r = await fetch("https://api.anthropic.com/v1/messages", {

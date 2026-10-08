@@ -209,3 +209,85 @@ export function assess(profile, answers) {
     unknownCount: unknownCount,
   };
 }
+
+// ---------- claims worth testing, supervisor results, and comparing two runs ----------
+
+// The "yes, and we could show the evidence" answers that matter most, one question each.
+// Written questions are left out because they were already examined when answered.
+export function claimsToTest(profile, answers, limit = 3) {
+  const weightOf = (questionId) => {
+    let best = 0;
+    for (const obligation of OBLIGATIONS) {
+      if (obligation.questions.includes(questionId) && obligation.weight > best) {
+        best = obligation.weight;
+      }
+    }
+    return best;
+  };
+  const candidates = [];
+  for (const question of selectQuestions(profile)) {
+    if (question.type === "written") {
+      continue;
+    }
+    if (answerValue(answers[question.id]) !== "evidence") {
+      continue;
+    }
+    candidates.push({ id: question.id, text: question.text, weight: weightOf(question.id) });
+  }
+  candidates.sort((first, second) => second.weight - first.weight || first.id.localeCompare(second.id));
+  return candidates.slice(0, limit);
+}
+
+// tests: [{ questionId, band }] where band is evidence, partly or no.
+export function summariseSupervisor(tests) {
+  const done = (tests || []).filter((test) => test && ["evidence", "partly", "no"].includes(test.band));
+  const held = done.filter((test) => test.band === "evidence").length;
+  const partly = done.filter((test) => test.band === "partly").length;
+  const notHeld = done.filter((test) => test.band === "no").length;
+  let line = "";
+  if (done.length > 0) {
+    if (held === done.length) {
+      line = `All ${done.length} of the claims you made held up when asked for the document.`;
+    } else {
+      line = `${held} of ${done.length} claims held up when asked for the document. ${partly} were partly there and ${notHeld} did not hold.`;
+    }
+  }
+  return { tested: done.length, held, partly, notHeld, line };
+}
+
+const STATUS_RANK = { unknown: 0, notyet: 1, partly: 2, ready: 3 };
+
+export function compareResults(previous, current) {
+  if (!previous || !current || !previous.lenses || !current.lenses) {
+    return null;
+  }
+  const lenses = [];
+  const improved = [];
+  const worsened = [];
+  let unchanged = 0;
+  for (const now of current.lenses) {
+    const before = previous.lenses.find((lens) => lens.lens === now.lens);
+    if (!before) {
+      continue;
+    }
+    lenses.push({ lens: now.lens, label: now.label, before: before.percent, after: now.percent, delta: now.percent - before.percent });
+    for (const obligation of now.obligations) {
+      const old = before.obligations.find((item) => item.id === obligation.id);
+      if (!old) {
+        continue;
+      }
+      const change = STATUS_RANK[obligation.status] - STATUS_RANK[old.status];
+      if (change > 0) {
+        improved.push({ title: obligation.title, lens: now.label, from: old.statusLabel, to: obligation.statusLabel });
+      } else if (change < 0) {
+        worsened.push({ title: obligation.title, lens: now.label, from: old.statusLabel, to: obligation.statusLabel });
+      } else {
+        unchanged = unchanged + 1;
+      }
+    }
+  }
+  if (lenses.length === 0) {
+    return null;
+  }
+  return { lenses, improved, worsened, unchanged, sameEngine: previous.engineVersion === current.engineVersion };
+}

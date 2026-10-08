@@ -57,8 +57,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
         <p>Every question distinguishes between what a firm does and what it can demonstrate. Supervisors ask for the latter, and that is where most firms fall short.</p>
       </div>
       <div>
-        <h3>No data leaves your browser</h3>
-        <p>Responses are scored locally, against fixed criteria. The assessment does not request customer data, model code or any confidential information.</p>
+        <h3>Scored in your browser, saved only to your result</h3>
+        <p>Your answers are scored in your browser against fixed criteria. They are saved so you can come back to your result, and so you can compare it with a later run. They are not shared. The assessment does not ask for customer data, model code or any confidential information.</p>
       </div>
     </div>
 
@@ -180,8 +180,17 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <div class="evidence-note" id="evidenceNote" hidden></div>
 
+    <div class="compare" id="cmpPanel" hidden></div>
+
     <h2>Priority areas</h2>
     <ol class="gaps" id="gapList"></ol>
+
+    <div class="supervisor noprint" id="supPanel" hidden>
+      <h2>Test your own claims</h2>
+      <p id="supIntro"></p>
+      <ul class="suplist" id="supList"></ul>
+      <p class="supline" id="supLine" role="status"></p>
+    </div>
 
     <div class="locked noprint">
       <h2>The full report</h2>

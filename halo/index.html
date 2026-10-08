@@ -12,6 +12,7 @@
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="halo.css">
+<link rel="stylesheet" href="../assets/team.css">
 </head>
 <body>
 <script>
@@ -164,6 +165,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
     <div id="reportLoading" class="thinking">Writing your report, this takes a little longer than a score, usually under a minute…</div>
     <div class="reportmd" id="reportBody" hidden></div>
 
+    <div id="teamPanel" class="noprint"></div>
+
     <div class="locked">
       <h2>The formalised version</h2>
       <p>The free report tells you where you stand and what to fix first. The formalised version makes it something you can act on properly.</p>
@@ -180,7 +183,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <div class="locked">
       <h2>Find out how your team actually experiences it</h2>
-      <p>You've just told us how you're doing. The real question this can't answer is whether it lands for your team the way you believe it does. An anonymous pulse across your whole team, run properly, answers that directly, and compares it against what you just said.</p>
+      <p>The panel above gives you your team's totals, anonymously. A facilitated pulse across a whole organisation, with a proper read-out and a conversation about the gaps, is the next step if you want it.</p>
       <div class="row">
         <button class="btn btn-solid" id="fullBtn">Talk to Abhinav about a team pulse</button>
         <span class="small" id="fullMsg" role="status"></span>

@@ -23,9 +23,9 @@ const PERSONA = {
     painH: "Claims and pricing AI gets watched differently to everything else",
     painP: "EIOPA and the FCA both treat AI in claims and underwriting as high-impact, even though it usually isn't classed as \u201Chigh-risk\u201D under the EU AI Act. The gap between those two facts is where most insurers are exposed.",
     confrontH: "Your claims team is already being tested by this, whether the process has caught up or not.",
-    confrontP: "Insurers detected more than £233m of suspected fraud last year, much of it involving AI-generated documents and images that looked entirely convincing.",
-    confrontSource: "That figure is from Aviva's own 2025 fraud reporting. The techniques it describes are not hypothetical, and they are not aimed only at Aviva.",
-    visual: { type: "readout", target: 233, prefix: "\u00A3", suffix: "m", caption: "suspected fraud, last year" },
+    confrontP: "Aviva alone reported uncovering a record £230m of bogus claims, with scammers using generative AI to fake crash photos, repair invoices and medical documents.",
+    confrontSource: "That figure is Aviva's own, reported in June 2026. The techniques it describes are not hypothetical, and they are not aimed only at Aviva.",
+    visual: { type: "readout", target: 230, prefix: "\u00A3", suffix: "m", caption: "bogus claims found by Aviva alone" },
     examples: [
       { h: "Claims and underwriting bias checks", p: "Whether AI-assisted claims decisions and fraud flags are checked before they affect a payout." },
       { h: "Customer outcomes", p: "Consumer Duty is judged on outcomes. If AI plays a part, its effect has to show up in what you measure." },

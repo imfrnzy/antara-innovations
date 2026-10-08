@@ -1,6 +1,6 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
-import { classify, FIELDS } from "./engine.js";
+import { classify, FIELDS, flipAnalysis, ninetyDayGates, compareKeel } from "./engine.js";
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (id) => document.getElementById(id);
@@ -192,7 +192,55 @@ async function showResults(prof) {
     <li><span>${esc(DIM_LABEL[r.field])}</span>
     <span><span class="readytag r-${r.level}">${esc(r.label)}</span>${r.provisional ? '<span class="small">unknown</span>' : ""}</span></li>`).join("");
 
+  renderFlip(a?.facts || {});
+  renderGates(c);
+  await renderKeelCompare(c);
+
   await loadReport();
+}
+
+// ---------- what would change the answer, the next 90 days, and the last run ----------
+function renderFlip(facts) {
+  const box = $("flipBox");
+  const f = flipAnalysis(facts);
+  const parts = [`<h2>How firm is this recommendation?</h2>`];
+  parts.push(f.fragile
+    ? `<p>It is close to the edge. The score is ${f.total} of 9 and is one point from a different answer, so one changed answer elsewhere could move it.</p>`
+    : `<p>The score is ${f.total} of 9, ${f.margin} points clear of the nearest boundary. It would take more than one changed answer to move it.</p>`);
+  if (f.flips.length) {
+    parts.push(`<p><strong>The smallest changes that would flip it</strong></p><ul>${f.flips.map((x) => `<li>${esc(x.sentence)}</li>`).join("")}</ul>`);
+  } else {
+    parts.push(`<p>No single answer on its own would flip it.</p>`);
+  }
+  if (f.unknownNote) parts.push(`<p>${esc(f.unknownNote)}</p>`);
+  box.innerHTML = parts.join("");
+  box.hidden = false;
+}
+
+function renderGates(c) {
+  const box = $("gatesBox");
+  const gates = ninetyDayGates(c);
+  if (!gates.length) { box.hidden = true; return; }
+  box.innerHTML = `<h2>Your next 90 days</h2><p>One observable gate for each area that is not yet established, weakest first. A gate is passed when someone else could check it.</p>` +
+    gates.map((g) => `<div class="gate"><p><strong>${esc(DIM_LABEL[g.field])}</strong></p><ul>${g.steps.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+  box.hidden = false;
+}
+
+async function renderKeelCompare(current) {
+  const box = $("cmpBox");
+  box.hidden = true;
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    const { data } = await sb.from("keel_assessments").select("id, classification, created_at, status").eq("user_id", session.user.id).order("created_at", { ascending: false });
+    const prev = (data || []).find((r) => r.id !== assessmentId && r.status === "complete" && r.classification && r.classification.readiness);
+    const cmp = prev ? compareKeel(prev.classification, current) : null;
+    if (!cmp) return;
+    const when = prev.created_at ? new Date(prev.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "your last run";
+    const word = (l) => ["absent", "partial", "established"][l];
+    const lines = cmp.moved.map((m) => `<li>${esc(DIM_LABEL[m.field])}: ${word(m.from)} to ${word(m.to)} (${m.direction === "up" ? "better" : "worse"})</li>`).join("");
+    box.innerHTML = `<h2>Since your last run</h2><p>Compared with ${esc(when)}.${cmp.model.changed ? ` The recommended model changed from ${esc(MODEL_TITLE[cmp.model.before])} to ${esc(MODEL_TITLE[cmp.model.after])}.` : " The recommended model is the same."}${cmp.sameEngine ? "" : " The scoring rules were updated in between, so the operating model result may differ for that reason."}</p>${lines ? `<ul>${lines}</ul>` : "<p>No readiness area changed.</p>"}`;
+    box.hidden = false;
+  } catch (err) { console.error(err); }
 }
 
 // A small, purpose-built markdown renderer, not a general parser: it only

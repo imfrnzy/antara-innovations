@@ -12,7 +12,7 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 // ---- Keel scoring rules, inlined so this whole function is one file ----
-const ENGINE_VERSION = "keel-rules-2.0";
+const ENGINE_VERSION = "keel-rules-2.1";
 
 const CHECKLIST = {
   EXISTING_COE: "Does this organisation already have some kind of AI governance function or CoE in place, even informally?",
@@ -44,9 +44,17 @@ function fieldIsUnknown(facts, key) {
   const v = getField(facts, key);
   return v === null || v === "unknown";
 }
+// Version 2.1: OM2 and OM3 are read the other way round. High capability, and spend already in
+// one place, do not push towards central control. Unknown still counts as 3.
+const OM_PUSH_REVERSED = ["OM2_existing_capability", "OM3_spend_model"];
+function omPush(field, value) {
+  const raw = OM_SCORE_MAP[value];
+  if (raw === undefined) return 3;
+  return OM_PUSH_REVERSED.includes(field) ? 4 - raw : raw;
+}
 function scoreOperatingModel(facts) {
   const unknownFields = OM_FIELDS.filter((k) => fieldIsUnknown(facts, k));
-  const scores = OM_FIELDS.map((k) => OM_SCORE_MAP[getField(facts, k)] ?? 3);
+  const scores = OM_FIELDS.map((k) => omPush(k, getField(facts, k)));
   const total = scores.reduce((a, b) => a + b, 0);
   let model;
   if (total >= 7) model = "CENTRALISED";

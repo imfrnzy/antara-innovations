@@ -2,6 +2,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
 import { SCENARIOS, DECISIONS, CONFIDENCE, ROUND_SECONDS, WRITTEN_QUESTION, ENGINE_VERSION } from "./scenarios.js";
 import { assess, TRUTH_LABEL } from "./engine.js";
+import { mountTeamPanel } from "../../assets/team-panel.js";
+import { trendLine } from "../../assets/team.js";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const byId = (id) => document.getElementById(id);
@@ -276,6 +278,14 @@ function showResults(profile) {
     byId("evidenceNote").hidden = true;
   }
 
+  const roundRows = result.rows.filter((r) => r.kind === "round");
+  const roundPercent = roundRows.length ? Math.round((roundRows.filter((r) => r.correct).length / roundRows.length) * 100) : null;
+  showTrend(result);
+  mountTeamPanel({
+    el: byId("teamPanel"), sb: supabase, tool: "ensign", module: "", label: "Ensign scenarios",
+    ensureSession, scenarios: SCENARIOS, leaderPercent: roundPercent,
+  });
+
   byId("rowList").innerHTML = result.rows.map((row) => {
     const tagClass = row.timedOut ? "timeout" : (row.correct ? "right" : "wrong");
     const tagText = row.timedOut ? "Timed out" : (row.correct ? "Correct" : "Missed");
@@ -286,6 +296,17 @@ function showResults(profile) {
     const said = row.timedOut ? "No decision made in time." : `You said: ${escapeHtml(TRUTH_LABEL[row.decision])}.`;
     return `<li><div class="rmeta"><span class="tag ${tagClass}">${tagText}</span><span>${escapeHtml(TRUTH_LABEL[row.truth])}</span></div><p>${said} ${escapeHtml(row.why)}</p></li>`;
   }).join("");
+}
+
+async function showTrend(result) {
+  byId("trendNote").hidden = true;
+  try {
+    const session = await ensureSession();
+    const { data } = await supabase.from("ensign_assessments").select("id, result, created_at").eq("user_id", session.user.id).order("created_at", { ascending: false });
+    const prev = (data || []).find((row) => row.id !== state.assessmentId && row.result && typeof row.result.percent === "number");
+    const line = prev ? trendLine({ percent: prev.result.percent, date: prev.created_at, overconfidentWrong: prev.result.overconfidentWrong }, result.percent, result.overconfidentWrong) : null;
+    if (line) { byId("trendNote").textContent = line; byId("trendNote").hidden = false; }
+  } catch (error) { console.error(error); }
 }
 
 // ---------- commercial buttons ----------

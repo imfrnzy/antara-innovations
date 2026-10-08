@@ -12,6 +12,7 @@
 <link rel="icon" href="../../assets/favicon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="squall.css">
+<link rel="stylesheet" href="../../assets/team.css">
 </head>
 <body>
 <script>
@@ -136,6 +137,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
     <div class="scorehead">
       <div class="big"><strong id="resPercent"></strong><span class="band" id="resBand"></span></div>
       <p class="small" id="resMeta" style="color:var(--muted); margin-top:8px"></p>
+      <p class="small" id="trendNote" style="color:var(--muted)" hidden></p>
     </div>
 
     <ul class="catlist" id="catList"></ul>
@@ -144,6 +146,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <h2>Round by round</h2>
     <ul class="rowlist" id="rowList"></ul>
+
+    <div id="teamPanel" class="noprint"></div>
 
     <div class="locked noprint">
       <h2>The full version</h2>

@@ -1,6 +1,8 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
 import { classify, DIM_LABEL } from "./engine.js";
+import { mountTeamPanel } from "../assets/team-panel.js";
+import { PULSE_QUESTIONS } from "./pulse-questions.js";
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (id) => document.getElementById(id);
@@ -174,6 +176,21 @@ async function showResults(prof) {
     $("calibrationCard").hidden = false;
     $("calibrationText").textContent = CALIBRATION_TEXT[c.calibration.value] || "";
   }
+
+  const leaderLevels = {};
+  for (const r of c.readiness) if (!r.provisional) leaderLevels[r.field] = r.level;
+  mountTeamPanel({
+    el: $("teamPanel"), sb, tool: "halo", module: "", label: "HALO team pulse",
+    ensureSession: async () => {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) return session;
+      const { data, error } = await sb.auth.signInAnonymously();
+      if (error) throw error;
+      return data.session;
+    },
+    questions: PULSE_QUESTIONS.map((q) => ({ ...q, short: DIM_LABEL[q.key] })),
+    leaderLevels,
+  });
 
   await loadReport();
 }

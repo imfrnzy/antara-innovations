@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Answer for your team | Antara Innovations</title>
+<meta name="description" content="Anonymous team answers for a leader running HALO, Squall or Ensign.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/team.css">
+</head>
+<body>
+<script>
+if (window.self !== window.top) document.documentElement.classList.add("embedded");
+</script>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../">
+      <img src="../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../use-cases/">Use cases</a>
+      <a href="../newsletter/">Newsletter</a>
+      <a href="../wellness/">Antara Wellness</a>
+      <a href="../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Team%20run">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="tj">
+  <section id="t-code" hidden>
+    <h1>Answer for your team</h1>
+    <p>Your leader sent you a short code. Enter it here.</p>
+    <form id="codeForm" novalidate>
+      <input type="text" id="codeInput" maxlength="8" autocomplete="off" autocapitalize="characters" aria-label="Code" placeholder="ABCD1234">
+      <button class="btn btn-solid" type="submit">Continue</button>
+      <p class="err" id="codeErr" role="alert"></p>
+    </form>
+  </section>
+
+  <section id="t-intro" hidden>
+    <h1 id="tiTitle"></h1>
+    <p id="tiLead"></p>
+    <p><strong>What happens to your answers.</strong> They are anonymous. You do not give a name or an email and you do not make an account. Your leader sees totals only, and only once at least three people have answered. They cannot see your individual answers. Your browser keeps a random code so that answering twice replaces your first answer instead of counting you twice.</p>
+    <button class="btn btn-solid" id="startBtn">Start</button>
+  </section>
+
+  <section id="t-pulse" hidden>
+    <p class="small" id="pCount"></p>
+    <h2 id="pQuestion" tabindex="-1"></h2>
+    <div id="pOptions" role="radiogroup" aria-labelledby="pQuestion"></div>
+  </section>
+
+  <section id="t-round" hidden>
+    <p class="small"><span id="rCount"></span> · <span id="rTimer"></span></p>
+    <div class="timer"><span id="rBar"></span></div>
+    <p id="rText" tabindex="-1" style="font-size:1.1rem;color:inherit"></p>
+    <div id="rOptions" role="radiogroup" aria-label="Your decision"></div>
+    <div id="rConf" hidden>
+      <p class="small">How sure are you?</p>
+      <div id="rConfOptions" role="radiogroup" aria-label="Confidence"></div>
+    </div>
+  </section>
+
+  <section id="t-done" hidden>
+    <h1>Thank you</h1>
+    <p id="doneMsg">Your answers were sent. You can close this page.</p>
+  </section>
+
+  <section id="t-msg" hidden>
+    <h1 id="msgTitle"></h1>
+    <p id="msgBody"></p>
+  </section>
+</main>
+
+<footer class="noprint">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand" style="margin-bottom:10px">
+        <img src="../assets/logo.png" alt="Antara Innovations">
+        <span class="word">Antara <sup>Innovations</sup></span>
+      </div>
+      <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+    </div>
+    <div class="foot-links">
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../">Instruments</a>
+      <a href="../use-cases/">Use cases</a>
+      <a href="../newsletter/">Newsletter</a>
+      <a href="../about/">About</a>
+      <a href="mailto:hello@antara-innovations.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', function(){
+  const open = navLinks.classList.toggle('open');
+  navToggle.innerHTML = open ? '&times;' : '&#9776;';
+  navToggle.setAttribute('aria-expanded', open);
+});
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

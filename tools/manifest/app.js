@@ -2,6 +2,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 import { SUPABASE_URL, SUPABASE_ANON_KEY, FREE_REPORT_LIMIT, PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
 import { assessOutcome, outcomeFacts, assessQueryRisk } from "./engine.js";
 import { fundingStatus, scoreTrack, flagsFor, sortCheckins, worstSeverity } from "./agent-rules.js";
+import { practiceSummary, summaryLines, outcomesCsv } from "./outcomes.js";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const byId = (id) => document.getElementById(id);
@@ -691,7 +692,31 @@ async function openClients() {
     return;
   }
   renderClients();
+  renderOutcomes();
 }
+
+function renderOutcomes() {
+  const box = byId("clientsOutcomes");
+  const lines = summaryLines(practiceSummary(clients, checkinsByClient));
+  if (!clients.length || !lines.length) { box.hidden = true; return; }
+  const holder = byId("outcomesLines");
+  holder.innerHTML = "";
+  lines.forEach((line) => holder.appendChild(el("p", "", line)));
+  box.hidden = false;
+}
+
+byId("outcomesBtn").addEventListener("click", () => {
+  const csv = outcomesCsv(clients, checkinsByClient);
+  if (!csv) return;
+  const url = URL.createObjectURL(new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `manifest-outcomes-${todayLocal()}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 
 function fundingLine(f) {
   if (f.level === "out") return `Funded sessions used up: ${f.used} of ${f.authorised}`;

@@ -31,9 +31,9 @@ const PERSONA = {
       "\u201CWe'd have flagged that invoice straight away.\u201D",
     ],
     confrontH: "Your claims team is already being tested by this, whether the process has caught up or not.",
-    confrontNum: 233, confrontSuffix: "m", confrontCaption: "in suspected fraud, last year",
+    confrontNum: 230, confrontSuffix: "m", confrontCaption: "of bogus claims found by Aviva alone",
     confrontP: "A rising share of it involving AI-generated photos and documents built to pass a quick look.",
-    confrontSource: "That figure is Aviva's own 2025 reporting. The judgement call it describes looks exactly like the ones on the next screen.",
+    confrontSource: "That figure is Aviva's own, reported in June 2026. The judgement call it describes looks exactly like the ones on the next screen.",
     examples: [
       { h: "The manipulated image", p: "Photos that look consistent at a glance, until the shadows or reflections don't quite agree with each other." },
       { h: "The genuine but messy one", p: "Blurry, badly lit, awkward angle, and entirely real. Imperfection is normal, not suspicious." },

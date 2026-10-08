@@ -1,7 +1,7 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
 import { JURISDICTIONS, SECTORS, SIZES, AI_USES, ANSWER_OPTIONS, LENS_LABEL, ENGINE_VERSION } from "./questions.js";
-import { selectQuestions, assess } from "./engine.js";
+import { selectQuestions, assess, claimsToTest, summariseSupervisor, compareResults } from "./engine.js";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const byId = (id) => document.getElementById(id);
@@ -14,6 +14,7 @@ const state = {
   position: 0,
   result: null,
   assessmentId: localStorage.getItem(STORAGE_KEY),
+  supervisor: { tests: [] },
 };
 
 // Someone can arrive from the Instruments hub's Banking or Insurance
@@ -69,11 +70,14 @@ async function boot() {
       return;
     }
     const { data: assessment } = await supabase
-      .from("bearing_assessments").select("id, result").eq("id", state.assessmentId).maybeSingle();
+      .from("bearing_assessments").select("id, result, answers, supervisor, jurisdictions, sector, org_size, ai_uses").eq("id", state.assessmentId).maybeSingle();
     const { data: profile } = await supabase
       .from("bearing_profiles").select("*").eq("user_id", sessionData.session.user.id).maybeSingle();
     if (assessment && assessment.result && profile && profile.work_email) {
       state.result = assessment.result;
+      state.answers = assessment.answers || {};
+      state.profile = { jurisdictions: assessment.jurisdictions || [], sector: assessment.sector, size: assessment.org_size, uses: assessment.ai_uses || [] };
+      state.supervisor = assessment.supervisor && Array.isArray(assessment.supervisor.tests) ? assessment.supervisor : { tests: [] };
       showResults(profile);
       return;
     }
@@ -470,6 +474,114 @@ function showResults(profile) {
       <p>${escapeHtml(gap.why)}</p></li>`).join("");
   }
   byId("lockedCount").textContent = String(result.obligationCount);
+  renderSupervisor();
+  renderCompare();
+}
+
+// ---------- mock supervisor: test the "yes, we could show the evidence" claims ----------
+const BAND_TEXT = { evidence: "Held up", partly: "Partly there", no: "Did not hold" };
+
+async function callScore(body) {
+  const { data, error } = await supabase.functions.invoke("bearing-score", { body });
+  if (error || !data) {
+    let message = "That could not be checked just now. Try again in a moment.";
+    try { const detail = await error.context.json(); if (detail.error) { message = detail.error; } } catch (ignore) { /* keep default */ }
+    throw new Error(message);
+  }
+  return data;
+}
+
+async function saveSupervisor() {
+  try {
+    await supabase.rpc("save_bearing_supervisor", { p_assessment: state.assessmentId, p_data: state.supervisor });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function renderSupervisor() {
+  const panel = byId("supPanel");
+  const claims = state.profile ? claimsToTest(state.profile, state.answers, 3) : [];
+  if (claims.length === 0) {
+    panel.hidden = true;
+    return;
+  }
+  panel.hidden = false;
+  byId("supIntro").textContent = `On ${claims.length === 1 ? "one question" : claims.length + " questions"} you said yes, and that you could show the evidence. A supervisor would not take your word for it. They would ask for the document. Pick one, say what you would hand over, and see whether it holds up.`;
+  byId("supList").innerHTML = claims.map((claim) => {
+    const done = state.supervisor.tests.find((test) => test.questionId === claim.id);
+    return `<li data-id="${escapeHtml(claim.id)}">
+      <p class="supq">${escapeHtml(claim.text)}</p>
+      ${done
+        ? `<p class="suprs"><span class="chip sup-${done.band}">${BAND_TEXT[done.band]}</span> ${escapeHtml(done.critique)}</p>`
+        : `<button type="button" class="btn supgo">Ask me for the document</button><div class="supbox" hidden></div>`}
+    </li>`;
+  }).join("");
+  byId("supList").querySelectorAll(".supgo").forEach((button) => {
+    button.onclick = () => openRequest(button.closest("li"), button);
+  });
+  const summary = summariseSupervisor(state.supervisor.tests);
+  byId("supLine").textContent = summary.line;
+}
+
+async function openRequest(item, button) {
+  const questionId = item.dataset.id;
+  const box = item.querySelector(".supbox");
+  button.disabled = true;
+  try {
+    await ensureSession();
+    const asked = await callScore({ mode: "ask", question_id: questionId });
+    box.hidden = false;
+    box.innerHTML = `<p class="supreq"><strong>The supervisor asks:</strong> ${escapeHtml(asked.request)}</p>
+      <textarea maxlength="1200" aria-label="What you would hand over" placeholder="Name the document, who holds it, and how current it is."></textarea>
+      <p class="err" role="alert"></p>
+      <button type="button" class="btn btn-solid supsend">Submit my answer</button>`;
+    button.hidden = true;
+    const send = box.querySelector(".supsend");
+    send.onclick = async () => {
+      const text = box.querySelector("textarea").value.trim();
+      const errorLine = box.querySelector(".err");
+      if (text.length < 15) { errorLine.textContent = "Write a specific answer, naming the document."; return; }
+      errorLine.textContent = "";
+      send.disabled = true;
+      try {
+        const graded = await callScore({ mode: "supervisor", question_id: questionId, response_text: text });
+        state.supervisor.tests.push({ questionId, band: graded.band, critique: graded.critique });
+        await saveSupervisor();
+        renderSupervisor();
+      } catch (error) {
+        send.disabled = false;
+        errorLine.textContent = error.message;
+      }
+    };
+  } catch (error) {
+    button.disabled = false;
+    item.querySelector(".supq").insertAdjacentHTML("afterend", `<p class="err" role="alert">${escapeHtml(error.message)}</p>`);
+  }
+}
+
+// ---------- compare with the previous run ----------
+async function renderCompare() {
+  const panel = byId("cmpPanel");
+  panel.hidden = true;
+  try {
+    const session = await ensureSession();
+    const { data } = await supabase.from("bearing_assessments").select("id, result, created_at").eq("user_id", session.user.id).order("created_at", { ascending: false });
+    const previous = (data || []).filter((row) => row.id !== state.assessmentId && row.result && row.result.lenses)[0];
+    const comparison = previous ? compareResults(previous.result, state.result) : null;
+    if (!comparison) { return; }
+    const when = previous.created_at ? new Date(previous.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "your last run";
+    const moves = comparison.lenses.map((lens) => `${escapeHtml(lens.label)}: ${lens.before}% to ${lens.after}%`).join(", ");
+    const list = (items) => items.slice(0, 5).map((item) => `<li>${escapeHtml(item.title)} <span class="src">${escapeHtml(item.from)} to ${escapeHtml(item.to)}</span></li>`).join("");
+    panel.innerHTML = `<h2>Since your last run</h2>
+      <p>Compared with ${escapeHtml(when)}. ${moves}.${comparison.sameEngine ? "" : " The scoring rules were updated in between, so small shifts may come from that."}</p>
+      ${comparison.improved.length ? `<p><strong>Improved</strong></p><ul class="obls">${list(comparison.improved)}</ul>` : ""}
+      ${comparison.worsened.length ? `<p><strong>Got worse</strong></p><ul class="obls">${list(comparison.worsened)}</ul>` : ""}
+      ${!comparison.improved.length && !comparison.worsened.length ? "<p>No obligation changed status.</p>" : ""}`;
+    panel.hidden = false;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // ---------- commercial buttons ----------

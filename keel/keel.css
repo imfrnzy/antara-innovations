@@ -182,3 +182,8 @@ table.matrix td.divide, table.matrix th.divide{border-left:2px solid var(--navy)
 .reportmd ul,.reportmd ol{margin:0 0 12px; padding-left:20px}
 .reportmd li{margin:4px 0; font-size:14.5px; line-height:1.6}
 .reportmd strong{color:var(--navy)}
+
+.flipbox{margin:26px 0;padding:16px 18px;border-left:3px solid var(--gold);background:rgba(128,128,128,.06)}
+.flipbox h2{margin-top:0}
+.flipbox ul{margin:6px 0 10px 18px}
+.flipbox .gate{margin:10px 0}

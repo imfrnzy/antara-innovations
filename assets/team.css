@@ -1,0 +1,30 @@
+/* Team panel and join page. Uses each tool's own colours when they exist. */
+.tp{border:1px solid var(--line,#d8d6cf);border-radius:10px;padding:20px;margin:24px 0;background:var(--card,transparent)}
+.tp h3{margin:0 0 8px;font-size:1.1rem}
+.tp h4{margin:18px 0 8px;font-size:.95rem}
+.tp p{margin:8px 0;line-height:1.55}
+.tp-err{color:#b3261e;min-height:1.2em}
+.tp-link{display:flex;gap:8px;flex-wrap:wrap}
+.tp-link input{flex:1 1 220px;min-width:0;padding:10px;border:1px solid var(--line,#ccc);border-radius:6px;font:inherit;background:transparent;color:inherit}
+.tp-code{font-size:.9rem;opacity:.85}
+.tp-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.tp-wait{padding:12px;border-left:3px solid var(--gold,#b8962e);background:rgba(128,128,128,.08)}
+.tp-head{font-size:1.02rem}
+.tp-watch{padding:10px 12px;border-left:3px solid #b3261e;background:rgba(179,38,30,.07)}
+.tp-list{list-style:none;padding:0;margin:10px 0}
+.tp-list li{padding:10px 0;border-top:1px solid var(--line,#e2e0d9)}
+.tp-q{font-weight:600}
+.tp-bar{position:relative;height:10px;border-radius:5px;background:rgba(128,128,128,.2);margin:8px 0 4px}
+.tp-fill{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--gold,#b8962e)}
+.tp-mark{position:absolute;top:-4px;width:3px;height:18px;background:currentColor;transform:translateX(-1px)}
+.tp-meta{font-size:.85rem;opacity:.85}
+/* join page */
+.tj{max-width:720px;margin:0 auto;padding:24px 16px 64px}
+.tj .opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border:1px solid var(--line,#ccc);border-radius:8px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.tj .opt[aria-checked="true"]{border-color:var(--gold,#b8962e);box-shadow:inset 0 0 0 1px var(--gold,#b8962e)}
+.tj .timer{height:6px;background:rgba(128,128,128,.2);border-radius:3px;overflow:hidden;margin:8px 0 16px}
+.tj .timer>span{display:block;height:100%;width:100%;background:var(--gold,#b8962e);transform-origin:left}
+.tj input[type=text]{padding:12px;font:inherit;border:1px solid var(--line,#ccc);border-radius:6px;text-transform:uppercase;letter-spacing:.15em;width:10em;background:transparent;color:inherit}
+.tj .err{color:#b3261e;min-height:1.2em}
+.tj .small{font-size:.85rem}
+.tj h1{font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--navy,inherit)}
