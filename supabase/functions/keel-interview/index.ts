@@ -12,14 +12,14 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 // ---- Keel scoring rules, inlined so this whole function is one file ----
-const ENGINE_VERSION = "keel-rules-2.1";
+const ENGINE_VERSION = "keel-rules-2.2";
 
 const CHECKLIST = {
   EXISTING_COE: "Does this organisation already have some kind of AI governance function or CoE in place, even informally?",
   CURRENT_MODEL: "Thinking about what exists today, would you describe it as centralised, federated, hybrid, or informal and ad hoc with no consistent model?",
   OM1_regulatory_exposure: "How exposed is this organisation's likely AI use to regulation: customer-facing decisions, regulated sectors, personal data at scale?",
   OM2_existing_capability: "How much in-house AI build capability already exists across the organisation, not just one team?",
-  OM3_spend_model: "Is AI spend today concentrated in one place, or already scattered across business units?",
+  OM3_spend_model: "How scattered is AI spend today? High means it is spread across several business units. Low means it sits in one place.",
   R1_sponsorship: "Is there a named executive sponsor for an AI programme, with actual budget authority, confirmed in writing?",
   R2_team: "Is there a CoE lead, an architect, and named Risk, Compliance and InfoSec contacts, even informally?",
   R3_portfolio: "Is there one place that tracks every AI idea and its status, or does each team keep its own list?",
@@ -44,9 +44,9 @@ function fieldIsUnknown(facts, key) {
   const v = getField(facts, key);
   return v === null || v === "unknown";
 }
-// Version 2.1: OM2 and OM3 are read the other way round. High capability, and spend already in
-// one place, do not push towards central control. Unknown still counts as 3.
-const OM_PUSH_REVERSED = ["OM2_existing_capability", "OM3_spend_model"];
+// Version 2.2: OM2 is read the other way round (high capability does not push towards central control).
+// OM3 means "how scattered is the spend": high means scattered, which does push towards central control.
+const OM_PUSH_REVERSED = ["OM2_existing_capability"];
 function omPush(field, value) {
   const raw = OM_SCORE_MAP[value];
   if (raw === undefined) return 3;
@@ -172,7 +172,7 @@ ${FIELDS.map((k) => `- ${k}: ${CHECKLIST[k]}`).join("\n")}
 RECORDING RULES
 - EXISTING_COE: record exactly "yes" or "no". Anything that functions as governance counts, even an informal committee or a single named approver, it doesn't need the name "CoE".
 - CURRENT_MODEL: only ask this if EXISTING_COE is yes. Record exactly one of "centralised", "federated", "hybrid", or "informal" if there's genuinely no consistent model yet. No other word.
-- OM1_regulatory_exposure, OM2_existing_capability, OM3_spend_model: record exactly one of "low", "medium", or "high", answering the literal question as it's phrased above, how exposed, how much capability, how concentrated. Never use any other word for these three fields, not "minimal", not "significant", not "some", not a number, not a description, exactly low, medium or high, whichever the person's answer actually supports.
+- OM1_regulatory_exposure, OM2_existing_capability, OM3_spend_model: record exactly one of "low", "medium", or "high", answering the literal question as it's phrased above: how exposed, how much capability, how SCATTERED the spend is. For OM3 the direction matters: spend spread across several business units or teams is "high", spend all in one place is "low", a main place plus a few others is "medium". Never record scattered spend as "low". Never use any other word for these three fields, not "minimal", not "significant", not "some", not a number, not a description, exactly low, medium or high, whichever the person's answer actually supports.
 - R1_sponsorship, R2_team, R3_portfolio, R4_risk_gate, R5_testing_monitoring, R6_benefits_proof: record exactly one of "absent", "partial", or "established". Never a different word.
 - Record a fact only when the person's words clearly support it. Quote the words that support it, briefly.
 - "Absent" means genuinely nothing exists yet, not that they haven't mentioned it. If they haven't addressed a fact at all, it stays unknown, never assumed absent.

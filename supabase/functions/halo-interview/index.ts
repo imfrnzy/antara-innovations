@@ -174,12 +174,29 @@ const TOOL = {
 };
 
 // ---- HALO report guard, inlined below. Keep identical to halo/report-check.js ----
-const REPORT_CHECK_VERSION = "halo-report-check-1.0";
+const REPORT_CHECK_VERSION = "halo-report-check-1.1";
 
 const NUM_WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7 };
 
 function squash(s) {
   return String(s ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+// Evidence lines the interviewer could not match to the leader's own words are stored with this
+// prefix. They are the interviewer's summary, so the report may use what they say but must never
+// show them as something the leader said.
+const NOTE_PREFIX = "[note] ";
+function isNote(row) { return !!row && typeof row.quote === "string" && row.quote.startsWith(NOTE_PREFIX); }
+function noteText(row) { return isNote(row) ? row.quote.slice(NOTE_PREFIX.length) : (row?.quote ?? ""); }
+
+// Is this quote really something the leader typed? Brackets and "..." are editing marks the
+// interviewer adds, so each remaining piece has to appear in what they wrote.
+function isVerbatim(quote, userText) {
+  const hay = squash(userText);
+  const pieces = String(quote ?? "").replace(/\[[^\]]*\]/g, "...").split(/\.\.\.|…/).map(squash).filter((x) => x.length > 0);
+  const long = pieces.filter((x) => x.length >= 12);
+  if (long.length) return long.every((x) => hay.includes(x));
+  return pieces.length > 0 && pieces.every((x) => hay.includes(x));
 }
 
 // Returns a list of problems. Empty list means the report passes.
@@ -189,14 +206,17 @@ function checkReport(report, classification, evidenceRows) {
   if (text.trim().length < 200) problems.push("The report is empty or far too short.");
   if (/[—–]/.test(text)) problems.push("The report contains a dash that is not allowed. Use commas or full stops.");
 
-  // 1. Every longer quoted span must really be something the leader said.
-  const said = (evidenceRows || []).filter((r) => r && r.quote).map((r) => squash(r.quote));
+  // 1. A quote the report attributes to the leader ("you said ...", "you told ...") must really be
+  // something they wrote. Wording the report only suggests ("try saying ...") is not checked here.
+  const said = (evidenceRows || []).filter((r) => r && r.quote && !isNote(r)).map((r) => squash(r.quote));
   const re = /["“]([^"”\n]{20,})["”]/g;
+  const attributed = /\b(?:you|your)\b[^.\n"“]{0,70}\b(?:said|say|says|told|tell|described|wrote|write|put it|mentioned|answered|explained|words|called)\b[^"“\n]{0,25}$/i;
   let m;
   while ((m = re.exec(text))) {
     const q = squash(m[1]);
-    if (q.length >= 20 && !said.some((s) => s.includes(q))) {
-      problems.push(`The quoted text "${m[1].slice(0, 60)}" is not in the evidence. Quote only the evidence lines, word for word, or do not quote.`);
+    const before = text.slice(Math.max(0, m.index - 110), m.index);
+    if (q.length >= 20 && attributed.test(before) && !said.some((s) => s.includes(q))) {
+      problems.push(`The quoted text "${m[1].slice(0, 60)}" is shown as something the leader said, but it is not one of their own words in the evidence. Quote only evidence lines that are not marked NOTE, word for word, or do not quote.`);
     }
   }
 
@@ -231,7 +251,7 @@ function checkReport(report, classification, evidenceRows) {
 // Always accurate, deliberately plain. Used only when the written report fails the check twice.
 function fallbackReport(classification, evidenceRows, firstName) {
   const c = classification || { readiness: [], established_count: 0, total_dimensions: 7 };
-  const quoteFor = (field) => (evidenceRows || []).find((r) => r.field === field && r.quote)?.quote;
+  const quoteFor = (field) => (evidenceRows || []).find((r) => r.field === field && r.quote && !isNote(r))?.quote;
   const lines = [];
   lines.push("## Where you stand today");
   lines.push(`${firstName ? firstName + ", " : ""}${c.established_count} of ${c.total_dimensions} standards are established.`);
@@ -278,7 +298,9 @@ Name the single weakest dimension. Give one concrete thing to do this week, spec
 ## Then build the rhythm
 The daily two-minute signal check and the weekly agenda-free check-in, briefly, adapted to what they're already doing versus not.
 
-End with one short, direct paragraph built from their calibration answer. Quote the recorded CALIBRATION evidence directly, in their own words, rather than characterising or paraphrasing it, the same way every other section grounds itself in a direct quote. Do not add any specific detail, story, or example to this paragraph that isn't in the CALIBRATION evidence line itself, nothing from any other field, however tempting a stronger detail might seem. If they said their team might describe things differently, quote that and connect it to what a real answer would need: "You said: '[their exact words]'. The team link on this page settles that gap, anonymously." If they said they believe it matches, quote that instead, and note that belief and evidence are different things, the team link on this page is what closes that gap either way. This is not a disclaimer about the report's limits, it's the next real finding, delivered the same directness as everything before it.
+Only text inside quotation marks in the evidence is something the leader really said. Lines marked NOTE are the interviewer's summary: use what they tell you, but never show them as a quote or as "you said". If you suggest wording the leader could use, say it is a suggestion before you put it in quotation marks.
+
+End with one short, direct paragraph built from their calibration answer. If the recorded CALIBRATION evidence is a real quote, quote it directly, in their own words, rather than characterising or paraphrasing it; if it is marked NOTE, say what they told you in your own words, the same way every other section grounds itself in a direct quote. Do not add any specific detail, story, or example to this paragraph that isn't in the CALIBRATION evidence line itself, nothing from any other field, however tempting a stronger detail might seem. If they said their team might describe things differently, quote that and connect it to what a real answer would need: "You said: '[their exact words]'. The team link on this page settles that gap, anonymously." If they said they believe it matches, quote that instead, and note that belief and evidence are different things, the team link on this page is what closes that gap either way. This is not a disclaimer about the report's limits, it's the next real finding, delivered the same directness as everything before it.
 
 Keep the whole report under 800 words. This is the free tier, complete and useful on its own, not a teaser withholding the real content.`;
 
@@ -336,7 +358,9 @@ Deno.serve(async (req) => {
     const { data: evidenceRows } = await db.from("halo_evidence").select("field, value, quote").eq("assessment_id", a.id).order("created_at");
     const evidenceText = (evidenceRows ?? [])
       .filter((r) => r.quote)
-      .map((r) => `- ${r.field}: ${r.value}. "${r.quote}"`)
+      .map((r) => isNote(r)
+        ? `- ${r.field}: ${r.value}. NOTE (the interviewer's summary, not their words, so never put it in quotation marks or say "you said"): ${noteText(r)}`
+        : `- ${r.field}: ${r.value}. "${r.quote}"`)
       .join("\n");
 
     const prompt = `LEADER: ${profile?.first_name ?? "unknown"}, ${profile?.job_title ?? "role unknown"}. Leads roughly ${a.team_size ?? "an unstated number of"} people, ${a.tenure ?? "tenure in the role not stated"}.
@@ -426,6 +450,7 @@ Record what the latest answer establishes, then ask the next question.`;
   }
 
   const updatedFacts = { ...currentFacts };
+  const userText = (history ?? []).filter((h) => h.role !== "assistant").map((h) => h.content).join("\n");
   for (const f of out.facts ?? []) {
     if (!FIELDS.includes(f.field)) continue;
     const prev = updatedFacts[f.field];
@@ -433,8 +458,11 @@ Record what the latest answer establishes, then ask the next question.`;
     let status = f.value === "unknown" ? "unknown" : "confirmed";
     if (prev && prev.value !== "unknown" && f.value !== "unknown" && prev.value !== f.value) status = "contradiction";
     if (prev && prev.status === "contradiction" && prev.value === f.value) status = "confirmed";
-    updatedFacts[f.field] = { value: f.value, status, quote: (f.quote ?? "").slice(0, 300) };
-    await db.from("halo_evidence").insert({ assessment_id: a.id, user_id: user.id, field: f.field, value: f.value, status, quote: (f.quote ?? "").slice(0, 300) });
+    // Only keep a quote as a quote if it really is in what the leader wrote. Otherwise it is the interviewer's note.
+    const rawQuote = (f.quote ?? "").toString().slice(0, 300 - NOTE_PREFIX.length);
+    const storedQuote = !rawQuote ? "" : isVerbatim(rawQuote, userText) ? rawQuote : NOTE_PREFIX + rawQuote;
+    updatedFacts[f.field] = { value: f.value, status, quote: storedQuote };
+    await db.from("halo_evidence").insert({ assessment_id: a.id, user_id: user.id, field: f.field, value: f.value, status, quote: storedQuote });
   }
   await db.from("halo_assessments").update({ facts: updatedFacts }).eq("id", a.id);
 
