@@ -307,8 +307,11 @@ export function checkConfig(text) {
   } else if (status === "POSSIBLE") {
     headline = "All three ingredients are possible.";
     narrative = "Some of what this agent connects to can carry outside text, hold private data or act, depending on how it is set up. Find out who can write to those systems and what the credentials allow.";
+  } else if (status === "UNKNOWN" && active.every((x) => !x.recognised)) {
+    headline = "We couldn't recognise anything in that, so we can't tell you either way.";
+    narrative = "Nothing you pasted matched a tool or server we know. That is not the same as safe. If this is a configuration file, check it is complete and paste the part that lists the servers. If it is a list, name each tool and say what it can do, for example reads email, writes to the database, sends messages.";
   } else if (status === "UNKNOWN") {
-    headline = `No full path found, but ${unrecognised.length === 1 ? "one thing" : unrecognised.length + " things"} weren't recognised.`;
+    headline = `No full path found, but ${unrecognised.length === 1 ? "one thing wasn't" : unrecognised.length + " things weren't"} recognised.`;
     narrative = `On the parts we recognised, ${missing.join(" and ")} is missing, which would break this path. The parts we didn't recognise could change that, so this is not a clear result.`;
   } else {
     headline = "No full attack path found.";

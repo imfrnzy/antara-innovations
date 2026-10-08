@@ -267,7 +267,14 @@ function renderReportMarkdown(md) {
   return html;
 }
 
-async function loadReport() {
+// One request at a time. Live tests showed the report being requested twice a fraction of a second apart,
+// which doubled the cost and let a slower, plainer copy overwrite a better one.
+let reportInFlight = null;
+function loadReport() {
+  if (!reportInFlight) reportInFlight = loadReportOnce().finally(() => { reportInFlight = null; });
+  return reportInFlight;
+}
+async function loadReportOnce() {
   const { data: existing } = await sb.from("keel_assessments").select("report_md").eq("id", assessmentId).single();
   if (existing?.report_md) {
     $("reportLoading").hidden = true;

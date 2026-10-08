@@ -3,12 +3,29 @@
 // Pure functions. The same block is pasted into supabase/functions/halo-interview/index.ts,
 // and tests/halo-report-check.test.mjs fails if the two copies differ.
 
-export const REPORT_CHECK_VERSION = "halo-report-check-1.0";
+export const REPORT_CHECK_VERSION = "halo-report-check-1.1";
 
 const NUM_WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7 };
 
 export function squash(s) {
   return String(s ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+// Evidence lines the interviewer could not match to the leader's own words are stored with this
+// prefix. They are the interviewer's summary, so the report may use what they say but must never
+// show them as something the leader said.
+export const NOTE_PREFIX = "[note] ";
+export function isNote(row) { return !!row && typeof row.quote === "string" && row.quote.startsWith(NOTE_PREFIX); }
+export function noteText(row) { return isNote(row) ? row.quote.slice(NOTE_PREFIX.length) : (row?.quote ?? ""); }
+
+// Is this quote really something the leader typed? Brackets and "..." are editing marks the
+// interviewer adds, so each remaining piece has to appear in what they wrote.
+export function isVerbatim(quote, userText) {
+  const hay = squash(userText);
+  const pieces = String(quote ?? "").replace(/\[[^\]]*\]/g, "...").split(/\.\.\.|…/).map(squash).filter((x) => x.length > 0);
+  const long = pieces.filter((x) => x.length >= 12);
+  if (long.length) return long.every((x) => hay.includes(x));
+  return pieces.length > 0 && pieces.every((x) => hay.includes(x));
 }
 
 // Returns a list of problems. Empty list means the report passes.
@@ -18,14 +35,17 @@ export function checkReport(report, classification, evidenceRows) {
   if (text.trim().length < 200) problems.push("The report is empty or far too short.");
   if (/[—–]/.test(text)) problems.push("The report contains a dash that is not allowed. Use commas or full stops.");
 
-  // 1. Every longer quoted span must really be something the leader said.
-  const said = (evidenceRows || []).filter((r) => r && r.quote).map((r) => squash(r.quote));
+  // 1. A quote the report attributes to the leader ("you said ...", "you told ...") must really be
+  // something they wrote. Wording the report only suggests ("try saying ...") is not checked here.
+  const said = (evidenceRows || []).filter((r) => r && r.quote && !isNote(r)).map((r) => squash(r.quote));
   const re = /["“]([^"”\n]{20,})["”]/g;
+  const attributed = /\b(?:you|your)\b[^.\n"“]{0,70}\b(?:said|say|says|told|tell|described|wrote|write|put it|mentioned|answered|explained|words|called)\b[^"“\n]{0,25}$/i;
   let m;
   while ((m = re.exec(text))) {
     const q = squash(m[1]);
-    if (q.length >= 20 && !said.some((s) => s.includes(q))) {
-      problems.push(`The quoted text "${m[1].slice(0, 60)}" is not in the evidence. Quote only the evidence lines, word for word, or do not quote.`);
+    const before = text.slice(Math.max(0, m.index - 110), m.index);
+    if (q.length >= 20 && attributed.test(before) && !said.some((s) => s.includes(q))) {
+      problems.push(`The quoted text "${m[1].slice(0, 60)}" is shown as something the leader said, but it is not one of their own words in the evidence. Quote only evidence lines that are not marked NOTE, word for word, or do not quote.`);
     }
   }
 
@@ -60,7 +80,7 @@ export function checkReport(report, classification, evidenceRows) {
 // Always accurate, deliberately plain. Used only when the written report fails the check twice.
 export function fallbackReport(classification, evidenceRows, firstName) {
   const c = classification || { readiness: [], established_count: 0, total_dimensions: 7 };
-  const quoteFor = (field) => (evidenceRows || []).find((r) => r.field === field && r.quote)?.quote;
+  const quoteFor = (field) => (evidenceRows || []).find((r) => r.field === field && r.quote && !isNote(r))?.quote;
   const lines = [];
   lines.push("## Where you stand today");
   lines.push(`${firstName ? firstName + ", " : ""}${c.established_count} of ${c.total_dimensions} standards are established.`);

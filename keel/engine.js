@@ -11,7 +11,7 @@
 // - It never invents a threshold that isn't stated here in plain code, so the
 //   basis for "why centralised, not federated" can always be shown to a user.
 
-export const ENGINE_VERSION = "keel-rules-2.1";
+export const ENGINE_VERSION = "keel-rules-2.2";
 
 // ---- The checklist ----
 // EXISTING_COE and CURRENT_MODEL are asked first, before anything else, since
@@ -25,7 +25,7 @@ export const CHECKLIST = {
   CURRENT_MODEL: "Thinking about what exists today, would you describe it as centralised, federated, hybrid, or informal and ad hoc with no consistent model?",
   OM1_regulatory_exposure: "How exposed is this organisation's likely AI use to regulation: customer-facing decisions, regulated sectors, personal data at scale?",
   OM2_existing_capability: "How much in-house AI build capability already exists across the organisation, not just one team?",
-  OM3_spend_model: "Is AI spend today concentrated in one place, or already scattered across business units?",
+  OM3_spend_model: "How scattered is AI spend today? High means it is spread across several business units. Low means it sits in one place.",
   R1_sponsorship: "Is there a named executive sponsor for an AI programme, with actual budget authority, confirmed in writing?",
   R2_team: "Is there a CoE lead, an architect, and named Risk, Compliance and InfoSec contacts, even informally?",
   R3_portfolio: "Is there one place that tracks every AI idea and its status, or does each team keep its own list?",
@@ -39,12 +39,13 @@ const OM_FIELDS = ["OM1_regulatory_exposure", "OM2_existing_capability", "OM3_sp
 const READINESS_FIELDS = ["R1_sponsorship", "R2_team", "R3_portfolio", "R4_risk_gate", "R5_testing_monitoring", "R6_benefits_proof"];
 
 const OM_SCORE_MAP = { low: 1, medium: 2, high: 3 };
-// Version 2.1: the answers to OM2 and OM3 are recorded as "how much capability" and "how
-// concentrated". High capability, and spend that is already in one place, do not push towards
-// central control, so those two are read the other way round. Before 2.1 they were not, which
-// contradicted the reason text shown for the Federated and Centralised results.
+// Version 2.1 read OM2 and OM3 the other way round. Version 2.2 keeps that for OM2 only.
+// OM2 is recorded as "how much capability": high capability does not push towards central control.
+// OM3 is now defined as "how scattered is the spend": high means scattered, which does push towards
+// central control. Live tests showed the interviewer already recorded "scattered" as high, so 2.1
+// read it backwards. The question and the interviewer's rule now say the same thing as the score.
 // An unknown answer still counts as 3, the cautious reading.
-const OM_PUSH_REVERSED = ["OM2_existing_capability", "OM3_spend_model"];
+const OM_PUSH_REVERSED = ["OM2_existing_capability"];
 export function omPush(field, value) {
   const raw = OM_SCORE_MAP[value];
   if (raw === undefined) return 3;
@@ -201,7 +202,7 @@ export function nextGaps(facts, maxResults = 3) {
 const OM_LABEL = {
   OM1_regulatory_exposure: "how exposed your AI use is to regulation",
   OM2_existing_capability: "how much AI build capability already exists across the organisation",
-  OM3_spend_model: "how concentrated your AI spend is",
+  OM3_spend_model: "how scattered your AI spend is",
 };
 const LEVELS = ["low", "medium", "high"];
 const modelFor = (total) => (total >= 7 ? "CENTRALISED" : total <= 4 ? "FEDERATED" : "HYBRID");

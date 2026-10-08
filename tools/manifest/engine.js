@@ -143,7 +143,9 @@ export function assessQueryRisk(data, outcome) {
     flags.push({
       severity: "amber",
       message: "No outcome measure scores given, and no reason stated for that.",
-      why: "Bupa's form asks directly whether outcome measures are collected, and if not, asks why not. Leaving this blank rather than answered is more likely to draw a query than a clear \"not used for this modality\" would be.",
+      why: insurer === "bupa"
+        ? "Bupa's form asks directly whether outcome measures are collected, and if not, asks why not. Leaving this blank rather than answered is more likely to draw a query than a clear \"not used for this modality\" would be."
+        : "A reviewer looks for outcome scores, or a stated reason none are used. Leaving it blank rather than answered is more likely to draw a query than a clear \"not used for this modality\" would be.",
     });
   }
 
