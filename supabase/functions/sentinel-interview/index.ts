@@ -409,7 +409,7 @@ function sameQuestion(a: string, b: string) {
   if (A.size < 4 || B.size < 4) return false;
   let shared = 0;
   for (const w of A) if (B.has(w)) shared++;
-  return shared / Math.min(A.size, B.size) >= 0.65;
+  return shared / (A.size + B.size - shared) >= 0.6;
 }
 
 function sanitiseModelText(s) {
@@ -530,7 +530,10 @@ Record what the latest answer establishes, then ask the next question.`;
   }
 
   const touched = new Set();
-  for (const f of out.facts ?? []) {
+  for (const f of Array.isArray(out.facts) ? out.facts : []) {
+    if (!f || typeof f !== "object") continue; // a malformed reply (for example a string) must never crash the interview
+    // The model sometimes writes "Established" or "Yes." instead of "established" or "yes". The rules only read lower case.
+    f.value = String(f.value ?? "").toLowerCase().replace(/[^a-z]/g, "");
     const ag = agents.find((x) => norm(x.name) === norm(f.agent ?? ""));
     if (!ag || !FIELDS.includes(f.field)) continue;
     const prev = (ag.facts ?? {})[f.field];
