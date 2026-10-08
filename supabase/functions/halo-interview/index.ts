@@ -97,6 +97,19 @@ const json = (body, status = 200) =>
 // meant for the visitor. This never re-asks the model, it just makes sure
 // nothing that looks like a stray tag ever reaches the screen.
 const TAG_PATTERN = /<\/?[a-zA-Z_][\w-]*(?:\s+[a-zA-Z_][\w-]*="[^"]*")*\s*\/?>/;
+// Repeat guard. The small model sometimes asks the same question again in new words when the
+// person did not answer it. This is checked in code, because a prompt rule alone is not reliable.
+function questionWords(s: string) {
+  return new Set(String(s).toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter((w) => w.length > 3));
+}
+function sameQuestion(a: string, b: string) {
+  const A = questionWords(a), B = questionWords(b);
+  if (A.size < 4 || B.size < 4) return false;
+  let shared = 0;
+  for (const w of A) if (B.has(w)) shared++;
+  return shared / Math.min(A.size, B.size) >= 0.65;
+}
+
 function sanitiseModelText(s) {
   const m = s.match(TAG_PATTERN);
   if (!m) return s;
@@ -245,6 +258,11 @@ function checkReport(report, classification, evidenceRows) {
       }
     } else problems.push('The report is missing the "Fix this one first" section.');
   }
+  // 4. Internal field codes (R1 to R7, R6_ai_disclosure) are for the engine, never for the reader.
+  const codeHit = text.match(/\bR[1-7](?:_[a-z_]+)?\b/);
+  if (codeHit) {
+    problems.push(`The report uses the internal code "${codeHit[0]}". Use the plain dimension name instead (for example AI boundaries, Clarity) and never write codes like R7.`);
+  }
   return problems;
 }
 
@@ -279,6 +297,7 @@ function fallbackReport(classification, evidenceRows, firstName) {
 // what wasn't. A dimension genuinely never established gets named as an open
 // question, stated once, plainly, not apologised for or dwelt on.
 const REPORT_SYSTEM = `You are writing a HALO practice report for Antara Innovations. The reader is a named leader who just talked through their own leadership practice.
+Never write internal codes such as R1 to R7 or field names with underscores. Refer to each dimension only by its plain name, for example Clarity or AI boundaries.
 
 Write in British English, direct and assertive, the way a sharp advisor writes when they're confident in what they found. No em dashes. No hype words. No hedging language, no "it's worth noting that", no disclaimers, no softening. State what the evidence shows, plainly. Where a fact was genuinely never established in the conversation, say so once, directly, as a plain statement, "this wasn't covered", not as an apology or a caveat repeated more than once.
 
@@ -472,8 +491,35 @@ Record what the latest answer establishes, then ask the next question.`;
     return await finish();
   }
 
-  const q = sanitiseModelText((out.next_question ?? "").toString()).replace(/\u2014/g, ",").slice(0, 600);
-  const why = sanitiseModelText((out.why_asking ?? "").toString()).replace(/\u2014/g, ",").slice(0, 300);
+  let q = sanitiseModelText((out.next_question ?? "").toString()).replace(/\u2014/g, ",").slice(0, 600);
+  let why = sanitiseModelText((out.why_asking ?? "").toString()).replace(/\u2014/g, ",").slice(0, 300);
+
+  // Never show the same question twice. Retry once with the repeat pointed out, then wrap up honestly.
+  const alreadyAsked = (history ?? []).filter((h: any) => h.role === "assistant").map((h: any) => String(h.content));
+  if (alreadyAsked.some((p) => sameQuestion(q, p))) {
+    let retriedQ = "", retriedWhy = "";
+    try {
+      const r2 = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "x-api-key": Deno.env.get("ANTHROPIC_API_KEY")!, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+        body: JSON.stringify({
+          model: MODEL, max_tokens: 800, system: SYSTEM,
+          tools: [TOOL], tool_choice: { type: "tool", name: TOOL.name },
+          messages: [{ role: "user", content: prompt + `\n\nIMPORTANT: your draft question repeats one that was already asked ("${q.slice(0, 200)}"). The person did not give a usable answer, so treat that fact as unknown and do not ask it again in any wording. Ask about a different gap instead.` }],
+        }),
+      });
+      const d2 = await r2.json();
+      const o2 = d2?.content?.find((b: any) => b.type === "tool_use")?.input;
+      retriedQ = sanitiseModelText((o2?.next_question ?? "").toString()).replace(/\u2014/g, ",").slice(0, 600);
+      retriedWhy = sanitiseModelText((o2?.why_asking ?? "").toString()).replace(/\u2014/g, ",").slice(0, 300);
+    } catch (e) { console.error("repeat retry error", e); }
+    if (retriedQ && !alreadyAsked.some((p) => sameQuestion(retriedQ, p))) {
+      q = retriedQ; why = retriedWhy;
+    } else {
+      await db.from("halo_interactions").insert({ assessment_id: a.id, user_id: user.id, role: "assistant", content: "I have what I can get from this conversation. Anything still unclear will be treated as unconfirmed.", meta: {} });
+      return await finish();
+    }
+  }
   await db.from("halo_interactions").insert({ assessment_id: a.id, user_id: user.id, role: "assistant", content: q, meta: { why } });
   return json({ question: q, why, done: false, progress: await progress() });
 });

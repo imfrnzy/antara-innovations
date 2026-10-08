@@ -74,6 +74,11 @@ export function checkReport(report, classification, evidenceRows) {
       }
     } else problems.push('The report is missing the "Fix this one first" section.');
   }
+  // 4. Internal field codes (R1 to R7, R6_ai_disclosure) are for the engine, never for the reader.
+  const codeHit = text.match(/\bR[1-7](?:_[a-z_]+)?\b/);
+  if (codeHit) {
+    problems.push(`The report uses the internal code "${codeHit[0]}". Use the plain dimension name instead (for example AI boundaries, Clarity) and never write codes like R7.`);
+  }
   return problems;
 }
 
