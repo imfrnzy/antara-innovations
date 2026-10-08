@@ -87,3 +87,26 @@
 html.embedded .site-header,html.embedded .site-footer{display:none}
 html.embedded .snd{padding-top:22px}
 html.embedded body{background:var(--bg)}
+
+/* Records check */
+.records{border:1px solid var(--line); border-radius:8px; padding:24px 26px; margin:0 0 30px; background:var(--paper)}
+.records textarea{width:100%; font:inherit; font-size:15px; color:var(--ink); background:#fff; border:1px solid rgba(15,42,71,.22); border-radius:6px; padding:10px 12px; resize:vertical}
+.records input[type=file]{width:100%; font:inherit; font-size:14px}
+.records .howto{margin:0 0 14px}
+.records .howto summary{cursor:pointer; color:var(--steel)}
+.rec-inputs{display:grid; grid-template-columns:1fr 1fr; gap:0 20px; margin-top:8px}
+@media (max-width:700px){ .rec-inputs{grid-template-columns:1fr} }
+.rec-group{margin:20px 0 0}
+.rec-group h3{font-size:15px; color:var(--navy); margin:0 0 4px}
+.rec-group .gnote{font-size:13.5px; color:var(--muted); margin:0 0 8px; max-width:70ch}
+.rec-row{display:grid; grid-template-columns:1fr auto auto; gap:6px 16px; align-items:center; padding:9px 0; border-bottom:1px solid var(--line); font-size:15px}
+.rec-row .meta{font-size:13px; color:var(--muted)}
+.rec-row .tag{display:inline-block; font-size:12.5px; font-weight:700; padding:2px 8px; border-radius:4px}
+.tag-mapped{background:#DDEBE3; color:#1F5A3A}
+.tag-missing{background:#F6E1DD; color:#8A2A1C}
+.rec-row label.mark{font-size:13px; color:var(--steel); display:flex; gap:6px; align-items:center; white-space:nowrap}
+@media (max-width:620px){ .rec-row{grid-template-columns:1fr} }
+.embedded-box{margin-top:18px}
+.embedded-box summary{cursor:pointer; color:var(--steel)}
+.embedded-box ul{padding-left:18px}
+.rec-row .tag{justify-self:start}

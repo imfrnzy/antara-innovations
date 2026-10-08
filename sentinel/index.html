@@ -78,6 +78,48 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <button class="btn btn-solid" id="beginBtn">Begin Sentinel</button>
       <button class="linkish" id="resumeLink" hidden>Continue where I stopped</button>
     </div>
+    <div class="cfgcta">
+      <p><b>Already have an agent in mind?</b> Paste its tool configuration and see in a minute whether it has the three ingredients a prompt-injection attack needs. No account, and nothing leaves this page.</p>
+      <button class="btn" id="cfgOpen" type="button">Check an agent's configuration</button>
+    </div>
+  </section>
+
+  <!-- 1b. Configuration check -->
+  <section id="s-config" hidden>
+    <p class="rpt-kicker">Sentinel configuration check</p>
+    <h1>Check one agent's configuration.</h1>
+    <p class="lead">Prompt-injection attacks need three things in one place: text written by someone outside, access to private data, and the ability to act. Paste the file or list that says what your agent is connected to, and we'll check whether all three are there.</p>
+    <p class="small"><b>Nothing is sent anywhere.</b> It is read in this browser tab only. Secret values are never shown, kept or sent. If you prefer, remove the secrets from your copy before pasting.</p>
+    <details class="small howto">
+      <summary>What can I paste?</summary>
+      <p>An MCP configuration from Claude Desktop (claude_desktop_config.json), Cursor (.cursor/mcp.json), VS Code (mcp.json) or Claude Code (.mcp.json). Or a plain list of the tools and permissions an agent has, one per line, for example <code>gmail.send</code>, <code>Mail.Read</code>, <code>Zendesk</code>. For agent platforms without a config file, copy the list of connected tools and permissions from its settings page.</p>
+    </details>
+    <label class="field"><span>Configuration or tool list</span><textarea id="cfgText" rows="12" spellcheck="false" autocomplete="off" placeholder='{ "mcpServers": { ... } }'></textarea></label>
+    <label class="field"><span>Or choose a file</span><input type="file" id="cfgFile" accept=".json,.jsonc,.txt,application/json,text/plain"></label>
+    <div class="row">
+      <button class="btn btn-solid" type="button" id="cfgRun">Check it</button>
+      <button class="linkish" type="button" id="cfgBack">Back</button>
+    </div>
+    <p class="err" id="cfgErr" role="alert"></p>
+
+    <div id="cfgOut" hidden>
+      <div class="cfg-verdict" id="cfgVerdict" tabindex="-1"></div>
+      <div class="legchips" id="cfgLegs"></div>
+      <div id="cfgBreaks"></div>
+      <h2 class="rpt-h2" style="margin-top:28px">Other findings</h2>
+      <div id="cfgFlags"></div>
+      <h2 class="rpt-h2" style="margin-top:28px">What it connects to</h2>
+      <div class="matrixwrap"><table class="matrix cfgtable" id="cfgServers"></table></div>
+      <div class="row">
+        <button class="btn" type="button" id="cfgCopy">Copy a summary</button>
+        <span class="small" id="cfgCopied" role="status"></span>
+      </div>
+      <p class="notice">This is inferred from names and settings in what you pasted. It does not run anything, and it can't see what the real credentials are allowed to do. A clean result is not a certificate of safety.</p>
+      <div class="cfgcta">
+        <p><b>This was one agent.</b> The interview maps every agent you have, including the ones nobody registered, and checks who is accountable for each.</p>
+        <button class="btn btn-solid" type="button" id="cfgToInterview">Begin Sentinel</button>
+      </div>
+    </div>
   </section>
 
   <!-- 2. Organisation -->

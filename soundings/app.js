@@ -1,12 +1,16 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
 import { classifyUseCase, summarise, FIELDS } from "./engine.js";
+import { scanText, markCovered, toCsv, CATEGORIES, CATALOGUE_VERSION } from "../assets/records-scan.js";
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (id) => document.getElementById(id);
 const KEY = "soundings.assessment";
 let assessmentId = localStorage.getItem(KEY);
 let busy = false;
+let currentItems = [];   // the uses on the person's map, used by the records check
+let recScan = null;      // latest records check result
+const recMarked = new Set(); // tools the person says are covered by a use on their map
 
 const screens = ["s-intro", "s-setup", "s-interview", "s-gate", "s-results", "s-loading"];
 function show(id) {
@@ -182,8 +186,10 @@ $("gateForm").onsubmit = async (e) => {
 
 async function showResults(prof) {
   show("s-loading");
-  const { data: ucs } = await sb.from("use_cases").select("name, facts, classification").eq("assessment_id", assessmentId).order("created_at");
+  const { data: ucs } = await sb.from("use_cases").select("name, description, facts, classification").eq("assessment_id", assessmentId).order("created_at");
   const list = (ucs || []).map((u) => ({ ...u, classification: classifyUseCase(u.facts || {}) }));
+  currentItems = list;
+  if (recScan) renderRecords();
   const s = summarise(list);
   show("s-results");
 
@@ -258,10 +264,113 @@ function drawMap(items) {
   $("map").innerHTML = g + "</g>";
 }
 
+
+// ---------- records check: runs entirely in the browser ----------
+const GROUP_ORDER = ["assistant", "meeting", "coding", "writing", "media", "research", "platform", "agents", "vertical", "customer"];
+const money = (n) => (n === null || n === undefined ? "" : Number(n).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+function recordsView() {
+  const marked = markCovered(recScan.aiTools, currentItems).map((m) => ({ ...m, covered: m.covered || recMarked.has(m.id) }));
+  return { marked, embedded: recScan.embedded };
+}
+
+function renderRecords() {
+  if (!recScan) return;
+  const { marked, embedded } = recordsView();
+  const missing = marked.filter((m) => !m.covered);
+  $("recOut").hidden = false; $("recClear").hidden = false;
+  if (!marked.length) {
+    $("recHeadline").textContent = `We read ${recScan.rowsScanned.toLocaleString("en-GB")} rows and found no AI tools in them. That is useful, but it is not proof: personal accounts, free tiers and tools missing from our list would not show up here.`;
+  } else {
+    $("recHeadline").textContent = `We read ${recScan.rowsScanned.toLocaleString("en-GB")} rows and found ${marked.length} AI ${marked.length === 1 ? "tool" : "tools"}. ${missing.length === 0 ? "All of them are covered by something on your map." : `${missing.length} ${missing.length === 1 ? "is" : "are"} not on your map yet.`}`;
+  }
+  let html = "";
+  for (const cat of GROUP_ORDER) {
+    const rows = marked.filter((m) => m.category === cat);
+    if (!rows.length) continue;
+    html += `<div class="rec-group"><h3>${esc(CATEGORIES[cat].label)}</h3><p class="gnote">${esc(CATEGORIES[cat].note)}</p>`;
+    for (const m of rows) {
+      const amount = recScan.hasAmountColumn && m.spend !== null ? ` · about ${money(m.spend)} in the amount column` : "";
+      const personal = m.personalAccountsCommon ? " · often used on personal accounts" : "";
+      html += `<div class="rec-row" data-id="${esc(m.id)}">
+        <div><b>${esc(m.name)}</b><div class="meta">${m.rows} ${m.rows === 1 ? "row" : "rows"}${amount}${personal}</div></div>
+        <span class="tag ${m.covered ? "tag-mapped" : "tag-missing"}">${m.covered ? "On your map" : "Not on your map"}</span>
+        ${m.covered && !recMarked.has(m.id) ? "<span></span>" : `<label class="mark"><input type="checkbox" data-mark="${esc(m.id)}" ${recMarked.has(m.id) ? "checked" : ""}> It's covered by a use above</label>`}
+      </div>`;
+    }
+    html += "</div>";
+  }
+  $("recList").innerHTML = html;
+  $("recList").querySelectorAll("input[data-mark]").forEach((box) => {
+    box.onchange = () => { if (box.checked) recMarked.add(box.dataset.mark); else recMarked.delete(box.dataset.mark); renderRecords(); };
+  });
+
+  $("recEmbeddedBox").hidden = !embedded.length;
+  if (embedded.length) {
+    $("recEmbeddedSummary").textContent = `${embedded.length} ordinary ${embedded.length === 1 ? "tool" : "tools"} in your records that now include AI features`;
+    $("recEmbeddedNote").textContent = CATEGORIES.embedded.note;
+    $("recEmbeddedList").innerHTML = embedded.map((m) => `<li>${esc(m.name)}</li>`).join("");
+  }
+  $("recCatalogue").textContent = `Tool list version ${CATALOGUE_VERSION}.`;
+}
+
+async function runRecords(text) {
+  $("recErr").textContent = "";
+  const result = scanText(text);
+  if (result.error) { $("recErr").textContent = result.error; return; }
+  recScan = result;
+  renderRecords();
+  $("recOut").scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
+$("recBtn").onclick = async () => {
+  const file = $("recFile").files && $("recFile").files[0];
+  const pasted = $("recPaste").value;
+  try {
+    if (file) {
+      if (file.size > 6_000_000) { $("recErr").textContent = "That file is too large to read here. Export a smaller date range and try again."; return; }
+      await runRecords(await file.text());
+    } else if (pasted.trim()) {
+      await runRecords(pasted);
+    } else {
+      $("recErr").textContent = "Choose a file or paste a list first.";
+    }
+  } catch (err) {
+    console.error(err);
+    $("recErr").textContent = "Couldn't read that file. Try saving it as CSV and choosing it again.";
+  }
+};
+
+$("recClear").onclick = () => {
+  recScan = null; recMarked.clear();
+  $("recFile").value = ""; $("recPaste").value = "";
+  $("recOut").hidden = true; $("recClear").hidden = true; $("recErr").textContent = "";
+};
+
+$("recSave").onclick = () => {
+  if (!recScan) return;
+  const { marked } = recordsView();
+  const blob = new Blob([toCsv(marked)], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "ai-tools-in-your-records.csv";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+
+// Names only, never rows or amounts. Sent with a report request so the follow-up can start from it.
+function recordsNote() {
+  if (!recScan) return null;
+  const { marked } = recordsView();
+  if (!marked.length) return "Records check: no AI tools found.";
+  const missing = marked.filter((m) => !m.covered).map((m) => m.name);
+  return `Records check: ${marked.length} AI tools found, ${missing.length} not on the map${missing.length ? " (" + missing.join(", ") + ")" : ""}.`.slice(0, 500);
+}
+
 // ---------- commercial buttons ----------
 $("reportBtn").onclick = async () => {
   const { data: { session } } = await sb.auth.getSession();
-  await sb.from("report_requests").insert({ assessment_id: assessmentId, user_id: session.user.id, kind: "detailed_report" });
+  await sb.from("report_requests").insert({ assessment_id: assessmentId, user_id: session.user.id, kind: "detailed_report", note: recordsNote() });
   if (REPORT_PAYMENT_LINK) {
     const u = new URL(REPORT_PAYMENT_LINK);
     u.searchParams.set("client_reference_id", assessmentId);
@@ -276,7 +385,7 @@ $("reportBtn").onclick = async () => {
 
 $("fullBtn").onclick = async () => {
   const { data: { session } } = await sb.auth.getSession();
-  await sb.from("report_requests").insert({ assessment_id: assessmentId, user_id: session.user.id, kind: "full_soundings" });
+  await sb.from("report_requests").insert({ assessment_id: assessmentId, user_id: session.user.id, kind: "full_soundings", note: recordsNote() });
   $("fullBtn").disabled = true;
   $("fullMsg").innerHTML = `Noted. Abhinav will be in touch, or email <a href="mailto:${CONTACT_EMAIL}?subject=Full%20Soundings" style="border-bottom:1px solid var(--gold)">${CONTACT_EMAIL}</a> now.`;
 };

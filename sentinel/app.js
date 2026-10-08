@@ -1,6 +1,7 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
 import { classifyAgent, summarise, FIELDS } from "./engine.js";
+import { checkConfig, summaryText, capLabels } from "./config-check.js";
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (id) => document.getElementById(id);
@@ -8,7 +9,7 @@ const KEY = "sentinel.assessment";
 let assessmentId = localStorage.getItem(KEY);
 let busy = false;
 
-const screens = ["s-intro", "s-setup", "s-interview", "s-gate", "s-results", "s-loading"];
+const screens = ["s-intro", "s-config", "s-setup", "s-interview", "s-gate", "s-results", "s-loading"];
 function show(id) {
   screens.forEach((s) => ($(s).hidden = s !== id));
   window.scrollTo({ top: 0 });
@@ -206,6 +207,7 @@ async function showResults(prof) {
   let line = s.exposure
     ? `We mapped ${agentWord}. ${s.exposure === 1 ? "One sits" : `${s.exposure} sit`} in the exposure zone, where the consequence is high and nobody could trace it.`
     : `We mapped ${agentWord}. On what you've told us, none sit in the exposure zone.`;
+  if (s.open_paths) line += ` ${s.open_paths === 1 ? "One has" : `${s.open_paths} have`} an open attack path: outside text, sensitive data and an unapproved action all meet in the same agent.`;
   if (s.provisional) line += ` ${s.provisional === 1 ? "One result is" : `${s.provisional} results are`} provisional, because some facts are still unknown.`;
   $("headline").textContent = line;
 
@@ -222,6 +224,7 @@ async function showResults(prof) {
 const MATRIX_FIELDS = [
   { key: "C1_irreversible_without_approval", short: "Irrev." },
   { key: "C2_sees_sensitive_data", short: "Data" },
+  { key: "U1_untrusted_input", short: "Outside input" },
   { key: "C3_multi_system_access", short: "Multi-sys" },
   { key: "C4_writes_system_of_record", short: "Writes" },
   { key: "T1_named_owner", short: "Owner" },
@@ -231,7 +234,7 @@ const MATRIX_FIELDS = [
 function buildMatrix(items) {
   const head = `<thead><tr>
     <th class="rowhead">Agent</th>
-    ${MATRIX_FIELDS.map((f, i) => `<th${i === 4 ? ' class="divide"' : ""}>${f.short}</th>`).join("")}
+    ${MATRIX_FIELDS.map((f, i) => `<th${i === 5 ? ' class="divide"' : ""}>${f.short}</th>`).join("")}
     <th class="divide">Zone</th>
   </tr></thead>`;
   const rows = items.map((u, i) => {
@@ -241,7 +244,7 @@ function buildMatrix(items) {
       const v = entry ? entry.value : "unknown";
       const cls = v === "yes" ? "yes" : v === "no" ? "no" : "unknown";
       const mark = v === "yes" ? "\u2713" : v === "no" ? "\u2013" : "?";
-      return `<td${fi === 4 ? ' class="divide"' : ""}><span class="cell ${cls}">${mark}</span></td>`;
+      return `<td${fi === 5 ? ' class="divide"' : ""}><span class="cell ${cls}">${mark}</span></td>`;
     }).join("");
     const c = u.classification;
     return `<tr>
@@ -256,8 +259,10 @@ function buildMatrix(items) {
 // ---------- findings: structured records, with a real recommendation from the playbook's own remediation table ----------
 // Source: Sentinel_Playbook.docx, "The control-by-control remediation table". Picks the
 // single highest-priority applicable action, not a generic line.
-function recommend(facts) {
+function recommend(facts, path) {
   const v = (k) => (facts[k] && facts[k].value) || "unknown";
+  if (path && path.status === "OPEN")
+    return "Break the attack path at its cheapest point: put a person's approval in front of the action that can't be undone, and stop the agent acting directly on outside content.";
   if (v("C1_irreversible_without_approval") === "yes")
     return "Add a human approval gate before this action executes.";
   if (v("C3_multi_system_access") === "yes")
@@ -275,6 +280,15 @@ function recommend(facts) {
   return "Keep the current monitoring in place. Nothing here needs an immediate change.";
 }
 
+// The attack path: outside text + sensitive data + unapproved action. Inferred, not tested.
+function pathBox(p) {
+  if (!p) return "";
+  const title = { OPEN: "Attack path open", POSSIBLE: "Attack path not ruled out", CLOSED: "Attack path closed" }[p.status];
+  const options = p.status === "OPEN" && p.break_options.length
+    ? `<ul>${p.break_options.map((o) => `<li>${esc(o)}</li>`).join("")}</ul>` : "";
+  return `<div class="pathbox p-${p.status}"><b>${title}.</b> ${esc(p.narrative)}${options}<span class="inferred">Inferred from your answers. Not tested against the real agent.</span></div>`;
+}
+
 function buildFindings(items) {
   $("findingsList").innerHTML = items.map((u, i) => {
     const c = u.classification;
@@ -288,7 +302,8 @@ function buildFindings(items) {
       <h3>${esc(u.name)}</h3>
       <p class="small" style="margin:0 0 8px">Consequence ${c.consequence_exposure.toLowerCase()}, traceability ${c.traceability.toLowerCase()}.</p>
       ${c.reasons.length ? `<ul>${c.reasons.slice(0, 4).map((r) => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}
-      <p class="action"><b>Recommended now:</b> ${esc(recommend(u.facts || {}))}</p>
+      ${pathBox(c.attack_path)}
+      <p class="action"><b>Recommended now:</b> ${esc(recommend(u.facts || {}, c.attack_path))}</p>
     </div>`;
   }).join("");
 }
@@ -326,6 +341,68 @@ function drawMap(items) {
   });
   $("map").innerHTML = g + "</g>";
 }
+
+
+// ---------- configuration check: runs entirely in the browser ----------
+let lastConfig = null;
+$("cfgOpen").onclick = () => { show("s-config"); };
+$("cfgBack").onclick = () => { show("s-intro"); };
+$("cfgToInterview").onclick = () => { localStorage.removeItem(KEY); assessmentId = null; show("s-setup"); };
+
+$("cfgFile").onchange = async () => {
+  const file = $("cfgFile").files && $("cfgFile").files[0];
+  if (!file) return;
+  if (file.size > 400000) { $("cfgErr").textContent = "That file is too large. Paste just the part that lists the tools or servers."; return; }
+  try { $("cfgText").value = await file.text(); $("cfgErr").textContent = ""; }
+  catch { $("cfgErr").textContent = "Couldn't read that file. Paste its contents instead."; }
+};
+
+const LEG_TEXT = {
+  untrusted_input: ["Outside content can reach it", { yes: "Yes", maybe: "Possibly", no: "Not found" }],
+  private_data: ["Can see private data", { yes: "Yes", maybe: "Possibly", no: "Not found" }],
+  outward_action: ["Can act on other systems", { yes: "Yes", maybe: "Possibly", no: "Not found" }],
+};
+
+function renderConfig(r) {
+  $("cfgOut").hidden = false;
+  $("cfgVerdict").className = `cfg-verdict st-${r.status}`;
+  $("cfgVerdict").innerHTML = `<h2>${esc(r.headline)}</h2><p>${esc(r.narrative)}</p>`;
+  $("cfgLegs").innerHTML = Object.entries(r.legs).map(([k, v]) =>
+    `<div class="legchip l-${v}"><b>${esc(LEG_TEXT[k][0])}</b>${esc(LEG_TEXT[k][1][v])}</div>`).join("");
+  $("cfgBreaks").innerHTML = r.breaks.length
+    ? `<div class="breaks"><h3>Ways to break the path</h3><ul>${r.breaks.map((b) => `<li>${esc(b)}</li>`).join("")}</ul></div>` : "";
+  $("cfgFlags").innerHTML = r.flags.length
+    ? r.flags.map((f) => `<div class="cfgflag"><span class="lvl lvl-${f.level}">${f.level}</span><div><span class="who">${esc(f.server)}:</span> ${esc(f.text)}</div></div>`).join("")
+    : '<p class="small">Nothing else stood out in what you pasted.</p>';
+  $("cfgServers").innerHTML = `<thead><tr><th class="rowhead">Name</th><th>What it is</th><th>What it can do</th></tr></thead><tbody>${
+    r.servers.map((sv) => {
+      const caps = capLabels(sv.caps), maybe = capLabels(sv.maybe);
+      const can = [...caps, ...maybe.map((m) => m + " (depends on setup)")];
+      return `<tr><td class="rowhead">${esc(sv.name)}${sv.disabled ? '<span class="idx">disabled</span>' : ""}</td>
+        <td>${sv.recognised ? esc(sv.kinds.join(", ")) : "Not recognised"}</td>
+        <td class="notes">${can.length ? esc(can.join("; ")) : (sv.recognised ? "No outside reach on its own" : "Unknown. Assume it can do anything until checked.")}${sv.notes.length ? "<br>" + esc(sv.notes[0]) : ""}</td></tr>`;
+    }).join("")}</tbody>`;
+  $("cfgVerdict").focus({ preventScroll: true });
+  $("cfgVerdict").scrollIntoView({ block: "start", behavior: "smooth" });
+}
+
+$("cfgRun").onclick = () => {
+  $("cfgErr").textContent = ""; $("cfgCopied").textContent = "";
+  const r = checkConfig($("cfgText").value);
+  if (r.error) { $("cfgOut").hidden = true; lastConfig = null; $("cfgErr").textContent = r.error; return; }
+  lastConfig = r;
+  renderConfig(r);
+};
+
+$("cfgCopy").onclick = async () => {
+  if (!lastConfig) return;
+  try {
+    await navigator.clipboard.writeText(summaryText(lastConfig));
+    $("cfgCopied").textContent = "Copied.";
+  } catch {
+    $("cfgCopied").textContent = "Couldn't copy. Select the text above instead.";
+  }
+};
 
 // ---------- commercial buttons ----------
 $("reportBtn").onclick = async () => {

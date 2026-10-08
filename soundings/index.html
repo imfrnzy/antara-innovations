@@ -172,6 +172,39 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
     <h2>Every use we mapped</h2>
     <ul class="uclist" id="ucList"></ul>
 
+    <section class="records" id="recordsBox" aria-labelledby="recHead">
+      <h2 id="recHead">Check this map against your records</h2>
+      <p>Everything above comes from what you told us. Your records show what is actually being paid for and signed into. Drop in a card or expense export, or a list of the apps connected to your single sign-on, and we'll look for AI tools in it.</p>
+      <p class="small"><b>Nothing is uploaded.</b> The file is read in this browser tab and never leaves your computer. We only count matches, we don't keep or show the rows.</p>
+      <details class="small howto">
+        <summary>Where do I get a list?</summary>
+        <p>Ask finance for the last 12 months of company card or expense transactions as a CSV. Ask IT for the list of apps people have signed into with company logins, and the browser extensions in use. Any of them works. Paste a plain list of names if that is all you have.</p>
+      </details>
+      <div class="rec-inputs">
+        <label class="field"><span>Choose a file (CSV, TSV or text)</span><input type="file" id="recFile" accept=".csv,.tsv,.txt,text/csv,text/plain"></label>
+        <label class="field"><span>Or paste a list</span><textarea id="recPaste" rows="4" placeholder="e.g. one app per line, or rows copied from a spreadsheet"></textarea></label>
+      </div>
+      <div class="row">
+        <button class="btn btn-solid" type="button" id="recBtn">Check my records</button>
+        <button class="linkish" type="button" id="recClear" hidden>Clear</button>
+      </div>
+      <p class="err" id="recErr" role="alert"></p>
+      <div id="recOut" hidden>
+        <p class="headline" id="recHeadline"></p>
+        <div id="recList"></div>
+        <details id="recEmbeddedBox" hidden class="small embedded-box">
+          <summary id="recEmbeddedSummary"></summary>
+          <p id="recEmbeddedNote"></p>
+          <ul id="recEmbeddedList"></ul>
+        </details>
+        <div class="row">
+          <button class="btn" type="button" id="recSave">Save this list (CSV)</button>
+          <span class="small" id="recCatalogue"></span>
+        </div>
+        <p class="notice">Matching is by name, so check each one. A tool in your records is not proof it is being used with company data, and a tool missing from your records may still be in use on personal accounts. The list of tools is kept up to date by hand and will miss new ones.</p>
+      </div>
+    </section>
+
     <div class="locked">
       <h2>The detailed report</h2>
       <p>The free map shows where each use sits. The detailed report shows why, and what to do about it.</p>

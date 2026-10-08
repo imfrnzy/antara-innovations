@@ -1,9 +1,11 @@
-// Sentinel deterministic engine, v1.
+// Sentinel deterministic engine, v2.
+// v2 adds one fact (does the agent read content written by people outside the organisation)
+// and an attack-path result built from it. The zone and traceability rules are unchanged from v1.
 // Built directly from Sentinel_Playbook.docx (Steps 3 and 4). The AI interviewer
 // only gathers facts about agents. This file alone decides classifications.
 // Same facts in, same result out. No network calls, no dynamic code execution.
 
-export const ENGINE_VERSION = "sentinel-rules-1.0";
+export const ENGINE_VERSION = "sentinel-rules-2.0";
 
 // The fixed checklist, taken directly from the playbook's scoring questions.
 // Every fact is answered yes, no, or unknown.
@@ -13,6 +15,8 @@ export const CHECKLIST = {
   C2_sees_sensitive_data: "Does what it can see include customer data, financial account details, health information, or anyone's login credentials?",
   C3_multi_system_access: "Is it connected to more than one system at once, so what it can access and what it can do compound together?",
   C4_writes_system_of_record: "Does it write or update a system of record, even if that write is reversible?",
+  // Untrusted input (added in v2). Not part of the zone score; it feeds the attack path.
+  U1_untrusted_input: "Does it read content written by people or systems outside the organisation and then act on it, for example inbound email, customer messages, tickets, web pages or uploaded files?",
   // Traceability (playbook Step 3, three factual questions)
   T1_named_owner: "Is there a named person, not \"the team\", who owns this agent and would be the first call if something went wrong?",
   T2_reconstructable: "Can you reconstruct, within a few hours, exactly what it saw, decided and did for any single action, not just that an action happened?",
@@ -86,6 +90,73 @@ function scoreTraceability(facts) {
   return "INVISIBLE";
 }
 
+
+// ---- Attack path (v2) ----
+// The pattern prompt-injection attacks depend on has three parts: text written by someone
+// outside can reach the agent, the agent can see sensitive data, and the agent can take an
+// action no person has approved. If all three are true, one hostile email or web page is
+// enough. If any one is false, that particular path is closed.
+// This is inferred from the answers given. It has not been tested against the real agent.
+function legValue(facts, fieldName) {
+  const value = getFieldValue(facts, fieldName);
+  if (fieldIsContradiction(facts, fieldName)) return "unknown";
+  return value;
+}
+
+export function assessAttackPath(facts) {
+  const legs = {
+    untrusted_input: legValue(facts, "U1_untrusted_input"),
+    sensitive_data: legValue(facts, "C2_sees_sensitive_data"),
+    unapproved_action: legValue(facts, "C1_irreversible_without_approval"),
+  };
+  const values = Object.values(legs);
+  const closedLegs = Object.keys(legs).filter((leg) => legs[leg] === "no");
+  const unknownLegs = Object.keys(legs).filter((leg) => legs[leg] === "unknown");
+
+  let status = "POSSIBLE";
+  if (closedLegs.length > 0) status = "CLOSED";
+  else if (values.every((value) => value === "yes")) status = "OPEN";
+
+  const writesRecords = fieldIsYes(facts, "C4_writes_system_of_record");
+  const breakOptions = [];
+  if (status !== "CLOSED") {
+    if (legs.unapproved_action !== "no") {
+      breakOptions.push("Put a person's approval in front of the action that can't be undone. This is usually the cheapest cut.");
+    }
+    if (legs.sensitive_data !== "no") {
+      breakOptions.push("Cut what the agent can see down to what the task needs, so there is less to leak.");
+    }
+    if (legs.untrusted_input !== "no") {
+      breakOptions.push("Don't let it act directly on outside content. Let it summarise or quote that content, and let a separate step or a person decide what happens.");
+    }
+  }
+
+  let narrative = "";
+  if (status === "OPEN") {
+    narrative = "Text written by someone outside the organisation can reach this agent, it can see sensitive data, and it can act without a person approving. That is the combination prompt-injection attacks rely on: an email, web page or file carries instructions, the agent follows them, and nothing between the instruction and the action stops it.";
+  } else if (status === "POSSIBLE") {
+    const missing = unknownLegs.map((leg) => ({ untrusted_input: "whether outside content reaches it", sensitive_data: "whether it sees sensitive data", unapproved_action: "whether it can act without approval" }[leg]));
+    narrative = "This path can't be ruled out yet. Still to establish: " + missing.join(", ") + ".";
+  } else {
+    const cutBy = closedLegs.map((leg) => ({ untrusted_input: "it does not read outside content", sensitive_data: "it does not see sensitive data", unapproved_action: "a person approves its irreversible actions" }[leg]));
+    narrative = "This path is closed on what you've said: " + cutBy.join(" and ") + ".";
+    if (writesRecords) {
+      narrative += " It still writes to a system of record, so a bad instruction could corrupt data even without an irreversible action.";
+    }
+  }
+
+  return {
+    status: status,
+    legs: legs,
+    closed_by: closedLegs,
+    unknown: unknownLegs,
+    writes_records: writesRecords,
+    narrative: narrative,
+    break_options: breakOptions,
+    inferred: true,
+  };
+}
+
 export function classifyAgent(facts) {
   const unknownConsequenceFields = CONSEQUENCE_FIELDS.filter((fieldName) => fieldIsUnknown(facts, fieldName));
   const isProvisional = unknownConsequenceFields.length > 0;
@@ -97,10 +168,14 @@ export function classifyAgent(facts) {
 
   const contradictedFields = FIELDS.filter((fieldName) => fieldIsContradiction(facts, fieldName));
   const unknownFields = FIELDS.filter((fieldName) => fieldIsUnknown(facts, fieldName));
-  const priority = calculatePriority(zone, consequenceScore, traceabilityState, contradictedFields, isProvisional);
+  let priority = calculatePriority(zone, consequenceScore, traceabilityState, contradictedFields, isProvisional);
+  const attackPath = assessAttackPath(facts);
+  // An open attack path moves the agent up the list.
+  if (attackPath.status === "OPEN") priority -= 2;
 
   return {
     engine: ENGINE_VERSION,
+    attack_path: attackPath,
     consequence_exposure: CONSEQUENCE_LEVEL_NAMES[consequenceScore],
     traceability: traceabilityState,
     zone: zone,
@@ -108,7 +183,7 @@ export function classifyAgent(facts) {
     unknown_fields: unknownFields,
     contradictions: contradictedFields,
     priority: priority,
-    reasons: buildReasons(facts, { consequenceScore, traceabilityState }),
+    reasons: buildReasons(facts, { consequenceScore, traceabilityState, attackPath }),
   };
 }
 
@@ -154,6 +229,12 @@ function buildReasons(facts, scoringSummary) {
     reasons.push("It writes to a system of record, even if that write is reversible.");
   }
 
+  if (scoringSummary.attackPath && scoringSummary.attackPath.status === "OPEN") {
+    reasons.push("Outside text can reach it, it sees sensitive data and it can act unapproved: the combination prompt-injection attacks use.");
+  } else if (fieldIsYes(facts, "U1_untrusted_input")) {
+    reasons.push("It reads content written by people outside the organisation.");
+  }
+
   if (scoringSummary.traceabilityState === "INVISIBLE") {
     reasons.push("Nobody outside the team knew this agent existed before now.");
   } else if (scoringSummary.traceabilityState === "INFORMAL") {
@@ -195,6 +276,7 @@ export function summarise(agents) {
     overbuilt: countInZone("OVERBUILT"),
     low_stakes: countInZone("LOW_STAKES"),
     provisional: classifiedAgents.filter((agent) => agent.c.provisional).length,
+    open_paths: classifiedAgents.filter((agent) => agent.c.attack_path && agent.c.attack_path.status === "OPEN").length,
     top: orderedByPriority.length > 0 ? orderedByPriority[0] : null,
     ordered: orderedByPriority,
   };
@@ -204,7 +286,7 @@ export function summarise(agents) {
 // Consequence facts first, since they move the zone most; traceability last,
 // since the playbook notes people round these up unless asked plainly.
 const FIELD_ASK_ORDER = [
-  "C1_irreversible_without_approval", "C2_sees_sensitive_data", "C3_multi_system_access",
+  "C1_irreversible_without_approval", "C2_sees_sensitive_data", "U1_untrusted_input", "C3_multi_system_access",
   "C4_writes_system_of_record", "T1_named_owner", "T3_known_outside_team", "T2_reconstructable",
 ];
 

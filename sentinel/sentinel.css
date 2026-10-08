@@ -155,3 +155,46 @@ table.matrix td.divide, table.matrix th.divide{border-left:2px solid var(--navy)
 .sevbadge.sev-OVERBUILT{background:#7A5A12; color:#fff}
 .sevbadge.sev-LOW_STAKES{background:#5B6472; color:#fff}
 .finding .provtag{font-size:11px; color:var(--gold-text); font-weight:700; text-transform:uppercase; letter-spacing:.4px}
+
+/* Configuration check and attack path */
+.cfgcta{margin:34px 0 0; padding:18px 22px; border:1px solid var(--line); border-radius:8px; background:var(--paper)}
+.cfgcta p{margin:0 0 12px; max-width:62ch}
+#s-config textarea{width:100%; font-family:ui-monospace,'SF Mono',Consolas,monospace; font-size:13px; line-height:1.5; color:var(--ink); background:var(--paper); border:1px solid rgba(15,42,71,.22); border-radius:6px; padding:12px; resize:vertical}
+#s-config input[type=file]{font:inherit; font-size:14px}
+#s-config .howto{margin:0 0 16px}
+#s-config .howto summary{cursor:pointer; color:var(--steel)}
+#s-config code{background:var(--paper); padding:1px 5px; border-radius:3px; font-size:12.5px}
+.cfg-verdict{border-left:5px solid var(--steel); background:var(--paper); border-radius:6px; padding:18px 22px; margin:26px 0 16px}
+.cfg-verdict h2{margin:0 0 8px; font-size:21px}
+.cfg-verdict p{margin:0; max-width:66ch}
+.cfg-verdict.st-OPEN{border-left-color:#8A2A1C; background:#FBEDEA}
+.cfg-verdict.st-POSSIBLE,.cfg-verdict.st-UNKNOWN{border-left-color:#B8923F; background:#FAF4E6}
+.cfg-verdict.st-CLOSED{border-left-color:#1F5A3A; background:#EEF5F0}
+.legchips{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 22px}
+.legchip{border:1px solid var(--line); border-radius:6px; padding:10px 14px; background:var(--paper); font-size:14px; min-width:190px}
+.legchip b{display:block; font-size:12px; letter-spacing:.4px; text-transform:uppercase; margin-bottom:2px}
+.legchip.l-yes{border-color:#8A2A1C; background:#FBEDEA}
+.legchip.l-yes b{color:#8A2A1C}
+.legchip.l-maybe{border-color:#B8923F; background:#FAF4E6}
+.legchip.l-maybe b{color:#7A5A12}
+.legchip.l-no b{color:#1F5A3A}
+.breaks{background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:14px 20px}
+.breaks h3{margin:0 0 6px; font-size:15px; color:var(--navy)}
+.breaks ul{margin:0; padding-left:18px}
+.breaks li{padding:3px 0; font-size:14.5px}
+.cfgflag{display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--line); font-size:14.5px}
+.cfgflag .lvl{flex:none; font-size:10.5px; font-weight:800; letter-spacing:.5px; padding:3px 8px; border-radius:3px; color:#fff; margin-top:2px}
+.lvl-HIGH{background:#8A2A1C}
+.lvl-MEDIUM{background:#7A5A12}
+.lvl-LOW{background:#5B6472}
+.cfgflag .who{font-weight:700; color:var(--navy)}
+table.cfgtable{min-width:0}
+table.cfgtable td,table.cfgtable th{text-align:left; vertical-align:top}
+table.cfgtable td.notes{font-size:12.5px; color:var(--muted)}
+.pathbox{margin:0 0 12px; padding:11px 14px; border-radius:5px; font-size:13.5px; border-left:3px solid var(--steel); background:var(--bg)}
+.pathbox.p-OPEN{border-left-color:#8A2A1C; background:#FBEDEA}
+.pathbox.p-POSSIBLE{border-left-color:#B8923F; background:#FAF4E6}
+.pathbox.p-CLOSED{border-left-color:#1F5A3A}
+.pathbox b{color:var(--navy)}
+.pathbox ul{margin:6px 0 0; padding-left:18px}
+.pathbox .inferred{display:block; margin-top:6px; font-size:12px; color:var(--muted)}
