@@ -9,14 +9,17 @@ createdb "$DB"; trap 'dropdb "$DB"' EXIT
 Q() { psql -v ON_ERROR_STOP=1 -qtA -d "$DB" "$@"; }
 Q -f stub-auth.sql >/dev/null
 Q -f ../../supabase/migrations/030_accounts_history.sql >/dev/null
-Q -f ../../supabase/migrations/030_accounts_history.sql >/dev/null   # idempotent re-run
+Q -f ../../supabase/migrations/032_verified_sessions.sql >/dev/null
+Q -f ../../supabase/migrations/030_accounts_history.sql >/dev/null   # idempotent re-run (030 then 032 again)
+Q -f ../../supabase/migrations/032_verified_sessions.sql >/dev/null
 ANN=11111111-1111-1111-1111-111111111111; BOB=22222222-2222-2222-2222-222222222222; GUEST=33333333-3333-3333-3333-333333333333; GUEST2=44444444-4444-4444-4444-444444444444
 Q -c "insert into auth.users values ('$ANN'),('$BOB'),('$GUEST'),('$GUEST2')" >/dev/null
 SNAP='{"v":1,"kind":"records","tools":[]}'
 
 # as <uid> <email|-> <anonymous true|false> <sql>   (runs as the logged-in role; prints last line or the error)
 as() {
-  local claims="{\"sub\":\"$1\",\"email\":\"$([ "$2" = "-" ] && echo "" || echo "$2")\",\"is_anonymous\":$3}" out
+  local amr="${AMR:-}"; [ -z "$amr" ] && amr='[{"method":"otp"}]'
+  local claims="{\"sub\":\"$1\",\"email\":\"$([ "$2" = "-" ] && echo "" || echo "$2")\",\"is_anonymous\":$3,\"amr\":$amr}" out
   out=$(psql -X -tA -d "$DB" -c "set role authenticated; select set_config('request.jwt.claim.sub','$1',false); select set_config('request.jwt.claims','$claims',false); $4" 2>&1 || true)
   if echo "$out" | grep -q 'ERROR:'; then echo "$out" | grep -m1 'ERROR:'; else echo "$out" | grep -v '^$' | tail -1; fi
 }
@@ -52,12 +55,16 @@ has "the anon role cannot grant either" "$(Q -c "set role anon; select public.gr
 Q -c "select public.grant_plan('Ann@Corp.com','pro',30,'invoice 001');" >/dev/null
 check "grant is stored lower-case" "$(Q -c "select email from public.plan_grants;")" "ann@corp.com"
 check "plan becomes pro" "$(as $ANN ann@corp.com false "select public.my_plan();")" "pro"
+check "an email typed into an anonymous-method session does not get Pro" "$(AMR='[{"method":"anonymous"}]' as $ANN ann@corp.com false "select public.my_plan();")" "free"
+check "a login with no method recorded does not get Pro" "$(AMR='[]' as $ANN ann@corp.com false "select public.my_plan();")" "free"
+has "and an unproven email cannot save either" "$(AMR='[{"method":"anonymous"}]' ins $ANN ann@corp.com false)" "sign_in_required"
+check "a password login counts as proven" "$(AMR='[{"method":"password"}]' as $ANN ann@corp.com false "select public.my_plan();")" "pro"
 check "a different person is still free" "$(as $BOB bob@corp.com false "select public.my_plan();")" "free"
 check "the claim in the token is matched in lower case" "$(as $ANN ANN@CORP.COM false "select public.my_plan();")" "pro"
 check "save 4 now allowed" "$(ins $ANN ann@corp.com false)" "INSERT 0 1"
 
 # Pro stops at 200
-Q -c "set role authenticated; select set_config('request.jwt.claim.sub','$ANN',false); select set_config('request.jwt.claims','{\"sub\":\"$ANN\",\"email\":\"ann@corp.com\",\"is_anonymous\":false}',false);
+Q -c "set role authenticated; select set_config('request.jwt.claim.sub','$ANN',false); select set_config('request.jwt.claims','{\"sub\":\"$ANN\",\"email\":\"ann@corp.com\",\"is_anonymous\":false,\"amr\":[{\"method\":\"otp\"}]}',false);
   do \$\$ begin for i in 1..250 loop begin insert into public.scan_history(user_id,tool,snapshot) values ('$ANN','soundings','$SNAP'); exception when others then if sqlerrm <> 'pro_limit' then raise; end if; exit; end; end loop; end \$\$;" >/dev/null
 check "pro stops at 200" "$(as $ANN ann@corp.com false "select count(*) from public.scan_history where tool='soundings';")" "200"
 has "201st refused with pro_limit" "$(ins $ANN ann@corp.com false)" "pro_limit"

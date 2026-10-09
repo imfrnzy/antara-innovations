@@ -121,29 +121,16 @@ const snapOf = (text) => { const s = scanText(text); return snapshotRecords(s, m
     await page.click('#historyPanel [data-hp="signin"] button');
     await page.waitForFunction(() => /sent a link to/.test(document.querySelector("#historyPanel").textContent));
     const log = await page.evaluate(() => window.__mock.log);
-    const up = log.find((l) => l.op === "updateUser");
-    assert.equal(up.attrs.email, "ann@corp.com"); assert.match(up.opts.emailRedirectTo, /\/soundings\/$/);
+    const up = log.find((l) => l.op === "signInWithOtp");
+    assert.equal(up.args.email, "ann@corp.com"); assert.match(up.args.options.emailRedirectTo, /\/soundings\/$/);
+    assert.ok(!log.some((l) => l.op === "updateUser"), "never adds an unproven email to the visitor");
     const pending = await page.evaluate(() => localStorage.getItem("hp.pending.soundings"));
     assert.ok(pending && /chatgpt/i.test(pending) && !/TESCO/.test(pending)); ok("anonymous visitor is sent a link, and the scan waits locally without row text");
   } finally { await browser.close(); }
 }
 {
-  // email already has an account: fall back to signing in with a link
-  const mock = { session: ANON, tables: { ...baseTables() }, updateUserError: "A user with this email address has already been registered" };
-  const { browser, page } = await launch(base, { mock, localStorage: { "soundings.assessment": "a1" } });
-  try {
-    await page.goto(base + "/soundings/");
-    await page.waitForSelector("#historyPanel .hp h3");
-    await page.fill('#historyPanel input[name="email"]', "ann@corp.com");
-    await page.click('#historyPanel [data-hp="signin"] button');
-    await page.waitForFunction(() => /sent a link to/.test(document.querySelector("#historyPanel").textContent));
-    const log = await page.evaluate(() => window.__mock.log);
-    assert.ok(log.some((l) => l.op === "signInWithOtp" && l.args.email === "ann@corp.com")); ok("existing account falls back to a sign-in link");
-  } finally { await browser.close(); }
-}
-{
   // a link that fails for another reason shows a plain message
-  const mock = { session: ANON, tables: { ...baseTables() }, updateUserError: "something unexpected" };
+  const mock = { session: ANON, tables: { ...baseTables() }, otpError: "something unexpected" };
   const { browser, page } = await launch(base, { mock, localStorage: { "soundings.assessment": "a1" } });
   try {
     await page.goto(base + "/soundings/");

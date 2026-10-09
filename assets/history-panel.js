@@ -108,13 +108,8 @@ export function mountHistoryPanel(opts) {
   }
 
   async function sendLink(email) {
-    const { data: { session } } = await sb.auth.getSession();
-    if (session && session.user && session.user.is_anonymous) {
-      const { error } = await sb.auth.updateUser({ email }, { emailRedirectTo: redirectTo });
-      if (!error) return;
-      // That email already has an account: sign in to it instead. Its saved scans come with it.
-      if (!/already|registered|exists|taken/i.test(String(error.message || ""))) throw error;
-    }
+    // Always a real email link. The person proves they own the address by opening it.
+    // (Adding an email to the anonymous visitor would apply it instantly when "Confirm email" is off, with no proof.)
     const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo, shouldCreateUser: true } });
     if (error) throw error;
   }

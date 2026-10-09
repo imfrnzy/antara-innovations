@@ -134,7 +134,7 @@ for (const tool of ["squall", "ensign"]) {
     await page.click('#historyPanel [data-hp="signin"] button');
     await page.waitForSelector("#historyPanel .hp-ok");
     const log = await logOf(page);
-    assert.ok(log.some((l) => l.op === "updateUser" && l.attrs.email === "ann@corp.com"));
+    assert.ok(log.some((l) => l.op === "signInWithOtp" && l.args.email === "ann@corp.com"));
     const pend = await page.evaluate(() => JSON.parse(localStorage.getItem("hp.pending.keel")));
     assert.equal(pend.snapshot.kind, "scores");
     ok("keel: an anonymous visitor gets a sign-in link, and the result is kept for after they confirm");
