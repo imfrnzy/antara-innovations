@@ -198,10 +198,16 @@ export function mountHistoryPanel(opts) {
         <h3>${viewOnly ? "Already saved a scan?" : "Keep this and see what changes next time"}</h3>
         <p>${viewOnly ? "Sign in with the email you used and your saved scans appear here." : esc(copy.teaser)}</p>
         <p class="hp-small">Saving keeps ${esc(copy.keeps)}. It never keeps ${esc(copy.never)}. Nothing is saved unless you press Save.</p>
-        ${sentTo ? `<p class="hp-ok" role="status">We've sent a link to <b>${esc(sentTo)}</b>. Open it on this device and you'll come back to this page.${snap ? " Your scan is kept here until then." : ""}</p>` : `
+        ${sentTo ? `<p class="hp-ok" role="status">We've emailed <b>${esc(sentTo)}</b>. Type the code from that email here.${snap ? " Your scan is kept here until then." : ""}</p>
+        <form class="hp-row" data-hp="code" novalidate>
+          <input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="Code from the email" maxlength="10" aria-label="Code from the email" required>
+          <button class="btn btn-solid" type="submit"${busy ? " disabled" : ""}>Confirm</button>
+          <button class="linkish" type="button" data-hp="resend">Use a different email</button>
+        </form>
+        <p class="hp-small">If your email has a link instead of a code, open the link on this device.</p>` : `
         <form class="hp-row" data-hp="signin" novalidate>
           <input type="email" name="email" placeholder="Your work email" autocomplete="email" maxlength="120" aria-label="Your work email" required>
-          <button class="btn btn-solid" type="submit"${busy ? " disabled" : ""}>Email me a sign-in link</button>
+          <button class="btn btn-solid" type="submit"${busy ? " disabled" : ""}>Email me a sign-in code</button>
         </form>`}
         <p class="hp-err" role="alert">${esc(err)}</p>`;
     } else {
@@ -258,6 +264,24 @@ export function mountHistoryPanel(opts) {
       }
       busy = false; draw();
     };
+    const codeForm = q("code");
+    if (codeForm) codeForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const token = String(new FormData(codeForm).get("code") || "").replace(/\s+/g, "");
+      if (!/^\d{4,10}$/.test(token)) { err = "Type the numbers from the email."; draw(); return; }
+      busy = true; err = ""; draw();
+      try {
+        const { error } = await sb.auth.verifyOtp({ email: sentTo, token, type: "email" });
+        if (error) throw error;
+        sentTo = ""; busy = false; await load(); return;
+      } catch (ex) {
+        console.error(ex);
+        err = "That code didn't work. Check it and try again, or use a different email to get a new one.";
+      }
+      busy = false; draw();
+    };
+    const rs = q("resend");
+    if (rs) rs.onclick = () => { sentTo = ""; err = ""; draw(); };
     const saveBtn = q("save");
     if (saveBtn) saveBtn.onclick = () => {
       const snap = getSnapshot && getSnapshot();

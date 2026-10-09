@@ -137,7 +137,7 @@ for (const tool of ["squall", "ensign"]) {
     assert.ok(log.some((l) => l.op === "signInWithOtp" && l.args.email === "ann@corp.com"));
     const pend = await page.evaluate(() => JSON.parse(localStorage.getItem("hp.pending.keel")));
     assert.equal(pend.snapshot.kind, "scores");
-    ok("keel: an anonymous visitor gets a sign-in link, and the result is kept for after they confirm");
+    ok("keel: an anonymous visitor gets a sign-in code, and the result is kept for after they confirm");
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
   // Coming back from the email link: the landing page opens the sign-in box and offers to save it.

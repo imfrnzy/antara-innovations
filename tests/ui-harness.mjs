@@ -66,6 +66,7 @@ export function createClient() {
       signInAnonymously: async () => ({ data: { session: m().session }, error: null }),
       updateUser: async (attrs, opts) => { m().log.push({ op: "updateUser", attrs, opts }); return { data: {}, error: m().updateUserError ? { message: m().updateUserError } : null }; },
       signInWithOtp: async (args) => { m().log.push({ op: "signInWithOtp", args }); return { data: {}, error: m().otpError ? { message: m().otpError } : null }; },
+      verifyOtp: async (args) => { m().log.push({ op: "verifyOtp", args }); if (m().verifyError) return { data: {}, error: { message: m().verifyError } }; m().session = m().verifySession || { user: { id: "u1", email: args.email, is_anonymous: false } }; return { data: { session: m().session }, error: null }; },
       signOut: async () => { m().log.push({ op: "signOut" }); m().session = null; return { error: null }; },
     },
     from: (t) => query(t),

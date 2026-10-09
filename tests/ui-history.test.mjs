@@ -119,7 +119,7 @@ const snapOf = (text) => { const s = scanText(text); return snapshotRecords(s, m
 
     await page.fill('#historyPanel input[name="email"]', "ann@corp.com");
     await page.click('#historyPanel [data-hp="signin"] button');
-    await page.waitForFunction(() => /sent a link to/.test(document.querySelector("#historyPanel").textContent));
+    await page.waitForFunction(() => /emailed/.test(document.querySelector("#historyPanel").textContent));
     const log = await page.evaluate(() => window.__mock.log);
     const up = log.find((l) => l.op === "signInWithOtp");
     assert.equal(up.args.email, "ann@corp.com"); assert.match(up.args.options.emailRedirectTo, /\/soundings\/$/);
@@ -298,7 +298,7 @@ async function check(page, text) {
     await check(page, CFG_B);
     await page.fill('#historyPanel input[name="email"]', "ann@corp.com");
     await page.click('#historyPanel [data-hp="signin"] button');
-    await page.waitForFunction(() => /sent a link to/.test(document.querySelector("#historyPanel").textContent));
+    await page.waitForFunction(() => /emailed/.test(document.querySelector("#historyPanel").textContent));
     const pending = await page.evaluate(() => localStorage.getItem("hp.pending.sentinel"));
     assert.ok(pending && !/ghp_/.test(pending)); ok("Sentinel keeps the waiting check without secrets");
     // the link is opened: same browser storage, now a confirmed account
@@ -311,6 +311,47 @@ async function check(page, text) {
       await back.page.waitForSelector("#historyPanel .hp-list li");
       ok("coming back from the email lands on the configuration screen with the check ready to save");
     } finally { await back.browser.close(); }
+  } finally { await browser.close(); }
+}
+
+// ---------- Typing the code from the email (the email carries a code, not a link) ----------
+{
+  const mock = { session: ANON, appendOnInsert: ["scan_history"], rpc: { my_plan: "free" }, tables: { ...baseTables(), scan_history: [] } };
+  const { browser, page, errors } = await launch(base, { mock, localStorage: { "soundings.assessment": "a1" } });
+  try {
+    await page.goto(base + "/soundings/");
+    await page.waitForSelector("#recPaste");
+    await scan(page, MAY);
+    await page.fill('#historyPanel input[name="email"]', "ann@corp.com");
+    await page.click('#historyPanel [data-hp="signin"] button');
+    await page.waitForSelector('#historyPanel [data-hp="code"]');
+    await page.fill('#historyPanel input[name="code"]', "12ab");
+    await page.click('#historyPanel [data-hp="code"] button[type="submit"]');
+    assert.match(await page.textContent("#historyPanel"), /numbers from the email/); ok("letters in the code box are refused before anything is sent");
+    await page.fill('#historyPanel input[name="code"]', "123 456");
+    await page.click('#historyPanel [data-hp="code"] button[type="submit"]');
+    await page.waitForSelector('#historyPanel [data-hp="save"]');
+    const v = (await page.evaluate(() => window.__mock.log)).find((l) => l.op === "verifyOtp");
+    assert.deepEqual(v.args, { email: "ann@corp.com", token: "123456", type: "email" }); ok("the code is checked with the same email, spaces removed");
+    assert.match(await page.textContent("#historyPanel"), /0 of 3 saved/);
+    await page.click('#historyPanel [data-hp="save"]');
+    await page.waitForSelector("#historyPanel .hp-list li"); ok("after the code, the scan on screen can be saved straight away");
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+}
+{
+  const mock = { session: ANON, verifyError: "Token has expired or is invalid", tables: { ...baseTables() } };
+  const { browser, page } = await launch(base, { mock, localStorage: { "soundings.assessment": "a1" } });
+  try {
+    await page.goto(base + "/soundings/");
+    await page.waitForSelector("#historyPanel .hp h3");
+    await page.fill('#historyPanel input[name="email"]', "ann@corp.com");
+    await page.click('#historyPanel [data-hp="signin"] button');
+    await page.fill('#historyPanel input[name="code"]', "000000");
+    await page.click('#historyPanel [data-hp="code"] button[type="submit"]');
+    await page.waitForFunction(() => /code didn't work/.test(document.querySelector("#historyPanel").textContent));
+    await page.click('#historyPanel [data-hp="resend"]');
+    await page.waitForSelector('#historyPanel [data-hp="signin"]'); ok("a wrong code says so plainly, and a different email can be tried");
   } finally { await browser.close(); }
 }
 
