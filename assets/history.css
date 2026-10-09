@@ -36,3 +36,15 @@
 .ap .ap-form input{padding:9px;border:1px solid var(--line,#ccc);border-radius:6px;font:inherit;background:transparent;color:inherit}
 .ap summary{cursor:pointer;font-weight:600;padding:6px 0}
 @media print{#auditPanel{display:none!important}}
+
+.plans{border:1px solid var(--line,#d8d6cf);border-radius:10px;padding:20px;margin:26px 0}
+.plans h2{margin:0 0 12px;font-size:1.15rem}
+.plans h3{margin:0 0 6px;font-size:1rem}
+.plans p{margin:6px 0;line-height:1.55}
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:640px){.plans-grid{grid-template-columns:1fr}}
+.plans-eg-h{font-weight:600;margin-top:14px}
+.plans-eg-h span{font-weight:400;opacity:.75;font-size:.85rem}
+.plans-eg{margin:4px 0 8px;padding-left:20px;font-size:.92rem}
+.plans-foot{font-size:.88rem;opacity:.9}
+@media print{.plans{display:none}}

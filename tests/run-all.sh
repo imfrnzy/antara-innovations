@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 DENO=${DENO:-deno}
 fail=0
 run() { echo "== $*"; "$@" > /tmp/test-out.$$ 2>&1 && tail -1 /tmp/test-out.$$ || { cat /tmp/test-out.$$ | tail -25; fail=1; }; }
-for f in history history-scores audit-pack records-scan manifest-flags prompt-rules sentinel-engine config-check team halo-report-check bearing-engine keel-engine manifest-agent-rules manifest-rules-parity manifest-outcomes; do run node tests/$f.test.mjs; done
+for f in history history-scores audit-pack plans-copy records-scan manifest-flags prompt-rules sentinel-engine config-check team halo-report-check bearing-engine keel-engine manifest-agent-rules manifest-rules-parity manifest-outcomes; do run node tests/$f.test.mjs; done
 for f in sentinel-function halo-function bearing-function; do run $DENO test --no-check --config tests/deno.json -A tests/$f.test.ts; done
 run $DENO test --no-check -A tests/manifest-functions.test.ts
 for f in ui-soundings ui-sentinel ui-history ui-history-scored ui-audit-pack ui-team ui-bearing ui-keel ui-manifest; do run node tests/$f.test.mjs; done
