@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="halo.css">
 <link rel="stylesheet" href="../assets/team.css">
+<link rel="stylesheet" href="../assets/history.css">
 </head>
 <body>
 <script>
@@ -76,6 +77,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <button class="btn btn-solid" id="beginBtn">Begin HALO</button>
       <button class="linkish" id="resumeLink" hidden>Continue where I stopped</button>
     </div>
+      <details class="small howto" id="historyIntroBox"><summary>Already saved a practice report? Sign in</summary><div id="historyIntro"></div></details>
   </section>
 
   <!-- 2. About the leader -->
@@ -192,6 +194,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <p class="notice">HALO scores what you told us against fixed, stated standards: the same answers always produce the same result. It is a leader's own account of their own practice, not a measurement of how their team experiences it, and it is not a clinical or diagnostic tool.</p>
     <p class="small"><button class="linkish" id="newBtn">Start a new assessment</button></p>
+    <div id="historyPanel" class="noprint"></div>
   </section>
 
   <section id="s-loading"><p class="thinking">Loading…</p></section>

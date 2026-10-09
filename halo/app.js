@@ -5,6 +5,22 @@ import { mountTeamPanel } from "../assets/team-panel.js";
 import { PULSE_QUESTIONS } from "./pulse-questions.js";
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Saved results and "what changed". Loaded lazily: if these files are missing the tool works exactly as before.
+let histMod = null, histApi = null, histBuild = null;
+(async () => {
+  try {
+    histMod = await import("../assets/history-mount.js");
+    let price = "";
+    try { price = (await import("./config.js")).PRO_PRICE_LABEL || ""; } catch { /* optional */ }
+    histApi = await histMod.mountSaved({ tool: "halo", sb: sb, contactEmail: CONTACT_EMAIL, proPriceLabel: price });
+    if (histBuild) histApi.setResult(histBuild());
+  } catch (e) { console.error(e); }
+})();
+function histShow(build) {
+  histBuild = build;
+  try { if (histApi) histApi.setResult(build()); } catch (e) { console.error(e); }
+}
 const $ = (id) => document.getElementById(id);
 const KEY = "halo.assessment";
 let assessmentId = localStorage.getItem(KEY);
@@ -160,6 +176,7 @@ async function showResults(prof) {
   const { data: a } = await sb.from("halo_assessments").select("facts, classification, report_md").eq("id", assessmentId).single();
   const c = a?.classification || classify(a?.facts || {});
   show("s-results");
+  histShow(() => histMod.snapshotHalo(c, DIM_LABEL));
 
   $("resTitle").textContent = prof?.first_name ? `${prof.first_name}, here's your HALO practice report` : "Your HALO practice report";
 

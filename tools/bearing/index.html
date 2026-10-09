@@ -12,6 +12,7 @@
 <link rel="icon" href="../../assets/favicon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="bearing.css">
+<link rel="stylesheet" href="../../assets/history.css">
 </head>
 <body>
 <script>
@@ -73,6 +74,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <button class="btn btn-solid" id="beginBtn" type="button">Begin the assessment</button>
     <p class="small note">Bearing provides a readiness assessment. It does not constitute legal advice or a compliance certification. Reviewed regularly as the underlying regulation changes.</p>
+      <details class="small howto" id="historyIntroBox"><summary>Already saved a assessment? Sign in</summary><div id="historyIntro"></div></details>
   </section>
 
   <!-- 2. Setup -->
@@ -207,6 +209,8 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <button class="linkish" id="againBtn" type="button">Start a new assessment</button>
     </div>
     <p class="small note">This result is a readiness assessment based on your own responses. It does not constitute legal advice or a compliance certification. Reviewed regularly as the underlying regulation changes.</p>
+    <div id="historyPanel" class="noprint"></div>
+    <div id="auditPanel" class="noprint"></div>
   </section>
 
   <section id="s-loading" hidden><p class="lead">Preparing your result&hellip;</p></section>

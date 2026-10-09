@@ -1,5 +1,5 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL, PRO_PRICE_LABEL } from "./config.js";
 import { classifyAgent, summarise, FIELDS } from "./engine.js";
 import { checkConfig, summaryText, capLabels } from "./config-check.js";
 
@@ -25,6 +25,8 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 // ---------- start-up ----------
 async function boot() {
   $("reportBtn").textContent = `Get the detailed report (${REPORT_PRICE_LABEL})`;
+  // Back from the sign-in email with a check waiting to be saved: go straight to the configuration screen.
+  try { if (localStorage.getItem("hp.pending.sentinel")) { show("s-config"); return; } } catch { /* storage blocked */ }
   const { data: { session } } = await sb.auth.getSession();
   if (!session || !assessmentId) { show("s-intro"); return; }
   const { data: a } = await sb.from("sentinel_assessments").select("id,status").eq("id", assessmentId).maybeSingle();
@@ -345,6 +347,7 @@ function drawMap(items) {
 
 // ---------- configuration check: runs entirely in the browser ----------
 let lastConfig = null;
+let hist = { refresh() {} }; // replaced by the saved-checks panel once it has loaded. The page works without it.
 $("cfgOpen").onclick = () => { show("s-config"); };
 $("cfgBack").onclick = () => { show("s-intro"); };
 $("cfgToInterview").onclick = () => { localStorage.removeItem(KEY); assessmentId = null; show("s-setup"); };
@@ -389,9 +392,10 @@ function renderConfig(r) {
 $("cfgRun").onclick = () => {
   $("cfgErr").textContent = ""; $("cfgCopied").textContent = "";
   const r = checkConfig($("cfgText").value);
-  if (r.error) { $("cfgOut").hidden = true; lastConfig = null; $("cfgErr").textContent = r.error; return; }
+  if (r.error) { $("cfgOut").hidden = true; lastConfig = null; $("cfgErr").textContent = r.error; hist.refresh(); return; }
   lastConfig = r;
   renderConfig(r);
+  hist.refresh();
 };
 
 $("cfgCopy").onclick = async () => {
@@ -426,5 +430,21 @@ $("fullBtn").onclick = async () => {
   $("fullBtn").disabled = true;
   $("fullMsg").innerHTML = `Noted. Abhinav will be in touch, or email <a href="mailto:${CONTACT_EMAIL}?subject=Full%20Sentinel" style="border-bottom:1px solid var(--gold)">${CONTACT_EMAIL}</a> now.`;
 };
+
+// ---------- saved checks (account, history, compare) ----------
+// Loaded after the page starts and wrapped in try/catch, so a missing file or a failed load
+// can never stop the assessment or the configuration check from working.
+(async () => {
+  try {
+    const [{ snapshotConfig }, { mountHistoryPanel }] = await Promise.all([import("../assets/history.js"), import("../assets/history-panel.js")]);
+    hist = mountHistoryPanel({
+      el: $("historyPanel"), sb, tool: "sentinel", contactEmail: CONTACT_EMAIL, proPriceLabel: PRO_PRICE_LABEL,
+      getSnapshot: () => (lastConfig ? snapshotConfig(lastConfig) : null),
+    });
+  } catch (err) {
+    console.error("Saved checks unavailable", err);
+    const el = $("historyPanel"); if (el) el.hidden = true;
+  }
+})();
 
 boot();

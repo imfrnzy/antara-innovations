@@ -4,6 +4,28 @@ import { JURISDICTIONS, SECTORS, SIZES, AI_USES, ANSWER_OPTIONS, LENS_LABEL, ENG
 import { selectQuestions, assess, claimsToTest, summariseSupervisor, compareResults } from "./engine.js";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Saved results and "what changed". Loaded lazily: if these files are missing the tool works exactly as before.
+let histMod = null, histApi = null, histBuild = null, auditApi = null, orgName = "";
+(async () => {
+  try {
+    histMod = await import("../../assets/history-mount.js");
+    let price = "";
+    try { price = (await import("./config.js")).PRO_PRICE_LABEL || ""; } catch { /* optional */ }
+    histApi = await histMod.mountSaved({ tool: "bearing", sb: supabase, contactEmail: CONTACT_EMAIL, proPriceLabel: price });
+    if (histBuild) histApi.setResult(histBuild());
+  } catch (e) { console.error(e); }
+  try {
+    const ap = await import("../../assets/audit-panel.js");
+    let price = "";
+    try { price = (await import("./config.js")).PRO_PRICE_LABEL || ""; } catch { /* optional */ }
+    auditApi = ap.mountAuditPanel({ el: document.getElementById("auditPanel"), sb: supabase, getResult: () => (state.result && histBuild ? state.result : null), getOrg: () => orgName, contactEmail: CONTACT_EMAIL, proPriceLabel: price });
+  } catch (e) { console.error(e); }
+})();
+function histShow(build) {
+  histBuild = build;
+  try { if (histApi) histApi.setResult(build()); } catch (e) { console.error(e); }
+}
 const byId = (id) => document.getElementById(id);
 const STORAGE_KEY = "bearing.assessment";
 
@@ -437,6 +459,9 @@ function summarySentence(result) {
 function showResults(profile) {
   const result = state.result;
   show("s-results");
+  orgName = (profile && profile.company) || "";
+  histShow(() => histMod.snapshotBearing(result));
+  try { if (auditApi) auditApi.reload(); } catch (e) { console.error(e); }
   byId("resTitle").textContent = profile && profile.first_name ? `${profile.first_name}, your Bearing result` : "Bearing: assessment result";
   byId("resSummary").textContent = summarySentence(result);
   byId("resMeta").textContent = `Based on ${result.questionCount} answers, checked against ${result.obligationCount} obligations.`;

@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="squall.css">
 <link rel="stylesheet" href="../../assets/team.css">
+<link rel="stylesheet" href="../../assets/history.css">
 </head>
 <body>
 <script>
@@ -72,6 +73,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <button class="btn btn-solid" id="beginBtn" type="button">Begin the assessment</button>
     <p class="small note">A single run reflects one individual's judgement, not the team's. Circulate the link and compare results.</p>
+      <details class="small howto" id="historyIntroBox"><summary>Already saved a result? Sign in</summary><div id="historyIntro"></div></details>
   </section>
 
   <!-- 2. Setup -->
@@ -164,6 +166,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <button class="linkish" id="againBtn" type="button">Start a new assessment</button>
     </div>
     <p class="small note">All scenarios are fictional. This assessment measures judgement under time pressure and does not constitute a live fraud check.</p>
+    <div id="historyPanel" class="noprint"></div>
   </section>
 
   <section id="s-loading" hidden><p class="lead">Scoring your run&hellip;</p></section>

@@ -27,13 +27,33 @@ function query(table) {
   const st = { table, filters: [], order: null, mode: "select", payload: null };
   const rows = () => { let r = (m().tables[table] || []).filter((x) => st.filters.every(([k, v, isIn]) => (isIn ? v.includes(x[k]) : x[k] === v))); return r; };
   const done = (single) => {
-    if (st.mode === "insert" || st.mode === "upsert") { m().log.push({ op: st.mode, table, payload: st.payload }); return { data: st.payload, error: m().errors && m().errors[table] ? { message: "err" } : null }; }
+    if (st.mode === "insert" || st.mode === "upsert") {
+      const em = m().insertErrorMessage && m().insertErrorMessage[table];
+      if (em) return { data: null, error: { message: em } };
+      m().log.push({ op: st.mode, table, payload: st.payload });
+      if (st.mode === "upsert" && st.conflict && (m().appendOnInsert || []).includes(table)) {
+        const keys = st.conflict.split(",").map((k) => k.trim());
+        const list = (m().tables[table] = m().tables[table] || []);
+        const hit = list.find((x) => keys.every((k) => x[k] === st.payload[k]));
+        if (hit) { Object.assign(hit, st.payload); return { data: st.payload, error: null }; }
+      }
+      if ((m().appendOnInsert || []).includes(table)) {
+        m().seq = (m().seq || 0) + 1;
+        (m().tables[table] = m().tables[table] || []).push(Object.assign({ id: "row" + m().seq, created_at: new Date(Date.UTC(2026, 8, m().seq, 9, 0, 0)).toISOString() }, st.payload));
+      }
+      return { data: st.payload, error: m().errors && m().errors[table] ? { message: "err" } : null };
+    }
+    if (st.mode === "delete") {
+      m().log.push({ op: "delete", table, filters: st.filters });
+      m().tables[table] = (m().tables[table] || []).filter((x) => !st.filters.every(([k, v]) => x[k] === v));
+      return { data: null, error: null };
+    }
     const r = rows();
     return { data: single ? (r[0] || null) : r, error: null };
   };
   const b = {
     select() { return b; }, eq(k, v) { st.filters.push([k, v]); return b; }, in(k, vals) { st.filters.push([k, vals, true]); return b; }, order() { return b; }, limit() { return b; },
-    insert(p) { st.mode = "insert"; st.payload = p; return b; }, upsert(p) { st.mode = "upsert"; st.payload = p; return b; },
+    insert(p) { st.mode = "insert"; st.payload = p; return b; }, delete() { st.mode = "delete"; return b; }, upsert(p, o) { st.mode = "upsert"; st.payload = p; st.conflict = o && o.onConflict; return b; },
     maybeSingle() { return Promise.resolve(done(true)); }, single() { return Promise.resolve(done(true)); },
     then(res, rej) { return Promise.resolve(done(false)).then(res, rej); },
   };
@@ -44,6 +64,9 @@ export function createClient() {
     auth: {
       getSession: async () => ({ data: { session: m().session } }),
       signInAnonymously: async () => ({ data: { session: m().session }, error: null }),
+      updateUser: async (attrs, opts) => { m().log.push({ op: "updateUser", attrs, opts }); return { data: {}, error: m().updateUserError ? { message: m().updateUserError } : null }; },
+      signInWithOtp: async (args) => { m().log.push({ op: "signInWithOtp", args }); return { data: {}, error: m().otpError ? { message: m().otpError } : null }; },
+      signOut: async () => { m().log.push({ op: "signOut" }); m().session = null; return { error: null }; },
     },
     from: (t) => query(t),
     rpc: async (name, args) => { m().log.push({ op: "rpc", name, args }); const q = (m().rpcQueue || {})[name]; const data = q && q.length ? q.shift() : (m().rpc || {})[name]; return { data: data === undefined ? null : data, error: (m().rpcErrors || {})[name] ? { message: "err" } : null }; },

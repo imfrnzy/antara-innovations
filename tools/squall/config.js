@@ -6,3 +6,6 @@ export const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 export const REPORT_PAYMENT_LINK = "";
 export const REPORT_PRICE_LABEL = "£350";
 export const CONTACT_EMAIL = "hello@antara-innovations.com";
+
+// Shown on the saved-results panel for the Pro plan, e.g. "£29 a month". Leave empty until you decide.
+export const PRO_PRICE_LABEL = "";

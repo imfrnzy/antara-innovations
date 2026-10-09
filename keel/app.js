@@ -3,6 +3,22 @@ import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABE
 import { classify, FIELDS, flipAnalysis, ninetyDayGates, compareKeel } from "./engine.js";
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Saved results and "what changed". Loaded lazily: if these files are missing the tool works exactly as before.
+let histMod = null, histApi = null, histBuild = null;
+(async () => {
+  try {
+    histMod = await import("../assets/history-mount.js");
+    let price = "";
+    try { price = (await import("./config.js")).PRO_PRICE_LABEL || ""; } catch { /* optional */ }
+    histApi = await histMod.mountSaved({ tool: "keel", sb: sb, contactEmail: CONTACT_EMAIL, proPriceLabel: price });
+    if (histBuild) histApi.setResult(histBuild());
+  } catch (e) { console.error(e); }
+})();
+function histShow(build) {
+  histBuild = build;
+  try { if (histApi) histApi.setResult(build()); } catch (e) { console.error(e); }
+}
 const $ = (id) => document.getElementById(id);
 const KEY = "keel.assessment";
 let assessmentId = localStorage.getItem(KEY);
@@ -162,6 +178,7 @@ async function showResults(prof) {
   const { data: a } = await sb.from("keel_assessments").select("facts, classification, report_md").eq("id", assessmentId).single();
   const c = a?.classification || classify(a?.facts || {});
   show("s-results");
+  histShow(() => histMod.snapshotKeel(c, DIM_LABEL));
 
   $("resTitle").textContent = prof?.first_name ? `${prof.first_name}, here's your Keel readiness report` : "Your Keel readiness report";
 

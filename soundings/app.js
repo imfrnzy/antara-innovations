@@ -1,5 +1,5 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL } from "./config.js";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, REPORT_PAYMENT_LINK, REPORT_PRICE_LABEL, CONTACT_EMAIL, PRO_PRICE_LABEL } from "./config.js";
 import { classifyUseCase, summarise, FIELDS } from "./engine.js";
 import { scanText, markCovered, toCsv, CATEGORIES, CATALOGUE_VERSION } from "../assets/records-scan.js";
 
@@ -11,6 +11,7 @@ let busy = false;
 let currentItems = [];   // the uses on the person's map, used by the records check
 let recScan = null;      // latest records check result
 const recMarked = new Set(); // tools the person says are covered by a use on their map
+let hist = { refresh() {} }; // replaced by the saved-scans panel once it has loaded. The page works without it.
 
 const screens = ["s-intro", "s-setup", "s-interview", "s-gate", "s-results", "s-loading"];
 function show(id) {
@@ -312,6 +313,7 @@ function renderRecords() {
     $("recEmbeddedList").innerHTML = embedded.map((m) => `<li>${esc(m.name)}</li>`).join("");
   }
   $("recCatalogue").textContent = `Tool list version ${CATALOGUE_VERSION}.`;
+  hist.refresh();
 }
 
 async function runRecords(text) {
@@ -345,6 +347,7 @@ $("recClear").onclick = () => {
   recScan = null; recMarked.clear();
   $("recFile").value = ""; $("recPaste").value = "";
   $("recOut").hidden = true; $("recClear").hidden = true; $("recErr").textContent = "";
+  hist.refresh();
 };
 
 $("recSave").onclick = () => {
@@ -389,5 +392,23 @@ $("fullBtn").onclick = async () => {
   $("fullBtn").disabled = true;
   $("fullMsg").innerHTML = `Noted. Abhinav will be in touch, or email <a href="mailto:${CONTACT_EMAIL}?subject=Full%20Soundings" style="border-bottom:1px solid var(--gold)">${CONTACT_EMAIL}</a> now.`;
 };
+
+// ---------- saved scans (account, history, compare) ----------
+// Loaded after the page starts and wrapped in try/catch, so a missing file or a failed load
+// can never stop the assessment or the records check from working.
+(async () => {
+  try {
+    const [{ snapshotRecords }, { mountHistoryPanel }] = await Promise.all([import("../assets/history.js"), import("../assets/history-panel.js")]);
+    hist = mountHistoryPanel({
+      el: $("historyPanel"), sb, tool: "soundings", contactEmail: CONTACT_EMAIL, proPriceLabel: PRO_PRICE_LABEL,
+      getSnapshot: () => { if (!recScan) return null; const { marked } = recordsView(); return snapshotRecords(recScan, marked); },
+    });
+    mountHistoryPanel({ el: $("historyIntro"), sb, tool: "soundings", viewOnly: true, getSnapshot: null, contactEmail: CONTACT_EMAIL, proPriceLabel: PRO_PRICE_LABEL });
+  } catch (err) {
+    console.error("Saved scans unavailable", err);
+    for (const id of ["historyPanel", "historyIntro"]) { const el = $(id); if (el) el.hidden = true; }
+    const d = $("historyIntroBox"); if (d) d.hidden = true;
+  }
+})();
 
 boot();

@@ -11,6 +11,7 @@
 <meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/history.css">
 <link rel="stylesheet" href="soundings.css">
 </head>
 <body>
@@ -79,6 +80,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <button class="btn btn-solid" id="beginBtn">Begin Soundings</button>
       <button class="linkish" id="resumeLink" hidden>Continue where I stopped</button>
     </div>
+    <details class="small howto" id="historyIntroBox"><summary>Already saved a scan? Sign in</summary><div id="historyIntro"></div></details>
   </section>
 
   <!-- 2. Organisation -->
@@ -203,6 +205,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
         </div>
         <p class="notice">Matching is by name, so check each one. A tool in your records is not proof it is being used with company data, and a tool missing from your records may still be in use on personal accounts. The list of tools is kept up to date by hand and will miss new ones.</p>
       </div>
+      <div id="historyPanel"></div>
     </section>
 
     <div class="locked">

@@ -12,6 +12,7 @@
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="keel.css">
+<link rel="stylesheet" href="../assets/history.css">
 </head>
 <body>
 <script>
@@ -78,6 +79,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
       <button class="btn btn-solid" id="beginBtn">Begin Keel</button>
       <button class="linkish" id="resumeLink" hidden>Continue where I stopped</button>
     </div>
+      <details class="small howto" id="historyIntroBox"><summary>Already saved a readiness report? Sign in</summary><div id="historyIntro"></div></details>
   </section>
 
   <!-- 2. Organisation -->
@@ -206,6 +208,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 
     <p class="notice">Keel gives a structured view based only on your answers, using a fixed scoring rule: the same answers always produce the same recommendation. The narrative report is generated from that score and your own evidence, and grounded to it, but it is not legal, financial or regulatory advice.</p>
     <p class="small"><button class="linkish" id="newBtn">Start a new assessment</button></p>
+    <div id="historyPanel" class="noprint"></div>
   </section>
 
   <section id="s-loading"><p class="thinking">Loading…</p></section>

@@ -6,6 +6,22 @@ import { mountTeamPanel } from "../../assets/team-panel.js";
 import { trendLine } from "../../assets/team.js";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Saved results and "what changed". Loaded lazily: if these files are missing the tool works exactly as before.
+let histMod = null, histApi = null, histBuild = null;
+(async () => {
+  try {
+    histMod = await import("../../assets/history-mount.js");
+    let price = "";
+    try { price = (await import("./config.js")).PRO_PRICE_LABEL || ""; } catch { /* optional */ }
+    histApi = await histMod.mountSaved({ tool: "squall", sb: supabase, contactEmail: CONTACT_EMAIL, proPriceLabel: price });
+    if (histBuild) histApi.setResult(histBuild());
+  } catch (e) { console.error(e); }
+})();
+function histShow(build) {
+  histBuild = build;
+  try { if (histApi) histApi.setResult(build()); } catch (e) { console.error(e); }
+}
 const byId = (id) => document.getElementById(id);
 const STORAGE_KEY = "squall.assessment";
 
@@ -293,6 +309,7 @@ byId("gateForm").onsubmit = async (event) => {
 function showResults(profile) {
   const result = state.result;
   show("s-results");
+  histShow(() => histMod.snapshotSquall(result));
   byId("resTitle").textContent = profile && profile.first_name ? `${profile.first_name}, your Squall result` : "Squall: assessment result";
   byId("resPercent").textContent = `${result.percent}%`;
   byId("resBand").textContent = result.band;
