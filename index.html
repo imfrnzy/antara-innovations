@@ -19,6 +19,7 @@
 <meta name="twitter:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <link rel="icon" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/v2.css">
 <link rel="stylesheet" href="assets/home.css">
 <link rel="preload" as="image" href="assets/hero-sunrise.jpg" media="(min-width:821px)">
 <script type="application/ld+json">
@@ -73,7 +74,7 @@
 }
 </script>
 </head>
-<body class="home">
+<body class="home v2">
 
 <header class="site-header">
   <div class="nav">
@@ -127,10 +128,10 @@
     </div>
 
     <div class="tabs" role="tablist" aria-label="Frameworks">
-      <button class="tab" role="tab" aria-selected="true">Soundings<i></i></button>
-      <button class="tab" role="tab" aria-selected="false">Keel<i></i></button>
-      <button class="tab" role="tab" aria-selected="false">Sentinel<i></i></button>
-      <button class="tab" role="tab" aria-selected="false">HALO<i></i></button>
+      <button class="tab" role="tab" aria-selected="true" data-name="Soundings" data-line="Find out which AI tools are actually running in your organisation, and whether the oversight around each one matches its real risk." data-tour="soundings/tour/" data-app="soundings/">Soundings<i></i></button>
+      <button class="tab" role="tab" aria-selected="false" data-name="Keel" data-line="Get a firm recommendation for your AI Centre of Excellence, what would flip it, and the first 90 days as checkable gates." data-tour="keel/tour/" data-app="keel/">Keel<i></i></button>
+      <button class="tab" role="tab" aria-selected="false" data-name="Sentinel" data-line="Paste an agent&rsquo;s tool configuration and find out in a minute whether the dangerous path is open: outside input, sensitive data and an action nobody approves." data-tour="sentinel/tour/" data-app="sentinel/">Sentinel<i></i></button>
+      <button class="tab" role="tab" aria-selected="false" data-name="HALO" data-line="Ask your team the same seven questions, anonymously, and see where their answers and yours differ." data-tour="halo/tour/" data-app="halo/">HALO<i></i></button>
     </div>
 
     <div class="laptop">
@@ -232,7 +233,14 @@
       <div class="base"></div>
     </div>
 
-    <p class="stage-foot">Illustrative examples, not client data. <a href="soundings/tour/">Try the real Soundings assessment, free</a></p>
+    <div class="stage-cta" id="stageCta" aria-live="polite">
+      <p class="stage-line" id="stageLine">Find out which AI tools are actually running in your organisation, and whether the oversight around each one matches its real risk.</p>
+      <div class="h-cta" style="justify-content:center">
+        <a class="h-btn solid" id="stageTour" href="soundings/tour/"><span id="stageTourLabel">See how Soundings works</span> <span class="arr">&rarr;</span></a>
+        <a class="h-btn" id="stageApp" href="soundings/">Start the assessment</a>
+      </div>
+      <p class="stage-note">Illustrative examples above, not client data.</p>
+    </div>
   </div>
 </section>
 
@@ -320,40 +328,30 @@
 
 </main>
 
-<footer>
-  <div class="wrap foot-grid">
+<footer class="v2-foot">
+<div class="wrap">
+  <div class="foot-main">
     <div>
-      <div class="brand" style="margin-bottom:10px">
+      <div class="brand">
         <img src="assets/logo.png" alt="Antara Innovations">
-        <span class="word" style="color:var(--navy)">Antara <sup>Innovations</sup></span>
+        <span class="word">Antara <sup>Innovations</sup></span>
       </div>
-      <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+      <small>&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
     </div>
-    <div class="foot-links">
-      <a href="frameworks/">Frameworks</a>
-      <a href="tools/">Instruments</a>
-      <a href="use-cases/">Use cases</a>
-      <a href="newsletter/">Newsletter</a>
-      <a href="wellness/">Antara Wellness</a>
-      <a href="about/">About</a>
-      <a href="mailto:hello@antara-innovations.com">Contact</a>
-    </div>
+    <div class="foot-col"><h4>Work</h4>
+      <a href="frameworks/">Frameworks</a><a href="tools/">Instruments</a><a href="use-cases/">Use cases</a></div>
+    <div class="foot-col"><h4>Read</h4>
+      <a href="newsletter/">The Awakened Intelligence</a><a href="about/">About Abhinav Gaurav</a><a href="wellness/">Antara Wellness</a></div>
+    <div class="foot-col"><h4>Talk</h4>
+      <a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
+</div>
 </footer>
 
+
 <script src="assets/motion.js"></script>
+<script src="assets/v2.js"></script>
 <script src="assets/home.js"></script>
-<script>
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', function(){
-  const open = navLinks.classList.toggle('open');
-  navToggle.innerHTML = open ? '&times;' : '&#9776;';
-  navToggle.setAttribute('aria-expanded', open);
-  navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-});
-document.getElementById('yr').textContent = new Date().getFullYear();
-</script>
 
 </body>
 </html>

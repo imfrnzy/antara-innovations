@@ -66,6 +66,17 @@
         t.classList.remove('auto');
       });
       panes.forEach(function(p, n){ p.classList.toggle('on', n === i); });
+      var cta = document.getElementById('stageCta');
+      if(cta && tabs[i].dataset.line){
+        cta.classList.add('swap');
+        setTimeout(function(){
+          document.getElementById('stageLine').innerHTML = tabs[i].dataset.line;
+          document.getElementById('stageTourLabel').textContent = 'See how ' + tabs[i].dataset.name + ' works';
+          document.getElementById('stageTour').setAttribute('href', tabs[i].dataset.tour);
+          document.getElementById('stageApp').setAttribute('href', tabs[i].dataset.app);
+          cta.classList.remove('swap');
+        }, reduce ? 0 : 220);
+      }
       var first = panes[i].querySelector('.row');
       if(first && !panes[i].querySelector('.row[aria-pressed="true"]')){ pick(first); }
       else { var sel = panes[i].querySelector('.row[aria-pressed="true"]'); if(sel) pick(sel); }

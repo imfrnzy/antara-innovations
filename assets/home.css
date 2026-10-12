@@ -302,3 +302,10 @@ body.home footer{background:var(--bg); border-top:1px solid var(--line)}
 }
 
 .pcard.is-visible .card-icon .draw{stroke-dashoffset:0}
+
+/* ---------- Link under the laptop follows the selected framework ---------- */
+.stage-cta{margin:46px auto 0; max-width:640px; text-align:center; transition:opacity .22s ease, transform .22s ease}
+.stage-cta.swap{opacity:0; transform:translateY(6px)}
+.stage-line{margin:0 0 22px; font-size:clamp(17px,1.6vw,21px); line-height:1.6; color:rgba(237,241,245,.9)}
+.stage-note{margin:18px 0 0; font-size:12.5px; color:rgba(237,241,245,.5)}
+body.home .stage .h-btn.solid{color:#0A1B30}

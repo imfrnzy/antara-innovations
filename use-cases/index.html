@@ -8,6 +8,7 @@
 
 <meta name="description" content="AI use cases from large global firms.">
 <meta name="keywords" content="AI use cases, AI in banking, AML machine learning, credit decisioning, AI governance, AI Centre of Excellence, fraud detection, AI readiness, EU AI Act, Antara Innovations">
+<meta name="theme-color" content="#0A1B30">
 <link rel="canonical" href="https://www.antara-innovations.com/use-cases/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Antara Innovations">
@@ -21,6 +22,7 @@
 <meta name="twitter:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/v2.css">
 
 <style>
 .uc-hero{padding:64px 0 36px}
@@ -108,61 +110,56 @@
 }
 </style>
 
+
 </head>
-
-<body>
-
+<body class="v2">
 <header class="site-header">
   <div class="nav">
-
     <a class="brand" href="../">
       <img src="../assets/logo.png" alt="Antara Innovations">
       <span class="word">Antara <sup>Innovations</sup></span>
     </a>
-
-    <button
-      class="nav-toggle"
-      id="navToggle"
-      aria-label="Open menu"
-      aria-expanded="false"
-    >
-      &#9776;
-    </button>
-
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
     <nav class="nav-links" id="navLinks">
       <a href="../frameworks/">Frameworks</a>
       <a href="../tools/">Instruments</a>
-      <a href="../use-cases/">Use cases</a>
+      <a href="../use-cases/" aria-current="page">Use cases</a>
       <a href="../newsletter/">Newsletter</a>
       <a href="../wellness/">Antara Wellness</a>
       <a href="../about/">About</a>
-      <a class="cta" href="mailto:hello@antara-innovations.com">Get in touch</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Enquiry">Get in touch</a>
     </nav>
-
   </div>
 </header>
+<main>
 
 
-<!-- HERO -->
 
-<section class="uc-hero">
-  <div class="wrap">
-    <div class="uc-hero-copy reveal-load">
-      <p class="kicker">Consulting</p>
-      <h1 class="display" style="font-size:36px;">
-        Turning AI ambition into business impact
-      </h1>
-      <p style="font-size:16px; margin-top:18px;">
-        Four real-world engagements at large global firms, led by
-        <a href="../about/" style="color:var(--navy); border-bottom:1px solid var(--gold);">Abhinav Gaurav</a>,
-        solving critical business challenges with the Antara frameworks and instruments.
-      </p>
+<section class="p-hero">
+  <div class="p-orb a"></div><div class="p-orb b"></div>
+  <div class="wrap p-split">
+    <div>
+      <p class="h-eyebrow h-fade" style="--d:0">Consulting</p>
+      <h1 class="p-title h-fade" style="--d:1">Turning AI ambition into <span class="serif">business impact</span></h1>
+      <p class="p-sub h-fade" style="--d:2">Four real-world engagements at large global firms, led by <a href="../about/" style="color:#fff;border-bottom:1px solid var(--gold)">Abhinav Gaurav</a>, solving critical business challenges with the Antara frameworks and instruments.</p>
+      <nav class="case-nav h-fade" style="--d:3" aria-label="Jump to a case">
+        <a href="#case-aml">Financial crime <span>Global bank</span></a>
+        <a href="#case-credit">Credit <span>UK lender</span></a>
+        <a href="#case-platform">ML platform <span>UK retail bank</span></a>
+        <a href="#case-fraud">Fraud <span>Payments</span></a>
+      </nav>
+    </div>
+    <div class="hero-stats h-fade" style="--d:3">
+      <div class="hstat"><b data-count="60%">60%</b><span>fewer false-positive alerts at a global bank</span></div>
+      <div class="hstat"><b data-count="50%">50%</b><span>faster credit policy change at a major UK lender</span></div>
+      <div class="hstat"><b data-count="£50M">&pound;50M</b><span>AI-attributed value at a major UK retail bank</span></div>
+      <div class="hstat"><b class="word">Milliseconds</b><span>fraud decision latency at global scale</span></div>
     </div>
   </div>
 </section>
 
 
-<hr class="uc-divider">
+
 
 
 <!-- AT A GLANCE -->
@@ -207,7 +204,7 @@
       <span class="tag">Global bank &middot; Financial crime</span>
       <h3 class="h">Replacing rules-based AML alerting with a risk-scored model</h3>
       <p class="uc-problem"><span class="uc-label">The problem</span>More than 95% of anti-money-laundering alerts were false positives. Investigators spent their time on noise while genuine crime stayed hidden.</p>
-      <div class="stat-strip"><div class="stat"><div class="num">60%</div><div class="label">Reduction in false-positive alerts</div></div><div class="stat"><div class="num">2 to 4x</div><div class="label">More genuine financial crime detected than the previous system</div></div></div>
+      <div class="stat-strip"><div class="stat"><div class="num" data-count="60%">60%</div><div class="label">Reduction in false-positive alerts</div></div><div class="stat"><div class="num">2 to 4x</div><div class="label">More genuine financial crime detected than the previous system</div></div></div>
       <details class="uc-more">
         <summary>How it was done</summary>
         <div class="uc-cols">
@@ -221,7 +218,7 @@
       <span class="tag">Major UK lender &middot; Credit decisioning and AI governance</span>
       <h3 class="h">One decisioning layer across lending, with governance built in</h3>
       <p class="uc-problem"><span class="uc-label">The problem</span>Three lending platforms with no shared logic. A credit policy change took at least two weeks, and conduct risk was rising.</p>
-      <div class="stat-strip"><div class="stat"><div class="num">50%</div><div class="label">Faster policy change cycles</div></div><div class="stat"><div class="num">Real-time</div><div class="label">Credit limit adjustments</div></div><div class="stat"><div class="num">5</div><div class="label">Products migrated within 12 months</div></div><div class="stat"><div class="num">Zero</div><div class="label">Operational downtime</div></div></div>
+      <div class="stat-strip"><div class="stat"><div class="num" data-count="50%">50%</div><div class="label">Faster policy change cycles</div></div><div class="stat"><div class="num">Real-time</div><div class="label">Credit limit adjustments</div></div><div class="stat"><div class="num" data-count="5">5</div><div class="label">Products migrated within 12 months</div></div><div class="stat"><div class="num">Zero</div><div class="label">Operational downtime</div></div></div>
       <details class="uc-more">
         <summary>How it was done</summary>
         <div class="uc-cols">
@@ -235,7 +232,7 @@
       <span class="tag">Major UK retail bank &middot; ML platform and generative AI</span>
       <h3 class="h">Unifying hundreds of models on one platform, then scaling the value</h3>
       <p class="uc-problem"><span class="uc-label">The problem</span>Hundreds of models in production on a decade-old platform that capped what the bank could do next.</p>
-      <div class="stat-strip"><div class="stat"><div class="num">Days to seconds</div><div class="label">Mortgage income verification</div></div><div class="stat"><div class="num">Minutes to seconds</div><div class="label">Frontline knowledge retrieval</div></div><div class="stat"><div class="num">&pound;50M</div><div class="label">AI-attributed value in a single year</div></div></div>
+      <div class="stat-strip"><div class="stat"><div class="num">Days to seconds</div><div class="label">Mortgage income verification</div></div><div class="stat"><div class="num">Minutes to seconds</div><div class="label">Frontline knowledge retrieval</div></div><div class="stat"><div class="num" data-count="£50M">&pound;50M</div><div class="label">AI-attributed value in a single year</div></div></div>
       <details class="uc-more">
         <summary>How it was done</summary>
         <div class="uc-cols">
@@ -249,7 +246,7 @@
       <span class="tag">Global payments company &middot; Fraud intelligence</span>
       <h3 class="h">Real-time fraud decisioning at global card scale</h3>
       <p class="uc-problem"><span class="uc-label">The problem</span>Billions of fraud decisions a year, each due in milliseconds, with customer trust at stake on every one.</p>
-      <div class="stat-strip"><div class="stat"><div class="num">50x</div><div class="label">Faster than the CPU baseline</div></div><div class="stat"><div class="num">10%</div><div class="label">Engineering time saved</div></div><div class="stat"><div class="num">Milliseconds</div><div class="label">Decision latency at global scale</div></div></div>
+      <div class="stat-strip"><div class="stat"><div class="num" data-count="50x">50x</div><div class="label">Faster than the CPU baseline</div></div><div class="stat"><div class="num" data-count="10%">10%</div><div class="label">Engineering time saved</div></div><div class="stat"><div class="num">Milliseconds</div><div class="label">Decision latency at global scale</div></div></div>
       <details class="uc-more">
         <summary>How it was done</summary>
         <div class="uc-cols">
@@ -473,72 +470,28 @@
 </section>
 
 
-<footer>
-
-  <div class="wrap foot-grid">
-
+</main>
+<footer class="v2-foot">
+<div class="wrap">
+  <div class="foot-main">
     <div>
-
-      <div class="brand" style="margin-bottom:10px">
-
+      <div class="brand">
         <img src="../assets/logo.png" alt="Antara Innovations">
-
-        <span class="word">
-          Antara <sup>Innovations</sup>
-        </span>
-
+        <span class="word">Antara <sup>Innovations</sup></span>
       </div>
-
-      <small class="copy">
-        &copy; <span id="yr"></span> Antara Innovations.
-        Human Potential, Amplified.
-      </small>
-
+      <small>&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
     </div>
-
-
-    <div class="foot-links">
-
-      <a href="../frameworks/">Frameworks</a>
-      <a href="../tools/">Instruments</a>
-      <a href="../use-cases/">Use cases</a>
-      <a href="../newsletter/">Newsletter</a>
-      <a href="../wellness/">Antara Wellness</a>
-      <a href="../about/">About</a>
-      <a href="mailto:hello@antara-innovations.com">Contact</a>
-
-    </div>
-
+    <div class="foot-col"><h4>Work</h4>
+      <a href="../frameworks/">Frameworks</a><a href="../tools/">Instruments</a><a href="../use-cases/">Use cases</a></div>
+    <div class="foot-col"><h4>Read</h4>
+      <a href="../newsletter/">The Awakened Intelligence</a><a href="../about/">About Abhinav Gaurav</a><a href="../wellness/">Antara Wellness</a></div>
+    <div class="foot-col"><h4>Talk</h4>
+      <a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
-
+</div>
 </footer>
-
-
 <script src="../assets/motion.js"></script>
-<script>
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-
-navToggle.addEventListener('click', function(){
-
-  const open = navLinks.classList.toggle('open');
-
-  navToggle.innerHTML = open ? '&times;' : '&#9776;';
-
-  navToggle.setAttribute(
-    'aria-expanded',
-    open
-  );
-
-  navToggle.setAttribute(
-    'aria-label',
-    open ? 'Close menu' : 'Open menu'
-  );
-
-});
-
-document.getElementById('yr').textContent = new Date().getFullYear();
-</script>
+<script src="../assets/v2.js"></script>
 
 </body>
 </html>
