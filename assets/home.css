@@ -288,7 +288,7 @@ body.home .nav-toggle{color:#fff}
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{margin:12px 0 0; color:var(--muted); line-height:1.75; font-size:15.5px}
 
-body.home footer{background:var(--bg); border-top:1px solid var(--line)}
+body.home footer.v2-foot{background:#0A1B30; border-top:0}
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
