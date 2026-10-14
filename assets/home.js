@@ -73,7 +73,7 @@
           document.getElementById('stageLine').innerHTML = tabs[i].dataset.line;
           document.getElementById('stageTourLabel').textContent = 'See how ' + tabs[i].dataset.name + ' works';
           document.getElementById('stageTour').setAttribute('href', tabs[i].dataset.tour);
-          document.getElementById('stageApp').setAttribute('href', tabs[i].dataset.app);
+          var _sa=document.getElementById('stageApp'); if(_sa) _sa.setAttribute('href', tabs[i].dataset.app);
           cta.classList.remove('swap');
         }, reduce ? 0 : 220);
       }
