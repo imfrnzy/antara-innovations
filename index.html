@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="assets/v2.css">
 <link rel="stylesheet" href="assets/home.css">
 <link rel="stylesheet" href="assets/hero-agent.css">
+<link rel="stylesheet" href="assets/home-platform.css">
 <link rel="preload" as="image" href="assets/hero-sunrise.jpg" media="(min-width:821px)">
 <script type="application/ld+json">
 {
@@ -102,9 +103,9 @@
 <section class="h-hero" aria-label="Introduction">
   <div class="h-hero-photo" role="img" aria-label="A person sitting on a rock, looking out over a lake and mountains at sunrise"></div>
   <div class="h-glow"></div>
-  <div class="ha" aria-label="Illustration of the agent working across an organisation">
+  <div class="ha" aria-label="The agent working across an organisation">
     <div class="ha-box">
-      <div class="ha-bar"><i></i><span>Soundings agent</span><span>Illustrative run</span></div>
+      <div class="ha-bar"><i></i><span>Soundings agent</span><span>Read-only</span></div>
       <canvas id="haCanvas" width="800" height="500" role="img" aria-label="A network of systems being scanned. Gaps are highlighted."></canvas>
       <div class="ha-stats"><div><b id="haTools">0</b><span>AI tools found</span></div><div><b class="red" id="haGaps">0</b><span>Unregistered</span></div><div><b id="haNew">0</b><span>New this week</span></div></div>
       <div class="ha-log" id="haLog" aria-live="off"></div>
@@ -135,7 +136,7 @@
     <div class="stage-head reveal">
       <p class="h-kicker">Four agents</p>
       <h2 class="h-h2">Watch an agent <span class="serif">do the work</span></h2>
-      <p class="h-lead">Each framework runs as an agent inside your environment. It reads, investigates, and proposes. A named person approves. These are illustrative runs on fictional data.</p>
+      <p class="h-lead">Each framework runs as an agent inside your environment. It reads, investigates, and proposes. A named person approves.</p>
     </div>
 
     <div class="tabs" role="tablist" aria-label="Frameworks">
@@ -148,7 +149,7 @@
     <div class="laptop">
       <div class="lid">
         <div class="screen">
-          <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t" id="paneTitle">Antara agent console</span><span class="sample">Illustrative run, fictional data</span></div>
+          <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t" id="paneTitle">Antara agent console</span><span class="sample">Read-only</span></div>
           <div class="panes">
           <div class="pane ag on" role="tabpanel">
             <div class="ag-head"><span class="ag-live"></span><b>Soundings agent</b><span>read-only</span><span>UK pack</span></div>
@@ -193,7 +194,6 @@
       <div class="h-cta" style="justify-content:center">
         <a class="h-btn solid" id="stageTour" href="soundings/tour/"><span id="stageTourLabel">See how Soundings works</span> <span class="arr">&rarr;</span></a>
       </div>
-      <p class="stage-note">Illustrative runs on fictional data. Nothing here is client data.</p>
     </div>
   </div>
 </section>
@@ -232,7 +232,7 @@
       <div class="reveal">
         <p class="h-kicker">The full capability</p>
         <h2 class="dp-big">Not a report.<br><span class="serif">An agent that lives in your world.</span></h2>
-        <p class="h-lead">The runs above are illustrations. In an engagement, the agent is deployed inside your organisation, across the whole AI Centre of Excellence, and connects to what is actually there.</p>
+        <p class="h-lead">In an engagement, the agent is deployed inside your organisation, across the whole AI Centre of Excellence, and connects to what is actually there.</p>
         <ul class="dp-points">
           <li><i>01</i><span><b>Connected to your environment</b>It reads what is actually running and what each part can reach and change, instead of asking you to describe it.</span></li>
           <li><i>02</i><span><b>Configured to your regulator</b>Scope, controls and thresholds are set for your market. Choose one on the right and watch the ring change.</span></li>
@@ -252,7 +252,7 @@
 <circle class="dp-core-halo" cx="300" cy="270" r="46"/><circle class="dp-core" cx="300" cy="270" r="34"/>
 <text class="dp-core-t" x="300" y="274" text-anchor="middle">Agent</text>
 <g class="dp-reg"><text id="dpReg0" x="300" y="40" text-anchor="middle"></text></g><g class="dp-reg"><text id="dpReg1" x="530" y="270" text-anchor="middle"></text></g><g class="dp-reg"><text id="dpReg2" x="300" y="500" text-anchor="middle"></text></g><g class="dp-reg"><text id="dpReg3" x="70" y="270" text-anchor="middle"></text></g></svg>
-        <p class="dp-cap">Illustrative. The agent is configured to the regime of each market.</p>
+        <p class="dp-cap">The agent is configured to the regime of each market.</p>
       </div>
     </div>
   </div>
@@ -292,67 +292,51 @@
   </div>
 </section>
 
-<section class="h-sec light" aria-label="Our specialisms">
+<section class="h-sec dark pf" aria-label="The platform">
   <div class="wrap">
     <div class="reveal">
-      <p class="h-kicker">What it covers</p>
-      <h2 class="h-h2">Three problems, <span class="serif">one governed platform</span></h2>
+      <p class="h-kicker">The platform</p>
+      <h2 class="h-h2">One governed system. <span class="serif">Seven instruments.</span></h2>
+      <p class="h-lead">Keel sets the rules. Three agents read your environment and test it against them. Three instruments measure the people. Everything sits on read-only connections and a regulation pack for your market.</p>
     </div>
-    <div class="pgrid">
-      <div class="pcard reveal">
-        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M16 34 L24 34 L21.5 12 L18.5 12 Z" /><path class="draw" d="M13 34 L27 34" /><path class="draw" d="M18.5 12 L13 6 M21.5 12 L27 6 M20 12 L20 4" /></svg>
-        <div class="tag">Agent &middot; Sentinel</div>
-        <h3>AI security</h3>
-        <p>What a system can actually cause, whether that can be reconstructed afterwards, and whether it learns from a near miss instead of repeating it.</p>
-        <a class="link" href="sentinel/tour/">See how the Sentinel agent works &rarr;</a>
+    <div class="pf-grid" id="pf">
+      <div class="pf-stack reveal">
+        <div class="pf-layer"><h4>Policy <span>sets the rules</span></h4><div class="pf-row" style="--n:1"><button type="button" class="pf-node" data-k="keel" aria-pressed="false">Keel<small>Gates, ownership, decisions</small></button></div></div>
+        <div class="pf-flow"></div>
+        <div class="pf-layer"><h4>Agents <span>read, test, prove</span></h4><div class="pf-row"><button type="button" class="pf-node" data-k="soundings" aria-pressed="false">Soundings<small>What is running</small></button><button type="button" class="pf-node" data-k="sentinel" aria-pressed="false">Sentinel<small>What it can cause</small></button><button type="button" class="pf-node" data-k="bearing" aria-pressed="false">Bearing<small>Proof for the supervisor</small></button></div></div>
+        <div class="pf-flow"></div>
+        <div class="pf-layer"><h4>Human layer <span>measure the people</span></h4><div class="pf-row"><button type="button" class="pf-node" data-k="halo" aria-pressed="false">HALO<small>Leaders and teams</small></button><button type="button" class="pf-node" data-k="squall" aria-pressed="false">Squall<small>Judgement under pressure</small></button><button type="button" class="pf-node" data-k="ensign" aria-pressed="false">Ensign<small>Disclosure and content</small></button></div></div>
+        <div class="pf-flow"></div>
+        <div class="pf-layer base"><h4>Your environment <span>read-only</span></h4><div class="pf-row"><div class="pf-chip">Identity</div><div class="pf-chip">Finance</div><div class="pf-chip">Cloud and software</div><div class="pf-chip">Documents and models</div></div></div>
       </div>
-      <div class="pcard reveal">
-        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M6 16 C6 25 13 30 20 30 C27 30 34 25 34 16" /><path class="draw" d="M20 30 L20 36" /><path class="draw" d="M20 6 L20 17 M20 9 L29 14" /></svg>
-        <div class="tag">Agent &middot; Keel</div>
-        <h3>Governance</h3>
-        <p>The operating model for an AI Centre of Excellence: which use cases to attempt, how they get built and checked before shipping, and how they are monitored once live.</p>
-        <a class="link" href="keel/tour/">See how the Keel agent works &rarr;</a>
-      </div>
-      <div class="pcard reveal">
-        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="draw" cx="20" cy="20" r="13" /><circle class="draw" cx="20" cy="20" r="3.5" /></svg>
-        <div class="tag">Agent &middot; HALO</div>
-        <h3>Human-AI leadership</h3>
-        <p>AI is raising the IQ of the workplace without touching its EQ. HALO keeps clarity, acknowledgement and quick repair as everyday leadership work, so trust does not leak out from underneath the speed.</p>
-        <a class="link" href="halo/tour/">See how the HALO agent works &rarr;</a>
-      </div>
-    </div>
-    <div class="pgrid two">
-      <div class="pcard reveal">
-        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M6 12 L34 12" /><path class="draw" d="M20 12 L20 28 L16 24 M20 28 L24 24" /><path class="draw" d="M8 19 C10.5 17 10.5 21 13 19 M8 25 C10.5 23 10.5 27 13 25" /></svg>
-        <div class="tag">Diagnostic &middot; Soundings</div>
-        <h3>Where to start</h3>
-        <p>Most engagements start with Soundings, a rapid diagnostic of which AI use cases are actually running in your organisation, and whether the oversight around each one matches its real risk. It tells us, and you, where Keel, Sentinel or HALO needs to land first.</p>
-        <a class="link" href="soundings/tour/">See how the Soundings agent works &rarr;</a>
-      </div>
-      <div class="pcard reveal">
-        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M6 22 L14 22 L17 12 L22 30 L25 20 L34 20" /></svg>
-        <div class="tag">Product &middot; Antara Wellness</div>
-        <h3>Neuroscience-led wellbeing</h3>
-        <p>A neuroscience-led psychological and psychosomatic wellbeing app, built on the same conviction: people change when they feel understood, not analysed. A separate line of work from the agents, with the same thinking underneath it.</p>
-        <a class="link" href="wellness/">Visit Antara Wellness &rarr;</a>
+      <div class="pf-detail reveal" id="pfDetail" aria-live="polite">
+        <p class="k"></p><h3></h3><p></p><ul></ul><a class="go" href="#"></a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="h-sec territory" aria-label="The territory">
-  <div class="wrap two">
-    <div class="reveal">
-      <p class="h-kicker">The territory</p>
-      <h2 class="h-h2">AI governance, <span class="serif">minus the theatre</span></h2>
-      <div class="pillars-lg"><span>Governance</span><span>Security</span><span>Applied AI</span></div>
-      <a class="h-btn solid" href="about/">About Abhinav Gaurav <span class="arr">&rarr;</span></a>
+<section class="h-sec light eg" aria-label="How an engagement runs">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center">
+      <p class="h-kicker">How it starts</p>
+      <h2 class="h-h2" style="margin-left:auto;margin-right:auto">From first call to a <span class="serif">working agent</span></h2>
     </div>
-    <div class="reveal">
-      <p>Most AI governance stops at what a system is allowed to access. Our work starts from what it can actually cause, whether that can be reconstructed afterwards, and whether the person meant to be supervising it still knows when not to trust it.</p>
-      <p>That is the thread running through the frameworks and the wellbeing work alike: technology examined for what it does to human judgement, not just what it can do.</p>
-      <p style="margin-top:28px"><span class="h-kicker" style="display:block">Also from Antara Innovations</span><a class="link" href="newsletter/" style="color:#fff; border-bottom:1px solid var(--gold); padding-bottom:2px">The Awakened Intelligence, a weekly publication on how AI reshapes human judgement, leadership and behaviour &rarr;</a></p>
+    <div class="eg-line" id="egLine">
+      <div class="eg-step"><i>1</i><h3>Scope</h3><p>Which regulation, which parts of the organisation, who owns the answer.</p></div>
+      <div class="eg-step"><i>2</i><h3>Connect</h3><p>Read-only connections, reviewed by your security team before anything is read.</p></div>
+      <div class="eg-step"><i>3</i><h3>First findings</h3><p>What is running, what it can cause, and the evidence behind each finding.</p></div>
+      <div class="eg-step"><i>4</i><h3>Keep watching</h3><p>The agent keeps running. Anything new is flagged for a named person to decide.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="st" aria-label="The thinking behind it">
+  <div class="wrap reveal">
+    <p class="h-kicker" style="justify-content:center">The thinking behind it</p>
+    <p class="big">Most AI governance stops at what a system is allowed to access. <em>We start from what it can actually cause.</em></p>
+    <p class="sub">Whether that can be reconstructed afterwards, and whether the person meant to be supervising it still knows when not to trust it. That is the thread through every framework here, and through the wellbeing work: technology examined for what it does to human judgement, not just what it can do.</p>
+    <div class="by"><a class="h-btn solid" href="about/">About Abhinav Gaurav <span class="arr">&rarr;</span></a><a class="h-btn" href="newsletter/">The Awakened Intelligence</a><a class="h-btn" href="wellness/">Antara Wellness</a></div>
   </div>
 </section>
 
@@ -403,5 +387,6 @@
 <script src="assets/home.js"></script>
 
 <script src="assets/hero-agent.js"></script>
+<script src="assets/home-platform.js"></script>
 </body>
 </html>
