@@ -54,7 +54,7 @@
     {
       "@type": "Question",
       "name": "What does Antara Innovations do?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Antara Innovations is a specialised AI advisory working on AI security, governance and human-AI leadership, alongside Antara Wellness, a science-led psychological and psychosomatic wellbeing product." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Antara Innovations deploys governed AI agents, backed by advisory work, on AI security, governance and human-AI leadership, alongside Antara Wellness, a science-led psychological and psychosomatic wellbeing product." }
     },
     {
       "@type": "Question",
@@ -133,109 +133,53 @@
 <section class="h-sec stage" aria-label="The frameworks at work">
   <div class="wrap">
     <div class="stage-head reveal">
-      <p class="h-kicker">Four frameworks, demonstrated</p>
-      <h2 class="h-h2">Click through <span class="serif">how we work</span></h2>
-      <p class="h-lead">These are demonstration versions, built to show how each framework thinks. The full capability is an agent deployed inside your own environment, described further down.</p>
+      <p class="h-kicker">Four agents</p>
+      <h2 class="h-h2">Watch an agent <span class="serif">do the work</span></h2>
+      <p class="h-lead">Each framework runs as an agent inside your environment. It reads, investigates, and proposes. A named person approves. These are illustrative runs on fictional data.</p>
     </div>
 
     <div class="tabs" role="tablist" aria-label="Frameworks">
-      <button class="tab" role="tab" aria-selected="true" data-name="Soundings" data-line="Find out which AI tools are actually running in your organisation, and whether the oversight around each one matches its real risk." data-tour="soundings/tour/" data-app="soundings/">Soundings<i></i></button>
-      <button class="tab" role="tab" aria-selected="false" data-name="Keel" data-line="Get a firm recommendation for your AI Centre of Excellence, what would flip it, and the first 90 days as checkable gates." data-tour="keel/tour/" data-app="keel/">Keel<i></i></button>
-      <button class="tab" role="tab" aria-selected="false" data-name="Sentinel" data-line="Paste an agent&rsquo;s tool configuration and find out in a minute whether the dangerous path is open: outside input, sensitive data and an action nobody approves." data-tour="sentinel/tour/" data-app="sentinel/">Sentinel<i></i></button>
-      <button class="tab" role="tab" aria-selected="false" data-name="HALO" data-line="Ask your team the same seven questions, anonymously, and see where their answers and yours differ." data-tour="halo/tour/" data-app="halo/">HALO<i></i></button>
+      <button class="tab" role="tab" aria-selected="true" data-name="Soundings" data-line="It finds which AI tools are actually running across your organisation, and whether the oversight around each one matches its real risk." data-tour="soundings/tour/" data-app="soundings/">Soundings<i></i></button>
+      <button class="tab" role="tab" aria-selected="false" data-name="Keel" data-line="It checks every AI use case against your gates, shows which ones skipped them, and proposes the fix for a named person to approve." data-tour="keel/tour/" data-app="keel/">Keel<i></i></button>
+      <button class="tab" role="tab" aria-selected="false" data-name="Sentinel" data-line="It maps what each agent can see and change, and tests whether a dangerous path is open: outside input, sensitive data and an action nobody approves." data-tour="sentinel/tour/" data-app="sentinel/">Sentinel<i></i></button>
+      <button class="tab" role="tab" aria-selected="false" data-name="HALO" data-line="It asks your teams the same questions as your leaders, anonymously, and shows where the two disagree." data-tour="halo/tour/" data-app="halo/">HALO<i></i></button>
     </div>
 
     <div class="laptop">
       <div class="lid">
         <div class="screen">
-          <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t" id="paneTitle">Antara instruments</span><span class="sample">Illustrative example</span></div>
+          <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t" id="paneTitle">Antara agent console</span><span class="sample">Illustrative run, fictional data</span></div>
           <div class="panes">
-
-          <!-- Soundings -->
-          <div class="pane on" role="tabpanel">
-            <h4>Soundings: what is running, and is it watched properly?</h4>
-            <p class="sub">Pick a use case. Overall risk is the highest of the three scores, never an average.</p>
-            <div class="cols">
-              <div class="box">
-                <h5>AI use cases found</h5>
-                <button class="row" aria-pressed="true" data-r="85" data-d="90" data-v="70" data-why="Regulatory exposure is high and the data is sensitive, so overall risk is High. Oversight is lighter than that risk calls for."><span class="n">Claims triage assistant</span><span class="chip hi">High</span><span class="chip gap">Gap</span></button>
-                <button class="row" aria-pressed="false" data-r="25" data-d="20" data-v="15" data-why="All three scores are low, and the oversight in place is enough for that level."><span class="n">Marketing copy drafting</span><span class="chip lo">Low</span><span class="chip ok">Matches</span></button>
-                <button class="row" aria-pressed="false" data-r="90" data-d="75" data-v="80" data-why="Decisions about people are hard to reverse. Overall risk is High, and nobody is checking the outputs."><span class="n">CV screening model</span><span class="chip hi">High</span><span class="chip gap">Gap</span></button>
-                <button class="row" aria-pressed="false" data-r="40" data-d="55" data-v="30" data-why="Medium risk, driven by the data it sees. A named owner and a review cycle are already in place."><span class="n">Meeting summariser</span><span class="chip md">Medium</span><span class="chip ok">Matches</span></button>
-                <p class="note m-only" data-note></p>
-              </div>
-              <div class="box hide-s">
-                <h5>Why this rating</h5>
-                <div class="meter"><div class="lb"><span>Regulatory exposure</span></div><div class="tr"><div class="fl" data-m="r"></div></div></div>
-                <div class="meter"><div class="lb"><span>Data sensitivity</span></div><div class="tr"><div class="fl" data-m="d"></div></div></div>
-                <div class="meter"><div class="lb"><span>Reversibility</span></div><div class="tr"><div class="fl" data-m="v"></div></div></div>
-                <p class="note" data-note></p>
-              </div>
+          <div class="pane ag on" role="tabpanel">
+            <div class="ag-head"><span class="ag-live"></span><b>Soundings agent</b><span>read-only</span><span>UK pack</span></div>
+            <div class="ag-grid">
+              <div class="ag-col"><h5>Reading</h5><ul class="ag-src"><li class="ag-x" style="--k:0"><i></i>Finance and expenses</li><li class="ag-x" style="--k:1"><i></i>Identity and sign-in</li><li class="ag-x" style="--k:2"><i></i>Software estate</li><li class="ag-x" style="--k:3"><i></i>Cloud accounts</li></ul></div>
+              <div class="ag-col"><h5>Investigating</h5><div class="ag-log"><p class="ag-x" style="--k:4"><b>discover</b><span class="">61 AI tools found</span></p><p class="ag-x" style="--k:5"><b>compare</b><span class="bad">38 on the approved list. 23 are not.</span></p><p class="ag-x" style="--k:6"><b>trace</b><span class="">complaint triage reads customer data and decides who escalates</span></p><p class="ag-x" style="--k:7"><b>score</b><span class="bad">regulation high, data high, reversibility low. Overall: high.</span></p></div></div>
+              <div class="ag-col ag-find"><h5>Finding</h5><div class="ag-big ag-x" style="--k:8">23</div><p class="ag-cap ag-x" style="--k:8">AI tools nobody approved</p><p class="ag-gap ag-x" style="--k:9">Gap: complaint triage has no named owner</p><p class="ag-prop ag-x" style="--k:10">Proposed: owner, review cycle, approval gate<br><em>Waiting for a named owner.</em></p></div>
             </div>
           </div>
-
-          <!-- Keel -->
-          <div class="pane" role="tabpanel">
-            <h4>Keel: the operating model for an AI Centre of Excellence</h4>
-            <p class="sub">Which use cases to attempt, how they get built and checked, and how they are watched once live.</p>
-            <div class="steps">
-              <div class="step"><div class="box"><h5>1. Choose</h5>
-                <p class="tick" style="--k:0"><b></b>Use case scored at intake</p>
-                <p class="tick" style="--k:1"><b></b>Business owner named</p>
-                <p class="tick" style="--k:2"><b></b>Go or no go recorded</p></div></div>
-              <div class="step"><div class="box"><h5>2. Build and check</h5>
-                <p class="tick" style="--k:3"><b></b>Tested before shipping</p>
-                <p class="tick" style="--k:4"><b></b>Risk review signed off</p>
-                <p class="tick" style="--k:5"><b></b>Fallback agreed</p></div></div>
-              <div class="step"><div class="box"><h5>3. Monitor</h5>
-                <p class="tick" style="--k:6"><b></b>Drift watched</p>
-                <p class="tick" style="--k:7"><b></b>Incidents logged</p>
-                <p class="tick" style="--k:8"><b></b>Reviewed on a schedule</p></div></div>
+          <div class="pane ag" role="tabpanel">
+            <div class="ag-head"><span class="ag-live"></span><b>Keel agent</b><span>read-only</span><span>UK pack</span></div>
+            <div class="ag-grid">
+              <div class="ag-col"><h5>Reading</h5><ul class="ag-src"><li class="ag-x" style="--k:0"><i></i>Use-case intake</li><li class="ag-x" style="--k:1"><i></i>Approval tooling</li><li class="ag-x" style="--k:2"><i></i>Delivery pipeline</li><li class="ag-x" style="--k:3"><i></i>Model register</li></ul></div>
+              <div class="ag-col"><h5>Investigating</h5><div class="ag-log"><p class="ag-x" style="--k:4"><b>discover</b><span class="">23 use cases in flight</span></p><p class="ag-x" style="--k:5"><b>check</b><span class="bad">14 went through intake. 9 did not.</span></p><p class="ag-x" style="--k:6"><b>check</b><span class="bad">cv-screening: owner named, tested, fallback missing</span></p><p class="ag-x" style="--k:7"><b>route</b><span class="">sent for human review. Risk sign-off outstanding.</span></p></div></div>
+              <div class="ag-col ag-find"><h5>Finding</h5><div class="ag-big ag-x" style="--k:8">9</div><p class="ag-cap ag-x" style="--k:8">use cases that skipped the gates</p><p class="ag-gap ag-x" style="--k:9">Gap: cv-screening has no fallback</p><p class="ag-prop ag-x" style="--k:10">Proposed: hold release until the fallback is agreed<br><em>Waiting for a named owner.</em></p></div>
             </div>
           </div>
-
-          <!-- Sentinel -->
-          <div class="pane" role="tabpanel">
-            <h4>Sentinel: security for AI agents</h4>
-            <p class="sub">Three questions: what can it actually cause, can it be reconstructed afterwards, and does it learn from a near miss.</p>
-            <div class="cols">
-              <div class="box">
-                <h5>One agent run, replayed</h5>
-                <ul class="trail">
-                  <li style="--k:0">Reads the customer ticket<small>Read access, expected</small></li>
-                  <li style="--k:1">Looks up the account<small>Customer data touched</small></li>
-                  <li style="--k:2">Calls the refund tool<small>Money moves here, so this is where oversight matters</small></li>
-                  <li style="--k:3">Writes the reply<small>Full trail kept, so it can be reconstructed</small></li>
-                </ul>
-              </div>
-              <div class="box hide-s">
-                <h5>The three checks</h5>
-                <p class="tick" style="--k:1"><b></b>Impact mapped</p>
-                <p class="tick" style="--k:2"><b></b>Trail reconstructable</p>
-                <p class="tick" style="--k:3"><b></b>Near miss fed back in</p>
-              </div>
+          <div class="pane ag" role="tabpanel">
+            <div class="ag-head"><span class="ag-live"></span><b>Sentinel agent</b><span>read-only</span><span>UK pack</span></div>
+            <div class="ag-grid">
+              <div class="ag-col"><h5>Reading</h5><ul class="ag-src"><li class="ag-x" style="--k:0"><i></i>Agent platforms</li><li class="ag-x" style="--k:1"><i></i>Tool servers</li><li class="ag-x" style="--k:2"><i></i>Permission sets</li><li class="ag-x" style="--k:3"><i></i>Action logs</li></ul></div>
+              <div class="ag-col"><h5>Investigating</h5><div class="ag-log"><p class="ag-x" style="--k:4"><b>discover</b><span class="bad">14 agents found. 5 are in no inventory.</span></p><p class="ag-x" style="--k:5"><b>map</b><span class="">refund-assistant reads CRM, payments and email, and can refund</span></p><p class="ag-x" style="--k:6"><b>test</b><span class="bad">outside input + private data + unapproved action: open</span></p><p class="ag-x" style="--k:7"><b>verify</b><span class="">71% of refund actions can be reconstructed</span></p></div></div>
+              <div class="ag-col ag-find"><h5>Finding</h5><div class="ag-big ag-x" style="--k:8">1</div><p class="ag-cap ag-x" style="--k:8">open attack path</p><p class="ag-gap ag-x" style="--k:9">Path: customer email to refund, no approval</p><p class="ag-prop ag-x" style="--k:10">Proposed: approval above a set value<br><em>Waiting for a named owner.</em></p></div>
             </div>
           </div>
-
-          <!-- HALO -->
-          <div class="pane" role="tabpanel">
-            <h4>HALO: human-AI leadership</h4>
-            <p class="sub">AI raises the IQ of a workplace without touching its EQ. HALO keeps clarity, acknowledgement and quick repair as everyday leadership work.</p>
-            <div class="cols">
-              <div class="box">
-                <h5>Trust in a team, over time</h5>
-                <svg class="spark" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true">
-                  <path class="a" d="M5 40 C60 42 90 60 130 85 S200 110 260 112 S350 108 395 110"/>
-                  <path class="b" d="M5 40 C60 42 90 58 125 78 C150 92 160 70 190 58 S270 30 330 24 S380 22 395 20"/>
-                </svg>
-                <div class="legend"><span><i style="background:#C25446"></i>Speed only</span><span><i style="background:#0F2A47"></i>With quick repair</span></div>
-              </div>
-              <div class="box hide-s">
-                <h5>Everyday practice</h5>
-                <p class="tick" style="--k:1"><b></b>Clarity: who decides what</p>
-                <p class="tick" style="--k:2"><b></b>Acknowledgement: people are heard</p>
-                <p class="tick" style="--k:3"><b></b>Repair: fix it fast, after a miss</p>
-              </div>
+          <div class="pane ag" role="tabpanel">
+            <div class="ag-head"><span class="ag-live"></span><b>HALO agent</b><span>read-only</span><span>your standards</span></div>
+            <div class="ag-grid">
+              <div class="ag-col"><h5>Reading</h5><ul class="ag-src"><li class="ag-x" style="--k:0"><i></i>Anonymous team pulses</li><li class="ag-x" style="--k:1"><i></i>Leaders’ own accounts</li><li class="ag-x" style="--k:2"><i></i>AI decision records</li><li class="ag-x" style="--k:3"><i></i>Existing team rhythms</li></ul></div>
+              <div class="ag-col"><h5>Investigating</h5><div class="ag-log"><p class="ag-x" style="--k:4"><b>pulse</b><span class="">94 of 112 team members answered, anonymously</span></p><p class="ag-x" style="--k:5"><b>compare</b><span class="bad">leaders: acknowledged in 24 hours. teams: 3 days.</span></p><p class="ag-x" style="--k:6"><b>flag</b><span class="bad">widest gap: repair after a miss. 7 of 10 against 3 of 10.</span></p><p class="ag-x" style="--k:7"><b>check</b><span class="bad">3 AI-taken decisions with no person named</span></p></div></div>
+              <div class="ag-col ag-find"><h5>Finding</h5><div class="ag-big ag-x" style="--k:8">4</div><p class="ag-cap ag-x" style="--k:8">points where leaders and teams disagree</p><p class="ag-gap ag-x" style="--k:9">Widest gap: repair after a miss</p><p class="ag-prop ag-x" style="--k:10">Proposed: leaders read-out. Totals only.<br><em>Waiting for a named owner.</em></p></div>
             </div>
           </div>
           </div>
@@ -249,12 +193,12 @@
       <div class="h-cta" style="justify-content:center">
         <a class="h-btn solid" id="stageTour" href="soundings/tour/"><span id="stageTourLabel">See how Soundings works</span> <span class="arr">&rarr;</span></a>
       </div>
-      <p class="stage-note">Demonstration with illustrative examples, not client data. Not the deployed capability.</p>
+      <p class="stage-note">Illustrative runs on fictional data. Nothing here is client data.</p>
     </div>
   </div>
 </section>
 
-<section class="h-sec dark dp" aria-label="From demonstration to deployment">
+<section class="h-sec dark dp" aria-label="The agent in your environment">
   <style>
   .dp .dp-grid{display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center}
   .dp .dp-big{font-size:clamp(30px,3.7vw,50px); line-height:1.06; letter-spacing:-.02em; margin:0 0 22px}
@@ -287,8 +231,8 @@
     <div class="dp-grid">
       <div class="reveal">
         <p class="h-kicker">The full capability</p>
-        <h2 class="dp-big">What you tried is a demonstration.<br><span class="serif">The product is an agent that lives in your world.</span></h2>
-        <p class="h-lead">The instruments on this site run in your browser and connect to nothing. In an engagement, the same thinking is deployed as an agent inside your organisation, across the whole AI Centre of Excellence.</p>
+        <h2 class="dp-big">Not a report.<br><span class="serif">An agent that lives in your world.</span></h2>
+        <p class="h-lead">The runs above are illustrations. In an engagement, the agent is deployed inside your organisation, across the whole AI Centre of Excellence, and connects to what is actually there.</p>
         <ul class="dp-points">
           <li><i>01</i><span><b>Connected to your environment</b>It reads what is actually running and what each part can reach and change, instead of asking you to describe it.</span></li>
           <li><i>02</i><span><b>Configured to your regulator</b>Scope, controls and thresholds are set for your market. Choose one on the right and watch the ring change.</span></li>
@@ -328,30 +272,30 @@
 <section class="h-sec light" aria-label="Our specialisms">
   <div class="wrap">
     <div class="reveal">
-      <p class="h-kicker">Our specialisms</p>
-      <h2 class="h-h2">A specialist AI advisory, built around <span class="serif">three problems</span></h2>
+      <p class="h-kicker">What it covers</p>
+      <h2 class="h-h2">Three problems, <span class="serif">one governed platform</span></h2>
     </div>
     <div class="pgrid">
       <div class="pcard reveal">
         <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M16 34 L24 34 L21.5 12 L18.5 12 Z" /><path class="draw" d="M13 34 L27 34" /><path class="draw" d="M18.5 12 L13 6 M21.5 12 L27 6 M20 12 L20 4" /></svg>
-        <div class="tag">Advisory &middot; Sentinel</div>
+        <div class="tag">Agent &middot; Sentinel</div>
         <h3>AI security</h3>
         <p>What a system can actually cause, whether that can be reconstructed afterwards, and whether it learns from a near miss instead of repeating it.</p>
-        <a class="link" href="sentinel/tour/">See the Sentinel framework &rarr;</a>
+        <a class="link" href="sentinel/tour/">See how the Sentinel agent works &rarr;</a>
       </div>
       <div class="pcard reveal">
         <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M6 16 C6 25 13 30 20 30 C27 30 34 25 34 16" /><path class="draw" d="M20 30 L20 36" /><path class="draw" d="M20 6 L20 17 M20 9 L29 14" /></svg>
-        <div class="tag">Advisory &middot; Keel</div>
+        <div class="tag">Agent &middot; Keel</div>
         <h3>Governance</h3>
         <p>The operating model for an AI Centre of Excellence: which use cases to attempt, how they get built and checked before shipping, and how they are monitored once live.</p>
-        <a class="link" href="keel/tour/">See the Keel framework &rarr;</a>
+        <a class="link" href="keel/tour/">See how the Keel agent works &rarr;</a>
       </div>
       <div class="pcard reveal">
         <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="draw" cx="20" cy="20" r="13" /><circle class="draw" cx="20" cy="20" r="3.5" /></svg>
-        <div class="tag">Advisory &middot; HALO</div>
+        <div class="tag">Agent &middot; HALO</div>
         <h3>Human-AI leadership</h3>
         <p>AI is raising the IQ of the workplace without touching its EQ. HALO keeps clarity, acknowledgement and quick repair as everyday leadership work, so trust does not leak out from underneath the speed.</p>
-        <a class="link" href="halo/tour/">See the HALO framework &rarr;</a>
+        <a class="link" href="halo/tour/">See how the HALO agent works &rarr;</a>
       </div>
     </div>
     <div class="pgrid two">
@@ -366,7 +310,7 @@
         <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M6 22 L14 22 L17 12 L22 30 L25 20 L34 20" /></svg>
         <div class="tag">Product &middot; Antara Wellness</div>
         <h3>Neuroscience-led wellbeing</h3>
-        <p>A neuroscience-led psychological and psychosomatic wellbeing app, built on the same conviction: people change when they feel understood, not analysed. A separate line of work from the advisory, with the same thinking underneath it.</p>
+        <p>A neuroscience-led psychological and psychosomatic wellbeing app, built on the same conviction: people change when they feel understood, not analysed. A separate line of work from the agents, with the same thinking underneath it.</p>
         <a class="link" href="wellness/">Visit Antara Wellness &rarr;</a>
       </div>
     </div>
@@ -382,7 +326,7 @@
       <a class="h-btn solid" href="about/">About Abhinav Gaurav <span class="arr">&rarr;</span></a>
     </div>
     <div class="reveal">
-      <p>Most AI governance stops at what a system is allowed to access. Our advisory work starts from what it can actually cause, whether that can be reconstructed afterwards, and whether the person meant to be supervising it still knows when not to trust it.</p>
+      <p>Most AI governance stops at what a system is allowed to access. Our work starts from what it can actually cause, whether that can be reconstructed afterwards, and whether the person meant to be supervising it still knows when not to trust it.</p>
       <p>That is the thread running through the frameworks and the wellbeing work alike: technology examined for what it does to human judgement, not just what it can do.</p>
       <p style="margin-top:28px"><span class="h-kicker" style="display:block">Also from Antara Innovations</span><a class="link" href="newsletter/" style="color:#fff; border-bottom:1px solid var(--gold); padding-bottom:2px">The Awakened Intelligence, a weekly publication on how AI reshapes human judgement, leadership and behaviour &rarr;</a></p>
     </div>
@@ -399,7 +343,7 @@
     </div>
 
     <div class="faq reveal" style="text-align:left">
-      <details><summary>What does Antara Innovations do?</summary><p>Antara Innovations is a specialised AI advisory working on AI security, governance and human-AI leadership, alongside Antara Wellness, a science-led psychological and psychosomatic wellbeing product.</p></details>
+      <details><summary>What does Antara Innovations do?</summary><p>Antara Innovations deploys governed AI agents, backed by advisory work, on AI security, governance and human-AI leadership, alongside Antara Wellness, a science-led psychological and psychosomatic wellbeing product.</p></details>
       <details><summary>Which markets does Antara Innovations work with?</summary><p>Antara Innovations is based in Zurich, Switzerland, with roots in the UK, and works with organisations across the UK, Switzerland, India and beyond.</p></details>
       <details><summary>What frameworks has Antara Innovations built?</summary><p>Four proprietary frameworks: Keel, for AI governance and Centre of Excellence operating models; Sentinel, for AI agent security; Soundings, a diagnostic for what AI is actually running inside an organisation; and HALO, a human-AI leadership operating model.</p></details>
       <details><summary>Who founded Antara Innovations?</summary><p>Antara Innovations was founded by Abhinav Gaurav, a cyberpsychologist and AI strategist, and author of Pixelated Souls.</p></details>
