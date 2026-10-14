@@ -105,8 +105,8 @@
     <h1 class="h-title"><span class="w"><span style="--i:0">Know</span></span> <span class="w"><span style="--i:1">what</span></span> <span class="w"><span style="--i:2">your</span></span> <span class="w"><span style="--i:3">AI</span></span> <span class="w"><span style="--i:4">can</span></span> <span class="w"><span style="--i:5" class="serif">actually</span></span> <span class="w"><span style="--i:6">cause.</span></span></h1>
     <p class="h-sub h-fade" style="--d:1">Antara Innovations is a specialised AI advisory. We work with organisations on AI security, governance and the human-AI leadership loop, the three mechanics that decide whether an organisation is ready for what AI does next.</p>
     <div class="h-cta h-fade" style="--d:2">
-      <a class="h-btn solid" href="soundings/tour/">Try the free Soundings assessment <span class="arr">&rarr;</span></a>
-      <a class="h-btn" href="mailto:hello@antara-innovations.com?subject=Scoping%20conversation">Request a scoping conversation</a>
+      <a class="h-btn solid" href="soundings/tour/">Try the Soundings demonstration <span class="arr">&rarr;</span></a>
+      <a class="h-btn" href="mailto:hello@antara-innovations.com?subject=Scoping%20conversation">Discuss a deployment</a>
     </div>
   </div>
   <div class="h-scroll" aria-hidden="true"></div>
@@ -122,9 +122,9 @@
 <section class="h-sec stage" aria-label="The frameworks at work">
   <div class="wrap">
     <div class="stage-head reveal">
-      <p class="h-kicker">Four frameworks, built as working tools</p>
+      <p class="h-kicker">Four frameworks, demonstrated</p>
       <h2 class="h-h2">Click through <span class="serif">how we work</span></h2>
-      <p class="h-lead">Each framework is a tool you can use, not a slide deck. Here is a small taste of each one.</p>
+      <p class="h-lead">These are demonstration versions, built to show how each framework thinks. The full capability is an agent deployed inside your own environment, described further down.</p>
     </div>
 
     <div class="tabs" role="tablist" aria-label="Frameworks">
@@ -237,11 +237,82 @@
       <p class="stage-line" id="stageLine">Find out which AI tools are actually running in your organisation, and whether the oversight around each one matches its real risk.</p>
       <div class="h-cta" style="justify-content:center">
         <a class="h-btn solid" id="stageTour" href="soundings/tour/"><span id="stageTourLabel">See how Soundings works</span> <span class="arr">&rarr;</span></a>
-        <a class="h-btn" id="stageApp" href="soundings/">Start the assessment</a>
+        <a class="h-btn" id="stageApp" href="soundings/">Try the demonstration</a>
       </div>
-      <p class="stage-note">Illustrative examples above, not client data.</p>
+      <p class="stage-note">Demonstration with illustrative examples, not client data. Not the deployed capability.</p>
     </div>
   </div>
+</section>
+
+<section class="h-sec dark dp" aria-label="From demonstration to deployment">
+  <style>
+  .dp .dp-grid{display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center}
+  .dp .dp-big{font-size:clamp(30px,3.7vw,50px); line-height:1.06; letter-spacing:-.02em; margin:0 0 22px}
+  .dp .dp-big .serif{font-family:'Playfair Display',serif; font-style:italic; font-weight:500; color:var(--gold-light)}
+  .dp .dp-points{list-style:none; padding:0; margin:30px 0 34px; display:grid; gap:18px}
+  .dp .dp-points li{display:grid; grid-template-columns:34px 1fr; gap:14px; line-height:1.6; color:rgba(237,241,245,.78)}
+  .dp .dp-points b{display:block; color:#fff; font-weight:600; letter-spacing:.01em}
+  .dp .dp-points i{font-style:normal; font-size:12px; letter-spacing:1.6px; color:var(--gold-light); font-weight:700; padding-top:3px}
+  .dp .dp-tabs{display:flex; gap:8px; justify-content:center; margin:0 0 6px; flex-wrap:wrap}
+  .dp .dp-tabs button{background:transparent; color:rgba(237,241,245,.75); border:1px solid rgba(237,241,245,.25); border-radius:999px; padding:8px 18px; font:600 13px inherit; letter-spacing:.4px; cursor:pointer; transition:all .25s}
+  .dp .dp-tabs button[aria-pressed="true"]{background:var(--gold-light); color:#0e1b2c; border-color:var(--gold-light)}
+  .dp .dp-svg{width:100%; height:auto; display:block}
+  .dp .dp-ring{fill:none; stroke:rgba(212,170,90,.35); stroke-width:1; stroke-dasharray:2 7}
+  .dp .dp-ring.r2{stroke:rgba(237,241,245,.1)}
+  .dp .dp-spoke{stroke:var(--gold-light); stroke-width:1.2; stroke-dasharray:4 6; opacity:.7; animation:dpflow 2.4s linear infinite; animation-delay:calc(var(--i)*-.35s)}
+  @keyframes dpflow{to{stroke-dashoffset:-20}}
+  .dp .dp-node circle{fill:#0e1b2c; stroke:var(--gold-light); stroke-width:1.6}
+  .dp .dp-node text{fill:rgba(237,241,245,.8); font-size:12.5px; letter-spacing:.4px}
+  .dp .dp-core-halo{fill:rgba(212,170,90,.12); animation:dppulse 3.2s ease-in-out infinite; transform-origin:300px 270px}
+  @keyframes dppulse{50%{transform:scale(1.3); opacity:.4}}
+  .dp .dp-core{fill:var(--gold-light)}
+  .dp .dp-core-t{fill:#0e1b2c; font-weight:700; font-size:13px; letter-spacing:.5px}
+  .dp .dp-reg text{fill:#fff; font-size:13.5px; font-weight:600; letter-spacing:.5px; transition:opacity .35s}
+  .dp .dp-reg text.out{opacity:0}
+  .dp .dp-cap{text-align:center; font-size:12.5px; color:rgba(237,241,245,.55); margin-top:4px}
+  @media (max-width:900px){.dp .dp-grid{grid-template-columns:1fr; gap:36px}}
+  @media (prefers-reduced-motion:reduce){.dp .dp-spoke,.dp .dp-core-halo{animation:none}}
+  </style>
+  <div class="wrap">
+    <div class="dp-grid">
+      <div class="reveal">
+        <p class="h-kicker">The full capability</p>
+        <h2 class="dp-big">What you tried is a demonstration.<br><span class="serif">The product is an agent that lives in your world.</span></h2>
+        <p class="h-lead">The instruments on this site run in your browser and connect to nothing. In an engagement, the same thinking is deployed as an agent inside your organisation, across the whole AI Centre of Excellence.</p>
+        <ul class="dp-points">
+          <li><i>01</i><span><b>Connected to your environment</b>It reads what is actually running and what each part can reach and change, instead of asking you to describe it.</span></li>
+          <li><i>02</i><span><b>Configured to your regulator</b>Scope, controls and thresholds are set for your market. Choose one on the right and watch the ring change.</span></li>
+          <li><i>03</i><span><b>Already working in the UK</b>Deployed and proven there. A new market is a configuration against its rules, and that is where an engagement starts.</span></li>
+        </ul>
+        <div class="h-cta"><a class="h-btn solid" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation">Discuss a deployment <span class="arr">&rarr;</span></a></div>
+      </div>
+      <div class="reveal">
+        <div class="dp-tabs" role="group" aria-label="Choose a market">
+          <button type="button" data-m="uk" aria-pressed="true">United Kingdom</button>
+          <button type="button" data-m="ch" aria-pressed="false">Switzerland</button>
+          <button type="button" data-m="eu" aria-pressed="false">European Union</button>
+        </div>
+        <svg class="dp-svg" viewBox="0 0 600 540" role="img" aria-label="An agent at the centre, connected to six parts of an organisation, inside a ring of the regulations that apply in the chosen market">
+<circle class="dp-ring" cx="300" cy="270" r="225"/><circle class="dp-ring r2" cx="300" cy="270" r="150"/>
+<line class="dp-spoke" x1="300" y1="270" x2="300.0" y2="120.0" style="--i:0"/><line class="dp-spoke" x1="300" y1="270" x2="429.9" y2="195.0" style="--i:1"/><line class="dp-spoke" x1="300" y1="270" x2="429.9" y2="345.0" style="--i:2"/><line class="dp-spoke" x1="300" y1="270" x2="300.0" y2="420.0" style="--i:3"/><line class="dp-spoke" x1="300" y1="270" x2="170.1" y2="345.0" style="--i:4"/><line class="dp-spoke" x1="300" y1="270" x2="170.1" y2="195.0" style="--i:5"/><g class="dp-node"><circle cx="300.0" cy="120.0" r="5"/><text x="300.0" y="106.0" text-anchor="middle">Identity</text></g><g class="dp-node"><circle cx="429.9" cy="195.0" r="5"/><text x="429.9" y="181.0" text-anchor="middle">Cloud</text></g><g class="dp-node"><circle cx="429.9" cy="345.0" r="5"/><text x="429.9" y="367.0" text-anchor="middle">Data</text></g><g class="dp-node"><circle cx="300.0" cy="420.0" r="5"/><text x="300.0" y="442.0" text-anchor="middle">Models</text></g><g class="dp-node"><circle cx="170.1" cy="345.0" r="5"/><text x="170.1" y="367.0" text-anchor="middle">Agents</text></g><g class="dp-node"><circle cx="170.1" cy="195.0" r="5"/><text x="170.1" y="181.0" text-anchor="middle">Documents</text></g>
+<circle class="dp-core-halo" cx="300" cy="270" r="46"/><circle class="dp-core" cx="300" cy="270" r="34"/>
+<text class="dp-core-t" x="300" y="274" text-anchor="middle">Agent</text>
+<g class="dp-reg"><text id="dpReg0" x="300" y="40" text-anchor="middle"></text></g><g class="dp-reg"><text id="dpReg1" x="530" y="270" text-anchor="middle"></text></g><g class="dp-reg"><text id="dpReg2" x="300" y="500" text-anchor="middle"></text></g><g class="dp-reg"><text id="dpReg3" x="70" y="270" text-anchor="middle"></text></g></svg>
+        <p class="dp-cap">Illustrative. The agent is configured to the regime of each market.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var R={uk:["FCA and PRA","SM&CR","Consumer Duty","ICO"],ch:["FINMA","FADP","Cantonal rules","Sector guidance"],eu:["EU AI Act","DORA","GDPR","Supervisors"]};
+    var root=document.currentScript.parentNode, els=[0,1,2,3].map(function(i){return root.querySelector("#dpReg"+i)}), btns=root.querySelectorAll(".dp-tabs button");
+    function set(m,first){els.forEach(function(e,i){ if(first){e.textContent=R[m][i];return} e.classList.add("out"); setTimeout(function(){e.textContent=R[m][i]; e.classList.remove("out")},300)}); btns.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.m===m)})}
+    btns.forEach(function(b){b.addEventListener("click",function(){set(b.dataset.m)})});
+    set("uk",true);
+    var order=["uk","ch","eu"],k=0,t=setInterval(function(){k=(k+1)%3;set(order[k])},5200);
+    btns.forEach(function(b){b.addEventListener("click",function(){clearInterval(t)})});
+  })();
+  </script>
 </section>
 
 <section class="h-sec light" aria-label="Our specialisms">
@@ -279,7 +350,7 @@
         <div class="tag">Diagnostic &middot; Soundings</div>
         <h3>Where to start</h3>
         <p>Most engagements start with Soundings, a fast, paid audit of which AI use cases are actually running in your organisation, and whether the oversight around each one matches its real risk. It tells us, and you, where Keel, Sentinel or HALO needs to land first.</p>
-        <a class="link" href="soundings/tour/">Try the free Soundings assessment &rarr;</a>
+        <a class="link" href="soundings/tour/">Try the Soundings demonstration &rarr;</a>
       </div>
       <div class="pcard reveal">
         <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="draw" d="M6 22 L14 22 L17 12 L22 30 L25 20 L34 20" /></svg>
@@ -314,7 +385,7 @@
       <p class="h-kicker">Building an AI CoE, or need to know what is actually running?</p>
       <h2 class="h-h2">Start with a <span class="serif">scoping conversation</span></h2>
       <p class="h-lead">Fifteen minutes to identify the right starting point for your organisation.</p>
-      <div class="h-cta"><a class="h-btn solid" href="mailto:hello@antara-innovations.com?subject=Scoping%20conversation">Request a scoping conversation <span class="arr">&rarr;</span></a><a class="h-btn" href="tools/">Explore the instruments</a></div>
+      <div class="h-cta"><a class="h-btn solid" href="mailto:hello@antara-innovations.com?subject=Scoping%20conversation">Discuss a deployment <span class="arr">&rarr;</span></a><a class="h-btn" href="tools/">See the demonstrations</a></div>
     </div>
 
     <div class="faq reveal" style="text-align:left">
