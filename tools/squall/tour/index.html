@@ -122,7 +122,7 @@
         <h2 class="pop d1">Where this can go from here</h2>
         <div class="ladder" id="ladder">
           <div data-t="300">
-            <span class="lstep">01</span><h4>Free test</h4>
+            <span class="lstep">01</span><h4>Demonstration</h4>
             <p>Six scenarios, your accuracy and calibration, round by round.</p>
             <span class="lprice">No charge</span>
           </div>
@@ -140,11 +140,30 @@
       </div>
     </section>
 
+    <section class="scene agentscene" data-ms="13500">
+      <style>
+.agentscene .ag-flow{display:grid; gap:10px; margin:24px auto 0; text-align:left}
+.agentscene .ag-step{display:grid; grid-template-columns:36px 1fr; gap:12px; border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:12px 16px; opacity:0; transform:translateY(10px)}
+.agentscene .ag-step.on{animation:agpop .5s ease forwards}
+@keyframes agpop{to{opacity:1; transform:none}}
+.agentscene .ag-step span{color:var(--gold-light); font-size:12px; letter-spacing:1.4px; font-weight:700; padding-top:3px}
+.agentscene .ag-step h4{color:#fff; font-size:15px; margin:0 0 3px}
+.agentscene .ag-step p{color:rgba(237,241,245,.68); font-size:13px; margin:0; max-width:none; line-height:1.55}
+.agentscene .ag-foot{font-size:12.5px; color:rgba(237,241,245,.55); margin-top:18px}
+</style>
+      <div class="inner" style="max-width:760px">
+        <p class="kick pop d1" style="max-width:none; text-align:center">In deployment</p>
+        <h2 class="pop d1">The same thinking, as a programme inside your organisation</h2>
+        <div class="ag-flow"><div class="ag-step" data-t="500"><span>01</span><div><h4>Built on your cases</h4><p>Scenarios come from your own fraud and claims patterns, not fictional ones.</p></div></div><div class="ag-step" data-t="2400"><span>02</span><div><h4>Delivered where people work</h4><p>Run inside your existing training and email, so people meet them as part of the working week.</p></div></div><div class="ag-step" data-t="4300"><span>03</span><div><h4>Scored on calibration</h4><p>Accuracy, and whether confidence matched reality, reported by team.</p></div></div><div class="ag-step" data-t="6200"><span>04</span><div><h4>Tracked over time</h4><p>You see judgement improve, or fade, after each new attack pattern.</p></div></div></div>
+        <p class="ag-foot pop d4">Designed with you in an engagement, and configured to your market and regulator.</p>
+      </div>
+    </section>
+
     <section class="scene" data-ms="8000">
       <div class="inner">
-        <h2 class="pop d1">Free to run. Easy to keep.</h2>
-        <p class="pop d2">Squall is free and needs no sign-up. Make a free account with just your email (we send a code, no password) and you can keep 3 saved results and put any two side by side.</p>
-        <p class="pop d3">Run it again later and you see what changed. Pro keeps up to 200 results and gives you a report of the changes to download.</p>
+        <h2 class="pop d1">A demonstration of the method</h2>
+        <p class="pop d2">What you just saw runs on what you tell it, in one short sitting. A deployed Squall runs on your own environment, configured to your regulator.</p>
+        <p class="pop d3">If you want to compare your own results over time, a free account keeps your saved results.</p>
       </div>
     </section>
 
@@ -152,10 +171,11 @@
       <div class="inner">
         <p class="kick pop d1" id="endKick">That's Squall</p>
         <h2 class="pop d2">See what your own judgement actually looks like under a clock.</h2>
-        <p class="pop d3">About five minutes. Every scenario is fictional, nothing about your real customers or claims is asked.</p>
+        <p class="pop d3">The demonstration runs six fictional scenarios. The deployed Squall uses your own cases, inside your own training.</p>
         <div class="btnrow pop d4">
           <button class="tourbtn" id="backBtn" type="button">Back to instruments</button>
           <button class="tourbtn solid" id="continueBtn" type="button">Start the test</button>
+          <a class="tourbtn" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation" style="text-decoration:none; display:inline-block">Discuss a deployment</a>
         </div>
       </div>
     </section>

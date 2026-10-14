@@ -126,7 +126,7 @@
     <section class="scene mapscene" data-ms="10500">
       <div class="inner" style="max-width:660px">
         <h2 class="pop d1">Then the picture draws itself</h2>
-        <p class="pop d2" style="margin:0 0 6px">This exhibit is what you see, unlocked, the moment the free assessment finishes.</p>
+        <p class="pop d2" style="margin:0 0 6px">This exhibit is what you see, unlocked, the moment the demonstration finishes.</p>
         <div class="mapwrap"><svg viewBox="0 0 640 380" id="tourMap"></svg></div>
       </div>
     </section>
@@ -135,7 +135,7 @@
       <div class="inner">
         <h2 class="pop d1">What you actually get, and where</h2>
         <div class="deliv" id="deliv">
-          <div data-t="400"><span class="tagpill tp-free">Free assessment</span><h4>The mismatch map</h4><p>Every use, plotted and ranked. Nothing buried in an appendix.</p></div>
+          <div data-t="400"><span class="tagpill tp-free">Demonstration</span><h4>The mismatch map</h4><p>Every use, plotted and ranked. Nothing buried in an appendix.</p></div>
           <div data-t="2000"><span class="tagpill tp-report">Detailed report</span><h4>A prioritised action list</h4><p>Sequenced by what's actually dangerous, not what's loudest.</p></div>
           <div data-t="3600"><span class="tagpill tp-report">Detailed report</span><h4>The inputs Keel needs</h4><p>Operating model and approval-gate decisions, on evidence.</p></div>
         </div>
@@ -145,7 +145,7 @@
     <section class="scene tlscene" data-ms="8500">
       <div class="inner" style="max-width:720px">
         <h2 class="pop d1">Ten working days, roughly</h2>
-        <p class="pop d2" style="margin:0 0 4px">That's the facilitated version. The free assessment finishes in one sitting.</p>
+        <p class="pop d2" style="margin:0 0 4px">That's the facilitated version. The demonstration finishes in one sitting.</p>
         <div class="timeline">
           <div class="track"></div>
           <div class="tl-row" id="tlrow">
@@ -211,7 +211,7 @@
         <h2 class="pop d1">Three ways to go deeper</h2>
         <div class="ladder" id="ladder">
           <div data-t="300">
-            <span class="lstep">01</span><h4>Free assessment</h4>
+            <span class="lstep">01</span><h4>Demonstration</h4>
             <p>The map you just saw. Up to three uses of AI, no cost.</p>
             <span class="lprice">No charge</span>
           </div>
@@ -221,19 +221,38 @@
             <span class="lprice" id="ladderPrice">Priced report</span>
           </div>
           <div data-t="3500">
-            <span class="lstep">03</span><h4>Full Soundings</h4>
-            <p>Your teams interviewed directly, under amnesty, compared against what leadership knows.</p>
+            <span class="lstep">03</span><h4>Deployed agent</h4>
+            <p>An agent connected to your records, finding every AI use without anyone declaring it, and flagging new ones as they appear.</p>
             <span class="lprice">Engagement, priced individually</span>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="scene agentscene" data-ms="13500">
+      <style>
+.agentscene .ag-flow{display:grid; gap:10px; margin:24px auto 0; text-align:left}
+.agentscene .ag-step{display:grid; grid-template-columns:36px 1fr; gap:12px; border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:12px 16px; opacity:0; transform:translateY(10px)}
+.agentscene .ag-step.on{animation:agpop .5s ease forwards}
+@keyframes agpop{to{opacity:1; transform:none}}
+.agentscene .ag-step span{color:var(--gold-light); font-size:12px; letter-spacing:1.4px; font-weight:700; padding-top:3px}
+.agentscene .ag-step h4{color:#fff; font-size:15px; margin:0 0 3px}
+.agentscene .ag-step p{color:rgba(237,241,245,.68); font-size:13px; margin:0; max-width:none; line-height:1.55}
+.agentscene .ag-foot{font-size:12.5px; color:rgba(237,241,245,.55); margin-top:18px}
+</style>
+      <div class="inner" style="max-width:760px">
+        <p class="kick pop d1" style="max-width:none; text-align:center">In deployment</p>
+        <h2 class="pop d1">The same thinking, as an agent in your environment</h2>
+        <div class="ag-flow"><div class="ag-step" data-t="500"><span>01</span><div><h4>Connects</h4><p>Read-only access to finance, identity and software-management records, so every tool people pay for or sign into is found without anyone having to declare it.</p></div></div><div class="ag-step" data-t="2400"><span>02</span><div><h4>Investigates</h4><p>Works out what each use touches, what happens when it is wrong, and who is watching, from your own data rather than from answers given in a sitting.</p></div></div><div class="ag-step" data-t="4300"><span>03</span><div><h4>Compares</h4><p>Sets what the records show against what leadership believes, and lists every gap between the two.</p></div></div><div class="ag-step" data-t="6200"><span>04</span><div><h4>Keeps watching</h4><p>Runs on a schedule. A new tool, or a change in what one touches, is flagged as it appears.</p></div></div></div>
+        <p class="ag-foot pop d4">Designed with you in an engagement, and configured to your market and regulator.</p>
+      </div>
+    </section>
+
     <section class="scene" data-ms="8000">
       <div class="inner">
-        <h2 class="pop d1">Free to run. Easy to keep.</h2>
-        <p class="pop d2">Soundings is free and needs no sign-up. Make a free account with just your email (we send a code, no password) and you can keep 3 saved results and put any two side by side.</p>
-        <p class="pop d3">Run it again later and you see what changed. Pro keeps up to 200 results and gives you a report of the changes to download.</p>
+        <h2 class="pop d1">A demonstration of the method</h2>
+        <p class="pop d2">What you just saw runs on what you tell it, in one short sitting. A deployed Soundings runs on your own environment, configured to your regulator.</p>
+        <p class="pop d3">If you want to compare your own results over time, a free account keeps your saved results.</p>
       </div>
     </section>
 
@@ -241,10 +260,11 @@
       <div class="inner">
         <p class="kick pop d1">That's Soundings</p>
         <h2 class="pop d2">Want to know what's actually running in your organisation?</h2>
-        <p class="pop d3">The free assessment takes about ten minutes and covers up to three uses of AI. Name the unofficial ones too, it's only useful if it's honest.</p>
+        <p class="pop d3">The demonstration takes about ten minutes on what you tell it. The deployed Soundings finds what is running without anyone having to declare it.</p>
         <div class="btnrow pop d4">
           <button class="tourbtn" id="backBtn" type="button">Back to frameworks</button>
-          <button class="tourbtn solid" id="continueBtn" type="button">Continue to the assessment</button>
+          <button class="tourbtn solid" id="continueBtn" type="button">Try the demonstration</button>
+          <a class="tourbtn" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation" style="text-decoration:none; display:inline-block">Discuss a deployment</a>
         </div>
       </div>
     </section>

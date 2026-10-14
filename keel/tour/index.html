@@ -158,7 +158,7 @@
 
     <section class="scene" data-ms="8500">
       <div class="inner">
-        <h2 class="pop d1">Free, and genuinely useful on its own</h2>
+        <h2 class="pop d1">Useful on its own, and only the start</h2>
         <p class="pop d2">Where you stand today, the recommended model and why, what a minimum viable team looks like for you, what your risk gate should check on day one, and a concrete first ninety days. Not a teaser, a real report.</p>
         <p class="pop d3">Want a version you can actually hand to your team, with a specific RACI and the forms pre-filled against your own answers? That's the formalised version. Want the two-to-three-year strategy beyond it? That's a conversation, not a report.</p>
       </div>
@@ -182,7 +182,7 @@
         <h2 class="pop d1">Three ways to go deeper</h2>
         <div class="ladder" id="ladder">
           <div data-t="300">
-            <span class="lstep">01</span><h4>Free report</h4>
+            <span class="lstep">01</span><h4>Demonstration report</h4>
             <p>The full current-state readout: model, reasoning, team, risk gate, first ninety days.</p>
             <span class="lprice">No charge</span>
           </div>
@@ -192,19 +192,38 @@
             <span class="lprice" id="ladderPrice">Priced report</span>
           </div>
           <div data-t="3500">
-            <span class="lstep">03</span><h4>Foundation plus strategy</h4>
-            <p>The current-state work, plus the two to three year path, built with you directly.</p>
+            <span class="lstep">03</span><h4>Deployed agent</h4>
+            <p>An agent inside your delivery and approval tooling, holding every use case to the gates your operating model sets.</p>
             <span class="lprice">Engagement, priced individually</span>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="scene agentscene" data-ms="13500">
+      <style>
+.agentscene .ag-flow{display:grid; gap:10px; margin:24px auto 0; text-align:left}
+.agentscene .ag-step{display:grid; grid-template-columns:36px 1fr; gap:12px; border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:12px 16px; opacity:0; transform:translateY(10px)}
+.agentscene .ag-step.on{animation:agpop .5s ease forwards}
+@keyframes agpop{to{opacity:1; transform:none}}
+.agentscene .ag-step span{color:var(--gold-light); font-size:12px; letter-spacing:1.4px; font-weight:700; padding-top:3px}
+.agentscene .ag-step h4{color:#fff; font-size:15px; margin:0 0 3px}
+.agentscene .ag-step p{color:rgba(237,241,245,.68); font-size:13px; margin:0; max-width:none; line-height:1.55}
+.agentscene .ag-foot{font-size:12.5px; color:rgba(237,241,245,.55); margin-top:18px}
+</style>
+      <div class="inner" style="max-width:760px">
+        <p class="kick pop d1" style="max-width:none; text-align:center">In deployment</p>
+        <h2 class="pop d1">The same thinking, as an agent in your environment</h2>
+        <div class="ag-flow"><div class="ag-step" data-t="500"><span>01</span><div><h4>Connects</h4><p>Reads your use-case intake, approval, delivery and risk tooling, and your training records.</p></div></div><div class="ag-step" data-t="2400"><span>02</span><div><h4>Investigates</h4><p>Scores every use case at intake against a fixed rule: it can ship on its own, or it needs human review.</p></div></div><div class="ag-step" data-t="4300"><span>03</span><div><h4>Proves</h4><p>Checks the gates were actually followed: owner named, tested before shipping, fallback agreed.</p></div></div><div class="ag-step" data-t="6200"><span>04</span><div><h4>Keeps watching</h4><p>Watches live use cases for drift and incidents, and tracks the first ninety days as checkable gates.</p></div></div></div>
+        <p class="ag-foot pop d4">Designed with you in an engagement, and configured to your market and regulator.</p>
+      </div>
+    </section>
+
     <section class="scene" data-ms="8000">
       <div class="inner">
-        <h2 class="pop d1">Free to run. Easy to keep.</h2>
-        <p class="pop d2">Keel is free and needs no sign-up. Make a free account with just your email (we send a code, no password) and you can keep 3 saved results and put any two side by side.</p>
-        <p class="pop d3">Run it again later and you see what changed. Pro keeps up to 200 results and gives you a report of the changes to download.</p>
+        <h2 class="pop d1">A demonstration of the method</h2>
+        <p class="pop d2">What you just saw runs on what you tell it, in one short sitting. A deployed Keel runs on your own environment, configured to your regulator.</p>
+        <p class="pop d3">If you want to compare your own results over time, a free account keeps your saved results.</p>
       </div>
     </section>
 
@@ -212,10 +231,11 @@
       <div class="inner">
         <p class="kick pop d1">That's Keel</p>
         <h2 class="pop d2">Want to know what shape your AI programme should actually take?</h2>
-        <p class="pop d3">A short conversation, then a properly written report, not a chart. Free, and genuinely useful on its own.</p>
+        <p class="pop d3">The demonstration is a short conversation about your set-up. The deployed Keel works inside your own intake, approval and delivery tooling.</p>
         <div class="btnrow pop d4">
           <button class="tourbtn" id="backBtn" type="button">Back to frameworks</button>
-          <button class="tourbtn solid" id="continueBtn" type="button">Continue to the assessment</button>
+          <button class="tourbtn solid" id="continueBtn" type="button">Try the demonstration</button>
+          <a class="tourbtn" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation" style="text-decoration:none; display:inline-block">Discuss a deployment</a>
         </div>
       </div>
     </section>
