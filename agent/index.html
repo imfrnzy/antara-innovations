@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The agent | Antara Innovations</title>
+<meta name="description" content="Antara deploys governed AI agents inside your organisation. They connect read-only to your environment, investigate what is actually there, and test it against the regulation you answer to.">
+<meta name="theme-color" content="#0A1B30">
+<link rel="canonical" href="https://www.antara-innovations.com/agent/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antara Innovations">
+<meta property="og:url" content="https://www.antara-innovations.com/agent/">
+<meta property="og:title" content="The agent | Antara Innovations">
+<meta property="og:description" content="Governed AI agents that work inside your organisation, configured to the regulation you answer to.">
+<meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/v2.css">
+<link rel="stylesheet" href="agent.css">
+</head>
+<body class="v2">
+<header class="site-header">
+  <div class="nav">
+    <a class="brand" href="../">
+      <img src="../assets/logo.png" alt="Antara Innovations">
+      <span class="word">Antara <sup>Innovations</sup></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../agent/" aria-current="page">The agent</a>
+      <a href="../frameworks/">Frameworks</a>
+      <a href="../tools/">Demonstrations</a>
+      <a href="../use-cases/">Use cases</a>
+      <a href="../newsletter/">Newsletter</a>
+      <a href="../wellness/">Antara Wellness</a>
+      <a href="../about/">About</a>
+      <a class="cta" href="mailto:hello@antara-innovations.com?subject=Enquiry">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="p-hero">
+  <div class="p-orb a"></div><div class="p-orb b"></div>
+  <div class="wrap">
+    <p class="h-eyebrow h-fade" style="--d:0">The agent</p>
+    <h1 class="p-title h-fade" style="--d:1">An agent that works <span class="serif">inside your organisation.</span></h1>
+    <p class="p-sub h-fade" style="--d:2">Antara deploys governed AI agents that connect to your environment, investigate what is actually there, and test it against the regulation you answer to. The frameworks are the rules. The agent does the work.</p>
+    <div class="h-cta h-fade" style="--d:3"><a class="h-btn solid" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation">Discuss a deployment <span class="arr">&rarr;</span></a><a class="h-btn" href="#system">See how it works <span class="arr">&darr;</span></a></div>
+  </div>
+</section>
+
+<section class="h-sec dark ag-sec" id="system">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="h-kicker">How it works</p>
+      <h2 class="h-h2">One platform. <span class="serif">Four agents.</span></h2>
+      <p class="h-lead">Choose an agent and a market. The sources it reads, the rules it applies and what it produces all change with them. Nothing leaves the loop without a named person approving it.</p>
+    </div>
+    <div class="ag-tabs" id="agTabs" role="group" aria-label="Choose an agent">
+      <button type="button" data-a="soundings" aria-pressed="true">Soundings</button>
+      <button type="button" data-a="sentinel" aria-pressed="false">Sentinel</button>
+      <button type="button" data-a="bearing" aria-pressed="false">Bearing</button>
+      <button type="button" data-a="keel" aria-pressed="false">Keel</button>
+    </div>
+    <p class="ag-ask" id="agAsk"></p>
+    <div class="ag-sys" id="agSys">
+      <div class="ag-col">
+        <h3 class="ag-colh">Reads, read-only</h3>
+        <ul class="ag-src" id="agSrc"></ul>
+      </div>
+      <div class="ag-flow" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="ag-core">
+        <h3 class="ag-colh">The agent</h3>
+        <div class="ag-layer"><b>Evidence ledger</b><span>Every observation is stored with its source and time, so any finding can be traced back.</span></div>
+        <div class="ag-layer"><b id="agRuleH">Framework rules</b><span id="agRule"></span></div>
+        <div class="ag-layer ag-pack"><b>Regulation pack</b>
+          <div class="ag-mk" id="agMk" role="group" aria-label="Choose a market">
+            <button type="button" data-m="uk" aria-pressed="true">UK</button><button type="button" data-m="ch" aria-pressed="false">Switzerland</button><button type="button" data-m="eu" aria-pressed="false">EU</button>
+          </div>
+          <span id="agPack"></span>
+        </div>
+        <div class="ag-gate"><b>Human approval</b><span>Proposed changes wait for a named owner.</span></div>
+      </div>
+      <div class="ag-flow" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="ag-col">
+        <h3 class="ag-colh">Produces</h3>
+        <ul class="ag-out" id="agOut"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="h-sec light ag-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="h-kicker">How we build it</p>
+      <h2 class="h-h2">Five rules <span class="serif">it is built by</span></h2>
+      <p class="h-lead">An agent that governs AI has to be held to a higher standard than the AI it is checking. These are the commitments in the design.</p>
+    </div>
+    <div class="ag-rules">
+      <div class="ag-rule reveal"><i>01</i><h3>Read-only first</h3><p>It connects with read access only. It proposes changes and people make them.</p></div>
+      <div class="ag-rule reveal"><i>02</i><h3>Rules score. The model investigates.</h3><p>A fixed rule sets every score, so the same evidence always gives the same result. The model does the searching and the explaining, never the scoring.</p></div>
+      <div class="ag-rule reveal"><i>03</i><h3>No finding without evidence</h3><p>Each finding links to the records behind it. If it cannot be evidenced, it is reported as unknown, not guessed.</p></div>
+      <div class="ag-rule reveal"><i>04</i><h3>Regulation is a pack</h3><p>The rules are one foundation. The regulation is configured per market, so a new market is a new pack, not a rebuild.</p></div>
+      <div class="ag-rule reveal"><i>05</i><h3>Governed like any agent</h3><p>We hold the agent to our own Sentinel questions: what it can see, what it can change, and whether every action can be reconstructed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="h-sec dark ag-sec" id="run">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="h-kicker">A run, illustrated</p>
+      <h2 class="h-h2">What the agent does <span class="serif">in thirty seconds</span></h2>
+      <p class="h-lead">An illustrative Sentinel run on a fictional organisation. Every line is something a person can check afterwards.</p>
+    </div>
+    <div class="ag-run">
+      <div class="ag-term" id="agTerm" aria-label="Illustrative agent run log"></div>
+      <div class="ag-card" id="agCard">
+        <p class="ag-card-k">Finding</p>
+        <h3>refund-assistant</h3>
+        <dl>
+          <div><dt>Consequence</dt><dd class="hi">High</dd></div>
+          <div><dt>Traceability</dt><dd class="hi">Low</dd></div>
+          <div><dt>Evidence linked</dt><dd>7 items</dd></div>
+          <div><dt>Proposed</dt><dd>2 control changes</dd></div>
+          <div><dt>Status</dt><dd>Awaiting named owner</dd></div>
+        </dl>
+        <p class="ag-card-n">Illustrative. Not client data.</p>
+      </div>
+    </div>
+    <button type="button" class="ag-replay" id="agReplay">Replay the run</button>
+  </div>
+</section>
+
+<section class="h-sec light ag-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="h-kicker">The four agents</p>
+      <h2 class="h-h2">Each answers <span class="serif">one hard question</span></h2>
+    </div>
+    <div class="ag-four">
+      <a class="ag-fcard reveal" href="../soundings/tour/"><span>Soundings</span><h3>What is actually running?</h3><p>Finds every use of AI across finance, identity and software records, including the ones nobody declared.</p><em>See how it works &rarr;</em></a>
+      <a class="ag-fcard reveal" href="../sentinel/tour/"><span>Sentinel</span><h3>What can it actually cause?</h3><p>Maps what each agent can see, change and trigger, and whether every action can be reconstructed.</p><em>See how it works &rarr;</em></a>
+      <a class="ag-fcard reveal" href="../tools/bearing/tour/"><span>Bearing</span><h3>What can you actually prove?</h3><p>Finds the evidence behind each regulatory obligation, and who is accountable for it.</p><em>See how it works &rarr;</em></a>
+      <a class="ag-fcard reveal" href="../keel/tour/"><span>Keel</span><h3>What is allowed to ship?</h3><p>Holds every use case to the gates of your operating model, and watches it once it is live.</p><em>See how it works &rarr;</em></a>
+    </div>
+    <p class="ag-alongside reveal">Alongside the agents runs the human layer: <a href="../halo/tour/">HALO</a> for leadership, <a href="../tools/squall/tour/">Squall</a> for judgement under pressure and <a href="../tools/ensign/tour/">Ensign</a> for AI content transparency. They measure what no system log can: what people actually do and decide.</p>
+  </div>
+</section>
+
+<section class="h-sec dark ag-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="h-kicker">Configured to the market</p>
+      <h2 class="h-h2">The same foundation. <span class="serif">Your regulator.</span></h2>
+      <p class="h-lead">A regulation pack sets which obligations the agent tests, what counts as evidence and how findings are worded for that supervisor. New markets are added as packs.</p>
+    </div>
+    <div class="ag-packs">
+      <div class="ag-pk reveal"><h3>United Kingdom</h3><ul><li>FCA and PRA expectations</li><li>Senior Managers and Certification Regime</li><li>Consumer Duty</li><li>PRA model risk management</li><li>UK GDPR and the ICO</li></ul></div>
+      <div class="ag-pk reveal"><h3>Switzerland</h3><ul><li>FINMA guidance on AI</li><li>Federal Act on Data Protection</li><li>Cantonal and sector rules</li></ul></div>
+      <div class="ag-pk reveal"><h3>European Union</h3><ul><li>EU AI Act</li><li>Digital Operational Resilience Act</li><li>GDPR</li><li>National supervisors</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="h-sec light ag-sec">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="h-kicker">How an engagement runs</p>
+      <h2 class="h-h2">From first conversation <span class="serif">to a working agent</span></h2>
+    </div>
+    <ol class="ag-steps">
+      <li class="reveal"><i>1</i><h3>Scope</h3><p>We agree the environment, the regulation pack and who owns what.</p></li>
+      <li class="reveal"><i>2</i><h3>Connect</h3><p>Read-only connections, reviewed by your own security team before anything is switched on.</p></li>
+      <li class="reveal"><i>3</i><h3>First findings</h3><p>The first inventory and gap register, with every finding linked to its evidence.</p></li>
+      <li class="reveal"><i>4</i><h3>Run and govern</h3><p>The agent keeps watching. Proposed changes go to named owners for a decision.</p></li>
+    </ol>
+    <p class="ag-note reveal">A typical shape. The sequence and timings are set with you for each engagement.</p>
+  </div>
+</section>
+
+<section class="h-sec dark ag-sec">
+  <div class="wrap two-col">
+    <div class="reveal">
+      <p class="h-kicker">Grounded in delivery</p>
+      <h2 class="h-h2">Built from <span class="serif">real engagements</span></h2>
+      <p class="h-lead">The frameworks the agent runs on come from work at major UK institutions, in credit decisioning, retail banking and AI platforms. The same questions, now asked continuously.</p>
+      <div class="h-cta"><a class="h-btn" href="../use-cases/">See the use cases <span class="arr">&rarr;</span></a></div>
+    </div>
+    <div class="ag-never reveal">
+      <h3>By design, it will not</h3>
+      <ul>
+        <li>Change anything in your systems without a named person approving it</li>
+        <li>Let a model set a score</li>
+        <li>Report a finding it cannot evidence</li>
+        <li>Act where it cannot be reconstructed afterwards</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="h-sec light ag-sec ag-cta">
+  <div class="wrap" style="text-align:center">
+    <p class="h-kicker">Start here</p>
+    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">Tell us what you answer to. <span class="serif">We will configure the rest.</span></h2>
+    <p class="h-lead" style="margin-left:auto;margin-right:auto">Fifteen minutes to identify where an agent would help most in your organisation.</p>
+    <div class="h-cta" style="justify-content:center"><a class="h-btn solid" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation">Discuss a deployment <span class="arr">&rarr;</span></a><a class="h-btn ink" href="../tools/">Try a demonstration</a></div>
+  </div>
+</section>
+</main>
+<footer class="v2-foot">
+<div class="wrap">
+  <div class="foot-main">
+    <div>
+      <div class="brand">
+        <img src="../assets/logo.png" alt="Antara Innovations">
+        <span class="word">Antara <sup>Innovations</sup></span>
+      </div>
+      <small>&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+    </div>
+    <div class="foot-col"><h4>Work</h4>
+      <a href="../agent/">The agent</a><a href="../frameworks/">Frameworks</a><a href="../tools/">Demonstrations</a><a href="../use-cases/">Use cases</a></div>
+    <div class="foot-col"><h4>Read</h4>
+      <a href="../newsletter/">The Awakened Intelligence</a><a href="../about/">About Abhinav Gaurav</a><a href="../wellness/">Antara Wellness</a></div>
+    <div class="foot-col"><h4>Talk</h4>
+      <a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
+  </div>
+</div>
+</footer>
+
+
+<script src="../assets/motion.js"></script>
+<script src="../assets/v2.js"></script>
+<script src="agent.js"></script>
+</body>
+</html>

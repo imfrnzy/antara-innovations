@@ -16,7 +16,7 @@ for (const p of pages) {
   });
   const tour = readFileSync(new URL(`../${p}/tour/index.html`, import.meta.url), "utf8");
   t(`${p}: tour has an agent scene and no Free-to-run or Pro wording`, () => {
-    assert.match(tour, /class="scene agentscene"/); assert.match(tour, /Designed with you in an engagement/);
+    assert.match(tour, /How an engagement runs/); assert.match(tour, /Configured to/); assert.match(tour, /Deployment%20conversation/); assert.match(tour, /How it investigates|How it is held to account/);
     assert.ok(!/Free to run|\bPro keeps\b|free assessment/i.test(tour));
   });
 }

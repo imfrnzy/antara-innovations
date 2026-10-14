@@ -1,0 +1,157 @@
+:root{
+  --chart:#3D6B4F;
+  --chart-soft:#E8F0EA;
+  --chart-dark:#28492F;
+}
+
+.tool{min-height:70vh; padding:48px 0 80px}
+.screen{display:none}
+.screen.on{display:block; animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+
+.wrap.narrow{max-width:720px}
+.wrap.center{text-align:center; padding-top:80px}
+
+.eyebrow{font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--chart); margin:0 0 14px}
+
+.tool h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(28px,4.2vw,40px); line-height:1.2; margin:0 0 18px; max-width:22ch}
+.tool h2{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(22px,3vw,28px); line-height:1.3; margin:0 0 20px; max-width:26ch}
+
+.lead{font-size:16.5px; line-height:1.65; color:#33403A; max-width:64ch; margin:0 0 28px}
+
+.panel{background:var(--chart-soft); border-left:3px solid var(--chart); padding:18px 20px; border-radius:2px; margin:0 0 20px}
+.panel.quiet{background:#F6F7F5; border-left-color:#C9D2CC}
+.panel-label{font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--chart-dark); margin:0 0 10px}
+.panel-note{font-size:13.5px; color:#5B6960; margin:0 0 14px}
+
+.check-list{margin:0; padding-left:20px}
+.check-list li{font-size:14.5px; line-height:1.6; color:#2E3B33; margin-bottom:10px}
+.check-list li::marker{color:var(--chart)}
+
+.btn-primary{display:inline-block; background:var(--chart); color:#fff; border:1px solid var(--chart); border-radius:4px; padding:13px 26px; font-size:15px; font-weight:600; cursor:pointer; text-decoration:none; transition:background .15s}
+.btn-primary:hover{background:var(--chart-dark); border-color:var(--chart-dark)}
+.btn-secondary{display:inline-block; background:#fff; color:var(--chart-dark); border:1px solid #C9D2CC; border-radius:4px; padding:11px 20px; font-size:14px; font-weight:600; cursor:pointer}
+.btn-secondary:hover{border-color:var(--chart)}
+
+.fine-print{font-size:13px; color:#6B776F; margin-top:12px}
+
+/* ---- form ---- */
+#reportForm{display:flex; flex-direction:column; gap:18px; margin-top:8px}
+.field{display:flex; flex-direction:column; gap:6px; flex:1}
+.field span{font-size:13.5px; font-weight:600; color:var(--navy)}
+.field small{font-size:12px; color:#6B776F}
+.field input, .field select, .field textarea{
+  font:inherit; font-size:15px; padding:10px 12px; border:1px solid #C9D2CC; border-radius:4px;
+  background:#fff; color:#1A2420; resize:vertical;
+}
+.field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--chart); outline-offset:1px; border-color:var(--chart)}
+.field-row{display:flex; gap:16px}
+.field-row .field{min-width:0}
+.field.small input{padding:8px 10px}
+
+fieldset.panel{border:none; margin:0 0 20px}
+fieldset.panel .field-row{margin-bottom:4px}
+
+.form-error{background:#FBEAEA; border-left:3px solid #C0453F; color:#7A2B26; padding:12px 14px; font-size:14px; border-radius:2px}
+
+/* ---- loading ---- */
+.spinner{width:34px; height:34px; border:3px solid var(--chart-soft); border-top-color:var(--chart); border-radius:50%; margin:0 auto 20px; animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---- draft result ---- */
+.facts-panel{background:var(--chart-soft); border-left:3px solid var(--chart); padding:16px 18px; margin:0 0 22px; border-radius:2px}
+.fact-line{font-size:13.5px; line-height:1.6; color:#2E3B33; margin:0 0 6px}
+.fact-line:last-child{margin-bottom:0; font-weight:600}
+
+#draftText{width:100%; font-family:'SF Mono',Consolas,Menlo,monospace; font-size:13.5px; line-height:1.7; padding:18px; border:1px solid #C9D2CC; border-radius:4px; background:#fff; color:#1A2420}
+
+.draft-actions{display:flex; gap:12px; margin-top:18px; flex-wrap:wrap}
+
+@media (max-width:640px){
+  .field-row{flex-direction:column; gap:18px}
+  .draft-actions{flex-direction:column}
+  .draft-actions .btn-primary, .draft-actions .btn-secondary{width:100%; text-align:center}
+}
+
+/* ---- auth gate: email + code ---- */
+#authCodeForm input[name="code"]{
+  /* Supabase's OTP length is a project setting (6-10 digits), not fixed,
+     so this sizes generously enough to fit the longer end comfortably
+     rather than assuming 6. */
+  font-family:'SF Mono',Consolas,Menlo,monospace; font-size:22px; letter-spacing:7px;
+  text-align:center; max-width:320px; padding:12px;
+}
+#authEmailForm, #authCodeForm{display:flex; flex-direction:column; gap:16px; max-width:420px}
+#authEmailForm[hidden], #authCodeForm[hidden]{display:none !important}
+#authResendBtn{align-self:flex-start}
+
+/* ---- query-risk check ---- */
+.flag-item{display:flex; gap:12px; padding:14px 16px; border-radius:4px; margin-bottom:10px; align-items:flex-start}
+.flag-item.red{background:#FBEAEA; border-left:3px solid #C0453F}
+.flag-item.amber{background:#FBF3E4; border-left:3px solid #C98A2C}
+.flag-dot{flex:none; width:8px; height:8px; border-radius:50%; margin-top:6px}
+.flag-item.red .flag-dot{background:#C0453F}
+.flag-item.amber .flag-dot{background:#C98A2C}
+.flag-message{font-size:14.5px; font-weight:600; color:#2A2420; margin:0 0 4px}
+.flag-why{font-size:13px; color:#55504A; margin:0}
+.flag-clean{background:var(--chart-soft); border-left:3px solid var(--chart); padding:16px 18px; border-radius:4px; font-size:14.5px; color:var(--chart-dark)}
+
+/* ---- returning clinicians: sign in, my reports ---- */
+.returning{margin-top:22px; font-size:14px; color:#4A574F}
+.link-btn{background:none; border:none; padding:0; font:inherit; font-size:14px; font-weight:600; color:var(--chart-dark); text-decoration:underline; cursor:pointer}
+.link-btn:hover{color:var(--chart)}
+.prefill-note{margin-bottom:22px}
+.prefill-note p:last-child{margin:0; font-size:14px; line-height:1.6}
+
+.client-card{border:1px solid #C9D2CC; border-radius:4px; background:#fff; padding:16px 18px; margin:0 0 14px}
+.client-card h3{font-size:16px; margin:0 0 4px; color:var(--navy)}
+.client-meta{font-size:13px; color:#5B6960; margin:0 0 12px}
+.client-actions{display:flex; gap:10px; flex-wrap:wrap}
+.client-card details{margin-top:12px; font-size:13.5px}
+.client-card summary{cursor:pointer; color:#4A574F}
+.earlier-row{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:8px 0; border-top:1px solid #EDF0EE}
+.reports-empty{background:#F6F7F5; border-left:3px solid #C9D2CC; padding:16px 18px; border-radius:2px; font-size:14.5px; margin:0 0 18px}
+@media (max-width:640px){
+  .client-actions{flex-direction:column}
+  .client-actions .btn-primary, .client-actions .btn-secondary{width:100%; text-align:center}
+}
+
+/* Buttons that carry the hidden attribute must stay hidden: the display
+   rules on .btn-primary and .btn-secondary would otherwise override it. */
+.btn-primary[hidden], .btn-secondary[hidden], .link-btn[hidden]{display:none}
+
+/* ---- clients, check-ins, agent flags ---- */
+.check-row{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:#2E3B33}
+.check-row input{margin-top:3px}
+#clientForm, #checkinForm{display:flex; flex-direction:column; gap:16px}
+.danger-zone{display:flex; gap:22px; margin-top:6px}
+.link-btn.danger{color:#9B2F2A}
+.inline-row{display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap}
+.inline-row .field{flex:0 0 220px}
+.funding-bar{height:6px; background:#E3E8E5; border-radius:3px; overflow:hidden; margin:0 0 12px}
+.funding-bar span{display:block; height:100%; background:var(--chart)}
+.funding-bar.low span{background:#C98A2C}
+.funding-bar.out span{background:#C0453F}
+.chip{display:inline-block; font-size:12.5px; line-height:1.4; padding:4px 9px; border-radius:3px; margin:0 6px 6px 0}
+.chip.red{background:#FBEAEA; color:#7A2B26}
+.chip.amber{background:#FBF3E4; color:#6B4A12}
+.session-row{display:flex; gap:14px; justify-content:space-between; align-items:flex-start; padding:10px 0; border-top:1px solid #EDF0EE; font-size:14px}
+.session-row:first-child{border-top:none}
+.session-row .when{flex:none; width:96px; color:#4A574F; font-weight:600}
+.session-row .what{flex:1; color:#2E3B33}
+.session-row .scores{color:#5B6960; font-size:13px}
+.sessions-box{margin:0 0 20px}
+.sessions-box summary{cursor:pointer; font-size:14px; font-weight:600; color:var(--navy); margin-bottom:6px}
+.panel-note{margin-top:0}
+#cdReplyOut{margin-top:16px; display:flex; flex-direction:column; gap:14px}
+#cdReplyOut[hidden]{display:none}
+#cdReplyText, #cdQuery{width:100%}
+.client-card.attention{border-left:3px solid #C98A2C}
+.client-card.attention.red{border-left-color:#C0453F}
+@media (max-width:640px){
+  .inline-row{flex-direction:column; align-items:stretch}
+  .inline-row .field{flex:1}
+  .session-row{flex-direction:column; gap:4px}
+}
+#cdReplyBtn{margin-top:12px}
+#cdReplyError{margin-top:12px}

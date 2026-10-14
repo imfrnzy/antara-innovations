@@ -111,6 +111,7 @@ function showGauge() { document.getElementById("gauge").removeAttribute("hidden"
 function hideGauge() { document.getElementById("gauge").setAttribute("hidden", ""); }
 
 function runVisual(persona) {
+  if (!document.getElementById("gauge")) return;
   const gaugeReadout = document.getElementById("gaugeReadout");
   const gaugeCaption = document.getElementById("gaugeCaption");
   const readout = document.getElementById("confrontReadout");
@@ -159,18 +160,21 @@ let currentPersona = null;
 function applyPersona(key) {
   const persona = PERSONA[key] || PERSONA.default;
   currentPersona = persona;
-  document.getElementById("painH").textContent = persona.painH;
-  document.getElementById("painP").textContent = persona.painP;
-  document.getElementById("confrontH").textContent = persona.confrontH;
-  document.getElementById("confrontP").textContent = persona.confrontP;
-  document.getElementById("confrontSource").textContent = persona.confrontSource;
-  document.getElementById("exH").textContent = key === "bank" || key === "insurer" || key === "asset"
+  const _g = document.getElementById.bind(document);
+  const _stub = { dataset: {}, set textContent(v) {}, set innerHTML(v) {} };
+  const get = (id) => _g(id) || _stub;
+  get("painH").textContent = persona.painH;
+  get("painP").textContent = persona.painP;
+  get("confrontH").textContent = persona.confrontH;
+  get("confrontP").textContent = persona.confrontP;
+  get("confrontSource").textContent = persona.confrontSource;
+  get("exH").textContent = key === "bank" || key === "insurer" || key === "asset"
     ? "What it actually asks about, for you"
     : "What it actually asks about";
-  document.getElementById("endKick").textContent = persona.endKick;
+  get("endKick").textContent = persona.endKick;
   const exampleEls = document.querySelectorAll("#examples > div");
   persona.examples.forEach((example, i) => {
-    exampleEls[i].innerHTML = `<h4>${example.h}</h4><p>${example.p}</p>`;
+    (exampleEls[i]||_stub).innerHTML = `<h4>${example.h}</h4><p>${example.p}</p>`;
   });
 }
 

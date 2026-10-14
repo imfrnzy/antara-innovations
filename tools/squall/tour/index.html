@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How Squall works | Antara Innovations</title>
-<meta name="description" content="A two minute walkthrough of Squall, the judgement-under-pressure test from Antara Innovations.">
+<meta name="description" content="A short walkthrough of how the Antara Squall agent works inside your organisation.">
 <link rel="canonical" href="https://www.antara-innovations.com/tools/squall/tour/">
 <link rel="icon" href="../../../assets/favicon.png">
 <link rel="stylesheet" href="../../../assets/site.css">
@@ -36,19 +36,6 @@
       </div>
     </section>
 
-    <!-- The one interactive scene -->
-    <section class="scene pickscene" data-ms="0">
-      <div class="inner" style="max-width:780px">
-        <h2 class="pop d1">Which of these is closest to you?</h2>
-        <p class="pop d2" style="margin:0 0 6px">This decides which six scenarios you get, and the examples shown next.</p>
-        <div class="picker" id="picker">
-          <button type="button" data-persona="bank"><h4>Banking and payments</h4><p>Payment fraud, impersonation, urgent requests.</p></button>
-          <button type="button" data-persona="insurer"><h4>Claims and underwriting</h4><p>Manipulated photos, invoices, claim notes.</p></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Persona pain point -->
     <section class="scene" data-ms="7500">
       <div class="inner">
         <h2 class="pop d1" id="painH">The tools get better, so does the pressure on people</h2>
@@ -56,126 +43,152 @@
       </div>
     </section>
 
-    <!-- The self-recognition scene: what people actually say, before the fact lands -->
-    <section class="scene" data-ms="8500">
-      <div class="inner">
-        <div class="confess" id="confess">
-          <p class="cline" data-t="300" id="confessLine1"></p>
-          <p class="cline" data-t="2200" id="confessLine2"></p>
-          <p class="cline" data-t="4100" id="confessLine3"></p>
-          <p class="cfoot" data-t="6300">Everyone says one of these. Before they're actually tested.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- The confrontation: a specific, sourced fact, aimed at the visitor -->
-    <section class="scene" data-ms="9500">
-      <div class="inner" style="max-width:680px">
-        <p class="kick pop d1">Before you're tested on it</p>
-        <h2 class="pop d2" id="confrontH" style="font-size:clamp(24px,3.4vw,32px)"></h2>
-        <p class="bignum pop d3" id="confrontNumWrap" hidden><span id="confrontNum">&pound;0</span></p>
-        <p class="bignum-caption pop d3" id="confrontCaption" hidden></p>
-        <p class="pop d3" id="confrontP" style="font-size:19px; color:#fff; margin-top:14px"></p>
-        <p class="pop d4" id="confrontSource" style="margin-top:14px"></p>
-      </div>
-    </section>
-
-    <section class="scene" data-ms="8500">
-      <div class="inner">
-        <h2 class="pop d1">Guessing on the uncertain ones is the actual failure</h2>
-        <p class="pop d2" style="font-size:19px; color:#fff">Not every scenario has a clean answer. Some are built to be genuinely uncertain.</p>
-        <p class="pop d3">Picking "genuine" or "fake" on one of those isn't confidence, it's a coin toss wearing confidence's clothes. Squall scores escalating as the correct call on exactly those ones, because that's what the real job actually rewards.</p>
-      </div>
-    </section>
-
-    <section class="scene chkscene" data-ms="9000">
-      <div class="inner" style="max-width:700px">
-        <h2 class="pop d1">Two things get measured, not one</h2>
-        <div class="scoregrid" id="scoregrid">
-          <div data-t="500"><h4>Accuracy</h4><p>Did the call match what was actually true, including when the true answer was "escalate this".</p></div>
-          <div data-t="1500"><h4>Calibration</h4><p>Wrong is one finding. Wrong and marked high confidence is a different, more dangerous one.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Persona-relevant examples -->
-    <section class="scene sitscene" data-ms="9500">
-      <div class="inner">
-        <h2 class="pop d1" id="exH">What you're actually judging</h2>
-        <div class="sits" id="examples">
-          <div data-t="0"></div>
-          <div data-t="3000"></div>
-          <div data-t="6000"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="scene" data-ms="7000">
-      <div class="inner">
-        <h2 class="pop d1">Six scenarios, a countdown on each</h2>
-        <p class="pop d2">Genuine, fake or manipulated, or not sure. Then how confident you were. About five minutes, on your own, then a score you can compare against your team's.</p>
-      </div>
-    </section>
-
-    <section class="scene ladderscene" data-ms="9500">
-      <div class="inner" style="max-width:820px">
-        <h2 class="pop d1">Where this can go from here</h2>
-        <div class="ladder" id="ladder">
-          <div data-t="300">
-            <span class="lstep">01</span><h4>Demonstration</h4>
-            <p>Six scenarios, your accuracy and calibration, round by round.</p>
-            <span class="lprice">No charge</span>
-          </div>
-          <div data-t="1900">
-            <span class="lstep">02</span><h4>Full report</h4>
-            <p>Where the pattern actually sits, and what it means for your process, not just your score.</p>
-            <span class="lprice" id="ladderPrice">Priced report</span>
-          </div>
-          <div data-t="3500">
-            <span class="lstep">03</span><h4>Team rollout</h4>
-            <p>Scenarios built from your own claims or payment types, run across the whole team.</p>
-            <span class="lprice">Engagement, priced individually</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="scene agentscene" data-ms="13500">
+    <section class="scene" data-ms="9000">
       <style>
-.agentscene .ag-flow{display:grid; gap:10px; margin:24px auto 0; text-align:left}
-.agentscene .ag-step{display:grid; grid-template-columns:36px 1fr; gap:12px; border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:12px 16px; opacity:0; transform:translateY(10px)}
-.agentscene .ag-step.on{animation:agpop .5s ease forwards}
-@keyframes agpop{to{opacity:1; transform:none}}
-.agentscene .ag-step span{color:var(--gold-light); font-size:12px; letter-spacing:1.4px; font-weight:700; padding-top:3px}
-.agentscene .ag-step h4{color:#fff; font-size:15px; margin:0 0 3px}
-.agentscene .ag-step p{color:rgba(237,241,245,.68); font-size:13px; margin:0; max-width:none; line-height:1.55}
-.agentscene .ag-foot{font-size:12.5px; color:rgba(237,241,245,.55); margin-top:18px}
+.tr-x{opacity:0; transform:translateY(8px)}
+.tr-x.on{animation:trpop .5s ease forwards}
+@keyframes trpop{to{opacity:1; transform:none}}
+.tr-wrap{max-width:820px; width:100%; margin:0 auto; text-align:left}
+.tr-wrap h2,.tr-c h2{text-align:center}
+.tr-c{text-align:center}
+.tr-sub{font-size:13.5px; color:rgba(237,241,245,.62); max-width:640px; margin:0 auto 18px; text-align:center}
+.tr-cmp{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px}
+.tr-cmp>div{border:1px solid rgba(255,255,255,.16); border-radius:8px; padding:18px 20px}
+.tr-cmp>div.hl{border-color:var(--gold-light); background:rgba(255,255,255,.05)}
+.tr-cmp h4{font-size:11.5px; letter-spacing:1.6px; text-transform:uppercase; color:rgba(237,241,245,.55); margin:0 0 8px}
+.tr-cmp .hl h4{color:var(--gold-light)}
+.tr-cmp p{margin:0; font-size:15px; line-height:1.6; color:rgba(237,241,245,.85); max-width:none}
+.tr-src{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:26px}
+.tr-src span{border:1px solid var(--gold-light); border-radius:999px; padding:9px 18px; font-size:14px; color:#fff; background:rgba(255,255,255,.05)}
+.tr-core{margin:22px auto 0; display:table; border:1px solid var(--gold-light); border-radius:10px; padding:12px 26px; font-weight:600; color:var(--gold-light); letter-spacing:.6px; background:rgba(255,255,255,.06)}
+.tr-term{background:rgba(3,10,18,.72); border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:16px 18px 8px; margin-top:20px; font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.tr-term .ln{display:grid; grid-template-columns:84px 1fr; gap:10px; margin-bottom:8px}
+.tr-term b{color:var(--gold-light); font-weight:600}
+.tr-term span{color:rgba(237,241,245,.88)}
+.tr-term .bad{color:#ff9b8a}
+.tr-tbl{margin-top:20px; border:1px solid rgba(255,255,255,.16); border-radius:10px; overflow:hidden}
+.tr-tbl .hd,.tr-tbl .rw{display:grid; grid-template-columns:1.7fr 1fr 1fr; gap:12px; padding:11px 16px; font-size:14px; align-items:center}
+.tr-tbl .hd{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(237,241,245,.5); background:rgba(255,255,255,.04)}
+.tr-tbl .rw{border-top:1px solid rgba(255,255,255,.1); color:#fff}
+.tr-tbl .rw em{font-style:normal; font-size:12.5px; padding:3px 10px; border-radius:999px; border:1px solid rgba(237,241,245,.3); justify-self:start; color:rgba(237,241,245,.9)}
+.tr-tbl .rw em.hi{border-color:#ff9b8a; color:#ff9b8a}
+.tr-tbl .rw em.ok{border-color:#8fd3a8; color:#8fd3a8}
+.tr-three{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px}
+.tr-three div{border:1px solid rgba(255,255,255,.16); border-radius:8px; padding:16px 16px}
+.tr-three i{font-style:normal; font-size:11.5px; letter-spacing:1.5px; font-weight:700; color:var(--gold-light)}
+.tr-three h4{color:#fff; font-size:15px; margin:6px 0 6px}
+.tr-three p{margin:0; font-size:13px; line-height:1.55; color:rgba(237,241,245,.7); max-width:none}
+.tr-mk{display:flex; gap:8px; justify-content:center; margin:20px 0 12px; flex-wrap:wrap}
+.tr-mk button{background:transparent; color:rgba(237,241,245,.8); border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:8px 18px; font:600 13px inherit; cursor:pointer}
+.tr-mk button[aria-pressed="true"]{background:var(--gold-light); color:#1a1405; border-color:var(--gold-light)}
+.tr-pk{display:none; border:1px solid var(--gold-light); border-radius:10px; padding:18px 22px; background:rgba(255,255,255,.05); font-size:15.5px; line-height:1.6; color:#fff; text-align:center}
+.tr-pk.on{display:block; animation:trpop .4s ease both}
+.tr-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:22px}
+.tr-steps div{border-top:2px solid var(--gold-light); padding-top:12px}
+.tr-steps i{font:italic 500 26px 'Playfair Display',serif; color:var(--gold-light)}
+.tr-steps h4{color:#fff; font-size:15px; margin:4px 0 6px}
+.tr-steps p{margin:0; font-size:13px; line-height:1.55; color:rgba(237,241,245,.7); max-width:none}
+.tr-bands{display:grid; gap:9px; margin-top:20px}
+.tr-bands div{border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:11px 16px; display:grid; grid-template-columns:130px 1fr; gap:14px; align-items:center}
+.tr-bands div.here{border-color:var(--gold-light); background:rgba(255,255,255,.07)}
+.tr-bands b{color:#fff; font-size:15px}
+.tr-bands div.here b::after{content:"  you are here"; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--gold-light); display:block; margin-top:2px}
+.tr-bands span{font-size:13.5px; color:rgba(237,241,245,.72)}
+.tr-note{font-size:12.5px; color:rgba(237,241,245,.5); margin:26px 0 0; text-align:center}
+
+.tr-cmp,.tr-term,.tr-tbl,.tr-three,.tr-steps,.tr-bands,.tr-pk{width:100%; box-sizing:border-box}
+.tr-term,.tr-term span,.tr-cmp>div,.tr-three div,.tr-steps div,.tr-bands div{text-align:left}
+.tr-term .ln b{text-align:left}
+.tr-pk{text-align:center}
+@media (max-width:700px){.tr-cmp,.tr-three,.tr-steps{grid-template-columns:1fr}.tr-tbl .hd,.tr-tbl .rw{grid-template-columns:1.4fr 1fr 1fr; font-size:12.5px; gap:8px; padding:10px 12px}.tr-bands div{grid-template-columns:1fr; gap:4px}.tr-term .ln{grid-template-columns:1fr; gap:0}}
+@media (prefers-reduced-motion:reduce){.tr-x{opacity:1; transform:none}}
 </style>
-      <div class="inner" style="max-width:760px">
-        <p class="kick pop d1" style="max-width:none; text-align:center">In deployment</p>
-        <h2 class="pop d1">The same thinking, as a programme inside your organisation</h2>
-        <div class="ag-flow"><div class="ag-step" data-t="500"><span>01</span><div><h4>Built on your cases</h4><p>Scenarios come from your own fraud and claims patterns, not fictional ones.</p></div></div><div class="ag-step" data-t="2400"><span>02</span><div><h4>Delivered where people work</h4><p>Run inside your existing training and email, so people meet them as part of the working week.</p></div></div><div class="ag-step" data-t="4300"><span>03</span><div><h4>Scored on calibration</h4><p>Accuracy, and whether confidence matched reality, reported by team.</p></div></div><div class="ag-step" data-t="6200"><span>04</span><div><h4>Tracked over time</h4><p>You see judgement improve, or fade, after each new attack pattern.</p></div></div></div>
-        <p class="ag-foot pop d4">Designed with you in an engagement, and configured to your market and regulator.</p>
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">An agent, not a questionnaire</p>
+        <h2 class="pop d1">Built on your world, not an invented one</h2>
+        <div class="tr-cmp"><div class="tr-x" data-t="500"><h4>The usual way</h4><p>Tests people on invented scenarios.</p></div><div class="tr-x hl" data-t="2300"><h4>The Squall agent</h4><p>Uses your own fraud and claims patterns, inside the working week.</p></div></div>
       </div>
     </section>
 
-    <section class="scene" data-ms="8000">
-      <div class="inner">
-        <h2 class="pop d1">A demonstration of the method</h2>
-        <p class="pop d2">What you just saw runs on what you tell it, in one short sitting. A deployed Squall runs on your own environment, configured to your regulator.</p>
-        <p class="pop d3">If you want to compare your own results over time, a free account keeps your saved results.</p>
+    <section class="scene" data-ms="8500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Step one</p>
+        <h2 class="pop d1">What it works with</h2>
+        <div class="tr-src"><span class="tr-x" data-t="400">Fraud and claims patterns, anonymised</span><span class="tr-x" data-t="850">Training platform</span><span class="tr-x" data-t="1300">Email, for delivery only</span><span class="tr-x" data-t="1750">Team structure</span></div>
+        <div class="tr-core tr-x" data-t="2500">Squall agent</div>
+        <p class="tr-sub tr-x" style="margin-top:16px" data-t="3100">Opt-in and anonymised where people are involved.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="11500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Step two</p>
+        <h2 class="pop d1">How it investigates</h2>
+        <div class="tr-term"><div class="ln tr-x" data-t="400"><b>build</b><span class="">12 scenarios built from last quarter's fraud patterns</span></div><div class="ln tr-x" data-t="1500"><b>deliver</b><span class="">sent inside the existing training platform to 6 teams</span></div><div class="ln tr-x" data-t="2600"><b>score</b><span class="bad">accuracy 74%. Wrong and certain in 11% of answers.</span></div><div class="ln tr-x" data-t="3700"><b>flag</b><span class="bad">claims team B is most confident when it is wrong</span></div><div class="ln tr-x" data-t="4800"><b>adapt</b><span class="">new attack pattern added: a cloned-voice request</span></div><div class="ln tr-x" data-t="5900"><b>track</b><span class="">confidence matched reality in 3 of 6 teams, up from 1</span></div></div>
+        <p class="tr-note">An illustrative run on a fictional organisation. Every line is something a person can check afterwards.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="9500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Step three</p>
+        <h2 class="pop d1">What it produces</h2>
+        <div class="tr-tbl"><div class="hd"><span>Team</span><span>Accuracy</span><span>Confidence</span></div><div class="rw tr-x" data-t="500"><span>Claims A</span><em class="ok">81%</em><em class="ok">Matches</em></div><div class="rw tr-x" data-t="1400"><span>Claims B</span><em class="hi">69%</em><em class="hi">Overconfident</em></div><div class="rw tr-x" data-t="2300"><span>Payments</span><em class="">77%</em><em class="ok">Matches</em></div><div class="rw tr-x" data-t="3200"><span>Customer service</span><em class="">72%</em><em class="">Underconfident</em></div></div>
+        <p class="tr-note">Accuracy and calibration by team. Illustrative.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="9500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">How it is held to account</p>
+        <h2 class="pop d1">Rules, not vibes</h2>
+        <div class="tr-three"><div class="tr-x" data-t="400"><i>01</i><h4>Wrong and certain is what costs money</h4><p>Each answer is scored for accuracy and for whether confidence matched reality.</p></div><div class="tr-x" data-t="1700"><i>02</i><h4>Escalating can be the right answer</h4><p>Where a scenario is genuinely uncertain, guessing is scored as the error.</p></div><div class="tr-x" data-t="3000"><i>03</i><h4>Teams, not individuals</h4><p>Results are totals by team, with nobody named.</p></div></div>
+        <p class="tr-note">The agent is held to the same questions it asks of everyone else.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="9000">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Configured to you</p>
+        <h2 class="pop d1">Set up around your organisation</h2>
+        <div class="tr-three"><div class="tr-x" data-t="400"><i>01</i><h4>Your cases</h4><p>Scenarios built from your own claims and payment types.</p></div><div class="tr-x" data-t="1700"><i>02</i><h4>Your channels</h4><p>Delivered where people already work and train.</p></div><div class="tr-x" data-t="3000"><i>03</i><h4>Your teams</h4><p>Grouped the way your operation is organised.</p></div></div>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="9500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">How an engagement runs</p>
+        <h2 class="pop d1">From first conversation to a working agent</h2>
+        <div class="tr-steps"><div class="tr-x" data-t="400"><i>1</i><h4>Scope</h4><p>Which teams, which fraud types.</p></div><div class="tr-x" data-t="1500"><i>2</i><h4>Build</h4><p>Scenarios from your own patterns.</p></div><div class="tr-x" data-t="2600"><i>3</i><h4>Run</h4><p>Inside the working week.</p></div><div class="tr-x" data-t="3700"><i>4</i><h4>Track</h4><p>Judgement over time, as new attacks appear.</p></div></div>
+        <p class="tr-note">A typical shape. The sequence and timings are set with you.</p>
+      </div>
+    </section>
+
+    <section class="scene" data-ms="9000">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">One platform</p>
+        <h2 class="pop d1">Squall does not work alone</h2>
+        <div class="tr-bands"><div class="tr-x" data-t="300"><b>Keel</b><span>Sets the policy and the gates for every use case.</span></div><div class="tr-x" data-t="1000"><b>Sentinel</b><span>Questions what each agent can see, change and cause.</span></div><div class="tr-x" data-t="1700"><b>Soundings</b><span>Sees what is actually running across the organisation.</span></div><div class="tr-x" data-t="2400"><b>Bearing</b><span>Proves it to the supervisor, obligation by obligation.</span></div><div class="tr-x here" data-t="3100"><b>The human layer</b><span>HALO, Squall and Ensign measure what no system log can.</span></div></div>
+        <p class="tr-note">See the whole platform on <a href="../../../agent/" style="color:var(--gold-light)">The agent</a> page.</p>
       </div>
     </section>
 
     <section class="scene end" data-ms="0">
       <div class="inner">
-        <p class="kick pop d1" id="endKick">That's Squall</p>
+        <p class="kick pop d1">That's Squall</p>
         <h2 class="pop d2">See what your own judgement actually looks like under a clock.</h2>
-        <p class="pop d3">The demonstration runs six fictional scenarios. The deployed Squall uses your own cases, inside your own training.</p>
+        <p class="pop d3">A demonstration of the method is one click away. The deployed Squall is built for your environment and configured to your regulator.</p>
         <div class="btnrow pop d4">
-          <button class="tourbtn" id="backBtn" type="button">Back to instruments</button>
-          <button class="tourbtn solid" id="continueBtn" type="button">Start the test</button>
-          <a class="tourbtn" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation" style="text-decoration:none; display:inline-block">Discuss a deployment</a>
+          <button class="tourbtn" id="backBtn" type="button">Back to frameworks</button>
+          <a class="tourbtn solid" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation" style="text-decoration:none; display:inline-block">Discuss a deployment</a>
+          <button class="tourbtn" id="continueBtn" type="button">Try the demonstration</button>
         </div>
       </div>
     </section>

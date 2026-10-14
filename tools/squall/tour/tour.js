@@ -57,33 +57,35 @@ function animateCount(el, target, suffix, ms) {
 }
 
 function applyPersona(key) {
+  const _stub = { dataset: {}, set textContent(v) {}, set innerHTML(v) {} };
+  const get = (id) => document.getElementById(id) || _stub;
   const persona = PERSONA[key];
   if (!persona) return;
-  document.getElementById("painH").textContent = persona.painH;
-  document.getElementById("painP").textContent = persona.painP;
+  get("painH").textContent = persona.painH;
+  get("painP").textContent = persona.painP;
   const lines = ["confessLine1", "confessLine2", "confessLine3"];
-  lines.forEach((id, i) => { document.getElementById(id).textContent = persona.confessions[i]; });
-  document.getElementById("confrontH").textContent = persona.confrontH;
-  document.getElementById("confrontP").textContent = persona.confrontP;
-  document.getElementById("confrontSource").textContent = persona.confrontSource;
-  const numWrap = document.getElementById("confrontNumWrap");
-  const captionEl = document.getElementById("confrontCaption");
+  lines.forEach((id, i) => { get(id).textContent = persona.confessions[i]; });
+  get("confrontH").textContent = persona.confrontH;
+  get("confrontP").textContent = persona.confrontP;
+  get("confrontSource").textContent = persona.confrontSource;
+  const numWrap = get("confrontNumWrap");
+  const captionEl = get("confrontCaption");
   if (persona.confrontNum) {
     numWrap.hidden = false;
     captionEl.hidden = false;
     captionEl.textContent = persona.confrontCaption;
-    document.getElementById("confrontNum").dataset.target = persona.confrontNum;
-    document.getElementById("confrontNum").dataset.suffix = persona.confrontSuffix || "";
-    document.getElementById("confrontNum").textContent = "\u00A30";
+    get("confrontNum").dataset.target = persona.confrontNum;
+    get("confrontNum").dataset.suffix = persona.confrontSuffix || "";
+    get("confrontNum").textContent = "\u00A30";
   } else {
     numWrap.hidden = true;
     captionEl.hidden = true;
   }
-  document.getElementById("exH").textContent = "What you're actually judging";
-  document.getElementById("endKick").textContent = persona.endKick;
+  get("exH").textContent = "What you're actually judging";
+  get("endKick").textContent = persona.endKick;
   const exampleEls = document.querySelectorAll("#examples > div");
   persona.examples.forEach((example, i) => {
-    exampleEls[i].innerHTML = `<h4>${example.h}</h4><p>${example.p}</p>`;
+    (exampleEls[i]||_stub).innerHTML = `<h4>${example.h}</h4><p>${example.p}</p>`;
   });
 }
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How Bearing works | Antara Innovations</title>
-<meta name="description" content="A two minute walkthrough of Bearing, the AI regulatory readiness instrument from Antara Innovations.">
+<meta name="description" content="A short walkthrough of how the Antara Bearing agent works inside your organisation.">
 <link rel="canonical" href="https://www.antara-innovations.com/tools/bearing/tour/">
 <link rel="icon" href="../../../assets/favicon.png">
 <link rel="stylesheet" href="../../../assets/site.css">
@@ -19,7 +19,7 @@
       <span>Bearing &middot; how it works</span>
       <div class="tour-controls">
         <button id="playBtn" type="button" aria-label="Pause">Pause</button>
-        <button class="skip" id="skipBtn" type="button">Skip to assessment</button>
+        <button class="skip" id="skipBtn" type="button">Skip to the end</button>
       </div>
     </div>
   </div>
@@ -36,22 +36,6 @@
       </div>
     </section>
 
-    <!-- The one interactive scene. No auto-advance: everything after this is
-         built from what gets picked here, so the deck waits for an answer. -->
-    <section class="scene pickscene" data-ms="0">
-      <div class="inner" style="max-width:780px">
-        <h2 class="pop d1">Which of these is closest to you?</h2>
-        <p class="pop d2" style="margin:0 0 6px">This decides the pain point, the examples, and later the questions you're actually asked.</p>
-        <div class="picker" id="picker">
-          <button type="button" data-persona="bank"><h4>Banking</h4><p>A bank, building society or payments firm.</p></button>
-          <button type="button" data-persona="insurer"><h4>Insurance</h4><p>An insurer, MGA or broker.</p></button>
-          <button type="button" data-persona="asset"><h4>Asset and investment management</h4><p>A fund manager, portfolio manager or wealth firm's investment arm.</p></button>
-          <button type="button" data-persona="other"><h4>Another financial firm</h4><p>Something else regulated, not covered above.</p></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Persona pain point: content set by tour.js once a choice is made -->
     <section class="scene" data-ms="7500">
       <div class="inner">
         <h2 class="pop d1" id="painH">Every AI use raises the same question eventually</h2>
@@ -59,147 +43,154 @@
       </div>
     </section>
 
-    <!-- The confrontation: a specific, sourced fact, aimed directly at the
-         visitor, not narrated at the industry in general. -->
-    <section class="scene" data-ms="9500">
-      <div class="inner" style="max-width:680px">
-        <p class="kick pop d1" id="confrontKick">One thing worth knowing first</p>
-        <h2 class="pop d2" id="confrontH" style="font-size:clamp(24px,3.4vw,32px)">Ask yourself this now, honestly, not in the assessment.</h2>
+    <section class="scene" data-ms="9000">
+      <style>
+.tr-x{opacity:0; transform:translateY(8px)}
+.tr-x.on{animation:trpop .5s ease forwards}
+@keyframes trpop{to{opacity:1; transform:none}}
+.tr-wrap{max-width:820px; width:100%; margin:0 auto; text-align:left}
+.tr-wrap h2,.tr-c h2{text-align:center}
+.tr-c{text-align:center}
+.tr-sub{font-size:13.5px; color:rgba(237,241,245,.62); max-width:640px; margin:0 auto 18px; text-align:center}
+.tr-cmp{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px}
+.tr-cmp>div{border:1px solid rgba(255,255,255,.16); border-radius:8px; padding:18px 20px}
+.tr-cmp>div.hl{border-color:var(--gold-light); background:rgba(255,255,255,.05)}
+.tr-cmp h4{font-size:11.5px; letter-spacing:1.6px; text-transform:uppercase; color:rgba(237,241,245,.55); margin:0 0 8px}
+.tr-cmp .hl h4{color:var(--gold-light)}
+.tr-cmp p{margin:0; font-size:15px; line-height:1.6; color:rgba(237,241,245,.85); max-width:none}
+.tr-src{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:26px}
+.tr-src span{border:1px solid var(--gold-light); border-radius:999px; padding:9px 18px; font-size:14px; color:#fff; background:rgba(255,255,255,.05)}
+.tr-core{margin:22px auto 0; display:table; border:1px solid var(--gold-light); border-radius:10px; padding:12px 26px; font-weight:600; color:var(--gold-light); letter-spacing:.6px; background:rgba(255,255,255,.06)}
+.tr-term{background:rgba(3,10,18,.72); border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:16px 18px 8px; margin-top:20px; font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.tr-term .ln{display:grid; grid-template-columns:84px 1fr; gap:10px; margin-bottom:8px}
+.tr-term b{color:var(--gold-light); font-weight:600}
+.tr-term span{color:rgba(237,241,245,.88)}
+.tr-term .bad{color:#ff9b8a}
+.tr-tbl{margin-top:20px; border:1px solid rgba(255,255,255,.16); border-radius:10px; overflow:hidden}
+.tr-tbl .hd,.tr-tbl .rw{display:grid; grid-template-columns:1.7fr 1fr 1fr; gap:12px; padding:11px 16px; font-size:14px; align-items:center}
+.tr-tbl .hd{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(237,241,245,.5); background:rgba(255,255,255,.04)}
+.tr-tbl .rw{border-top:1px solid rgba(255,255,255,.1); color:#fff}
+.tr-tbl .rw em{font-style:normal; font-size:12.5px; padding:3px 10px; border-radius:999px; border:1px solid rgba(237,241,245,.3); justify-self:start; color:rgba(237,241,245,.9)}
+.tr-tbl .rw em.hi{border-color:#ff9b8a; color:#ff9b8a}
+.tr-tbl .rw em.ok{border-color:#8fd3a8; color:#8fd3a8}
+.tr-three{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px}
+.tr-three div{border:1px solid rgba(255,255,255,.16); border-radius:8px; padding:16px 16px}
+.tr-three i{font-style:normal; font-size:11.5px; letter-spacing:1.5px; font-weight:700; color:var(--gold-light)}
+.tr-three h4{color:#fff; font-size:15px; margin:6px 0 6px}
+.tr-three p{margin:0; font-size:13px; line-height:1.55; color:rgba(237,241,245,.7); max-width:none}
+.tr-mk{display:flex; gap:8px; justify-content:center; margin:20px 0 12px; flex-wrap:wrap}
+.tr-mk button{background:transparent; color:rgba(237,241,245,.8); border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:8px 18px; font:600 13px inherit; cursor:pointer}
+.tr-mk button[aria-pressed="true"]{background:var(--gold-light); color:#1a1405; border-color:var(--gold-light)}
+.tr-pk{display:none; border:1px solid var(--gold-light); border-radius:10px; padding:18px 22px; background:rgba(255,255,255,.05); font-size:15.5px; line-height:1.6; color:#fff; text-align:center}
+.tr-pk.on{display:block; animation:trpop .4s ease both}
+.tr-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:22px}
+.tr-steps div{border-top:2px solid var(--gold-light); padding-top:12px}
+.tr-steps i{font:italic 500 26px 'Playfair Display',serif; color:var(--gold-light)}
+.tr-steps h4{color:#fff; font-size:15px; margin:4px 0 6px}
+.tr-steps p{margin:0; font-size:13px; line-height:1.55; color:rgba(237,241,245,.7); max-width:none}
+.tr-bands{display:grid; gap:9px; margin-top:20px}
+.tr-bands div{border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:11px 16px; display:grid; grid-template-columns:130px 1fr; gap:14px; align-items:center}
+.tr-bands div.here{border-color:var(--gold-light); background:rgba(255,255,255,.07)}
+.tr-bands b{color:#fff; font-size:15px}
+.tr-bands div.here b::after{content:"  you are here"; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--gold-light); display:block; margin-top:2px}
+.tr-bands span{font-size:13.5px; color:rgba(237,241,245,.72)}
+.tr-note{font-size:12.5px; color:rgba(237,241,245,.5); margin:26px 0 0; text-align:center}
 
-        <svg class="gauge pop d3" id="gauge" viewBox="0 0 200 200" hidden>
-          <path class="arc-track" d="M 34 148 A 80 80 0 1 1 166 148"/>
-          <path class="arc-fill" id="arcFill" d="M 34 148 A 80 80 0 1 1 166 148"/>
-          <g id="gaugeTicks"></g>
-          <g id="needle" class="needle">
-            <path d="M100,32 L106,100 L100,110 L94,100 Z" class="needle-n"/>
-          </g>
-          <circle cx="100" cy="100" r="4" class="hub"/>
-        </svg>
-        <p class="gauge-readout pop d3" id="gaugeReadout" hidden></p>
-        <p class="gauge-caption pop d3" id="gaugeCaption" hidden></p>
-
-        <p class="readout pop d3" id="confrontReadout" hidden>&pound;0</p>
-        <p class="readout-caption pop d3" id="readoutCaption" hidden></p>
-
-        <p class="pop d3" id="confrontP" style="font-size:19px; color:#fff; margin-top:14px"></p>
-        <p class="pop d4" id="confrontSource" style="margin-top:14px"></p>
-      </div>
-    </section>
-
-    <section class="scene sitscene" data-ms="9000">
-      <div class="inner">
-        <h2 class="pop d1">One pass, three rulebooks</h2>
-        <div class="sits" id="sits">
-          <div data-t="0"><h4>United Kingdom</h4><p>SM&amp;CR wants a named senior manager and evidence of reasonable steps. Consumer Duty wants the outcome, not just the intention.</p></div>
-          <div data-t="3000"><h4>Switzerland</h4><p>FINMA's guidance wants governance, an inventory, and someone who can explain a result, not just produce one.</p></div>
-          <div data-t="6000"><h4>European Union</h4><p>The AI Act wants classification, transparency, and specific duties where AI touches credit or life and health pricing.</p></div>
-        </div>
+.tr-cmp,.tr-term,.tr-tbl,.tr-three,.tr-steps,.tr-bands,.tr-pk{width:100%; box-sizing:border-box}
+.tr-term,.tr-term span,.tr-cmp>div,.tr-three div,.tr-steps div,.tr-bands div{text-align:left}
+.tr-term .ln b{text-align:left}
+.tr-pk{text-align:center}
+@media (max-width:700px){.tr-cmp,.tr-three,.tr-steps{grid-template-columns:1fr}.tr-tbl .hd,.tr-tbl .rw{grid-template-columns:1.4fr 1fr 1fr; font-size:12.5px; gap:8px; padding:10px 12px}.tr-bands div{grid-template-columns:1fr; gap:4px}.tr-term .ln{grid-template-columns:1fr; gap:0}}
+@media (prefers-reduced-motion:reduce){.tr-x{opacity:1; transform:none}}
+</style>
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">An agent, not a questionnaire</p>
+        <h2 class="pop d1">What it reads, not what people remember</h2>
+        <div class="tr-cmp"><div class="tr-x" data-t="500"><h4>The usual way</h4><p>Asks whether you have the policy, and takes yes for an answer.</p></div><div class="tr-x hl" data-t="2300"><h4>The Bearing agent</h4><p>Finds the document that evidences each obligation, and the person who owns it.</p></div></div>
       </div>
     </section>
 
     <section class="scene" data-ms="8500">
-      <div class="inner">
-        <h2 class="pop d1">Having it isn't the same as showing it</h2>
-        <div class="chat" id="chat1">
-          <div class="bubble b-ask" data-t="300">Is AI output checked by a person before it reaches a customer?</div>
-          <div class="bubble b-ans" data-t="2300">Yes, someone reviews it.</div>
-          <div class="bubble b-why" data-t="3800">Why we ask twice: a belief and a record are different things.</div>
-          <div class="bubble b-ask" data-t="5600">Could you show what was checked, by whom, and when?</div>
-        </div>
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Step one</p>
+        <h2 class="pop d1">What it connects to, read-only</h2>
+        <div class="tr-src"><span class="tr-x" data-t="400">Document stores</span><span class="tr-x" data-t="850">Policy library</span><span class="tr-x" data-t="1300">Model register</span><span class="tr-x" data-t="1750">Committee records</span><span class="tr-x" data-t="2200">Roles and accountabilities</span></div>
+        <div class="tr-core tr-x" data-t="2950">Bearing agent</div>
+        <p class="tr-sub tr-x" style="margin-top:16px" data-t="3550">Read access only. Nothing is changed in your systems.</p>
       </div>
     </section>
 
-    <section class="scene chkscene" data-ms="10000">
-      <div class="inner" style="max-width:700px">
-        <h2 class="pop d1">Every answer earns a status, not a guess</h2>
-        <p class="pop d2" style="margin:0">The same fixed rule applies to everyone, so two people answering honestly land in the same place.</p>
-        <div class="scoregrid" id="scoregrid">
-          <div data-t="500"><h4>Ready</h4><p>You have it, and you could show the evidence, on every question behind that obligation.</p></div>
-          <div data-t="1500"><h4>Partly</h4><p>Some of it's there, or you have it but couldn't show it under questioning.</p></div>
-          <div data-t="2500"><h4>Not yet</h4><p>It isn't in place. Not a verdict on you, a starting point for the work.</p></div>
-          <div data-t="3500"><h4>Can't tell yet</h4><p>You didn't know. That's a finding too: if you can't tell, a supervisor won't either.</p></div>
-        </div>
+    <section class="scene" data-ms="11500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Step two</p>
+        <h2 class="pop d1">How it investigates</h2>
+        <div class="tr-term"><div class="ln tr-x" data-t="400"><b>connect</b><span class="">document stores, policy library and model register: read-only</span></div><div class="ln tr-x" data-t="1500"><b>map</b><span class="">212 obligations across SM&CR, Consumer Duty, FINMA and the EU AI Act</span></div><div class="ln tr-x" data-t="2600"><b>find</b><span class="bad">131 have a document. 81 have none. 24 are out of date.</span></div><div class="ln tr-x" data-t="3700"><b>own</b><span class="bad">credit-decisioning model has 3 named owners. Accountability is split.</span></div><div class="ln tr-x" data-t="4800"><b>verify</b><span class="">6 of 10 strongest yes answers could be backed by a document</span></div><div class="ln tr-x" data-t="5900"><b>keep</b><span class="">supervisor pack updated. 2 obligations changed this month.</span></div></div>
+        <p class="tr-note">An illustrative run on a fictional organisation. Every line is something a person can check afterwards.</p>
       </div>
     </section>
 
-    <!-- Persona-relevant examples: content set by tour.js -->
-    <section class="scene sitscene" data-ms="9500">
-      <div class="inner">
-        <h2 class="pop d1" id="exH">What it actually asks about</h2>
-        <div class="sits" id="examples">
-          <div data-t="0"></div>
-          <div data-t="3000"></div>
-          <div data-t="6000"></div>
-        </div>
+    <section class="scene" data-ms="9500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Step three</p>
+        <h2 class="pop d1">What it produces</h2>
+        <div class="tr-tbl"><div class="hd"><span>Obligation</span><span>Evidence</span><span>Owner</span></div><div class="rw tr-x" data-t="500"><span>Model risk management covering AI</span><em class="ok">Found</em><em class="ok">Named</em></div><div class="rw tr-x" data-t="1400"><span>AI inventory</span><em class="hi">Missing</em><em class="hi">None</em></div><div class="rw tr-x" data-t="2300"><span>Consumer Duty outcome testing</span><em class="hi">Out of date</em><em class="ok">Named</em></div><div class="rw tr-x" data-t="3200"><span>Human oversight of AI decisions</span><em class="ok">Found</em><em class="hi">Split</em></div></div>
+        <p class="tr-note">An obligation-to-evidence map. Illustrative.</p>
       </div>
     </section>
 
-    <section class="scene" data-ms="7000">
-      <div class="inner">
-        <h2 class="pop d1">Only the questions that apply to you</h2>
-        <p class="pop d2">Where you operate, your type of firm and where you actually use AI decide which of roughly twenty obligations get asked. A Swiss wealth manager sees far fewer than a bank licensed in all three places.</p>
+    <section class="scene" data-ms="9500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">How it is held to account</p>
+        <h2 class="pop d1">Rules, not vibes</h2>
+        <div class="tr-three"><div class="tr-x" data-t="400"><i>01</i><h4>A yes is not evidence</h4><p>An answer counts only when the document behind it can be produced.</p></div><div class="tr-x" data-t="1700"><i>02</i><h4>One accountable person</h4><p>Split or missing ownership is reported as a finding, not smoothed over.</p></div><div class="tr-x" data-t="3000"><i>03</i><h4>Changes are tracked</h4><p>When the regulation or the evidence changes, the supervisor pack changes.</p></div></div>
+        <p class="tr-note">The agent is held to the same questions it asks of everyone else.</p>
       </div>
     </section>
 
-    <section class="scene ladderscene" data-ms="9500">
-      <div class="inner" style="max-width:820px">
-        <h2 class="pop d1">From here, three ways forward</h2>
-        <div class="ladder" id="ladder">
-          <div data-t="300">
-            <span class="lstep">01</span><h4>Demonstration</h4>
-            <p>A score per jurisdiction, ready or not for every obligation, and your three biggest gaps. About ten minutes.</p>
-            <span class="lprice">No charge</span>
-          </div>
-          <div data-t="1900">
-            <span class="lstep">02</span><h4>Full report</h4>
-            <p>What a supervisor would ask to see, what good looks like, the fix, who should own it.</p>
-            <span class="lprice" id="ladderPrice">Priced report</span>
-          </div>
-          <div data-t="3500">
-            <span class="lstep">03</span><h4>Deployed agent</h4>
-            <p>An agent in your document stores, finding the real evidence behind each obligation and keeping the supervisor pack current.</p>
-            <span class="lprice">Engagement, priced individually</span>
-          </div>
-        </div>
+    <section class="scene" data-ms="9000">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">Configured to your regulator</p>
+        <h2 class="pop d1">The same agent. Your market.</h2>
+        <div class="tr-mk"><button type="button" data-m="uk" aria-pressed="true">United Kingdom</button><button type="button" data-m="ch" aria-pressed="false">Switzerland</button><button type="button" data-m="eu" aria-pressed="false">European Union</button></div>
+        <div class="tr-pk on" data-m="uk">SM&CR and Consumer Duty obligations, with PRA model risk expectations.</div><div class="tr-pk" data-m="ch">FINMA's guidance and the Federal Act on Data Protection.</div><div class="tr-pk" data-m="eu">EU AI Act obligations by risk class, with DORA where it applies.</div>
+        <p class="tr-note">Choose a market. Other markets are added as packs.</p>
       </div>
     </section>
 
-    <section class="scene agentscene" data-ms="13500">
-      <style>
-.agentscene .ag-flow{display:grid; gap:10px; margin:24px auto 0; text-align:left}
-.agentscene .ag-step{display:grid; grid-template-columns:36px 1fr; gap:12px; border:1px solid rgba(255,255,255,.16); border-radius:6px; padding:12px 16px; opacity:0; transform:translateY(10px)}
-.agentscene .ag-step.on{animation:agpop .5s ease forwards}
-@keyframes agpop{to{opacity:1; transform:none}}
-.agentscene .ag-step span{color:var(--gold-light); font-size:12px; letter-spacing:1.4px; font-weight:700; padding-top:3px}
-.agentscene .ag-step h4{color:#fff; font-size:15px; margin:0 0 3px}
-.agentscene .ag-step p{color:rgba(237,241,245,.68); font-size:13px; margin:0; max-width:none; line-height:1.55}
-.agentscene .ag-foot{font-size:12.5px; color:rgba(237,241,245,.55); margin-top:18px}
-</style>
-      <div class="inner" style="max-width:760px">
-        <p class="kick pop d1" style="max-width:none; text-align:center">In deployment</p>
-        <h2 class="pop d1">The same thinking, as an agent in your environment</h2>
-        <div class="ag-flow"><div class="ag-step" data-t="500"><span>01</span><div><h4>Connects</h4><p>Read-only access to your document stores, policy library, model register and committee records.</p></div></div><div class="ag-step" data-t="2400"><span>02</span><div><h4>Investigates</h4><p>For each obligation under SM&amp;CR, Consumer Duty, FINMA's guidance and the EU AI Act, finds the document that actually evidences it, or shows that none exists.</p></div></div><div class="ag-step" data-t="4300"><span>03</span><div><h4>Proves</h4><p>Maps each AI use to a named accountable person, and flags where responsibility is split or missing.</p></div></div><div class="ag-step" data-t="6200"><span>04</span><div><h4>Keeps watching</h4><p>Tracks regulatory change and stale evidence, and keeps the pack a supervisor would ask for ready to produce.</p></div></div></div>
-        <p class="ag-foot pop d4">Designed with you in an engagement, and configured to your market and regulator.</p>
+    <section class="scene" data-ms="9500">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">How an engagement runs</p>
+        <h2 class="pop d1">From first conversation to a working agent</h2>
+        <div class="tr-steps"><div class="tr-x" data-t="400"><i>1</i><h4>Scope</h4><p>Which regimes, which entities, who owns what.</p></div><div class="tr-x" data-t="1500"><i>2</i><h4>Connect</h4><p>Read-only connections to your document stores, reviewed first.</p></div><div class="tr-x" data-t="2600"><i>3</i><h4>First evidence map</h4><p>Every obligation, the evidence found and the owner named.</p></div><div class="tr-x" data-t="3700"><i>4</i><h4>Keep the pack current</h4><p>Stale evidence and regulatory change are flagged.</p></div></div>
+        <p class="tr-note">A typical shape. The sequence and timings are set with you.</p>
       </div>
     </section>
 
-    <section class="scene" data-ms="8000">
-      <div class="inner">
-        <h2 class="pop d1">A demonstration of the method</h2>
-        <p class="pop d2">What you just saw runs on what you tell it, in one short sitting. A deployed Bearing runs on your own environment, configured to your regulator.</p>
-        <p class="pop d3">If you want to compare your own results over time, a free account keeps your saved results.</p>
+    <section class="scene" data-ms="9000">
+      
+      <div class="inner" style="max-width:840px">
+        <p class="kick pop d1" style="max-width:none">One platform</p>
+        <h2 class="pop d1">Bearing does not work alone</h2>
+        <div class="tr-bands"><div class="tr-x" data-t="300"><b>Keel</b><span>Sets the policy and the gates for every use case.</span></div><div class="tr-x" data-t="1000"><b>Sentinel</b><span>Questions what each agent can see, change and cause.</span></div><div class="tr-x" data-t="1700"><b>Soundings</b><span>Sees what is actually running across the organisation.</span></div><div class="tr-x here" data-t="2400"><b>Bearing</b><span>Proves it to the supervisor, obligation by obligation.</span></div><div class="tr-x" data-t="3100"><b>The human layer</b><span>HALO, Squall and Ensign measure what no system log can.</span></div></div>
+        <p class="tr-note">See the whole platform on <a href="../../../agent/" style="color:var(--gold-light)">The agent</a> page.</p>
       </div>
     </section>
 
     <section class="scene end" data-ms="0">
       <div class="inner">
-        <p class="kick pop d1" id="endKick">That's Bearing</p>
+        <p class="kick pop d1">That's Bearing</p>
         <h2 class="pop d2">Find out where your firm actually stands.</h2>
-        <p class="pop d3">The demonstration takes about ten minutes on what you tell it. The deployed Bearing reads the evidence in your own document stores.</p>
+        <p class="pop d3">A demonstration of the method is one click away. The deployed Bearing is built for your environment and configured to your regulator.</p>
         <div class="btnrow pop d4">
-          <button class="tourbtn" id="backBtn" type="button">Back to instruments</button>
-          <button class="tourbtn solid" id="continueBtn" type="button">Try the demonstration</button>
-          <a class="tourbtn" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation" style="text-decoration:none; display:inline-block">Discuss a deployment</a>
+          <button class="tourbtn" id="backBtn" type="button">Back to frameworks</button>
+          <a class="tourbtn solid" href="mailto:hello@antara-innovations.com?subject=Deployment%20conversation" style="text-decoration:none; display:inline-block">Discuss a deployment</a>
+          <button class="tourbtn" id="continueBtn" type="button">Try the demonstration</button>
         </div>
       </div>
     </section>
@@ -220,5 +211,8 @@
 </div>
 
 <script type="module" src="tour.js"></script>
+<script>
+document.addEventListener("click",function(e){var b=e.target.closest(".tr-mk button");if(!b)return;var m=b.dataset.m;document.querySelectorAll(".tr-mk button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});document.querySelectorAll(".tr-pk").forEach(function(p){p.classList.toggle("on",p.dataset.m===m)})});
+</script>
 </body>
 </html>
