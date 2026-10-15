@@ -113,3 +113,7 @@ html.embedded body{background:#0A1B30!important}
 /*lockup*/
 .brand .word{display:inline-flex;flex-direction:column;line-height:1}
 .brand .word sup,.foot-main .brand .word sup{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#D9B86A;vertical-align:baseline;position:static;margin-top:4px;line-height:1}
+/*textfloor*/
+.in_tg,.in_fr,.mx-verb,.mx-sub,.uc-label,.tag,.stat .label,.arch-label,.role,.ar,.rl,.rw,.np-kick,.foot-col h4,.foot-col .h4,.hm-lab,.hm-k{font-size:12px!important}
+.in_sqv span,.in_sqv text{font-size:11px}
+th.svg,.mx th,td.corner{font-size:12px}

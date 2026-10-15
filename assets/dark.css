@@ -42,3 +42,7 @@ body.v2 .uc-law .no{font:italic 500 clamp(26px,3vw,40px) "Playfair Display",Geor
 body.v2 .uc-law h3{margin:0!important;font-size:clamp(22px,2.6vw,34px)!important;line-height:1.1;letter-spacing:-.02em;color:#fff}
 body.v2 .uc-law p{margin:0!important;font-size:17px;line-height:1.5;color:rgba(237,241,245,.72)}
 @media(max-width:820px){body.v2 .uc-law{grid-template-columns:52px 1fr;gap:6px 14px}body.v2 .uc-law p{grid-column:2}body.v2 .uc-law h3{font-size:24px!important}}
+/*textfloor*/
+.in_tg,.in_fr,.mx-verb,.mx-sub,.uc-label,.tag,.stat .label,.arch-label,.role,.ar,.rl,.rw,.np-kick,.foot-col h4,.foot-col .h4,.hm-lab,.hm-k{font-size:12px!important}
+.in_sqv span,.in_sqv text{font-size:11px}
+th.svg,.mx th,td.corner{font-size:12px}

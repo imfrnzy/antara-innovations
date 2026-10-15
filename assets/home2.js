@@ -67,3 +67,19 @@
   }
   window.addEventListener('scroll', vf, {passive:true}); window.addEventListener('resize', vf); vf();
 })();
+
+/* mission chart draws as it crosses the screen */
+(function(){
+  var fig=document.querySelector('.hm-chart'); if(!fig) return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dot=document.getElementById('hDot'), hp=document.getElementById('hPath');
+  function clamp(x){return Math.max(0,Math.min(1,x))}
+  function upd(){
+    var r=fig.getBoundingClientRect(), vh=window.innerHeight;
+    var p=clamp((vh*.92-r.top)/(vh*.62)); if(reduce)p=1;
+    var m=clamp(p/.55), h=clamp((p-.3)/.7);
+    fig.style.setProperty('--m',m.toFixed(3)); fig.style.setProperty('--h',h.toFixed(3));
+    if(dot&&hp){var pt=hp.getPointAtLength(h*hp.getTotalLength()); dot.setAttribute('cx',pt.x); dot.setAttribute('cy',pt.y)}
+  }
+  window.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd();
+})();
