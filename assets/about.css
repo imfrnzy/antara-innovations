@@ -1,0 +1,24 @@
+.ab-sec{padding:70px 0 20px}
+.ab-rail{position:relative;max-width:1020px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center}
+.ab-rail::before{content:"";position:absolute;left:16.6%;right:16.6%;top:48px;height:1px;background:linear-gradient(90deg,transparent,#D9B86A 18%,#D9B86A 82%,transparent);transform:scaleX(0);transform-origin:50% 50%;transition:transform 1.4s cubic-bezier(.2,.8,.2,1) .2s}
+.ab-rail.is-visible::before{transform:scaleX(1)}
+.ab-item{position:relative;padding:0 14px}
+.ab-ic{position:relative;width:96px;height:96px;margin:0 auto 22px;border-radius:50%;background:#0A1B30;border:1px solid rgba(217,184,106,.55);display:grid;place-items:center;transition:background .35s,transform .35s,box-shadow .35s}
+.ab-ic::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(217,184,106,.35);animation:abp 3.6s ease-out infinite}
+.ab-item:nth-child(2) .ab-ic::after{animation-delay:1.2s}.ab-item:nth-child(3) .ab-ic::after{animation-delay:2.4s}
+@keyframes abp{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+.ab-ic svg{width:44px;height:44px;fill:none;stroke:#D9B86A;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.ab-ic svg *{stroke-dasharray:140;stroke-dashoffset:140}
+.ab-rail.is-visible .ab-ic svg *{animation:abd 1.6s cubic-bezier(.4,.1,.2,1) forwards}
+.ab-item:nth-child(2) .ab-ic svg *{animation-delay:.35s!important}.ab-item:nth-child(3) .ab-ic svg *{animation-delay:.7s!important}
+@keyframes abd{to{stroke-dashoffset:0}}
+.ab-item:hover .ab-ic{background:#D9B86A;transform:translateY(-6px);box-shadow:0 20px 40px rgba(217,184,106,.22)}
+.ab-item:hover .ab-ic svg{stroke:#0A1B30}
+body.v2 .ab-w{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(30px,3.4vw,44px);color:#D9B86A;margin:0 0 8px;line-height:1.1}
+body.v2 .ab-item p{margin:0 auto;max-width:24ch;font-size:16px;line-height:1.55;color:rgba(237,241,245,.78)}
+@media(max-width:760px){
+  .ab-rail{grid-template-columns:1fr;gap:38px}
+  .ab-rail::before{left:50%;right:auto;top:48px;bottom:60px;width:1px;height:auto;background:linear-gradient(180deg,transparent,#D9B86A 10%,#D9B86A 90%,transparent);transform:scaleY(0)}
+  .ab-rail.is-visible::before{transform:scaleY(1)}
+}
+@media(prefers-reduced-motion:reduce){.ab-ic::after{animation:none}.ab-ic svg *{stroke-dashoffset:0;animation:none!important}}

@@ -9,14 +9,14 @@ for (const p of pages) {
   t(`${p}: intro says this is a demonstration, before the begin button`, () => {
     assert.match(intro, /class="plans"/); assert.ok(intro.indexOf('class="plans"') < intro.indexOf('id="beginBtn"'));
     assert.match(intro, /Demonstration version/); assert.match(intro, /Deployed in your organisation/);
-    assert.match(intro, /mailto:hello@antara-innovations\.com\?subject=Deployment/);
+    assert.match(intro, /href="(\.\.\/)+contact\/"/);
   });
   t(`${p}: no Pro tier, no pricing language`, () => {
     assert.ok(!/\bPro\b|up to 200|per month|\/month|invoice|billing/i.test(intro));
   });
   const tour = readFileSync(new URL(`../${p}/tour/index.html`, import.meta.url), "utf8");
   t(`${p}: tour has an agent scene and no Free-to-run or Pro wording`, () => {
-    assert.match(tour, /How an engagement runs/); assert.match(tour, /Configured to/); assert.match(tour, /Deployment%20conversation/); assert.match(tour, /How it investigates|How it is held to account/);
+    assert.match(tour, /How an engagement runs/); assert.match(tour, /Configured to/); assert.match(tour, /href="(\.\.\/)+contact\//); assert.match(tour, /How it investigates|How it is held to account/);
     assert.ok(!/Free to run|\bPro keeps\b|free assessment/i.test(tour));
   });
 }
