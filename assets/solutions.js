@@ -40,12 +40,12 @@ function scanStart(){
 var RPT={soundings:['AI inventory','23 AI tools nobody approved','Gap: complaint triage has no named owner','Proposed: owner and approval gate'],sentinel:['Attack-path report','1 open attack path','Customer email to refund, no approval','Proposed: approval above a set value'],keel:['Gate report','9 use cases skipped the gates','cv-screening has no fallback','Proposed: human review before launch']};
 var RUN=0;
 function lap2Cycle(){
-  RUN++; var ck=document.getElementById('lclock'); if(ck)ck.textContent='Run '+RUN;
+  RUN++; var ck=document.getElementById('lclock'); if(ck)ck.textContent='Cycle '+RUN;
   ORD.forEach(function(k,i){
     var w=document.getElementById('aw'+i),r=document.getElementById('rp'+i); if(!w)return;
     var al=w.querySelector('.al'),pb=w.querySelector('.pb u'),st=w.querySelector('em'),d=LAP[k],t0=i*1600;
-    w.classList.remove('on','done'); al.innerHTML=''; pb.style.transition='none'; pb.style.width='0'; st.textContent='idle';
-    r.innerHTML='<div class="rw">Waiting for '+SOLN[k]+'</div>'; r.classList.remove('in');
+    w.classList.remove('on','done'); al.innerHTML=''; pb.style.transition='none'; pb.style.width='0'; st.textContent='standing by';
+    r.innerHTML='<div class="rw">Report from '+SOLN[k]+' appears here</div>'; r.classList.remove('in');
     T.push(setTimeout(function(){w.classList.add('on'); st.textContent='reading'; pb.style.transition='width 7.2s linear'; pb.style.width='100%'},t0+200));
     d.src.forEach(function(x,j){T.push(setTimeout(function(){al.insertAdjacentHTML('beforeend','<p class="rd"><b>read</b>'+x+'</p>'); trim(al)},t0+500+j*450))});
     T.push(setTimeout(function(){st.textContent='investigating'},t0+2500));

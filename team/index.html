@@ -9,6 +9,7 @@
 <link rel="icon" href="../assets/favicon.png">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/team.css">
+<link rel="stylesheet" href="../assets/appdark.css">
 </head>
 <body>
 <script>
@@ -36,12 +37,13 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 <main class="tj">
   <section id="t-code" hidden>
     <h1>Answer for your team</h1>
-    <p>Your leader sent you a short code. Enter it here.</p>
+    <p>A leader at your organisation is running a short, anonymous exercise with their team, using one of our instruments (HALO, Squall or Ensign). Enter the short code they sent you to take part. You do not need an account, and your leader sees only combined results.</p>
     <form id="codeForm" novalidate>
       <input type="text" id="codeInput" maxlength="8" autocomplete="off" autocapitalize="characters" aria-label="Code" placeholder="ABCD1234">
       <button class="btn btn-solid" type="submit">Continue</button>
       <p class="err" id="codeErr" role="alert"></p>
     </form>
+    <p class="small">No code? <a href="../instruments/" style="border-bottom:1px solid #D9B86A">See the instruments</a> or <a href="../" style="border-bottom:1px solid #D9B86A">go to the home page</a>.</p>
   </section>
 
   <section id="t-intro" hidden>
@@ -79,23 +81,24 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
   </section>
 </main>
 
-<footer class="noprint">
-  <div class="wrap foot-grid">
+<footer class="v2-foot noprint">
+<div class="wrap">
+  <div class="foot-main">
     <div>
-      <div class="brand" style="margin-bottom:10px">
+      <div class="brand">
         <img src="../assets/logo.png" alt="Antara Innovations">
         <span class="word">Antara <sup>Innovations</sup></span>
       </div>
-      <small class="copy">&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+      <small>&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
     </div>
-    <div class="foot-links">
-      <a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a>
-      <a href="../use-cases/">Use cases</a>
-      <a href="../newsletter/">Newsletter</a>
-      <a href="../about/">About</a>
-      <a href="../contact/">Contact</a>
-    </div>
+    <div class="foot-col"><h4>Work</h4>
+      <a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a><a href="../use-cases/">Use cases</a></div>
+    <div class="foot-col"><h4>Read</h4>
+      <a href="../newsletter/">The Awakened Intelligence</a><a href="../about/">About Abhinav Gaurav</a><a href="../wellness/">Antara Wellness</a></div>
+    <div class="foot-col"><h4>Talk</h4>
+      <a href="../contact/">Send a message</a><a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
+</div>
 </footer>
 
 <script>

@@ -256,3 +256,5 @@ small.copy{color:var(--muted); font-size:12.5px}
 .faq-item:first-of-type{border-top:1px solid var(--line)}
 .faq-item h3{font-size:16px; color:var(--navy); margin:0 0 8px}
 .faq-item p{margin-bottom:0; font-size:14.5px}
+.brand .word{display:inline-flex;flex-direction:column;line-height:1}
+.brand .word sup,.foot-main .brand .word sup{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#D9B86A;vertical-align:baseline;position:static;margin-top:4px;line-height:1}

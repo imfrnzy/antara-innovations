@@ -69,9 +69,10 @@ body.home .site-header.scrolled{background:rgba(10,27,48,.88); backdrop-filter:b
 .hm-sect{overflow:hidden; padding:clamp(70px,9vw,120px) 0}
 .hm-sect h2{margin:0 auto clamp(34px,5vw,56px); padding:0 28px; max-width:1180px; font-size:clamp(28px,4vw,52px); line-height:1.08; letter-spacing:-.03em; font-weight:600; color:#fff}
 .hm-sect h2 .serif{color:var(--gold-light); font-weight:500; font-style:italic}
-.hm-band{display:flex; width:max-content; gap:14px; margin-top:14px; animation:hmmq 60s linear infinite}
+.hm-band{display:flex; width:max-content; gap:34px; margin-top:14px; animation:hmmq 60s linear infinite}
 .hm-band.rev{animation-direction:reverse; animation-duration:72s}
-.hm-band span{white-space:nowrap; padding:13px 24px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:15px; color:rgba(237,241,245,.86)}
+.hm-band span{white-space:nowrap; padding:6px 0; font-size:clamp(20px,2.4vw,30px); letter-spacing:-.01em; color:rgba(237,241,245,.78); display:inline-flex; align-items:center; gap:14px}
+.hm-band span::after{content:""; width:6px; height:6px; border-radius:50%; background:var(--gold-light); opacity:.7}
 .hm-band:hover{animation-play-state:paused}
 
 /* CTA */
@@ -88,3 +89,25 @@ body.home .site-header.scrolled{background:rgba(10,27,48,.88); backdrop-filter:b
   .hm-img,.hm-tick .tr,.hm-band{animation:none}
   .hm-h .ln>span{transform:none; animation:none} .hm-sub,.hm-cta,.hm-scroll{opacity:1; animation:none}
 }
+
+/* values: one real sentence each */
+.hm-vals li{flex-wrap:wrap; row-gap:0; align-items:flex-start}
+.hm-vals li::before{align-self:flex-start; margin-top:.9em}
+.hm-vals b{align-self:flex-start}
+.hm-vals .vs{flex-basis:100%; max-width:46ch; margin:6px 0 0 calc(34px + clamp(18px,3vw,40px)); font-size:17px; line-height:1.5; color:rgba(237,241,245,.72)}
+@media(max-width:760px){.hm-vals .vs{font-size:15px}}
+/* our work strip */
+.hm-offer-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,6vw,90px); margin-top:34px}
+.hm-oh{display:flex; justify-content:space-between; align-items:baseline; margin:0 0 6px; font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:500; font-size:clamp(26px,3vw,38px); color:var(--gold-light)}
+.hm-oh a{font:600 13px 'Inter',sans-serif; letter-spacing:.04em; color:rgba(237,241,245,.7); font-style:normal}
+.hm-oh a:hover{color:#fff}
+.hm-ol{display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:18px; padding:20px 0; border-top:1px solid rgba(255,255,255,.14); transition:padding-left .3s, background .3s}
+.hm-ol:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
+.hm-ol b{grid-column:1; font-size:clamp(22px,2.4vw,30px); font-weight:600; letter-spacing:-.02em; color:#fff}
+.hm-ol span{grid-column:1; margin-top:4px; font-size:15.5px; line-height:1.45; color:rgba(237,241,245,.68)}
+.hm-ol i{grid-column:2; grid-row:1 / span 2; align-self:center; font-style:normal; font-size:22px; color:var(--gold-light); transform:translateX(0); transition:transform .3s}
+.hm-ol:hover{padding-left:12px; background:rgba(217,184,106,.06)}
+.hm-ol:hover i{transform:translateX(6px)}
+@media(max-width:820px){.hm-offer-grid{grid-template-columns:1fr}}
+.brand .word{display:inline-flex;flex-direction:column;line-height:1}
+.brand .word sup{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#D9B86A;vertical-align:baseline;position:static;margin-top:4px;line-height:1}

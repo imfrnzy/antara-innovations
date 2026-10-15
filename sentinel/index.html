@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/history.css">
 <link rel="stylesheet" href="sentinel.css">
+<link rel="stylesheet" href="../assets/appdark.css">
 </head>
 <body>
 <script>
@@ -27,7 +28,7 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
     <nav class="nav-links" id="navLinks">
-      <a href="../solutions/">Solutions</a>
+      <a href="../solutions/" aria-current="page">Solutions</a>
       <a href="../instruments/">Instruments</a>
       <a href="../use-cases/">Use cases</a>
       <a href="../newsletter/">Newsletter</a>
@@ -268,16 +269,24 @@ if (window.self !== window.top) document.documentElement.classList.add("embedded
 </div>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap foot-grid">
-    <p class="small">© <span id="yr"></span> Antara Innovations. Sentinel is an original framework by Abhinav Gaurav.</p>
-    <div class="foot-links">
-      <a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a>
-      
-      <a href="../about/">About</a>
-      <a href="../contact/">Contact</a>
+<footer class="v2-foot">
+<div class="wrap">
+  <div class="foot-main">
+    <div>
+      <div class="brand">
+        <img src="../assets/logo.png" alt="Antara Innovations">
+        <span class="word">Antara <sup>Innovations</sup></span>
+      </div>
+      <small>&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
     </div>
+    <div class="foot-col"><h4>Work</h4>
+      <a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a><a href="../use-cases/">Use cases</a></div>
+    <div class="foot-col"><h4>Read</h4>
+      <a href="../newsletter/">The Awakened Intelligence</a><a href="../about/">About Abhinav Gaurav</a><a href="../wellness/">Antara Wellness</a></div>
+    <div class="foot-col"><h4>Talk</h4>
+      <a href="../contact/">Send a message</a><a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
+</div>
 </footer>
 
 <script type="module" src="app.js"></script>
