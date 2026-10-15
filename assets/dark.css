@@ -9,7 +9,7 @@ body.v2 p,body.v2 li,body.v2 td,body.v2 th,body.v2 span{color:inherit}
 body.v2 p{color:rgba(237,241,245,.76)}
 body.v2 .h-kicker,body.v2 .uc-label,body.v2 .k{color:#D9B86A!important}
 body.v2 .h-h2 .serif,body.v2 .p-title .serif,body.v2 .serif{color:#D9B86A}
-body.v2 .btn-solid,body.v2 .h-btn.ink.solid,body.v2 .band,body.v2 .uc-dot{background:#D9B86A!important; color:#0A1B30!important}
+body.v2 .btn-solid,body.v2 .h-btn.ink.solid,body.v2 .uc-dot{background:#D9B86A!important; color:#0A1B30!important}
 body.v2 .h-btn.ink.solid *{color:#0A1B30}
 body.v2 .h-btn.ink,body.v2 .btn{color:#EDF1F5!important; border-color:rgba(217,184,106,.6)!important; background:transparent}
 body.v2 .h-btn.ink:hover,body.v2 .btn:hover,body.v2 .uc-chip:hover{background:#D9B86A!important; color:#0A1B30!important}
@@ -20,7 +20,6 @@ body.v2 table th,body.v2 table td{border-color:rgba(255,255,255,.12)!important}
 body.v2 .reveal{filter:none!important}
 body.v2 hr{border-color:rgba(255,255,255,.12)}
 body.v2 a{color:inherit}
-body.v2 .band *{color:#0A1B30}
 
 body.v2 .card{transition:transform .4s cubic-bezier(.2,.8,.2,1), border-color .4s, box-shadow .4s}
 body.v2 .card:hover{transform:translateY(-6px); border-color:rgba(217,184,106,.65)!important; box-shadow:0 22px 50px rgba(0,0,0,.4)}
@@ -31,3 +30,15 @@ body.v2 .reveal.is-visible{transform:none; opacity:1}
 
 
 body.v2 .stat-strip b{color:#D9B86A}
+
+/*laws*/
+body.v2 .band{background:#0A1B30!important;color:#EDF1F5}
+body.v2 .band .kicker{color:#D9B86A}
+body.v2 .band h2.h{font-size:clamp(30px,4.4vw,56px);line-height:1.05;letter-spacing:-.03em;max-width:16em}
+body.v2 .uc-laws{display:grid!important;grid-template-columns:1fr!important;gap:0!important;margin-top:44px!important;border-top:1px solid rgba(255,255,255,.14)}
+body.v2 .uc-law{display:grid!important;grid-template-columns:90px minmax(0,1fr) minmax(0,1fr);gap:8px 28px;align-items:baseline;padding:26px 0!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.14)!important;background:transparent!important;border-radius:0!important;box-shadow:none!important;transition:padding-left .35s,background .35s}
+body.v2 .uc-law:hover{padding-left:14px!important;background:rgba(217,184,106,.06)!important}
+body.v2 .uc-law .no{font:italic 500 clamp(26px,3vw,40px) "Playfair Display",Georgia,serif;color:#D9B86A!important}
+body.v2 .uc-law h3{margin:0!important;font-size:clamp(22px,2.6vw,34px)!important;line-height:1.1;letter-spacing:-.02em;color:#fff}
+body.v2 .uc-law p{margin:0!important;font-size:17px;line-height:1.5;color:rgba(237,241,245,.72)}
+@media(max-width:820px){body.v2 .uc-law{grid-template-columns:52px 1fr;gap:6px 14px}body.v2 .uc-law p{grid-column:2}body.v2 .uc-law h3{font-size:24px!important}}

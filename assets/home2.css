@@ -61,7 +61,7 @@ body.home .site-header.scrolled{background:rgba(10,27,48,.88); backdrop-filter:b
 .hm-vals li{position:relative; display:flex; align-items:baseline; gap:clamp(18px,3vw,40px); padding:clamp(14px,2.2vw,28px) 0; border-top:1px solid rgba(255,255,255,.12); counter-increment:v}
 .hm-vals li:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
 .hm-vals li::before{content:"0" counter(v); font:italic 500 20px 'Playfair Display',serif; color:var(--gold-light); min-width:34px}
-.hm-vals b{position:relative; display:inline-block; font-size:clamp(44px,9.4vw,140px); line-height:1; font-weight:600; letter-spacing:-.045em; color:rgba(237,241,245,.13); transition:color .4s}
+.hm-vals b{position:relative; display:inline-block; font-size:clamp(30px,9.4vw,140px); white-space:nowrap; line-height:1; font-weight:600; letter-spacing:-.045em; color:rgba(237,241,245,.13); transition:color .4s}
 .hm-vals b::after{content:attr(data-t); position:absolute; left:0; top:0; color:#fff; white-space:nowrap; clip-path:inset(0 calc((1 - var(--f,0))*100%) 0 0)}
 .hm-vals li:hover b{color:rgba(217,184,106,.45)}
 
