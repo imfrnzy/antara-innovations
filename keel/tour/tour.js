@@ -150,7 +150,7 @@ function drawReportCharts() {
 }
 
 
-document.getElementById("backBtn").onclick = () => { location.href = "../../frameworks/"; };
+document.getElementById("backBtn").onclick = () => { location.href = "../../solutions/"; };
 document.getElementById("skipBtn").onclick = () => { clearTimer(); goTo(scenes.length - 1); };
 
 const modalbg = document.getElementById("modalbg");

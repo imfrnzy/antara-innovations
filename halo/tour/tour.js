@@ -104,7 +104,7 @@ document.addEventListener("keydown", (e) => {
 // ---------- the report preview: illustrative, not real output ----------
 
 
-document.getElementById("backBtn").onclick = () => { location.href = "../../frameworks/"; };
+document.getElementById("backBtn").onclick = () => { location.href = "../../instruments/"; };
 
 const modalbg = document.getElementById("modalbg");
 const modalFrame = document.getElementById("modalFrame");

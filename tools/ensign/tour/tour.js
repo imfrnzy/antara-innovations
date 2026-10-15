@@ -107,7 +107,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeModal();
 });
 
-document.getElementById("backBtn").onclick = () => { location.href = "../../"; };
+document.getElementById("backBtn").onclick = () => { location.href = "../../../instruments/"; };
 document.getElementById("skipBtn").onclick = () => { clearTimer(); goTo(scenes.length - 1); };
 
 const modalbg = document.getElementById("modalbg");

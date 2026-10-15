@@ -1,0 +1,90 @@
+/* Home. Loads after site.css and v2.css. */
+body.home{background:#0A1B30; color:#EDF1F5}
+body.home .wrap{max-width:1180px}
+body.home .site-header{position:fixed; left:0; right:0; top:0; background:transparent; border-bottom:1px solid transparent; transition:background .35s, border-color .35s}
+body.home .site-header.scrolled{background:rgba(10,27,48,.88); backdrop-filter:blur(14px); border-bottom-color:rgba(255,255,255,.08)}
+
+/* ---------- Hero ---------- */
+.hm-hero{position:relative; min-height:100vh; min-height:100svh; overflow:hidden; display:flex; align-items:flex-end; isolation:isolate; background:#0A1B30}
+.hm-img{position:absolute; right:0; top:0; z-index:-3; width:min(62vw,940px); height:100%; object-fit:cover; object-position:50% 50%; transform-origin:30% 46%; animation:hmzoom 34s ease-in-out infinite alternate; will-change:transform; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%); mask-image:linear-gradient(90deg,transparent 0,#000 38%)}
+@keyframes hmzoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hm-motes{position:absolute; inset:0; z-index:-2; width:100%; height:100%; mix-blend-mode:screen; pointer-events:none}
+.hm-shade{position:absolute; inset:0; z-index:-1; background:
+  linear-gradient(90deg,rgba(10,27,48,.78) 0%,rgba(10,27,48,.35) 40%,rgba(10,27,48,0) 62%),
+  linear-gradient(0deg,#0A1B30 0%,rgba(10,27,48,0) 26%),
+  linear-gradient(180deg,rgba(10,27,48,.7) 0%,rgba(10,27,48,0) 20%)}
+.hm-copy{position:relative; width:100%; padding:0 28px clamp(96px,14vh,150px)}
+.hm-k{display:flex; align-items:center; gap:14px; margin:0 0 26px; font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:600; color:var(--gold-light)}
+.hm-k::before{content:""; width:44px; height:1px; background:var(--gold-light); transform-origin:0 50%; animation:hmline 1.4s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes hmline{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hm-h{margin:0; font-size:clamp(46px,7.2vw,112px); line-height:.98; letter-spacing:-.035em; font-weight:600; color:#fff}
+.hm-h .ln{display:block; overflow:hidden; padding-bottom:.08em}
+.hm-h .ln>span{display:block; transform:translateY(105%); animation:hmup 1.2s cubic-bezier(.2,.8,.2,1) forwards}
+.hm-h .ln:nth-child(1)>span{animation-delay:.25s} .hm-h .ln:nth-child(2)>span{animation-delay:.4s} .hm-h .ln:nth-child(3)>span{animation-delay:.55s}
+@keyframes hmup{to{transform:none}}
+.hm-h .g{font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:500; color:var(--gold-light); letter-spacing:-.02em}
+.hm-sub{margin:30px 0 34px; max-width:26em; font-size:clamp(18px,1.8vw,24px); line-height:1.5; color:rgba(237,241,245,.86); opacity:0; animation:hmfade 1.2s .9s ease forwards}
+.hm-cta{display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation:hmfade 1.2s 1.1s ease forwards}
+@keyframes hmfade{to{opacity:1}}
+.hm-scroll{position:absolute; left:50%; bottom:28px; width:22px; height:36px; margin-left:-11px; border:1.5px solid rgba(255,255,255,.45); border-radius:12px; opacity:0; animation:hmfade 1s 1.8s ease forwards}
+.hm-scroll::after{content:""; position:absolute; left:50%; top:7px; width:3px; height:7px; margin-left:-1.5px; border-radius:2px; background:var(--gold-light); animation:hmdot 1.8s ease-in-out infinite}
+@keyframes hmdot{0%{opacity:0; transform:translateY(0)}30%{opacity:1}100%{opacity:0; transform:translateY(12px)}}
+
+/* ---------- Ticker ---------- */
+.hm-tick{overflow:hidden; border-block:1px solid rgba(255,255,255,.09); background:#07142a; padding:20px 0}
+.hm-tick .tr{display:flex; width:max-content; animation:hmmq 46s linear infinite}
+.hm-tick span{font-size:12.5px; letter-spacing:2.6px; text-transform:uppercase; color:rgba(237,241,245,.66); white-space:nowrap; padding-right:48px; display:flex; align-items:center; gap:48px}
+.hm-tick span::after{content:""; width:5px; height:5px; background:var(--gold-light); transform:rotate(45deg)}
+@keyframes hmmq{to{transform:translateX(-50%)}}
+
+/* ---------- Sections ---------- */
+.hm-sec{padding:clamp(80px,11vw,150px) 0}
+.hm-lab{margin:0 0 clamp(36px,5vw,64px); font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700; color:var(--gold-light); display:flex; align-items:center; gap:14px}
+.hm-lab::before{content:""; width:34px; height:1px; background:var(--gold-light)}
+
+/* What we are */
+.hm-rows{border-bottom:1px solid rgba(255,255,255,.14)}
+.hm-row{display:grid; grid-template-columns:90px minmax(0,1fr) minmax(0,1.1fr); gap:28px; align-items:baseline; padding:clamp(28px,4vw,48px) 0; border-top:1px solid rgba(255,255,255,.14); position:relative; transition:padding .5s cubic-bezier(.2,.8,.2,1)}
+.hm-row::before{content:""; position:absolute; left:0; top:-1px; height:1px; width:0; background:var(--gold-light); transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.hm-row:hover::before{width:100%} .hm-row:hover{padding-left:14px}
+.hm-row i{font:italic 500 22px 'Playfair Display',serif; color:var(--gold-light)}
+.hm-row h3{margin:0; font-size:clamp(30px,4.4vw,60px); line-height:1; letter-spacing:-.03em; font-weight:600; color:#fff}
+.hm-row p{margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.65; color:rgba(237,241,245,.72); max-width:30em}
+
+/* Who we are */
+.hm-who{background:linear-gradient(180deg,#0A1B30,#0C2038)}
+.hm-quote{margin:0; max-width:17em; font-family:'Playfair Display',Georgia,serif; font-weight:500; font-size:clamp(32px,5.2vw,74px); line-height:1.12; letter-spacing:-.02em; color:#fff}
+.hm-quote em{font-style:italic; color:var(--gold-light)}
+
+/* Values */
+.hm-vals{list-style:none; margin:0; padding:0; counter-reset:v}
+.hm-vals li{position:relative; display:flex; align-items:baseline; gap:clamp(18px,3vw,40px); padding:clamp(14px,2.2vw,28px) 0; border-top:1px solid rgba(255,255,255,.12); counter-increment:v}
+.hm-vals li:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+.hm-vals li::before{content:"0" counter(v); font:italic 500 20px 'Playfair Display',serif; color:var(--gold-light); min-width:34px}
+.hm-vals b{position:relative; display:inline-block; font-size:clamp(44px,9.4vw,140px); line-height:1; font-weight:600; letter-spacing:-.045em; color:rgba(237,241,245,.13); transition:color .4s}
+.hm-vals b::after{content:attr(data-t); position:absolute; left:0; top:0; color:#fff; white-space:nowrap; clip-path:inset(0 calc((1 - var(--f,0))*100%) 0 0)}
+.hm-vals li:hover b{color:rgba(217,184,106,.45)}
+
+/* Sectors */
+.hm-sect{overflow:hidden; padding:clamp(70px,9vw,120px) 0}
+.hm-sect h2{margin:0 auto clamp(34px,5vw,56px); padding:0 28px; max-width:1180px; font-size:clamp(28px,4vw,52px); line-height:1.08; letter-spacing:-.03em; font-weight:600; color:#fff}
+.hm-sect h2 .serif{color:var(--gold-light); font-weight:500; font-style:italic}
+.hm-band{display:flex; width:max-content; gap:14px; margin-top:14px; animation:hmmq 60s linear infinite}
+.hm-band.rev{animation-direction:reverse; animation-duration:72s}
+.hm-band span{white-space:nowrap; padding:13px 24px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:15px; color:rgba(237,241,245,.86)}
+.hm-band:hover{animation-play-state:paused}
+
+/* CTA */
+.hm-end{padding:clamp(90px,12vw,170px) 0; text-align:center; background:radial-gradient(700px 360px at 50% 100%,rgba(217,184,106,.14),transparent 70%),#0A1B30}
+.hm-end h2{margin:0 auto 34px; max-width:14em; font-size:clamp(34px,5.4vw,76px); line-height:1.04; letter-spacing:-.035em; font-weight:600; color:#fff}
+.hm-end h2 .serif{color:var(--gold-light); font-weight:500; font-style:italic}
+
+@media (max-width:820px){
+  .hm-shade{background:linear-gradient(0deg,rgba(7,18,34,.96) 0%,rgba(7,18,34,.55) 55%,rgba(7,18,34,.25) 100%)}
+  .hm-img{width:100%; -webkit-mask-image:linear-gradient(180deg,#000 40%,transparent); mask-image:linear-gradient(180deg,#000 40%,transparent); height:70%}
+  .hm-row{grid-template-columns:1fr; gap:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hm-img,.hm-tick .tr,.hm-band{animation:none}
+  .hm-h .ln>span{transform:none; animation:none} .hm-sub,.hm-cta,.hm-scroll{opacity:1; animation:none}
+}

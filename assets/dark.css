@@ -1,0 +1,33 @@
+/* Antara dark theme for marketing pages */
+:root{--bg:#0A1B30; --paper:#112844; --navy:#EDF1F5; --navy2:#173B60; --steel:rgba(237,241,245,.66); --gold-text:#D9B86A; --ink:#EDF1F5; --muted:rgba(237,241,245,.74); --line:rgba(255,255,255,.13); --shadow:0 10px 30px rgba(0,0,0,.35)}
+body.v2{background:#0A1B30!important; color:#EDF1F5}
+body.v2 main > section:not(.dark){background-color:#0A1B30}
+body.v2 main > section:nth-of-type(even):not(.dark){background-color:#0C2038}
+body.v2 .card,body.v2 .stat-strip,body.v2 .fw-card,body.v2 .dcard,body.v2 .issue-card,body.v2 .uc-case,body.v2 .uc-note,body.v2 .uc-mx-wrap,body.v2 .uc-mx-item,body.v2 .uc-chip,body.v2 .fchip,body.v2 .outcomes span,body.v2 .chain-detail,body.v2 .case-nav a:hover{background:#112844!important; border-color:rgba(255,255,255,.13)!important; color:#EDF1F5}
+body.v2 h1,body.v2 h2,body.v2 h3,body.v2 h4,body.v2 h5,body.v2 strong,body.v2 b{color:#fff}
+body.v2 p,body.v2 li,body.v2 td,body.v2 th,body.v2 span{color:inherit}
+body.v2 p{color:rgba(237,241,245,.76)}
+body.v2 .h-kicker,body.v2 .uc-label,body.v2 .k{color:#D9B86A!important}
+body.v2 .h-h2 .serif,body.v2 .p-title .serif,body.v2 .serif{color:#D9B86A}
+body.v2 .btn-solid,body.v2 .h-btn.ink.solid,body.v2 .band,body.v2 .uc-dot{background:#D9B86A!important; color:#0A1B30!important}
+body.v2 .h-btn.ink.solid *{color:#0A1B30}
+body.v2 .h-btn.ink,body.v2 .btn{color:#EDF1F5!important; border-color:rgba(217,184,106,.6)!important; background:transparent}
+body.v2 .h-btn.ink:hover,body.v2 .btn:hover,body.v2 .uc-chip:hover{background:#D9B86A!important; color:#0A1B30!important}
+body.v2 .node .dot{background:#112844!important; color:#EDF1F5!important; border-color:rgba(255,255,255,.25)!important}
+body.v2 .node[aria-selected="true"] .dot{background:#D9B86A!important; color:#0A1B30!important}
+body.v2 .fchip[aria-pressed="true"]{background:#D9B86A!important; color:#0A1B30!important}
+body.v2 table th,body.v2 table td{border-color:rgba(255,255,255,.12)!important}
+body.v2 .reveal{filter:none!important}
+body.v2 hr{border-color:rgba(255,255,255,.12)}
+body.v2 a{color:inherit}
+body.v2 .band *{color:#0A1B30}
+
+body.v2 .card{transition:transform .4s cubic-bezier(.2,.8,.2,1), border-color .4s, box-shadow .4s}
+body.v2 .card:hover{transform:translateY(-6px); border-color:rgba(217,184,106,.65)!important; box-shadow:0 22px 50px rgba(0,0,0,.4)}
+body.v2 .reveal{transform:translateY(34px); transition:opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1)}
+body.v2 .reveal.is-visible{transform:none; opacity:1}
+@keyframes nm{to{transform:translateX(-50%)}}
+@keyframes glowdrift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,30px) scale(1.15)}}
+
+
+body.v2 .stat-strip b{color:#D9B86A}
