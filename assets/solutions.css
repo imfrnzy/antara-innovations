@@ -74,3 +74,21 @@
 @media (prefers-reduced-motion:reduce){.solp *{animation-duration:.01ms!important}}
 @keyframes pl{70%{box-shadow:0 0 0 8px rgba(111,207,151,0)}0%{box-shadow:0 0 0 0 rgba(111,207,151,.6)}}
 @keyframes lp{50%{opacity:.25}}
+
+.solp .cmp{margin-top:44px; border:1px solid rgba(217,184,106,.3); border-radius:16px; overflow:hidden; background:linear-gradient(160deg,rgba(15,39,71,.9),rgba(6,16,32,.95))}
+.solp .cmp-head,.solp .cmp-row{display:grid; grid-template-columns:1fr 1.5fr 1.1fr; gap:0}
+.solp .cmp-head>div{padding:16px 22px; font-size:12px; letter-spacing:1.8px; text-transform:uppercase; font-weight:700; color:var(--mut)}
+.solp .cmp-head .cmp-us{color:var(--gold-light,#e8cf91)}
+.solp .cmp-row>div{padding:20px 22px; border-top:1px solid var(--line); font-size:15.5px; line-height:1.55}
+.solp .cmp-q{font-weight:600; color:#fff}
+.solp .cmp-us{color:#fff; background:rgba(217,184,106,.09); border-left:2px solid var(--gold)}
+.solp .cmp-them{color:var(--mut)}
+.solp .cmp-head .cmp-us{background:rgba(217,184,106,.09); border-left:2px solid var(--gold)}
+@media (max-width:760px){
+  .solp .cmp-head{display:none}
+  .solp .cmp-row{grid-template-columns:1fr}
+  .solp .cmp-row>div{padding:12px 18px; border-top:0}
+  .solp .cmp-row{border-top:1px solid var(--line)}
+  .solp .cmp-row .cmp-them::before{content:"Typical platforms: "; font-size:11px; letter-spacing:1.2px; text-transform:uppercase}
+  .solp .cmp-row .cmp-us::before{content:"Antara: "; font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold)}
+}
