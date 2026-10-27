@@ -240,8 +240,8 @@ button{font:inherit}
 .chipnote{margin-top:12px;font-size:14.5px;color:var(--mute);min-height:2.8em}
 
 /* six gates, pinned scroll story */
-.gs{position:relative;height:calc(640px + 380vh)}
-.gs-sticky{position:sticky;top:84px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto minmax(0,1fr);gap:8px clamp(24px,4vw,56px);height:min(640px,calc(100svh - 100px))}
+.gs{position:relative;height:calc(100svh + 300vh)}
+.gs-sticky{position:sticky;top:84px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto minmax(0,1fr);gap:8px clamp(24px,4vw,56px);height:max(560px,calc(100svh - 100px));align-content:center}
 .gs-head{grid-column:1 / -1;display:grid;gap:14px}
 .gs-head .h2{font-size:clamp(26px,3.4vw,46px);max-width:20em}
 .gs-steps{position:relative;display:grid;align-content:center;gap:2px;padding-left:28px}
@@ -592,3 +592,4 @@ button{font:inherit}
 .case h4{margin:26px 0 10px}.case h4:first-child{margin-top:0}
 .case .gr p{margin:0 0 6px}
 @media(max-width:1020px){.br .say{display:none}}
+.gs>.wrap{height:100%}
