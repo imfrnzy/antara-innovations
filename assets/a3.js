@@ -197,7 +197,7 @@ if(field){
     gates.forEach(function(g,i){g.classList.toggle('on',i===step&&seg<=5);g.classList.toggle('done',i<seg||seg===6)});
     var held=seg===1&&t>.5;pk.classList.toggle('held',held);
     var txt='refund £2,400';if(held)txt='held for approval';else if((seg===3&&t>.5)||seg===4||seg===5)txt='approved';else if(seg===6)txt='rule sent back';
-    pillT.textContent=txt;var flip=x>500;pill.setAttribute('transform','translate('+(flip?-16-128:16)+' -34)');
+    pillT.textContent=txt;var flip=x>500;pill.setAttribute('transform','translate('+(flip?-16-128:16)+' '+(y<90?14:-34)+')');
     person.classList.toggle('show',seg>3||(seg===3&&t>.45));
     sec.style.setProperty('--p',clamp(p).toFixed(3));
   }
