@@ -1,4 +1,4 @@
-.insp{--mut:rgba(237,241,245,.68); --line:rgba(237,241,245,.15); --sans:'Inter',system-ui,sans-serif; --c:#d9b86a}
+.insp{--mut:rgba(237,241,245,.68); --line:rgba(237,241,245,.15); --sans:'Hanken Grotesk',system-ui,sans-serif; --c:#d9b86a}
 .insp .in_ic{--c:#d9b86a}
 .insp .i-hero{padding-top:clamp(120px,14vw,170px)}
 .insp .i-h{margin:0 0 22px; font-size:clamp(38px,6vw,84px); line-height:1.02; letter-spacing:-.035em; font-weight:600; color:#fff; max-width:13em}

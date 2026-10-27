@@ -11,7 +11,7 @@
 
 .sqi{padding:44px 0 80px}
 .sqi .wrap{max-width:900px}
-.sqi h1{font-family:'Playfair Display',Georgia,serif; font-weight:600; color:var(--navy); font-size:clamp(28px,4.2vw,42px); line-height:1.18; margin:0 0 20px; letter-spacing:-.01em; max-width:24ch}
+.sqi h1{font-family:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif; font-weight:600; color:var(--navy); font-size:clamp(28px,4.2vw,42px); line-height:1.18; margin:0 0 20px; letter-spacing:-.01em; max-width:24ch}
 .sqi h1:focus,.sqi .scenario:focus{outline:none}
 .sqi h2{color:var(--navy); font-size:20px; margin:34px 0 12px}
 .sqi p{max-width:66ch}
@@ -59,7 +59,7 @@
 .timerbar.low{background:var(--wrong)}
 @media (prefers-reduced-motion:reduce){ .timerbar.running{animation:none; transform:scaleX(0)} }
 
-.scenario{font-family:'Playfair Display',Georgia,serif; font-weight:600; font-size:clamp(19px,2.4vw,23px); line-height:1.5; color:var(--navy); margin:0 0 26px; max-width:56ch}
+.scenario{font-family:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif; font-weight:600; font-size:clamp(19px,2.4vw,23px); line-height:1.5; color:var(--navy); margin:0 0 26px; max-width:56ch}
 .decisions{display:grid; gap:10px; margin:0 0 8px; max-width:560px}
 .opt{text-align:left; font:inherit; font-size:15.5px; color:var(--ink); background:var(--paper); border:1px solid rgba(15,42,71,.2); border-radius:6px; padding:13px 16px; cursor:pointer}
 .opt:hover{border-color:var(--navy)}

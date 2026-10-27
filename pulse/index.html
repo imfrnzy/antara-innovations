@@ -3,315 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>PulseX | Antara Innovations</title>
-
-<meta name="description" content="PulseX brings Cliniko to your phone and goes far beyond it.">
-<meta name="keywords" content="PulseX, Cliniko app, clinic app, voice scribe, session notes, home visits, osteopath app, Antara Innovations">
-<meta name="theme-color" content="#0A1B30">
+<meta name="description" content="PulseX brings Cliniko to your phone and runs everything around the patient: notes, letters, scheduling, home visits and follow-ups.">
 <link rel="canonical" href="https://www.antara-innovations.com/pulse/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Antara Innovations">
 <meta property="og:url" content="https://www.antara-innovations.com/pulse/">
-<meta property="og:title" content="PulseX | The one app your practice runs on">
-<meta property="og:description" content="Cliniko on your phone, then a long way past it. Scribe, voice booking, home visits, letters, follow-ups and a memory of its own.">
+<meta property="og:title" content="PulseX | Antara Innovations">
+<meta property="og:description" content="PulseX brings Cliniko to your phone and runs everything around the patient: notes, letters, scheduling, home visits and follow-ups.">
 <meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PulseX | The one app your practice runs on">
-<meta name="twitter:description" content="Cliniko on your phone, then a long way past it.">
-<meta name="twitter:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
 <link rel="icon" href="../assets/favicon.png">
-<link rel="stylesheet" href="../assets/site.css">
-<link rel="stylesheet" href="../assets/v2.css">
-<link rel="stylesheet" href="../assets/dark.css">
-
-<style>
-  /* PulseX page only. Everything is prefixed px- so nothing else on the site is touched. */
-  .px-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border-top:1px solid rgba(128,128,128,.25);border-bottom:1px solid rgba(128,128,128,.25)}
-  .px-strip div{padding:26px 22px;border-right:1px solid rgba(128,128,128,.2)}
-  .px-strip div:last-child{border-right:0}
-  .px-strip b{display:block;font-size:1.05rem;letter-spacing:.01em;margin-bottom:6px}
-  .px-strip span{opacity:.72;font-size:.95rem;line-height:1.5}
-
-  .px-day{max-width:820px;margin:38px auto 0;position:relative}
-  .px-day:before{content:"";position:absolute;left:92px;top:6px;bottom:6px;width:1px;background:rgba(128,128,128,.35)}
-  .px-row{display:grid;grid-template-columns:92px 1fr;gap:0;padding:0 0 30px}
-  .px-row:last-child{padding-bottom:0}
-  .px-time{font-weight:600;font-size:1.02rem;padding-top:2px;padding-right:22px;text-align:right}
-  .px-body{padding-left:26px;position:relative}
-  .px-body:before{content:"";position:absolute;left:-5px;top:9px;width:9px;height:9px;border-radius:50%;background:#4FD1C5;box-shadow:0 0 0 4px rgba(79,209,197,.18)}
-  .px-body h3{margin:0 0 6px;font-size:1.12rem;font-weight:600}
-  .px-body p{margin:0;opacity:.78;line-height:1.6}
-
-  .px-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:40px;text-align:left}
-  .px-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:26px 24px;transition:transform .25s ease,background .25s ease,border-color .25s ease}
-  .px-card:hover{transform:translateY(-3px);background:rgba(255,255,255,.09);border-color:rgba(79,209,197,.55)}
-  .px-card .tag{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#4FD1C5;margin-bottom:12px}
-  .px-card h3{margin:0 0 10px;font-size:1.2rem;line-height:1.3;color:#fff;font-weight:600}
-  .px-card p{margin:0;color:rgba(255,255,255,.78);line-height:1.62;font-size:.99rem}
-
-  .px-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:34px}
-  .px-box{border:1px solid rgba(128,128,128,.28);border-radius:18px;padding:26px 24px}
-  .px-box h3{margin:0 0 8px;font-size:1.1rem;font-weight:600}
-  .px-box p{margin:0;opacity:.8;line-height:1.6}
-
-  @media (max-width:640px){
-    .px-day:before{left:62px}
-    .px-row{grid-template-columns:62px 1fr}
-    .px-time{padding-right:14px;font-size:.92rem}
-    .px-strip div{border-right:0;border-bottom:1px solid rgba(128,128,128,.2)}
-    .px-strip div:last-child{border-bottom:0}
-  }
-</style>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/a3.css">
+<script>
+(function(){var d=document.documentElement;d.className+=' js';try{var t=localStorage.getItem('antara-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})();
+</script>
 </head>
-<body class="v2">
-<header class="site-header">
-  <div class="nav">
-    <a class="brand" href="../">
-      <img src="../assets/logo.png" alt="Antara Innovations">
-      <span class="word">Antara <sup>Innovations</sup></span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="../solutions/">Solutions</a>
-      <a href="../instruments/">Instruments</a>
-      <a href="../use-cases/">Use cases</a>
-      <a href="../newsletter/">Newsletter</a>
-      <a href="../about/">About</a>
-      <a class="cta" href="../contact/">Get in touch</a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="hd" id="hd">
+  <div class="in">
+    <a class="brand" href="../" aria-label="Antara Innovations, home"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><circle class="ring" cx="13" cy="13" r="10"/><circle class="dot" cx="13" cy="3" r="3.2"/></svg>Antara<small>Innovations</small></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a class="l" href="../solutions/">Solutions</a>
+      <a class="l" href="../wellness/">Wellness</a>
+      <a class="l" href="../pulse/" aria-current="page">Pulse</a>
+      <a class="l" href="../about/">About</a>
+      <button class="tg" id="tg" aria-label="Switch light and dark theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <a class="btn solid" href="../contact/">Book a scoping call <span class="ar">&rarr;</span></a>
     </nav>
   </div>
 </header>
 
-<main>
-
-<!-- HERO -->
-<section class="p-hero">
-  <div class="p-orb a"></div><div class="p-orb b"></div>
-  <div class="wrap p-split">
-    <div>
-      <p class="h-eyebrow h-fade" style="--d:0">Product &middot; PulseX</p>
-      <h1 class="p-title sm h-fade" style="--d:1">The one app your <span class="serif">practice</span> runs on.</h1>
-      <p class="p-sub h-fade" style="--d:2">PulseX brings Cliniko to your phone, every part of it, and then goes a long way past it. It listens in the room, plans your drive, writes your notes and letters, chases the patients who went quiet, and remembers how you like things done.</p>
-      <p class="p-sub h-fade" style="--d:2;color:#fff;font-weight:500">You treat people. PulseX runs everything around them.</p>
-      <div class="h-cta h-fade" style="--d:3">
-        <a class="h-btn solid" href="#get">Get PulseX <span class="arr">&darr;</span></a>
-        <a class="h-btn" href="#day">See a day with PulseX</a>
-        <a class="h-btn" href="#connect">Connect to Cliniko</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STRIP -->
-<section class="h-sec" style="padding-top:34px;padding-bottom:34px">
-  <div class="wrap reveal">
-    <div class="px-strip">
-      <div><b>All of Cliniko</b><span>Diary, patients, notes, invoices, forms and recalls, on your phone.</span></div>
-      <div><b>Hears the session</b><span>Speak in the room. The note is written by the time you stand up.</span></div>
-      <div><b>Plans your day</b><span>Drive times, turnarounds, clinic or home visit. Worked out for you.</span></div>
-      <div><b>Learns you</b><span>Your habits, your wording, your usual week. Without filling in a single form.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- CLINIKO IN YOUR POCKET -->
-<section class="h-sec">
-  <div class="wrap p-split" style="align-items:start">
-    <div class="reveal">
-      <p class="h-kicker">The starting point</p>
-      <h2 class="h-h2">Cliniko, <span class="serif">in your pocket</span></h2>
-    </div>
-    <div class="reveal">
-      <p class="h-lead">Cliniko is brilliant at a desk. You do not live at a desk. PulseX connects to your own Cliniko account and gives you the whole thing on your phone: your diary, your patients, treatment notes, invoices, forms, recalls and the clinic details you already have set up.</p>
-      <p class="h-lead">Change something in PulseX and it is changed in Cliniko. Change it in Cliniko and PulseX shows it straight away. It keeps the wording and the feel you already know, so there is nothing new to learn on day one.</p>
-      <p class="h-lead">That is where it starts. Everything below is what Cliniko was never built to do.</p>
-    </div>
-  </div>
-</section>
-
-<!-- A DAY WITH PULSEX -->
-<section class="h-sec" id="day">
-  <div class="wrap reveal" style="text-align:center">
-    <p class="h-kicker">A day with PulseX</p>
-    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">It is already <span class="serif">working</span> before you are</h2>
-    <p class="h-lead" style="margin-left:auto;margin-right:auto">Here is what an ordinary Thursday looks like.</p>
-  </div>
+<main id="main">
+<section class="hero page pul" id="hero">
+<div class="ecg" aria-hidden="true"><svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path class="base" d="M0 100 L140 100 L160 100 L176 70 L192 128 L212 20 L232 140 L250 100 L300 100 L330 92 L360 100 L560 100 L580 100 L596 70 L612 128 L632 20 L652 140 L670 100 L720 100 L750 92 L780 100 L980 100 L1000 100 L1016 70 L1032 128 L1052 20 L1072 140 L1090 100 L1140 100 L1170 92 L1200 100"/><path class="live" pathLength="1" d="M0 100 L140 100 L160 100 L176 70 L192 128 L212 20 L232 140 L250 100 L300 100 L330 92 L360 100 L560 100 L580 100 L596 70 L612 128 L632 20 L652 140 L670 100 L720 100 L750 92 L780 100 L980 100 L1000 100 L1016 70 L1032 128 L1052 20 L1072 140 L1090 100 L1140 100 L1170 92 L1200 100"/></svg></div>
   <div class="wrap">
-    <div class="px-day reveal">
-      <div class="px-row">
-        <div class="px-time">07:30</div>
-        <div class="px-body"><h3>Your morning note</h3><p>A short briefing on your phone. Who is in, who needs what before they arrive, which notes are still unwritten from yesterday, and where the day is tight.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">08:40</div>
-        <div class="px-body"><h3>Told when to leave</h3><p>You have a home visit first. PulseX works out the real drive time, tells you when to set off, and warns you if the turnaround to your next patient will not work.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">10:15</div>
-        <div class="px-body"><h3>You just talk</h3><p>Put the phone down and treat. PulseX listens to the session and drafts the note in your own template, checked against what was actually said. Your hands and eyes stay on the patient.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">12:05</div>
-        <div class="px-body"><h3>Booked by voice</h3><p>&ldquo;Book Sarah in for next Tuesday afternoon.&rdquo; Done. It finds the slot that suits your week and puts it in the diary.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">13:55</div>
-        <div class="px-body"><h3>Your 2pm is coming up</h3><p>A quick nudge asks if the patient has arrived. One tap and your day carries on without you touching a screen.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">16:30</div>
-        <div class="px-body"><h3>Letters written</h3><p>Referral to a consultant. Report for an insurer. Letter to a GP. Discharge summary. PulseX drafts it from the record, in your voice, ready for you to read and send.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">18:00</div>
-        <div class="px-body"><h3>Loose ends tied</h3><p>Missed appointments followed up. Patients who have gone quiet brought back to your attention. Your own dentist appointment, and your mum&rsquo;s birthday on Saturday, sitting in the same diary.</p></div>
-      </div>
-    </div>
+    <p class="eyebrow">Product &middot; PulseX &middot; the clinic</p>
+    <h1 class="h1" id="h1" style="max-width:12em"><span class="l" style="--d:0ms"><span>The one app your practice</span></span><span class="l" style="--d:120ms"><span><em><span class="hand">runs on.<svg viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 C 60 3, 120 9, 180 5 S 270 6, 298 4"/></svg></span></em></span></span></h1>
+    <p class="lede rv" style="--d:400ms">PulseX brings Cliniko to your phone, every part of it, and then goes a long way past it. It listens in the room, plans your drive, writes your notes and letters, chases the patients who went quiet, and remembers how you like things done.</p>
+    <div class="cta rv" style="--d:520ms"><a class="btn solid" href="#get">Get PulseX <span class="ar">&darr;</span></a><a class="btn ghost" href="#day">See a day with PulseX</a><a class="btn ghost" href="#connect">Connect to Cliniko</a></div>
+    <p class="rv" style="--d:640ms;font:600 clamp(20px,2vw,26px)/1.3 var(--fh);margin-top:30px;max-width:30ch">You treat people. PulseX runs everything around them.</p>
   </div>
 </section>
+<section class="sec" id="all"><div class="wrap">
+  <div class="cards c4" style="margin-top:0">
+    <div class="card rv"><span class="k">All of Cliniko</span><p>Diary, patients, notes, invoices, forms and recalls, on your phone.</p></div>
+    <div class="card rv" style="--d:70ms"><span class="k">Hears the session</span><p>Speak in the room. The note is written by the time you stand up.</p></div>
+    <div class="card rv" style="--d:140ms"><span class="k">Plans your day</span><p>Drive times, turnarounds, clinic or home visit. Worked out for you.</p></div>
+    <div class="card rv" style="--d:210ms"><span class="k">Learns you</span><p>Your habits, your wording, your usual week. Without filling in a single form.</p></div>
+  </div>
+</div></section>
 
-<!-- BEYOND CLINIKO: THE FEATURES -->
-<section class="h-sec dark">
-  <div class="wrap reveal" style="text-align:center">
-    <p class="h-kicker">Beyond Cliniko</p>
-    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">A chief of staff for <span class="serif">your practice</span></h2>
-    <p class="h-lead" style="margin-left:auto;margin-right:auto">Not a scribe. Not a booking app. One assistant that sees your whole working life and keeps it moving.</p>
+<section class="sec" id="start" style="padding-top:0"><div class="wrap two">
+  <div><p class="eyebrow rv">The starting point</p><h2 class="h2 rv">Cliniko, <em>in your pocket.</em></h2></div>
+  <div class="prose2 rv"><p>Cliniko is brilliant at a desk. You do not live at a desk. PulseX connects to your own Cliniko account and gives you the whole thing on your phone: your diary, your patients, treatment notes, invoices, forms, recalls and the clinic details you already have set up.</p><p>Change something in PulseX and it is changed in Cliniko. Change it in Cliniko and PulseX shows it straight away. It keeps the wording and the feel you already know, so there is nothing new to learn on day one.</p><p>That is where it starts. Everything below is what Cliniko was never built to do.</p></div>
+</div></section>
 
-    <div class="px-grid">
-      <div class="px-card"><span class="tag">Scribe</span><h3>Sessions turn into notes</h3><p>Record the session, get a finished note in your own Cliniko template. Every point is checked against what was said. If your template cannot be used, you still get a clean plain session note.</p></div>
-      <div class="px-card"><span class="tag">Assistant</span><h3>Someone who knows your practice</h3><p>Ask it anything about your day, your patients or your week. It shows you the notes still to write, the invoices waiting, the people who need a call, and what to do first.</p></div>
-      <div class="px-card"><span class="tag">Letters</span><h3>Referrals, reports, discharge</h3><p>Referral letters, insurer reports, GP letters and discharge summaries drafted from the record in your own style. You read it, change what you like, and it is done.</p></div>
-      <div class="px-card"><span class="tag">Follow-ups</span><h3>Nobody falls through</h3><p>Missed appointments get a follow-up. Patients who have gone quiet come back to your attention before they drift away for good.</p></div>
-      <div class="px-card"><span class="tag">Voice booking</span><h3>Say it, and it is booked</h3><p>&ldquo;Book an appointment with Mr Patel on Friday.&rdquo; PulseX finds the right slot and puts it in the diary while you carry on with your day.</p></div>
-      <div class="px-card"><span class="tag">Smart scheduling</span><h3>A diary that fills itself well</h3><p>It watches your diary, spots gaps and tells you the moment a slot frees up, so a cancellation becomes a booked session instead of lost income.</p></div>
-      <div class="px-card"><span class="tag">Home visits</span><h3>Real drive times</h3><p>Proper travel times between visits, when to leave, and a clear warning when a turnaround is too tight to be realistic.</p></div>
-      <div class="px-card"><span class="tag">Clinic or home</span><h3>It works out where you are</h3><p>PulseX knows your usual week of clinic days and visit days and plans around it. It only asks you when it genuinely cannot tell.</p></div>
-      <div class="px-card"><span class="tag">Your own life</span><h3>One diary for all of it</h3><p>Private appointments, family birthdays, your own doctor. Kept in PulseX alongside your working day, and never mixed into your patients&rsquo; records.</p></div>
-      <div class="px-card"><span class="tag">Nudges</span><h3>The right reminder, right time</h3><p>A morning briefing. A heads-up when a slot opens. A tap-to-confirm when your patient arrives. Quiet when nothing needs you, and it never puts a patient&rsquo;s name in a notification.</p></div>
-      <div class="px-card"><span class="tag">Learns you</span><h3>It picks up how you work</h3><p>Your phrasing, your habits, the shape of your week. PulseX learns it as you use it. Nobody has to fill in a questionnaire, and the longer you use it the more it feels like yours.</p></div>
-      <div class="px-card"><span class="tag">Your memory, your control</span><h3>See it. Change it. Delete it.</h3><p>Everything PulseX has learned about how you work is visible in one place. Edit any of it, or wipe it, whenever you like.</p></div>
-    </div>
+<section class="sec" id="day" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><p class="eyebrow rv">A day with PulseX</p><h2 class="h2 rv">It is already working <em>before you are.</em></h2><p class="lede rv">Here is what an ordinary Thursday looks like.</p></div>
+  <div class="day">
+    <div class="dr"><time>07:30</time><div><h3>Your morning note</h3><p>A short briefing on your phone. Who is in, who needs what before they arrive, which notes are still unwritten from yesterday, and where the day is tight.</p></div></div>
+    <div class="dr"><time>08:40</time><div><h3>Told when to leave</h3><p>You have a home visit first. PulseX works out the real drive time, tells you when to set off, and warns you if the turnaround to your next patient will not work.</p></div></div>
+    <div class="dr"><time>10:15</time><div><h3>You just talk</h3><p>Put the phone down and treat. PulseX listens to the session and drafts the note in your own template, checked against what was actually said. Your hands and eyes stay on the patient.</p></div></div>
+    <div class="dr"><time>12:05</time><div><h3>Booked by voice</h3><p>&ldquo;Book Sarah in for next Tuesday afternoon.&rdquo; Done. It finds the slot that suits your week and puts it in the diary.</p></div></div>
+    <div class="dr"><time>13:55</time><div><h3>Your 2pm is coming up</h3><p>A quick nudge asks if the patient has arrived. One tap and your day carries on without you touching a screen.</p></div></div>
+    <div class="dr"><time>16:30</time><div><h3>Letters written</h3><p>Referral to a consultant. Report for an insurer. Letter to a GP. Discharge summary. PulseX drafts it from the record, in your voice, ready for you to read and send.</p></div></div>
+    <div class="dr"><time>18:00</time><div><h3>Loose ends tied</h3><p>Missed appointments followed up. Patients who have gone quiet brought back to your attention. Your own dentist appointment, and your mum&rsquo;s birthday on Saturday, sitting in the same diary.</p></div></div>
   </div>
-</section>
+</div></section>
 
-<!-- WHY IT MATTERS -->
-<section class="h-sec">
-  <div class="wrap reveal" style="text-align:center">
-    <p class="h-kicker">Why clinicians keep it</p>
-    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">It gives you back <span class="serif">the hours</span> and the attention</h2>
-    <p class="h-lead" style="margin-left:auto;margin-right:auto">The evening notes. The Sunday diary check. The drive-time maths. The letters that sit on the pile. Most of a clinician&rsquo;s working week is not treatment. PulseX takes that part and handles it, so the time you spend with a patient is actually with the patient.</p>
+<section class="sec" id="beyond" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><p class="eyebrow rv">Beyond Cliniko</p><h2 class="h2 rv">A chief of staff <em>for your practice.</em></h2><p class="lede rv">Not a scribe. Not a booking app. One assistant that sees your whole working life and keeps it moving.</p></div>
+  <div class="cards">
+    <div class="card rv"><span class="k">Scribe</span><h3>Sessions turn into notes</h3><p>Record the session, get a finished note in your own Cliniko template. Every point is checked against what was said. If your template cannot be used, you still get a clean plain session note.</p></div>
+    <div class="card rv" style="--d:70ms"><span class="k">Assistant</span><h3>Someone who knows your practice</h3><p>Ask it anything about your day, your patients or your week. It shows you the notes still to write, the invoices waiting, the people who need a call, and what to do first.</p></div>
+    <div class="card rv" style="--d:140ms"><span class="k">Letters</span><h3>Referrals, reports, discharge</h3><p>Referral letters, insurer reports, GP letters and discharge summaries drafted from the record in your own style. You read it, change what you like, and it is done.</p></div>
+    <div class="card rv"><span class="k">Follow-ups</span><h3>Nobody falls through</h3><p>Missed appointments get a follow-up. Patients who have gone quiet come back to your attention before they drift away for good.</p></div>
+    <div class="card rv" style="--d:70ms"><span class="k">Voice booking</span><h3>Say it, and it is booked</h3><p>&ldquo;Book an appointment with Mr Patel on Friday.&rdquo; PulseX finds the right slot and puts it in the diary while you carry on with your day.</p></div>
+    <div class="card rv" style="--d:140ms"><span class="k">Smart scheduling</span><h3>A diary that fills itself well</h3><p>It watches your diary, spots gaps and tells you the moment a slot frees up, so a cancellation becomes a booked session instead of lost income.</p></div>
+    <div class="card rv"><span class="k">Home visits</span><h3>Real drive times</h3><p>Proper travel times between visits, when to leave, and a clear warning when a turnaround is too tight to be realistic.</p></div>
+    <div class="card rv" style="--d:70ms"><span class="k">Clinic or home</span><h3>It works out where you are</h3><p>PulseX knows your usual week of clinic days and visit days and plans around it. It only asks you when it genuinely cannot tell.</p></div>
+    <div class="card rv" style="--d:140ms"><span class="k">Your own life</span><h3>One diary for all of it</h3><p>Private appointments, family birthdays, your own doctor. Kept in PulseX alongside your working day, and never mixed into your patients&rsquo; records.</p></div>
+    <div class="card rv"><span class="k">Nudges</span><h3>The right reminder, right time</h3><p>A morning briefing. A heads-up when a slot opens. A tap-to-confirm when your patient arrives. Quiet when nothing needs you, and it never puts a patient&rsquo;s name in a notification.</p></div>
+    <div class="card rv" style="--d:70ms"><span class="k">Learns you</span><h3>It picks up how you work</h3><p>Your phrasing, your habits, the shape of your week. PulseX learns it as you use it. Nobody has to fill in a questionnaire, and the longer you use it the more it feels like yours.</p></div>
+    <div class="card rv" style="--d:140ms"><span class="k">Your memory, your control</span><h3>See it. Change it. Delete it.</h3><p>Everything PulseX has learned about how you work is visible in one place. Edit any of it, or wipe it, whenever you like.</p></div>
   </div>
-  <div class="wrap">
-    <div class="px-two reveal">
-      <div class="px-box"><h3>Built for sole practitioners</h3><p>You are the clinician, the receptionist, the biller and the diary manager. PulseX covers the jobs you never trained for.</p></div>
-      <div class="px-box"><h3>Built for small clinics</h3><p>Every clinician signs in with their own email and gets an assistant that learns their way of working, on top of the clinic&rsquo;s shared Cliniko account.</p></div>
-      <div class="px-box"><h3>Built for home visits</h3><p>If your day involves a car, PulseX plans the whole thing for you: when to leave, how long it takes, and whether the next patient will be kept waiting.</p></div>
-    </div>
-  </div>
-</section>
+</div></section>
 
-<!-- TRUST -->
-<section class="h-sec dark">
-  <div class="wrap reveal" style="text-align:center">
-    <p class="h-kicker">Made for patient data</p>
-    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">Locked, <span class="serif">private</span>, yours</h2>
-    <div class="px-grid">
-      <div class="px-card"><span class="tag">Sign-in</span><h3>No passwords</h3><p>You sign in with a one-time code sent to your email. Nothing to remember and nothing to leak.</p></div>
-      <div class="px-card"><span class="tag">Lock</span><h3>Face ID or fingerprint</h3><p>Close the app and it locks. Open it again and it asks for your face or finger. Switch away for a moment and it lets you straight back in.</p></div>
-      <div class="px-card"><span class="tag">Notifications</span><h3>No names on your lock screen</h3><p>Reminders tell you what you need to know without ever showing a patient&rsquo;s name.</p></div>
-    </div>
+<section class="sec" id="why" style="padding-top:0"><div class="wrap two">
+  <div><p class="eyebrow rv">Why clinicians keep it</p><h2 class="h2 rv">It gives you back <em>the hours</em> and the attention.</h2>
+  <div class="prose2 rv"><p>The evening notes. The Sunday diary check. The drive-time maths. The letters that sit on the pile. Most of a clinician&rsquo;s working week is not treatment. PulseX takes that part and handles it, so the time you spend with a patient is actually with the patient.</p></div></div>
+  <div class="cards c2" style="grid-template-columns:1fr;margin-top:0">
+    <div class="card rv"><span class="k">Built for sole practitioners</span><p>You are the clinician, the receptionist, the biller and the diary manager. PulseX covers the jobs you never trained for.</p></div>
+    <div class="card rv"><span class="k">Built for small clinics</span><p>Every clinician signs in with their own email and gets an assistant that learns their way of working, on top of the clinic&rsquo;s shared Cliniko account.</p></div>
+    <div class="card rv"><span class="k">Built for home visits</span><p>If your day involves a car, PulseX plans the whole thing for you: when to leave, how long it takes, and whether the next patient will be kept waiting.</p></div>
   </div>
-</section>
+</div></section>
 
-<!-- GET THE APP -->
-<section class="h-sec dark" id="get">
-  <div class="wrap reveal" style="text-align:center">
-    <p class="h-kicker">Get the app</p>
-    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">Download <span class="serif">PulseX</span></h2>
-    <p class="h-lead" style="margin-left:auto;margin-right:auto">Free to download, with a 3-day free trial. After that, PulseX Premium is a simple monthly subscription, billed by Google Play or the App Store. It works with any Cliniko account.</p>
-    <div class="badges-v2" style="justify-content:center;margin-top:26px">
-      <!-- APPLE: when Apple approves the app, replace the <span> below with this line, using the real App Store link:
-      <a href="PASTE_APP_STORE_LINK_HERE" target="_blank" rel="noopener" aria-label="Download PulseX on the App Store"><img src="../assets/app-store-badge.svg" alt="Download on the App Store"></a>
-      -->
-      <span aria-label="PulseX for iPhone is coming soon" style="display:inline-flex;align-items:center;opacity:.55"><img src="../assets/app-store-badge.svg" alt="App Store, coming soon"></span>
-      <a href="https://play.google.com/store/apps/details?id=com.antarainnovations.pulse" target="_blank" rel="noopener" aria-label="Get PulseX on Google Play"><img src="../assets/google-play-badge.png" alt="Get it on Google Play"></a>
-    </div>
-    <p class="h-lead" style="margin:18px auto 0;font-size:.95rem;opacity:.8">iPhone version coming soon.</p>
+<section class="sec" id="private" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><p class="eyebrow rv">Made for patient data</p><h2 class="h2 rv">Locked, <em>private,</em> yours.</h2></div>
+  <div class="cards">
+    <div class="card rv"><span class="k">Sign-in</span><h3>No passwords</h3><p>You sign in with a one-time code sent to your email. Nothing to remember and nothing to leak.</p></div>
+    <div class="card rv" style="--d:70ms"><span class="k">Lock</span><h3>Face ID or fingerprint</h3><p>Close the app and it locks. Open it again and it asks for your face or finger. Switch away for a moment and it lets you straight back in.</p></div>
+    <div class="card rv" style="--d:140ms"><span class="k">Notifications</span><h3>No names on your lock screen</h3><p>Reminders tell you what you need to know without ever showing a patient&rsquo;s name.</p></div>
   </div>
-</section>
+</div></section>
 
-<!-- CONNECT TO CLINIKO / INTEGRATION GUIDE -->
-<section class="h-sec" id="connect">
-  <div class="wrap reveal" style="text-align:center">
-    <p class="h-kicker">Setup in a few minutes</p>
-    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">Connect PulseX to <span class="serif">your Cliniko account</span></h2>
-    <p class="h-lead" style="margin-left:auto;margin-right:auto">PulseX works with the Cliniko account you already use. You give it a key once, and it reads your diary, patients, notes and invoices straight from Cliniko.</p>
-  </div>
-  <div class="wrap">
-    <div class="px-day reveal">
-      <div class="px-row">
-        <div class="px-time">Step 1</div>
-        <div class="px-body"><h3>Open your details in Cliniko</h3><p>In Cliniko, open your name at the top right, then choose &ldquo;My info&rdquo;.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">Step 2</div>
-        <div class="px-body"><h3>Create an API key</h3><p>Scroll to &ldquo;Manage API keys&rdquo; and choose &ldquo;Add API key&rdquo;. Copy the key.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">Step 3</div>
-        <div class="px-body"><h3>Paste it into PulseX</h3><p>In PulseX, paste the key into &ldquo;Cliniko API key&rdquo;.</p></div>
-      </div>
-      <div class="px-row">
-        <div class="px-time">Step 4</div>
-        <div class="px-body"><h3>Tap Connect</h3><p>PulseX checks the key with Cliniko and you are straight in.</p></div>
-      </div>
-    </div>
-    <div class="px-two reveal">
-      <div class="px-box"><h3>Your records stay in Cliniko</h3><p>PulseX reads them live. Your key is stored encrypted. You can disconnect any time from More in the app, and you can remove the key in Cliniko to cut it off everywhere.</p></div>
-      <div class="px-box"><h3>The full user guide</h3><p>Every screen and every feature, step by step, including how to get started and how to connect.</p></div>
-    </div>
-    <div class="h-cta reveal" style="justify-content:center;margin-top:26px">
-      <a class="h-btn solid" href="PulseX_User_Guide.pdf" target="_blank" rel="noopener">Open the full user guide (PDF)</a>
-      <a class="h-btn" href="PulseX_User_Guide.pdf#page=9" target="_blank" rel="noopener">Go to the connection steps</a>
-    </div>
-  </div>
-</section>
+<section class="sec" id="get" style="padding-top:0"><div class="wrap two">
+  <div><p class="eyebrow rv">Get the app</p><h2 class="h2 rv">Download <em>PulseX.</em></h2>
+  <div class="prose2 rv"><p>Free to download, with a 3-day free trial. After that, PulseX Premium is a simple monthly subscription, billed by Google Play or the App Store. It works with any Cliniko account.</p></div>
+  <div class="stores rv"><a href="https://play.google.com/store/apps/details?id=com.antarainnovations.pulse" target="_blank" rel="noopener"><img src="../assets/google-play-badge.png" alt="Get it on Google Play"></a><span class="note">iPhone version coming soon.</span></div></div>
+  <div class="card rv" id="connect"><span class="k">Setup in a few minutes</span><h3>Connect PulseX to your Cliniko account</h3><p>PulseX works with the Cliniko account you already use. You give it a key once, and it reads your diary, patients, notes and invoices straight from Cliniko.</p>
+  <ol style="margin:6px 0 0;padding-left:20px;color:var(--ink2);line-height:1.7"><li><b>Open your details in Cliniko.</b> Open your name at the top right, then choose &ldquo;My info&rdquo;.</li><li><b>Create an API key.</b> Scroll to &ldquo;Manage API keys&rdquo; and choose &ldquo;Add API key&rdquo;. Copy the key.</li><li><b>Paste it into PulseX.</b> Paste the key into &ldquo;Cliniko API key&rdquo;.</li><li><b>Tap Connect.</b> PulseX checks the key with Cliniko and you are straight in.</li></ol>
+  <p style="margin-top:10px"><b>Your records stay in Cliniko.</b> PulseX reads them live. Your key is stored encrypted. You can disconnect any time from More in the app, and you can remove the key in Cliniko to cut it off everywhere.</p>
+  <a class="go" href="PulseX_User_Guide.pdf">Open the full user guide (PDF) &rarr;</a></div>
+</div></section>
 
-<!-- LEGAL -->
-<section class="h-sec" id="legal">
-  <div class="wrap reveal" style="text-align:center">
-    <p class="h-kicker">The small print, in plain words</p>
-    <h2 class="h-h2" style="margin-left:auto;margin-right:auto">Privacy and <span class="serif">terms</span></h2>
-    <div class="h-cta" style="justify-content:center;margin-top:22px"><a class="h-btn solid" href="privacy/">Privacy Policy</a> <a class="h-btn" href="terms/">Terms of Use</a></div>
-    <p class="h-lead" style="margin:22px auto 0">Questions: <a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a></p>
+<section class="sec" style="padding-top:0"><div class="wrap"><p class="note" style="font-size:14px">The small print, in plain words: <a class="lnk" href="privacy/">Privacy Policy</a> &nbsp;&middot;&nbsp; <a class="lnk" href="terms/">Terms of Use</a> &nbsp;&middot;&nbsp; <a class="lnk" href="delete/">Delete your account</a> &nbsp;&middot;&nbsp; Questions: <a class="lnk" href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a></p></div></section>
+
+<section class="sec thread" style="padding-top:0"><div class="wrap">
+  <p class="eyebrow rv">One company, one idea</p>
+  <h2 class="h2 rv">The same question sits <em>in three places.</em></h2>
+  <div class="tri">
+    <a class="rv" href="../solutions/"><b>In the organisation</b><span>Who is accountable when AI acts? See our solutions.</span></a>
+    <a class="rv" href="../wellness/" style="--d:80ms"><b>In the person</b><span>What does living next to intelligent machines do to us? See Antara Wellness.</span></a>
+    <a class="rv" href="../pulse/" style="--d:160ms" aria-current="page"><b>In the clinic</b><span>How does a specialist stay in charge of what the AI sees? You are here.</span></a>
   </div>
-</section>
+</div></section>
+<section class="end"><div class="wrap"><h2 class="h2 rv">Running a practice? <em>Talk to us.</em></h2><div class="row rv"><a class="btn solid" href="../contact/">Send a message <span class="ar">&rarr;</span></a></div></div></section>
 
 </main>
-<footer class="v2-foot">
-<div class="wrap">
-  <div class="foot-main">
-    <div>
-      <div class="brand">
-        <img src="../assets/logo.png" alt="Antara Innovations">
-        <span class="word">Antara <sup>Innovations</sup></span>
+<footer class="ft-w">
+  <div class="wrap">
+    <div class="ft-g">
+      <div>
+        <a class="brand" href="../"><svg class="mark" data-f="1" viewBox="0 0 26 26" aria-hidden="true"><circle class="ring" cx="13" cy="13" r="10"/><circle class="dot" cx="13" cy="3" r="3.2"/></svg>Antara<small>Innovations</small></a>
+        <small>Human Potential, Amplified.<br>&copy; <span id="yr">2026</span> Antara Innovations.</small>
       </div>
-      <small>&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+      <div><h4>Work</h4><a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a><a href="../use-cases/">Real-life cases</a></div>
+      <div><h4>Journey</h4><a href="../wellness/">Antara Wellness</a><a href="../pulse/">Pulse</a><a href="../about/">About Abhinav Gaurav</a><a href="../newsletter/">The Awakened Intelligence</a></div>
+      <div><h4>Talk</h4><a href="../contact/">Send a message</a><a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
     </div>
-    <div class="foot-col"><h4>Work</h4>
-      <a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a><a href="../use-cases/">Use cases</a></div>
-    <div class="foot-col"><h4>Read</h4>
-      <a href="../newsletter/">The Awakened Intelligence</a><a href="../about/">About Abhinav Gaurav</a><a href="../wellness/">Antara Wellness</a><a href="../pulse/">PulseX</a></div>
-    <div class="foot-col"><h4>Talk</h4>
-      <a href="../contact/">Send a message</a><a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
-</div>
 </footer>
-
-<script src="../assets/motion.js"></script>
-<script src="../assets/v2.js"></script>
-
+<script src="../assets/a3.js"></script>
+<script src="../assets/a3b.js"></script>
 </body>
 </html>

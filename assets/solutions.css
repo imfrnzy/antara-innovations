@@ -1,14 +1,14 @@
-.solp{--mut:rgba(237,241,245,.68); --goldd:#b8924a; --red:#ff9b8a; --line:rgba(237,241,245,.15); --sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif; --serif:'Playfair Display',Georgia,serif; --gold:#d9b86a}
+.solp{--mut:rgba(228,236,232,.68); --goldd:#b8924a; --red:#ff9b8a; --line:rgba(228,236,232,.15); --sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif; --serif:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif; --gold:#ffb03a}
 .solp .tabs{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 18px}
-.solp .tabs button{background:transparent; border:1px solid var(--line); border-radius:999px; padding:9px 20px; font:600 13.5px var(--sans); color:rgba(237,241,245,.8); cursor:pointer; transition:all .25s}
+.solp .tabs button{background:transparent; border:1px solid var(--line); border-radius:999px; padding:9px 20px; font:600 13.5px var(--sans); color:rgba(228,236,232,.8); cursor:pointer; transition:all .25s}
 .solp .tabs button:hover{border-color:var(--gold); color:#fff}
 .solp .tabs button[aria-pressed="true"]{background:var(--gold); color:#1a1405; border-color:var(--gold)}
 .solp .pack{border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:10px; padding:18px 22px; background:rgba(255,255,255,.03); font-size:16px; line-height:1.6}
 .solp .sol-hero{padding-top:clamp(120px,14vw,170px)}
 .solp .sol-h{margin:0 0 22px; font-size:clamp(38px,6vw,84px); line-height:1.02; letter-spacing:-.035em; font-weight:600; color:#fff; max-width:13em}
 .solp .sol-h .serif{color:var(--gold-light); font-weight:500; font-style:italic}
-.solp .free{margin-top:26px; font-size:14.5px; color:rgba(237,241,245,.7)} .solp .free a{color:var(--gold-light); border-bottom:1px solid rgba(217,184,106,.4); margin-right:14px}
-.solp .scan{border:1px solid rgba(217,184,106,.3); border-radius:16px; background:linear-gradient(160deg,rgba(15,39,71,.9),rgba(6,16,32,.95)); box-shadow:0 30px 90px rgba(0,0,0,.5); overflow:hidden; min-width:0}
+.solp .free{margin-top:26px; font-size:14.5px; color:rgba(228,236,232,.7)} .solp .free a{color:var(--gold-light); border-bottom:1px solid rgba(255,176,58,.4); margin-right:14px}
+.solp .scan{border:1px solid rgba(255,176,58,.3); border-radius:16px; background:linear-gradient(160deg,rgba(18,33,29,.9),rgba(9,18,16,.95)); box-shadow:0 30px 90px rgba(0,0,0,.5); overflow:hidden; min-width:0}
 .solp .scan .sb{display:flex; gap:8px; align-items:center; padding:10px 14px; border-bottom:1px solid var(--line); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--mut)}
 .solp .scan .sb i{width:8px; height:8px; border-radius:50%; background:#6fcf97; animation:pl 2s infinite}
 .solp .scan .sb span:last-child{margin-left:auto; color:var(--gold)}
@@ -22,8 +22,8 @@
 .solp .scan .lg p{margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis} .scan .lg b{color:var(--gold); margin-right:10px}
 .solp .scan .lg .bad{color:var(--red)}
 .solp .lap{max-width:960px; margin:30px auto 0}
-.solp .lap .lid{background:#05101f; border:10px solid #0b1626; border-bottom-width:12px; border-radius:16px 16px 4px 4px; box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.solp .lap .scr{background:linear-gradient(180deg,#0f2646,#0a1c36); padding:16px 18px 20px; min-height:300px}
+.solp .lap .lid{background:#070f0d; border:10px solid #0f1b18; border-bottom-width:12px; border-radius:16px 16px 4px 4px; box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.solp .lap .scr{background:linear-gradient(180deg,#12211d,#0d1a17); padding:16px 18px 20px; min-height:300px}
 .solp .lap .base{height:14px; background:linear-gradient(180deg,#cfd6df,#8d98a8); border-radius:0 0 18px 18px; width:112%; margin-left:-6%}
 .solp .lap .hd{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px}
 .solp .lap .hd b{font-size:16px} .lap .hd i{width:9px; height:9px; border-radius:50%; background:#6fcf97}
@@ -42,12 +42,12 @@
 .solp .lap2{max-width:1040px}
 .solp .lap2 .aws{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
 .solp .lap2 .aw{border:1px solid var(--line); border-radius:10px; padding:11px 13px; min-height:190px; background:rgba(255,255,255,.02); transition:border-color .4s, box-shadow .4s}
-.solp .lap2 .aw.on{border-color:rgba(217,184,106,.55); box-shadow:0 0 24px rgba(217,184,106,.10)}
-.solp .lap2 .aw.done{border-color:rgba(217,184,106,.9)}
+.solp .lap2 .aw.on{border-color:rgba(255,176,58,.55); box-shadow:0 0 24px rgba(255,176,58,.10)}
+.solp .lap2 .aw.done{border-color:rgba(255,176,58,.9)}
 .solp .lap2 .ah{display:flex; align-items:center; gap:8px; margin-bottom:8px}
-.solp .lap2 .ah i{width:8px; height:8px; border-radius:50%; background:rgba(237,241,245,.3)}
-.solp .lap2 .aw.on .ah i{background:#d9b86a; animation:lp 1s infinite}
-.solp .lap2 .aw.done .ah i{animation:none; background:#d9b86a}
+.solp .lap2 .ah i{width:8px; height:8px; border-radius:50%; background:rgba(228,236,232,.3)}
+.solp .lap2 .aw.on .ah i{background:#ffb03a; animation:lp 1s infinite}
+.solp .lap2 .aw.done .ah i{animation:none; background:#ffb03a}
 @keyframes lp{50%{opacity:.25}}
 .solp .lap2 .ah b{font-size:14px} .lap2 .ah em{margin-left:auto; font-style:normal; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold)}
 .solp .lap2 .pb{height:3px; background:rgba(255,255,255,.1); border-radius:3px; overflow:hidden; margin-bottom:9px}
@@ -59,12 +59,12 @@
 .solp .lap2 .reps{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
 .solp .lap2 .rp{margin:0; width:auto; max-width:none; justify-self:stretch; border:1px dashed var(--line); border-radius:10px; padding:13px 14px; min-height:150px; display:flex; flex-direction:column; gap:5px}
 .solp .lap2 .rp .rw{margin:auto; font-size:12px; color:var(--mut)}
-.solp .lap2 .rp.in{border:1px solid rgba(217,184,106,.7); background:#f4f1e8; color:#16233a; animation:rin .7s cubic-bezier(.2,.8,.2,1) both}
+.solp .lap2 .rp.in{border:1px solid rgba(255,176,58,.7); background:#f4f1e8; color:#12211d; animation:rin .7s cubic-bezier(.2,.8,.2,1) both}
 @keyframes rin{from{opacity:0; transform:translateY(26px) rotate(-1.2deg)}to{opacity:1; transform:none}}
 .solp .lap2 .rh{display:flex; justify-content:space-between; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:#7a6130; font-weight:700}
-.solp .lap2 .rn{font:600 32px/1 var(--sans); color:#16233a} .lap2 .rc{font-size:12px; color:#42536a}
+.solp .lap2 .rn{font:600 32px/1 var(--sans); color:#12211d} .lap2 .rc{font-size:12px; color:#3b5149}
 .solp .lap2 .rg{font-size:12px; font-weight:600} .lap2 .rpp{font-size:11.5px; color:#6b5a30}
-.solp .lap2 .ra{margin-top:auto; font-size:10.5px; color:#42536a; display:flex; gap:6px; align-items:center} .lap2 .ra i{width:7px; height:7px; border-radius:50%; background:#d9b86a; animation:lp 1.2s infinite}
+.solp .lap2 .ra{margin-top:auto; font-size:10.5px; color:#3b5149; display:flex; gap:6px; align-items:center} .lap2 .ra i{width:7px; height:7px; border-radius:50%; background:#ffb03a; animation:lp 1.2s infinite}
 .solp .lap2 .ar{margin:-4px 0 8px; font-size:11.5px; color:var(--mut)}
 .solp .scan.wide{max-width:900px; margin:38px auto 0}
 .solp .scan.wide .st3 b{font-size:28px}
@@ -75,15 +75,15 @@
 @keyframes pl{70%{box-shadow:0 0 0 8px rgba(111,207,151,0)}0%{box-shadow:0 0 0 0 rgba(111,207,151,.6)}}
 @keyframes lp{50%{opacity:.25}}
 
-.solp .cmp{margin-top:44px; border:1px solid rgba(217,184,106,.3); border-radius:16px; overflow:hidden; background:linear-gradient(160deg,rgba(15,39,71,.9),rgba(6,16,32,.95))}
+.solp .cmp{margin-top:44px; border:1px solid rgba(255,176,58,.3); border-radius:16px; overflow:hidden; background:linear-gradient(160deg,rgba(18,33,29,.9),rgba(9,18,16,.95))}
 .solp .cmp-head,.solp .cmp-row{display:grid; grid-template-columns:1fr 1.5fr 1.1fr; gap:0}
 .solp .cmp-head>div{padding:16px 22px; font-size:12px; letter-spacing:1.8px; text-transform:uppercase; font-weight:700; color:var(--mut)}
-.solp .cmp-head .cmp-us{color:var(--gold-light,#e8cf91)}
+.solp .cmp-head .cmp-us{color:var(--gold-light,#ffc56b)}
 .solp .cmp-row>div{padding:20px 22px; border-top:1px solid var(--line); font-size:15.5px; line-height:1.55}
 .solp .cmp-q{font-weight:600; color:#fff}
-.solp .cmp-us{color:#fff; background:rgba(217,184,106,.09); border-left:2px solid var(--gold)}
+.solp .cmp-us{color:#fff; background:rgba(255,176,58,.09); border-left:2px solid var(--gold)}
 .solp .cmp-them{color:var(--mut)}
-.solp .cmp-head .cmp-us{background:rgba(217,184,106,.09); border-left:2px solid var(--gold)}
+.solp .cmp-head .cmp-us{background:rgba(255,176,58,.09); border-left:2px solid var(--gold)}
 @media (max-width:760px){
   .solp .cmp-head{display:none}
   .solp .cmp-row{grid-template-columns:1fr}

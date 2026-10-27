@@ -6,7 +6,7 @@
 .ag-tabs button[aria-pressed="true"],.ag-mk button[aria-pressed="true"]{background:var(--gold-light); color:#0A1B30; border-color:var(--gold-light)}
 .ag-mk{margin:10px 0 8px}
 .ag-mk button{padding:6px 13px; font-size:12px}
-.ag-ask{font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(20px,2.2vw,28px); color:var(--gold-light); margin:6px 0 28px; min-height:1.4em}
+.ag-ask{font-family:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif; font-style:italic; font-size:clamp(20px,2.2vw,28px); color:var(--gold-light); margin:6px 0 28px; min-height:1.4em}
 .ag-sys{display:grid; grid-template-columns:1fr 54px 1.3fr 54px 1fr; align-items:stretch}
 .ag-colh{font-size:11.5px; letter-spacing:2px; text-transform:uppercase; font-weight:700; color:rgba(237,241,245,.55); margin:0 0 12px}
 .ag-src,.ag-out{list-style:none; margin:0; padding:0; display:grid; gap:8px}
@@ -68,7 +68,7 @@
 .ag-pk li::before{content:""; position:absolute; left:0; top:.62em; width:6px; height:1px; background:var(--gold-light)}
 .ag-steps{list-style:none; padding:0; margin:36px 0 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; counter-reset:s}
 .ag-steps li{border-top:2px solid var(--gold-text); padding-top:18px}
-.ag-steps i{font-style:normal; font:italic 500 34px 'Playfair Display',serif; color:var(--gold-text)}
+.ag-steps i{font-style:normal; font:italic 500 34px 'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif; color:var(--gold-text)}
 .ag-steps h3{font-size:19px; color:var(--navy); margin:6px 0 8px}
 .ag-steps p{font-size:14.5px; line-height:1.65; color:var(--muted); margin:0}
 .ag-note{margin-top:26px; font-size:13.5px; color:var(--muted)}

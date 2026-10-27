@@ -27,4 +27,4 @@
 .tj input[type=text]{padding:12px;font:inherit;border:1px solid var(--line,#ccc);border-radius:6px;text-transform:uppercase;letter-spacing:.15em;width:10em;background:transparent;color:inherit}
 .tj .err{color:#b3261e;min-height:1.2em}
 .tj .small{font-size:.85rem}
-.tj h1{font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--navy,inherit)}
+.tj h1{font-family:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif;font-weight:600;color:var(--navy,inherit)}
