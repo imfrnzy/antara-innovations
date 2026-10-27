@@ -6,154 +6,296 @@
 <title>Solutions | Antara Innovations</title>
 <meta name="description" content="Three governed AI agents, Soundings, Sentinel and Keel, deployed read-only inside your organisation and tuned to your regulator. A named person approves every change.">
 <link rel="canonical" href="https://www.antara-innovations.com/solutions/">
-<meta property="og:title" content="Solutions | Antara Innovations">
-<meta property="og:description" content="Governed AI that works inside your organisation.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antara Innovations">
 <meta property="og:url" content="https://www.antara-innovations.com/solutions/">
+<meta property="og:title" content="Solutions | Antara Innovations">
+<meta property="og:description" content="Three governed AI agents, Soundings, Sentinel and Keel, deployed read-only inside your organisation and tuned to your regulator. A named person approves every change.">
 <meta property="og:image" content="https://www.antara-innovations.com/assets/hero-brand.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/favicon.png">
-<link rel="stylesheet" href="../assets/site.css">
-<link rel="stylesheet" href="../assets/v2.css">
-<link rel="stylesheet" href="../assets/dark.css">
-<link rel="stylesheet" href="../assets/solutions.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/a3.css">
+<script>
+(function(){var d=document.documentElement;d.className+=' js';try{var t=localStorage.getItem('antara-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})();
+</script>
 </head>
-<body class="v2">
-
-<header class="site-header">
-  <div class="nav">
-    <a class="brand" href="../">
-      <img src="../assets/logo.png" alt="Antara Innovations">
-      <span class="word">Antara <sup>Innovations</sup></span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="../solutions/" aria-current="page">Solutions</a>
-      <a href="../instruments/">Instruments</a>
-      <a href="../use-cases/">Use cases</a>
-      <a href="../newsletter/">Newsletter</a>
-      <a href="../about/">About</a>
-      <a class="cta" href="../contact/">Get in touch</a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="hd" id="hd">
+  <div class="in">
+    <a class="brand" href="../" aria-label="Antara Innovations, home"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><circle class="ring" cx="13" cy="13" r="10"/><circle class="dot" cx="13" cy="3" r="3.2"/></svg>Antara<small>Innovations</small></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a class="l" href="../solutions/" aria-current="page">Solutions</a>
+      <a class="l" href="../wellness/">Wellness</a>
+      <a class="l" href="../pulse/">Pulse</a>
+      <a class="l" href="../about/">About</a>
+      <a class="l" href="../newsletter/">Newsletter</a>
+      <button class="tg" id="tg" aria-label="Switch light and dark theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <a class="btn solid" href="../contact/">Book a scoping call <span class="ar">&rarr;</span></a>
     </nav>
   </div>
 </header>
 
-<main class="solp">
-<section class="h-sec dark sol-hero">
+<main id="main">
+
+<section class="hero page" id="hero">
+  <canvas class="cv" id="gcv" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="h-kicker">Solutions</p>
-    <h1 class="sol-h">Governed AI that works <span class="serif">inside your organisation.</span></h1>
-    <p class="h-lead">Three agents with read-only access to your environment, tuned to your regulator, and a named person who approves every change.</p>
-    <div class="h-cta"><a class="h-btn solid" href="../contact/">Discuss a deployment <span class="arr">&rarr;</span></a></div>
-    <div class="scan wide" style="margin-top:48px"><div class="sb"><i></i><span>Soundings</span><span>Read-only</span></div><canvas id="cv" width="800" height="500"></canvas><div class="st3"><div><b id="s1">0</b><span>AI tools found</span></div><div><b class="r" id="s2">0</b><span>Unregistered</span></div><div><b id="s3">0</b><span>New this week</span></div></div><div class="lg" id="lg"></div></div>
+    <p class="eyebrow">Solutions &middot; compliance, governance, consulting</p>
+    <h1 class="h1" id="h1" style="max-width:11em">
+      <span class="l"><span>Your people are already using AI.</span></span>
+      <span class="l" style="--d:120ms"><span><em><span class="hand">Nobody can say where.<svg viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 C 60 3, 120 9, 180 5 S 270 6, 298 4"/></svg></span></em></span></span>
+    </h1>
+    <p class="lede rv" style="--d:400ms">The tools got into the building before the rules did. We find them, test what they can cause, and put a named person in charge. Read-only, and tuned to your regulator.</p>
+    <div class="cta rv" style="--d:520ms">
+      <a class="btn solid" href="../contact/">Discuss a deployment <span class="ar">&rarr;</span></a>
+      <a class="btn ghost" href="console/">Open the live console</a>
+    </div>
+    <ul class="facts rv" style="--d:640ms"><li>Read-only access</li><li>First result in two weeks</li><li>Nothing to install</li></ul>
+  </div>
+  <p class="hint" aria-hidden="true">Each block is an AI request, held at the gate.<br><b>Your cursor</b> is the person who approves it.</p>
+</section>
+
+<section class="sec" id="problem" style="padding-top:clamp(40px,6vw,80px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">What is happening right now</p>
+      <h2 class="h2 rv">Four sentences we hear <em>in almost every first meeting.</em></h2>
+      <p class="lede rv">Composites from conversations, not quotes from named clients. If one of them sounds like your week, you are not behind. You are normal.</p>
+    </div>
+    <div class="prob">
+      <article class="pb rv"><i>01</i><q>Half the team uses some AI tool. I could not give you a list.</q><p>Browser extensions, free chatbots, note-takers on personal accounts. It arrived one convenient shortcut at a time, and nobody decided it.</p><span class="to">Soundings looks for it</span></article>
+      <article class="pb rv" style="--d:80ms"><i>02</i><q>We gave an agent access to make life easier. What can it actually do?</q><p>Most agents get set up for what they should do. Very few get tested for what they could do on a bad day.</p><span class="to">Sentinel tests it</span></article>
+      <article class="pb rv" style="--d:160ms"><i>03</i><q>If the regulator asks who is accountable for this, who do I name?</q><p>Under SM&amp;CR and FINMA, a shrug is not an answer. Somebody has to own each use of AI, by name.</p><span class="to">Keel assigns it</span></article>
+      <article class="pb rv" style="--d:240ms"><i>04</i><q>The AI got it wrong and my team did not notice.</q><p>This is the one people go quiet about. The tool is rarely the whole problem. Tired, busy people trust a confident answer.</p><span class="to">The free instruments test this</span></article>
+    </div>
   </div>
 </section>
 
-<section class="h-sec">
+<section class="sec" id="agents" style="padding-top:0">
   <div class="wrap">
-    <div class="reveal" style="text-align:center">
-      <p class="h-kicker">Live console</p>
-      <h2 class="h-h2" style="margin-left:auto;margin-right:auto">Three agents. <span class="serif">Working now.</span></h2>
-      <p class="h-lead" style="margin-left:auto;margin-right:auto">Each agent reads your environment, investigates, and files a report. Nothing changes until a named person approves.</p>
-      <p class="h-lead" style="margin-left:auto;margin-right:auto">Soundings finds the AI in use, Sentinel tests what it could do, and Keel decides how it is approved. Watch each one work, then file its report.</p>
+    <div class="sec-head">
+      <p class="eyebrow rv">Our answer</p>
+      <h2 class="h2 rv">Governed AI that works inside your organisation. <em>Three agents look, a person decides.</em></h2>
+      <p class="lede rv">Each one reads your environment, investigates and files a report. Nothing changes until someone with a name approves it.</p>
     </div>
-    <div class="lap lap2"><div class="lid"><div class="scr"><div class="hd"><i></i><b>Antara agent console</b><span>Read-only</span><span id="lclock">Cycle 1</span></div>
-      <div class="aws">
-        <div class="aw" id="aw0"><div class="ah"><i></i><b>Soundings</b><em>standing by</em></div><p class="ar">Sees what is running</p><div class="pb"><u></u></div><div class="al"></div></div>
-        <div class="aw" id="aw1"><div class="ah"><i></i><b>Sentinel</b><em>standing by</em></div><p class="ar">Tests what it can cause</p><div class="pb"><u></u></div><div class="al"></div></div>
-        <div class="aw" id="aw2"><div class="ah"><i></i><b>Keel</b><em>standing by</em></div><p class="ar">Governs how it is approved</p><div class="pb"><u></u></div><div class="al"></div></div>
+
+    <div class="agents">
+      <a class="ag rv" href="../soundings/">
+        <div class="tag"><span class="n">01 / SEE</span><span class="ro">Read-only</span></div>
+        <h3>Soundings</h3>
+        <p class="verb">Finds the AI already running in your organisation.</p>
+        <p>Reads files exported from your systems, on one machine. Nothing leaves your firm.</p>
+        <svg class="fig" viewBox="0 0 200 160" role="img" aria-label="A radar sweep lighting up unregistered AI tools">
+          <circle class="fg2" cx="100" cy="80" r="70"/><circle class="fg2" cx="100" cy="80" r="46"/><circle class="fg2" cx="100" cy="80" r="22"/>
+          <line class="fg2" x1="100" y1="10" x2="100" y2="150"/><line class="fg2" x1="30" y1="80" x2="170" y2="80"/>
+          <g class="sweep"><path d="M100 80 L170 80 A70 70 0 0 0 164 55 Z" fill="var(--acc)" opacity=".16"/><line x1="100" y1="80" x2="170" y2="80" stroke="var(--acc)" stroke-width="1.5"/></g>
+          <g class="bl" data-x="140" data-y="52"><circle class="fk" r="3.2"/></g>
+          <g class="bl" data-x="68" data-y="46"><circle class="fk" r="3.2"/></g>
+          <g class="bl" data-x="82" data-y="116"><circle class="fa" r="3.6"/><circle class="fa pulse" r="3.6"/></g>
+          <g class="bl" data-x="132" data-y="110"><circle class="fk" r="3.2"/></g>
+          <g class="bl" data-x="50" data-y="86"><circle class="fa" r="3.6"/><circle class="fa pulse" r="3.6"/></g>
+          <circle class="fk" cx="100" cy="80" r="2.4"/>
+          <circle class="fa" cx="8" cy="153" r="3"/><text class="ft" x="16" y="156">Unregistered</text>
+        </svg>
+        <span class="go">Open Soundings <i>&rarr;</i></span>
+      </a>
+
+      <a class="ag rv" href="../sentinel/" style="--d:90ms">
+        <div class="tag"><span class="n">02 / TEST</span><span class="ro">Read-only</span></div>
+        <h3>Sentinel</h3>
+        <p class="verb">Tests what your AI agents can actually cause.</p>
+        <p>Follows each agent from what it can touch to what it could set off, and marks where a person has to be in the loop.</p>
+        <svg class="fig" viewBox="0 0 200 160" role="img" aria-label="An agent action travelling toward a consequence and being stopped">
+          <rect class="fg" x="8" y="62" width="40" height="36" rx="6"/><text class="ft" x="28" y="84" text-anchor="middle">Agent</text>
+          <rect class="fg" x="80" y="62" width="40" height="36" rx="6"/><text class="ft" x="100" y="84" text-anchor="middle">Action</text>
+          <rect class="fg2" x="152" y="62" width="40" height="36" rx="6" stroke-dasharray="3 3"/><text class="ft" x="172" y="84" text-anchor="middle">Effect</text>
+          <line class="fg flow" x1="50" y1="80" x2="78" y2="80"/>
+          <line class="fg flow" x1="122" y1="80" x2="132" y2="80"/>
+          <line x1="138" y1="64" x2="138" y2="96" stroke="var(--acc)" stroke-width="2.4" stroke-linecap="round"/>
+          <path class="fg flow" d="M100 60 C 100 30, 172 30, 172 60" style="animation-duration:2.4s"/>
+          <circle class="fa" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M100 60 C 100 30, 172 30, 172 60"/></circle>
+          <g transform="translate(138 118)"><circle class="fg" r="9"/><circle class="fk" cy="-2.5" r="2.6"/><path class="fg" d="M-5 5 Q0 0 5 5"/></g>
+          <text class="ft" x="138" y="143" text-anchor="middle">Person in the loop</text>
+        </svg>
+        <span class="go">Open Sentinel <i>&rarr;</i></span>
+      </a>
+
+      <a class="ag rv" href="../keel/" style="--d:180ms">
+        <div class="tag"><span class="n">03 / GOVERN</span><span class="ro">Read-only</span></div>
+        <h3>Keel</h3>
+        <p class="verb">Governs how AI gets approved and who answers for it.</p>
+        <p>A named accountable person for every AI use, mapped to SM&amp;CR and FINMA expectations.</p>
+        <svg class="fig" viewBox="0 0 200 160" role="img" aria-label="Requests passing a gate that only opens when a named person approves">
+          <line class="fg2" x1="6" y1="96" x2="194" y2="96"/>
+          <line class="fg" x1="100" y1="58" x2="100" y2="110"/><line class="fg" x1="92" y1="58" x2="108" y2="58"/>
+          <g class="mv"><rect class="fa" x="10" y="86" width="16" height="10" rx="2"/></g>
+          <g transform="translate(100 38)"><circle class="fg" r="10"/><circle class="fk" cy="-3" r="3"/><path class="fg" d="M-6 6 Q0 0 6 6"/></g>
+          <path class="tick" d="M114 36 l5 5 l9 -11" fill="none" stroke="var(--acc)" stroke-width="2"/>
+          <text class="ft" x="100" y="136" text-anchor="middle">Named owner approves</text>
+        </svg>
+        <span class="go">Open Keel <i>&rarr;</i></span>
+      </a>
+    </div>
+
+    <div class="finding rv">
+      <div>
+        <p class="eyebrow" style="margin-bottom:18px">How honest the output is</p>
+        <h3>Every finding says how sure we are.</h3>
+        <p>Each finding is marked observed, declared, inferred or unknown. A guess never gets dressed up as a fact, and if nobody owns an AI tool yet, the finding says so.</p>
+        <div class="chips" id="chips" role="tablist" aria-label="Finding labels">
+          <button class="chip on" role="tab" aria-selected="true" data-n="Seen directly in the files we were given.">Observed</button>
+          <button class="chip" role="tab" aria-selected="false" data-n="Somebody told us. Nobody has checked it yet.">Declared</button>
+          <button class="chip" role="tab" aria-selected="false" data-n="We worked it out from other evidence. Treat it as a lead.">Inferred</button>
+          <button class="chip" role="tab" aria-selected="false" data-n="No evidence either way, and we say so.">Unknown</button>
+        </div>
+        <p class="chipnote" id="chipnote" aria-live="polite">Seen directly in the files we were given.</p>
       </div>
-      <div class="rl">Reports filed</div>
-      <div class="reps"><div class="rp" id="rp0"><div class="rw">Report from Soundings appears here</div></div><div class="rp" id="rp1"><div class="rw">Report from Sentinel appears here</div></div><div class="rp" id="rp2"><div class="rw">Report from Keel appears here</div></div></div>
-    </div></div><div class="base"></div></div>
-  </div>
-</section>
-
-<section class="h-sec dark" id="compare">
-  <div class="wrap">
-    <div class="reveal" style="text-align:center">
-      <p class="h-kicker">Antara and the alternatives</p>
-      <h2 class="h-h2" style="margin-left:auto;margin-right:auto">Why firms choose <span class="serif">Antara</span></h2>
-      <p class="h-lead" style="margin-left:auto;margin-right:auto">Most AI governance tools watch the technology. Antara answers the questions a board and a regulator actually ask.</p>
-    </div>
-    <div class="cmp" role="table" aria-label="Antara compared with typical AI governance platforms">
-      <div class="cmp-head" role="row"><div></div><div class="cmp-us">Antara</div><div class="cmp-them">Typical platforms</div></div>
-      <div class="cmp-row reveal"><div class="cmp-q">Who answers for each AI use</div><div class="cmp-us">A named accountable person for every AI use, mapped to SM&amp;CR and FINMA expectations</div><div class="cmp-them">A dashboard of tools with a risk score</div></div><div class="cmp-row reveal"><div class="cmp-q">Whether your people catch failures</div><div class="cmp-us">A measured human judgement test: accuracy and confidence under real AI errors</div><div class="cmp-them">Tests the model. Never tests the people</div></div><div class="cmp-row reveal"><div class="cmp-q">Time to first result</div><div class="cmp-us">Two weeks. Nothing to install, no integration project</div><div class="cmp-them">Months of integration and a platform licence</div></div><div class="cmp-row reveal"><div class="cmp-q">Your regulator</div><div class="cmp-us">UK and Swiss rules first: SM&amp;CR, Consumer Duty, FINMA</div><div class="cmp-them">Built around EU AI Act, NIST and ISO</div></div><div class="cmp-row reveal"><div class="cmp-q">How much you can trust a finding</div><div class="cmp-us">Every finding marked observed, declared, inferred or unknown</div><div class="cmp-them">One score built on partial data</div></div><div class="cmp-row reveal"><div class="cmp-q">Your data</div><div class="cmp-us">Exported files read on one machine. Nothing leaves your firm</div><div class="cmp-them">Standing access to your environment</div></div><div class="cmp-row reveal"><div class="cmp-q">What the board receives</div><div class="cmp-us">A board paper written by a named expert, refreshed every quarter</div><div class="cmp-them">A dashboard export</div></div><div class="cmp-row reveal"><div class="cmp-q">Independence</div><div class="cmp-us">Advice on which platform fits your gaps, with no platform of our own to sell</div><div class="cmp-them">Recommends its own product</div></div>
-    </div>
-    <div class="h-cta" style="text-align:center;margin-top:36px"><a class="h-btn solid" href="../contact/">Book a scoping call <span class="arr">&rarr;</span></a></div>
-  </div>
-</section>
-
-<section class="h-sec" id="architecture">
-  <div class="wrap">
-    <div class="reveal" style="text-align:center">
-      <p class="h-kicker">How they fit together</p>
-      <h2 class="h-h2" style="margin-left:auto;margin-right:auto">One system, <span class="serif">three parts</span></h2>
-      <p class="h-lead" style="margin-left:auto;margin-right:auto">Every action an AI takes passes six questions: who is acting, what it may do, what it uses, what it can cause, whether we can reconstruct it, and what should change. Keel sets the rules, Sentinel asks the hard questions and Soundings watches and feeds back. Click a step, or let it run.</p>
-    </div>
-
-    <div class="reveal" style="margin-top:38px">
-      <div class="cband keel">
-        <div class="side">PEOPLE<br>POLICY<br>ACCOUNTABILITY</div>
-        <div class="mid"><p class="role">Governance</p><h3>Keel</h3><p class="desc">Sets policy &middot; approves changes &middot; ensures accountability</p></div>
-        <div class="side">HUMAN JUDGEMENT<br>ORGANISATIONAL TRUST<br>RESPONSIBLE AI</div>
+      <div class="term beam" aria-label="Illustrative Soundings finding">
+        <div class="top"><span>Soundings &middot; sample finding</span><span>Illustrative</span></div>
+        <div><span class="k">tool</span> Meeting-notes assistant</div>
+        <div><span class="k">seen in</span> Browser extension export</div>
+        <div><span class="k">status</span> <span class="st ob">OBSERVED</span></div>
+        <div><span class="k">owner</span> none recorded</div>
+        <div><span class="k">data leaves</span> <span class="st un">UNKNOWN</span></div>
+        <div><span class="k">next</span> Name an accountable person<span class="cur"></span></div>
       </div>
-      <p class="arch-label">&darr; Governance over the chain &darr;</p>
-      <div class="chain" role="tablist" aria-label="The six-link security chain"><div class="chain-fill"></div><button class="node" role="tab" aria-selected="true"><span class="dot">01</span><span class="nm">Identity</span></button><button class="node" role="tab" aria-selected="false"><span class="dot">02</span><span class="nm">Authority</span></button><button class="node" role="tab" aria-selected="false"><span class="dot">03</span><span class="nm">Context</span></button><button class="node" role="tab" aria-selected="false"><span class="dot">04</span><span class="nm">Action</span></button><button class="node" role="tab" aria-selected="false"><span class="dot">05</span><span class="nm">Evidence</span></button><button class="node" role="tab" aria-selected="false"><span class="dot">06</span><span class="nm">Adaptation</span></button></div>
-      <div class="chain-detail"><div class="cd on" role="tabpanel"><div><h4>Identity</h4><p class="q">Who is acting?</p></div><ul><li>Human user</li><li>AI agent</li><li>Shared or delegated identity</li></ul><p class="close">Establish and verify identity for every action.</p></div><div class="cd" role="tabpanel"><div><h4>Authority</h4><p class="q">What is it authorised to do?</p></div><ul><li>Task-level authorisation</li><li>Least privilege by design</li><li>Approval workflows</li></ul><p class="close">Grant the minimum authority required.</p></div><div class="cd" role="tabpanel"><div><h4>Context</h4><p class="q">What does it use?</p></div><ul><li>Data sources and access</li><li>External information</li><li>Trust and data quality</li></ul><p class="close">Control what informs its decisions, and trust it.</p></div><div class="cd" role="tabpanel"><div><h4>Action &amp; Consequence</h4><p class="q">What can it cause?</p></div><ul><li>Read, write, execute</li><li>Ability to trigger other agents</li><li>Human in the loop, where needed</li></ul><p class="close">Restrict and monitor real-world impact.</p></div><div class="cd" role="tabpanel"><div><h4>Evidence</h4><p class="q">Can we reconstruct it?</p></div><ul><li>End-to-end audit logs</li><li>Decision inputs and outputs</li><li>Tamper-resistant records</li></ul><p class="close">Prove what happened, and why.</p></div><div class="cd" role="tabpanel"><div><h4>Adaptation</h4><p class="q">What should change?</p></div><ul><li>Incident and near-miss learning</li><li>Control recommendations</li><li>Evolving threat landscape</li></ul><p class="close">Learn from what happened and propose changes.</p></div></div>
-      <p class="arch-label">&uarr; Learning feedback loop: insights from evidence and adaptation inform stronger controls &uarr;</p>
-      <div class="cband soundings">
-        <div class="side">VISIBILITY<br>MONITORING<br>INSIGHTS</div>
-        <div class="mid"><p class="role">Observability &amp; Oversight</p><h3>Soundings</h3><p class="desc">Sees what is happening &middot; flags anomalies &middot; tracks change over time</p></div>
-        <div class="side">EARLY WARNINGS<br>CONTINUOUS INSIGHT<br>CONFIDENCE TO SCALE</div>
-      </div>
-      <div class="outcomes"><span>Reduced security incidents</span><span>Trusted AI adoption</span><span>Clear accountability</span><span>Regulatory confidence</span><span>Safe, scalable innovation</span></div>
-      <p class="principle"><b>Key principle:</b> Secure the chain from intelligence to action. And teach it to learn.</p>
     </div>
   </div>
 </section>
 
-<section class="h-sec">
+<section class="gs" id="gates" aria-label="How one AI action is checked">
   <div class="wrap">
-    <p class="h-kicker reveal">Configured to your regulator</p>
-    <h2 class="h-h2 reveal">One method. <span class="serif">Your market.</span></h2>
-    <div class="tabs" id="sxt"><button data-sx="uk" aria-pressed="true">United Kingdom</button><button data-sx="eu" aria-pressed="false">European Union</button></div>
-    <div class="pack" id="pack"><b>United Kingdom.</b> FCA and PRA expectations, SM&amp;CR, Consumer Duty, UK GDPR.</div>
-    <p class="free">Prefer to start smaller? Take a free assessment: <a href="../soundings/">Soundings</a><a href="../sentinel/">Sentinel</a><a href="../keel/">Keel</a></p>
+    <div class="gs-sticky">
+      <header class="gs-head">
+        <p class="eyebrow">The method</p>
+        <h2 class="h2">Every AI action passes <em>six questions.</em></h2>
+      </header>
+      <ol class="gs-steps" id="gsSteps">
+        <li class="rail" aria-hidden="true"><span id="gsRail"></span></li>
+        <li class="gs-step"><i>01</i><div><h3>Identity</h3><p>Who is acting? A human, an AI agent, or a shared and delegated login. We establish who, for every action.</p></div></li>
+        <li class="gs-step"><i>02</i><div><h3>Authority</h3><p>What may it do? Least privilege by design, with approval workflows for anything above the limit.</p></div></li>
+        <li class="gs-step"><i>03</i><div><h3>Context</h3><p>What does it use? The data it reads, the outside information it trusts, and how good that data is.</p></div></li>
+        <li class="gs-step"><i>04</i><div><h3>Action</h3><p>What can it cause? Read, write, execute, or trigger other agents. A person stays in the loop where it matters.</p></div></li>
+        <li class="gs-step"><i>05</i><div><h3>Evidence</h3><p>Can we reconstruct it? Inputs, outputs and the approver, in a record that cannot be quietly edited.</p></div></li>
+        <li class="gs-step"><i>06</i><div><h3>Adaptation</h3><p>What should change? Near-misses become control recommendations, and they go back to the start.</p></div></li>
+      </ol>
+      <div class="gs-stage">
+        <svg id="gsSvg" viewBox="0 0 700 330" role="img" aria-label="An AI action travels through six gates and the lesson loops back to the start">
+          <path id="gsLoop" class="lp" d="M640 190 Q668 190 668 164 L668 56 Q668 34 646 34 L54 34 Q32 34 32 56 L32 170"/>
+          <path class="lp on" d="M640 190 Q668 190 668 164 L668 56 Q668 34 646 34 L54 34 Q32 34 32 56 L32 170" pathLength="1"/>
+          <text class="gl" x="350" y="22" text-anchor="middle">What we learn goes back into the rules</text>
+          <line class="rl" x1="32" y1="190" x2="650" y2="190"/>
+          <g id="gsGates"></g>
+          <g id="gsPerson" class="person"><circle r="11"/><circle cy="-3" r="3.2"/><path d="M-6 6 Q0 0 6 6"/><path class="ok" d="M14 -10 l5 5 l9 -12"/></g>
+          <g id="gsPk" class="pk"><circle class="halo" r="16"/><circle class="core" r="9"/><g class="pill" transform="translate(16 -34)"><rect x="0" y="0" width="128" height="24" rx="12"/><text x="64" y="16" text-anchor="middle">refund £2,400</text></g></g>
+        </svg>
+        <div class="gs-card beam" id="gsCard" aria-live="polite">
+          <div class="gc-top"><span id="gcQ">Who is acting?</span><b id="gcS" class="chipS">Flag</b></div>
+          <p id="gcT">claims-agent-07, running on a shared login. Nobody can say which person started it.</p>
+          <small>Illustrative scenario. Scroll to move the action through the gates.</small>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="h-sec dark">
-  <div class="wrap" style="display:flex; gap:40px; flex-wrap:wrap; align-items:center; justify-content:space-between">
-    <div class="reveal" style="max-width:700px">
-      <h2 class="h-h2">Let&rsquo;s talk <span class="serif">deployment</span></h2>
-      <p class="h-lead">A fifteen-minute scoping conversation is enough to tell you what the agents would read, and what they would find.</p>
+<section class="sec" id="why-antara">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">Antara and the alternatives</p>
+      <h2 class="h2 rv">Most AI tools watch the technology. <em>We answer the questions a board asks.</em></h2>
     </div>
-    <a class="h-btn solid" href="../contact/">Discuss a deployment <span class="arr">&rarr;</span></a>
+    <div class="cmp">
+      <div class="row h"><span>The question</span><span>Antara</span><span>Most platforms</span></div>
+      <div class="row rv"><div class="q">Who answers for each AI use?</div><div class="a">A named accountable person for every use, mapped to SM&amp;CR and FINMA.</div><div class="t">A dashboard of tools with a risk score.</div></div>
+      <div class="row rv"><div class="q">Do your people catch the failures?</div><div class="a">A measured judgement test: accuracy and confidence when the AI gets it wrong.</div><div class="t">Tests the model. Never the people.</div></div>
+      <div class="row rv"><div class="q">How long to a first result?</div><div class="a">Two weeks. Nothing to install, no integration project.</div><div class="t">Months of integration and a licence.</div></div>
+      <div class="row rv"><div class="q">Whose rules come first?</div><div class="a">UK and Swiss: SM&amp;CR, Consumer Duty, FINMA.</div><div class="t">Built around the EU AI Act, NIST and ISO.</div></div>
+      <div class="row rv"><div class="q">Can you trust the advice?</div><div class="a">We have no platform of our own to sell.</div><div class="t">Recommends its own product.</div></div>
+    </div>
+    <p class="rv" style="margin-top:34px;display:flex;gap:22px;flex-wrap:wrap;align-items:center"><a class="btn solid" href="../contact/">Book a scoping call <span class="ar">&rarr;</span></a><a class="lnk" href="../use-cases/">Read the four engagements &rarr;</a></p>
+  </div>
+</section>
+
+<section class="sec" id="instruments" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">Free instruments</p>
+      <h2 class="h2 rv">Four short tests. <em>Each one tests you.</em></h2>
+      <p class="lede rv">No account needed. They measure what you do under pressure, and never ask how confident you feel.</p>
+    </div>
+    <div class="ins">
+      <a class="rv" href="../tools/bearing/">
+        <span class="for">Financial services</span><span class="nm">Bearing</span>
+        <span class="ds"><b>AI regulatory readiness</b>Four written answers, graded against what the regulator says good evidence looks like.</span>
+        <span class="tm">Free</span>
+        <svg class="gl2" viewBox="0 0 56 56" aria-hidden="true"><path class="g0" d="M8 40 A20 20 0 0 1 48 40"/><g class="needle"><line x1="28" y1="40" x2="28" y2="20"/></g><circle cx="28" cy="40" r="2.6" fill="currentColor"/></svg>
+      </a>
+      <a class="rv" href="../tools/squall/">
+        <span class="for">Banking and insurance</span><span class="nm">Squall</span>
+        <span class="ds"><b>Judgement under pressure</b>Six scenarios, 25 seconds each. Call each one genuine, fake, or escalate it.</span>
+        <span class="tm">Free</span>
+        <svg class="gl2" viewBox="0 0 56 56" aria-hidden="true"><circle class="g0" cx="28" cy="28" r="19"/><circle class="cd" cx="28" cy="28" r="19" transform="rotate(-90 28 28)"/><text x="28" y="33" text-anchor="middle">25</text></svg>
+      </a>
+      <a class="rv" href="../tools/ensign/">
+        <span class="for">Agencies and marketing</span><span class="nm">Ensign</span>
+        <span class="ds"><b>AI disclosure readiness</b>Six timed scenarios and one written answer on when AI-made content needs a label.</span>
+        <span class="tm">Free</span>
+        <svg class="gl2" viewBox="0 0 56 56" aria-hidden="true"><rect class="g0" x="9" y="18" width="38" height="22" rx="4"/><g class="lab"><rect x="14" y="23" width="20" height="12" rx="3"/><text x="24" y="32.5" text-anchor="middle">AI</text></g></svg>
+      </a>
+      <a class="rv" href="../halo/">
+        <span class="for">Leaders</span><span class="nm">HALO</span>
+        <span class="ds"><b>Your own practice, with AI in the room</b>A conversation with an AI interviewer who asks for specific, recent examples.</span>
+        <span class="tm">Free</span>
+        <svg class="gl2 wv" viewBox="0 0 56 56" aria-hidden="true"><line x1="10" y1="27" x2="10" y2="29"/><line x1="19" y1="27" x2="19" y2="29"/><line x1="28" y1="27" x2="28" y2="29"/><line x1="37" y1="27" x2="37" y2="29"/><line x1="46" y1="27" x2="46" y2="29"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec thread" id="thread" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow rv">One company, one idea</p>
+    <h2 class="h2 rv">The same question sits <em>in three places.</em></h2>
+    <div class="tri">
+      <a class="rv" href="../"><b>In the organisation</b><span>Who is accountable when AI acts? That is this page.</span></a>
+      <a class="rv" href="../wellness/" style="--d:80ms"><b>In the person</b><span>What does living next to intelligent machines do to us? That is Antara Wellness.</span></a>
+      <a class="rv" href="../pulse/" style="--d:160ms"><b>In the clinic</b><span>How does a specialist stay in charge of what the AI sees? That is Pulse.</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <h2 class="h2 rv">Fifteen minutes <em>to scope it.</em></h2>
+    <div class="row rv">
+      <a class="btn solid" href="../contact/">Book a scoping call <span class="ar">&rarr;</span></a>
+      <span class="mail">or write to <a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a></span>
+    </div>
   </div>
 </section>
 </main>
-
-<footer class="v2-foot">
-<div class="wrap">
-  <div class="foot-main">
-    <div>
-      <div class="brand">
-        <img src="../assets/logo.png" alt="Antara Innovations">
-        <span class="word">Antara <sup>Innovations</sup></span>
+<footer class="ft-w">
+  <div class="wrap">
+    <div class="ft-g">
+      <div>
+        <a class="brand" href="../"><svg class="mark" data-f="1" viewBox="0 0 26 26" aria-hidden="true"><circle class="ring" cx="13" cy="13" r="10"/><circle class="dot" cx="13" cy="3" r="3.2"/></svg>Antara<small>Innovations</small></a>
+        <small>Human Potential, Amplified.<br>&copy; <span id="yr">2026</span> Antara Innovations.</small>
       </div>
-      <small>&copy; <span id="yr"></span> Antara Innovations. Human Potential, Amplified.</small>
+      <div><h4>Work</h4><a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a><a href="../use-cases/">Use cases</a></div>
+      <div><h4>Journey</h4><a href="../wellness/">Antara Wellness</a><a href="../pulse/">Pulse</a><a href="../about/">About Abhinav Gaurav</a><a href="../newsletter/">The Awakened Intelligence</a></div>
+      <div><h4>Talk</h4><a href="../contact/">Send a message</a><a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
     </div>
-    <div class="foot-col"><h4>Work</h4>
-      <a href="../solutions/">Solutions</a><a href="../instruments/">Instruments</a><a href="../use-cases/">Use cases</a></div>
-    <div class="foot-col"><h4>Read</h4>
-      <a href="../newsletter/">The Awakened Intelligence</a><a href="../about/">About Abhinav Gaurav</a><a href="../wellness/">Antara Wellness</a><a href="../pulse/">PulseX</a></div>
-    <div class="foot-col"><h4>Talk</h4>
-      <a href="../contact/">Send a message</a><a href="mailto:hello@antara-innovations.com">hello@antara-innovations.com</a><a href="https://www.linkedin.com/in/abgaurav/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
-</div>
 </footer>
-
-<script src="../assets/motion.js"></script>
-<script src="../assets/v2.js"></script>
-<script src="../assets/solutions.js"></script>
+<script src="../assets/a3.js"></script>
 </body>
 </html>
