@@ -4,6 +4,8 @@
 "use strict";
 var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+/* the A inside the logo ring (Antara). Added here once so every page gets it. */
+$$('svg.mark').forEach(function(s){if(s.querySelector('.mA'))return;var t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('class','mA');t.setAttribute('x','13');t.setAttribute('y','17.1');t.setAttribute('text-anchor','middle');t.textContent='A';s.insertBefore(t,s.querySelector('.dot'))});
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 var clamp=function(v,a,b){a=a===undefined?0:a;b=b===undefined?1:b;return Math.min(b,Math.max(a,v))};
 var smooth=function(v){return v*v*(3-2*v)};
