@@ -13,6 +13,7 @@
 .brg{padding:44px 0 80px}
 .brg .wrap{max-width:900px}
 .brg section{padding:0}
+.brg .plans{padding:20px}
 .brg h1:focus,.brg .question:focus{outline:none}
 .brg h1{font-family:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif; font-weight:600; color:var(--navy); font-size:clamp(28px,4.2vw,42px); line-height:1.18; margin:0 0 20px; letter-spacing:-.01em; max-width:24ch}
 .brg h2{color:var(--navy); font-size:20px; margin:34px 0 12px}
