@@ -606,3 +606,13 @@ button{font:inherit}
 .bk:has(.bk-f[hidden]){grid-template-columns:1fr}
 #book{scroll-margin-top:90px}
 @media(max-width:1020px){.bk{grid-template-columns:1fr}.bk-f iframe{height:720px}}
+
+/* work list: sweep line, dimmed siblings, moving arrow */
+.wk{position:relative}
+.wk::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease)}
+.wk>*{transition:opacity .3s ease}
+.wk .go .ar{display:inline-block;transition:transform .35s var(--ease)}
+.wk:hover::after,.wk:focus-visible::after{transform:scaleX(1)}
+.wk:hover .go .ar,.wk:focus-visible .go .ar{transform:translateX(7px)}
+@media(hover:hover){.works:hover .wk:not(:hover)>*{opacity:.38}}
+@media(prefers-reduced-motion:reduce){.wk::after,.wk .go .ar,.wk>*{transition:none}}
