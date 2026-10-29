@@ -74,6 +74,7 @@ button{font:inherit}
 .mark{width:26px;height:26px;flex:none;overflow:visible}
 .mark .ring{fill:none;stroke:var(--ink);stroke-width:2}
 .mark .dot{fill:var(--acc);transform-origin:13px 13px;animation:orbit 9s linear infinite}
+.mark .mA{fill:var(--ink);font:700 11.5px var(--fh);letter-spacing:0}
 @keyframes orbit{to{transform:rotate(360deg)}}
 .nav{margin-left:auto;display:flex;align-items:center;gap:28px}
 .nav a.l{font:500 15px/1 var(--fb);color:var(--ink2);position:relative;padding:6px 0}
