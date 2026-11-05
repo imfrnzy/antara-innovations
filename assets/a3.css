@@ -362,7 +362,7 @@ button{font:inherit}
 }
 @media (max-width:820px){
   .burger{display:block}
-  .nav{position:fixed;inset:72px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--gut) 26px;transform:translateY(-130%);transition:transform .4s var(--ease)}
+  .nav{position:fixed;inset:72px 0 auto 0;max-height:calc(100vh - 72px);max-height:calc(100dvh - 72px);overflow-y:auto;overscroll-behavior:contain;flex-direction:column;align-items:flex-start;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--gut) 26px;transform:translateY(calc(-100% - 80px));transition:transform .4s var(--ease)}
   .nav.open{transform:none}
   .nav a.l{font:500 22px var(--fh);padding:14px 0;width:100%;border-bottom:1px solid var(--line2)}
   .nav .btn{margin-top:18px}.nav .tg{margin-top:14px}
@@ -617,3 +617,8 @@ button{font:inherit}
 .wk:hover .go .ar,.wk:focus-visible .go .ar{transform:translateX(7px)}
 @media(hover:hover){.works:hover .wk:not(:hover)>*{opacity:.38}}
 @media(prefers-reduced-motion:reduce){.wk::after,.wk .go .ar,.wk>*{transition:none}}
+
+/* printing: paper is white and browsers skip backgrounds, so print with the light colours even if dark is saved */
+@media print{
+  :root[data-theme="dark"]{--paper:#fff; --paper2:#fff; --card:#fff; --ink:#0F1C19; --ink2:#3F544E; --mute:#4D6159; --line:rgba(15,28,25,.25); --line2:rgba(15,28,25,.12); --acc:#8F5200; --acc-t:#8F5200; --on:#0F1C19; --onfg:#fff; color-scheme:light}
+}

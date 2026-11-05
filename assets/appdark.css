@@ -160,5 +160,12 @@ h2,h3{letter-spacing:-.02em}
 .tg .sun{display:none}
 :root[data-theme="dark"] .tg .moon{display:none}
 :root[data-theme="dark"] .tg .sun{display:block}
-@media(max-width:820px){.nav-links .tg{margin-top:16px}}
+@media(max-width:820px){.nav-links .tg{margin-top:16px}
+  /* short screens (phone on its side, 300%+ zoom): let the open menu scroll so the last items stay reachable */
+  .nav-links{max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain}}
 html.embedded .tg{display:none}
+
+/* printing: same idea, light colours on paper even if dark is saved */
+@media print{
+  :root[data-theme="dark"]{--ad-bg:#fff; --ad-bg-rgb:255,255,255; --ad-card:#fff; --ad-card2:#eee; --ad-ink:#0F1C19; --ad-ink2:#3F544E; --ad-ink-rgb:15,28,25; --ad-w-rgb:15,28,25; --ad-hi:#0F1C19; --ad-on:#0F1C19; --ad-onfg:#fff; --ad-acc:#8F5200; --ad-acc-t:#8F5200; --ad-acc-t2:#8F5200; --ad-faint:rgba(15,28,25,.72); color-scheme:light}
+}
