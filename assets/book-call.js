@@ -3,8 +3,8 @@
   if(!go||!box) return;
   var URL_='https://cal.com/antarainnovations/awaken';
   function theme(){
-    try{if(document.documentElement.getAttribute('data-theme')==='light') return 'light';}catch(e){}
-    return 'dark';
+    try{if(document.documentElement.getAttribute('data-theme')==='dark') return 'dark';}catch(e){}
+    return 'light';
   }
   function open(){
     if(box.firstChild) return;

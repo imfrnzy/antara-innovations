@@ -21,7 +21,7 @@ readCols();
 /* ---------- theme, nav, header, year ---------- */
 var tg=$('#tg');
 if(tg)tg.addEventListener('click',function(){
-  var next=root.getAttribute('data-theme')==='light'?'dark':'light';
+  var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
   root.setAttribute('data-theme',next);try{localStorage.setItem('antara-theme',next)}catch(e){}
   readCols();window.dispatchEvent(new Event('antara-theme'));
 });

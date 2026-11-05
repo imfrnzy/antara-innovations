@@ -3,27 +3,27 @@
    Rule that holds every page together: a dot is a person, a line is the machine. */
 
 :root{
-  /* dark is the default */
-  --paper:#0B1714; --paper2:#10201C; --card:#12211D;
-  --ink:#E4ECE8; --ink2:#AEC2BB; --mute:#86A097;
-  --line:rgba(228,236,232,.16); --line2:rgba(228,236,232,.08);
-  --acc:#FFB03A; --acc-t:#FFB03A; --acc-soft:rgba(255,176,58,.10);
-  --on:#E4ECE8; --onfg:#0B1714;
-  --term:#07100D; --termfg:#E4ECE8;
-  --fh:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif;
-  --fb:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --fm:'DM Mono',ui-monospace,Menlo,monospace;
-  --max:1200px; --gut:clamp(20px,4vw,48px); --ease:cubic-bezier(.2,.7,.2,1);
-  color-scheme:dark;
-}
-:root[data-theme="light"]{
+  /* light is the default */
   --paper:#E6ECE8; --paper2:#DCE4DF; --card:#F1F5F2;
   --ink:#0F1C19; --ink2:#3F544E; --mute:#5E746D;
   --line:rgba(15,28,25,.17); --line2:rgba(15,28,25,.08);
   --acc:#E8930C; --acc-t:#A86100; --acc-soft:rgba(232,147,12,.12);
   --on:#0F1C19; --onfg:#E6ECE8;
   --term:#0F1C19; --termfg:#E6ECE8;
+  --fh:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif;
+  --fb:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --fm:'DM Mono',ui-monospace,Menlo,monospace;
+  --max:1200px; --gut:clamp(20px,4vw,48px); --ease:cubic-bezier(.2,.7,.2,1);
   color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --paper:#0B1714; --paper2:#10201C; --card:#12211D;
+  --ink:#E4ECE8; --ink2:#AEC2BB; --mute:#86A097;
+  --line:rgba(228,236,232,.16); --line2:rgba(228,236,232,.08);
+  --acc:#FFB03A; --acc-t:#FFB03A; --acc-soft:rgba(255,176,58,.10);
+  --on:#E4ECE8; --onfg:#0B1714;
+  --term:#07100D; --termfg:#E4ECE8;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -85,9 +85,9 @@ button{font:inherit}
 .tg{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .2s;flex:none}
 .tg:hover{background:var(--paper2)}
 .tg svg{width:17px;height:17px}
-.tg .moon{display:none}
-:root[data-theme="light"] .tg .moon{display:block}
-:root[data-theme="light"] .tg .sun{display:none}
+.tg .sun{display:none}
+:root[data-theme="dark"] .tg .moon{display:none}
+:root[data-theme="dark"] .tg .sun{display:block}
 .burger{display:none;width:40px;height:40px;background:none;border:1px solid var(--line);border-radius:50%;color:var(--ink);cursor:pointer;margin-left:auto}
 .burger span{display:block;width:16px;height:1.5px;background:currentColor;margin:4px auto}
 
