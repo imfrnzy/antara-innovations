@@ -6,9 +6,10 @@
   --ad-bg:#E6ECE8; --ad-bg-rgb:230,236,232; --ad-card:#F1F5F2; --ad-card2:#DCE4DF;
   --ad-ink:#0F1C19; --ad-ink2:#3F544E; --ad-ink-rgb:15,28,25; --ad-w-rgb:15,28,25; --ad-hi:#0F1C19;
   --ad-on:#0F1C19; --ad-onfg:#E6ECE8;
-  --ad-acc:#E8930C; --ad-acc-rgb:232,147,12; --ad-acc-t:#A86100; --ad-acc-t2:#A86100;
+  --ad-acc:#E8930C; --ad-acc-rgb:232,147,12; --ad-acc-t:#8F5200; --ad-acc-t2:#8F5200;
   --ad-red:#B5432F; --ad-red-t:#A23B2B; --ad-red-rgb:196,80,62;
   --ad-grn:#2F7F55; --ad-grn-t:#1F6B45; --ad-grn-rgb:47,127,85;
+  --ad-faint:rgba(15,28,25,.72);
   --ad-shadow:0 10px 30px rgba(15,28,25,.10);
   color-scheme:light;
 }
@@ -19,6 +20,7 @@
   --ad-acc:#ffb03a; --ad-acc-rgb:255,176,58; --ad-acc-t:#ffb03a; --ad-acc-t2:#ffc56b;
   --ad-red:#F29A8B; --ad-red-t:#F6B6AA; --ad-red-rgb:242,154,139;
   --ad-grn:#7FD6A3; --ad-grn-t:#9BE3B8; --ad-grn-rgb:127,214,163;
+  --ad-faint:rgba(228,236,232,.5);
   --ad-shadow:0 10px 30px rgba(0,0,0,.35);
   color-scheme:dark;
 }
@@ -126,7 +128,7 @@ input:focus,select:focus,textarea:focus,.btn:focus-visible,.linkish:focus-visibl
 .foot-main{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px;padding:48px 0 56px}
 .foot-main .brand .word{color:var(--ad-hi);font-family:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif;font-size:19px;font-weight:600}
 .foot-main .brand .word sup{font-size:11px;font-weight:400}
-.foot-main small{display:block;margin-top:14px;font-size:12.5px;color:rgba(var(--ad-ink-rgb),.5);line-height:1.6}
+.foot-main small{display:block;margin-top:14px;font-size:12.5px;color:var(--ad-faint);line-height:1.6}
 .foot-col h4{margin:0 0 14px;font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ad-acc-t2)}
 .foot-col a{display:block;font-size:14px;color:rgba(var(--ad-ink-rgb),.78)!important;padding:8px 0;transition:color .2s}
 .foot-col a:hover{color:var(--ad-hi)!important}
@@ -147,6 +149,9 @@ h1,h2,h3,.brand .word{font-family:'Bricolage Grotesque','Hanken Grotesk',system-
 h2,h3{letter-spacing:-.02em}
 .nav-links .cta{background:var(--ad-on)!important;border-color:var(--ad-on)!important;color:var(--ad-onfg)!important}
 .nav-links .cta:hover{background:var(--ad-acc)!important;border-color:var(--ad-acc)!important}
+
+/* small accent text that tool pages colour with the fill accent */
+.roundcount{color:var(--ad-acc-t)}
 
 /* theme switch (added by assets/theme.js) */
 .tg{width:38px;height:38px;padding:0;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ad-ink);cursor:pointer;display:grid;place-items:center;flex:none;transition:background .2s}
