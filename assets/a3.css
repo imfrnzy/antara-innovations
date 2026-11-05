@@ -622,3 +622,6 @@ button{font:inherit}
 @media print{
   :root[data-theme="dark"]{--paper:#fff; --paper2:#fff; --card:#fff; --ink:#0F1C19; --ink2:#3F544E; --mute:#4D6159; --line:rgba(15,28,25,.25); --line2:rgba(15,28,25,.12); --acc:#8F5200; --acc-t:#8F5200; --on:#0F1C19; --onfg:#fff; color-scheme:light}
 }
+
+/* very narrow phones (e.g. Galaxy Fold 280px): stack the 5 awareness cells so the big numbers do not push the page sideways */
+@media(max-width:380px){.aware{grid-template-columns:1fr}}
