@@ -52,6 +52,25 @@ pre{background:var(--ink);color:var(--paper);padding:12px 14px;border-radius:8px
 .fl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.fl>*{width:auto;min-width:140px}
 .rep{display:flex;flex-direction:column;gap:8px}.rep h3{font-size:18px}.rep p{margin:0;color:var(--ink2);font-size:14px}
 @media(max-width:640px){main{padding:16px 14px 60px}.bars .nm{width:100px}.b2 .mono{margin-left:110px!important}}
+.rp h1{font-size:32px;margin-top:4px}.rp .kick{font:500 11px var(--fm);letter-spacing:1.5px;text-transform:uppercase;color:var(--ra)}.rp .big{font-size:19px;line-height:1.5;max-width:860px;margin:12px 0 20px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.kp>div{padding:14px 16px;border-right:1px solid var(--line2)}.kp b{display:block;font:600 28px var(--fh);line-height:1.15}.kp span{font-size:12.5px;color:var(--mute)}
+.cc{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card)}.cc:hover{border-color:var(--ink2)}.cc.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.chip{display:inline-block;font-size:11.5px;font-weight:600;border-radius:6px;padding:1px 7px;border:1px solid currentColor;margin:0 4px 3px 0}
+.pl3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.rpc{border-top:4px solid var(--acc)}.rc-cat{border-top-color:#0E7C86}.rc-map{border-top-color:#FF6B5E}.rc-card{border-top-color:#5B4BC4}.rc-led{border-top-color:#2E7D32}
+.so .tagx{display:inline-block;border:1px solid var(--line);background:var(--card);border-radius:6px;padding:2px 8px;font-size:13px;margin:0 6px 6px 0}.so .tagx b{color:#0E7C86;margin-left:4px}
+.catc{border:1px solid var(--line);border-left:5px solid #0E7C86;border-radius:10px;padding:14px 16px;background:var(--card)}
+.sx{background:#0A1220;color:#D8E3F0;border-radius:16px;padding:26px 24px;margin:-6px 0}.sx h1,.sx h2,.sx h3,.sx b{color:#fff}.sx .big{color:#D8E3F0}.sx .noprint .sm{background:#16233A;color:#D8E3F0;border-color:#2A3B58}
+.sx .hm{border-collapse:separate;border-spacing:3px}.sx .hm th{color:#8FA6C4;border-bottom:1px solid #22324D}.sx .hm td{border-bottom:0;padding:4px;vertical-align:middle}.sx .hm td:first-child{color:#D8E3F0}
+.hc{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:30px;border-radius:6px;font:600 13px var(--fm);color:#fff}.hc.high{background:#C62828}.hc.medium{background:#B26A00}.hc.low{background:#4F6586}.hc.z{background:#111C30}
+.sxp{border:1px solid #2A3B58;background:#0F1A2E;border-radius:10px;padding:12px 16px;margin-bottom:10px}.sxp p{margin:6px 0;color:#C2D0E4;font-size:14px}.sxp .fxs{color:#8EE6A0}.khi{color:#FF8A80;font-weight:700}
+.kcols{display:flex;gap:22px;flex-wrap:wrap}.kcol b{display:block;font:600 28px var(--fh)}.kcol small{font-size:15px;color:var(--mute)}.kcol span{font-size:12.5px;color:var(--mute)}
+.kt{text-align:center;width:90px}.kl td.kt span{font-size:18px;font-weight:700}.dots i{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--line);margin-right:3px}.dots i.on.lo2{background:var(--hi)}.dots i.on.mid{background:var(--md)}.dots i.on.full{background:var(--ok)}
+.rc .led{border:1px solid var(--ink);border-radius:4px;background:var(--card);padding:0 4px 4px}.rc .ledh{display:flex;justify-content:space-between;padding:12px 10px;border-bottom:3px double var(--ink);font-weight:600}.rc .num{text-align:right;font-family:var(--fm);font-variant-numeric:tabular-nums;white-space:nowrap}
+.rc tfoot td{border-top:3px double var(--ink);border-bottom:0;padding-top:12px}.bb{height:8px;background:var(--line2);border-radius:4px;margin:3px 0;overflow:hidden}.bb i{display:block;height:100%}.bb .c{background:var(--md)}.bb .g{background:var(--ok)}.kc,.kg{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 3px 0 8px}.kc{background:var(--md)}.kg{background:var(--ok)}
+@media print{.top,.noprint{display:none!important}main{padding:0;max-width:none}body{background:#fff}.sx{-webkit-print-color-adjust:exact;print-color-adjust:exact}tr.row{break-inside:avoid}}
+
 </style>
 </head>
 <body>
@@ -117,7 +136,7 @@ function shell(){
 }
 $('orgsel').onchange=function(){S.org=S.orgs.filter(function(o){return o.id===$('orgsel').value})[0];load()};
 $('out').onclick=function(){sb.auth.signOut().then(function(){S.session=null;authView()})};
-window.addEventListener('hashchange',function(){S.tab=(location.hash||'#overview').slice(1);S.open=null;if(S.tab==='clients'&&S.isOp){opLoad();return}if(S.data){if(!S.org){load();return}render()}});
+window.addEventListener('hashchange',function(){S.tab=(location.hash||'#overview').slice(1);S.open=null;S.rep=null;if(S.tab==='clients'&&S.isOp){opLoad();return}if(S.data){if(!S.org){load();return}render()}});
 
 function boot(){
   S.tab=(location.hash||'#overview').slice(1)||'overview';
@@ -131,19 +150,13 @@ function load(){
 /* ---------- numbers ---------- */
 function stats(){
   var d=S.data,open=d.findings.filter(function(f){return f.status==='open'&&f.severity!=='info'});
-  var c={high:0,medium:0,low:0};open.forEach(function(f){c[f.severity]++});
+  var g=groups(open),c={high:0,medium:0,low:0};g.forEach(function(x){c[x.sev]++});
   var wk=Date.now()-7*DAY;
   var fresh=d.devices.filter(function(x){return x.status==='active'&&x.last_seen&&Date.now()-new Date(x.last_seen).getTime()<3*DAY}).length;
-  return{open:open,c:c,fresh:fresh,active:d.devices.filter(function(x){return x.status==='active'}).length,
+  return{open:open,g:g,c:c,fresh:fresh,active:d.devices.filter(function(x){return x.status==='active'}).length,
     newWk:d.findings.filter(function(f){return f.severity!=='info'&&new Date(f.first_seen).getTime()>wk}).length,
     fixedWk:d.findings.filter(function(f){return f.status==='fixed'&&f.resolved_at&&new Date(f.resolved_at).getTime()>wk}).length};
 }
-function groups(list){
-  var m={};list.forEach(function(f){var k=(f.check_id||'x');var g=m[k]||(m[k]={key:k,module:f.module,sev:f.severity,title:f.title,detail:f.detail,devs:{},n:0,rank:0});g.devs[f.device_id]=1;g.n++;if({high:3,medium:2,low:1,info:0}[f.severity]>{high:3,medium:2,low:1,info:0}[g.sev])g.sev=f.severity})
-  return Object.keys(m).map(function(k){var g=m[k];g.devices=Object.keys(g.devs).length;return g}).sort(function(a,b){var r={high:3,medium:2,low:1,info:0};return r[b.sev]-r[a.sev]||b.devices-a.devices})
-}
-function bu(f){return f.business_unit||'Unassigned'}
-
 /* ---------- views ---------- */
 function vOverview(){
   var d=S.data,s=stats();
@@ -151,14 +164,14 @@ function vOverview(){
   var units={};s.open.forEach(function(f){var u=bu(f);units[u]=units[u]||{high:0,medium:0,low:0};units[u][f.severity]++});
   var us=Object.keys(units).sort(function(a,b){return(units[b].high*3+units[b].medium)-(units[a].high*3+units[a].medium)}),mx=Math.max.apply(null,us.map(function(u){return units[u].high*3+units[u].medium*1.5+units[u].low*.5}).concat([1]));
   var bars=us.map(function(u){var x=units[u],t=x.high*3+x.medium*1.5+x.low*.5;return '<div class="b2"><div class="r"><span class="nm">'+esc(u)+'</span><span class="tr"><span style="display:flex;width:'+Math.max(6,t/mx*100)+'%;height:100%"><i style="background:var(--hi);flex:'+x.high*3+'"></i><i style="background:var(--md);flex:'+x.medium*1.5+'"></i><i style="background:var(--lo);flex:'+x.low*.5+'"></i></span></span></div><div class="mono" style="color:var(--mute);margin-left:160px">'+x.high+' high · '+x.medium+' medium · '+x.low+' low</div></div>'}).join('')||'<div class="empty">Nothing open.</div>';
-  var top=groups(s.open).slice(0,6).map(function(g){var p=split(g.detail);return '<tr><td>'+pill(g.sev)+'</td><td><b>'+esc(g.title)+'</b><div style="color:var(--mute);font-size:13px">'+esc(p.fix||p.why)+'</div></td><td class="mono">'+g.devices+' computer'+(g.devices>1?'s':'')+'</td></tr>'}).join('');
+  var gg=s.g,hg=gg.filter(function(x){return x.sev==='high'}),more=Math.max(0,hg.length-8),top=hg.slice(0,8).concat(hg.length<8?gg.filter(function(x){return x.sev!=='high'}).slice(0,Math.min(3,8-hg.length)):[]).map(function(g){var p=split(g.detail);return '<tr><td>'+pill(g.sev)+'</td><td><b>'+esc(g.title)+'</b><div style="color:var(--mute);font-size:13px">'+esc(p.fix||p.why)+'</div></td><td class="mono">'+g.devices+' computer'+(g.devices>1?'s':'')+'</td></tr>'}).join('');
   var stale=s.active-s.fresh;
   return '<div class="grid g4"><div class="card stat"><div class="n">'+s.fresh+'<span style="font-size:20px;color:var(--mute)"> / '+s.active+'</span></div><div class="l">computers reporting in the last 3 days'+(stale?' · '+stale+' gone quiet':'')+'</div></div>'+
-   '<div class="card stat"><div class="n">'+d.agents.length+'</div><div class="l">AI agents found</div></div>'+
-   '<div class="card stat"><div class="n"><span class="hi">'+s.c.high+'</span> <span class="md">'+s.c.medium+'</span> <span class="lo">'+s.c.low+'</span></div><div class="l">open: high, medium, low</div></div>'+
-   '<div class="card stat"><div class="n">'+s.newWk+' <span style="font-size:20px;color:var(--mute)">new</span></div><div class="l">in the last 7 days · '+s.fixedWk+' fixed</div></div></div>'+
+   '<div class="card stat"><div class="n">'+model().ag.length+'</div><div class="l">AI agents found</div></div>'+
+   '<div class="card stat"><div class="n"><span class="hi">'+s.c.high+'</span> <span class="md">'+s.c.medium+'</span> <span class="lo">'+s.c.low+'</span></div><div class="l">open problems: high, medium, low</div></div>'+
+   '<div class="card stat"><div class="n">'+s.newWk+' <span style="font-size:20px;color:var(--mute)">new</span></div><div class="l">findings in the last 7 days · '+s.fixedWk+' fixed</div></div></div>'+
    '<div class="grid g2" style="margin-top:14px"><div class="card"><h3>Where the risk sits</h3><p class="lead" style="margin:4px 0 10px">By business unit. Red counts most.</p><div class="bars">'+bars+'</div></div>'+
-   '<div class="card"><h3>What to fix first</h3><p class="lead" style="margin:4px 0 6px">The same problem on many computers is one fix.</p><div class="tw"><table><tbody>'+(top||'<tr><td class="empty">Nothing open.</td></tr>')+'</tbody></table></div><div style="margin-top:12px"><a class="btn sm" href="#findings">See all findings</a> <a class="btn sm pri" href="#reports">Board briefing</a></div></div></div>';
+   '<div class="card"><h3>What to fix first</h3><p class="lead" style="margin:4px 0 6px">'+s.c.high+' high, '+s.c.medium+' medium, '+s.c.low+' low. The same problem on many computers is one fix.</p><div class="tw"><table><tbody>'+(top||'<tr><td class="empty">Nothing open.</td></tr>')+'</tbody></table></div>'+(more?'<p class="mono" style="margin:10px 0 0;color:var(--hi)">+ '+more+' more high problems. See all findings.</p>':'')+'<div style="margin-top:12px"><a class="btn sm" href="#findings">See all findings</a> <a class="btn sm pri" href="#reports">Reports</a></div></div></div>';
 }
 function vComputers(){
   var d=S.data,ed=S.org.role!=='viewer';
@@ -180,14 +193,8 @@ function vFindings(){
     (o?'<tr class="det"><td colspan="6"><p style="margin:0 0 8px">'+esc(p.claim)+'</p>'+(p.why?'<p style="margin:0 0 8px"><b>Why it matters.</b> '+esc(p.why)+'</p>':'')+(p.fix?'<p style="margin:0 0 12px"><b>What to do.</b> '+esc(p.fix)+'</p>':'')+
      '<div class="mono" style="color:var(--mute)">First seen '+ago(x.first_seen)+' · last seen '+ago(x.last_seen)+'</div>'+
      (ed?'<div class="fl" style="margin-top:12px"><input id="fo" placeholder="Owner (name)" value="'+esc(x.owner||'')+'" style="max-width:220px"><select id="fs"><option value="open"'+(x.status==='open'?' selected':'')+'>Open</option><option value="accepted"'+(x.status==='accepted'?' selected':'')+'>Risk accepted</option><option value="fixed"'+(x.status==='fixed'?' selected':'')+'>Fixed</option></select><button class="sm pri" data-save="'+esc(x.id)+'">Save</button></div>':'')+'</td></tr>':'')}).join('');
-  return '<div class="fl">'+sel('fsev',[['','All severities'],['high','High'],['medium','Medium'],['low','Low']],f.sev)+sel('fst',[['','Any status'],['open','Open'],['accepted','Risk accepted'],['fixed','Fixed']],f.st)+sel('fmod',[['','All areas'],['discover','Soundings'],['secure','Sentinel'],['govern','Keel'],['economics','Reckoning']],f.mod)+'<input id="fq" placeholder="Search" value="'+esc(f.q)+'" style="min-width:200px"><span class="mono" style="align-self:center;color:var(--mute)">'+L.length+' shown</span></div>'+
+  return '<div class="fl">'+sel('fsev',[['','All severities'],['high','High'],['medium','Medium'],['low','Low']],f.sev)+sel('fst',[['','Any status'],['open','Open'],['accepted','Risk accepted'],['fixed','Fixed']],f.st)+sel('fmod',[['','All areas'],['discover','Soundings'],['secure','Sentinel'],['govern','Keel'],['economics','Reckoning']],f.mod)+'<input id="fq" placeholder="Search" value="'+esc(f.q)+'" style="min-width:200px"><span class="mono" style="align-self:center;color:var(--mute)">'+L.length+' findings shown (one per computer)</span></div>'+
    (L.length?'<div class="card tw"><table><thead><tr><th>Level</th><th>What</th><th>Where</th><th>Area</th><th>Status</th><th>Owner</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="card empty">Nothing matches.</div>');
-}
-function vReports(){
-  var cards=[['board','Board briefing','The whole picture in plain words: where the risk sits, what to fix first, a 30, 60 and 90 day plan, and what changed. Print it or save as PDF.',null]];
-  Object.keys(MODS).forEach(function(k){cards.push([k,MODS[k][0]+': '+MODS[k][1],'Only the findings in this area, in the same board style.',k])});
-  cards.push(['csv-f','Findings register (CSV)','Every finding with owner, status and dates, to open in Excel.',null],['csv-a','AI inventory (CSV)','Every AI agent found, where, with which model, tools and keys.',null]);
-  return '<p class="lead">Reports build from what your computers have reported, so they are always current.</p><div class="grid g4" style="margin-top:14px">'+cards.map(function(c){return '<div class="card rep"><h3>'+esc(c[1])+'</h3><p>'+esc(c[2])+'</p><div><button class="pri sm" data-rep="'+c[0]+'">'+(c[0].indexOf('csv')===0?'Download':'Open report')+'</button></div></div>'}).join('')+'</div>';
 }
 function vAdd(){
   var ed=S.org.role!=='viewer';if(!ed)return '<div class="card empty">Only an owner or admin can add computers.</div>';
@@ -220,6 +227,11 @@ function wire(){
   q('[data-rev]',function(b){b.onclick=function(){if(confirm('Revoke this computer? It stops reporting.'))api('revoke_device',{device_id:b.dataset.rev}).then(function(){S.audit=null;load()})}});
   q('[data-rt]',function(b){b.onclick=function(){api('revoke_token',{token_id:b.dataset.rt}).then(function(){load()})}});
   q('[data-rep]',function(b){b.onclick=function(){report(b.dataset.rep)}});
+  q('[data-back]',function(b){b.onclick=function(){S.rep=null;render();window.scrollTo(0,0)}});
+  q('[data-rxc]',function(b){b.onclick=function(){S.rx.cat=S.rx.cat===b.dataset.rxc?null:b.dataset.rxc;render()}});
+  q('[data-rxa]',function(b){b.onclick=function(){S.rx.agent=S.rx.agent===b.dataset.rxa?null:b.dataset.rxa;render()}});
+  q('[data-rxf]',function(b){b.onclick=function(){S.rx.f=b.dataset.rxf;S.rx.agent=null;render()}});
+  var pr=$('prt');if(pr)pr.onclick=function(){window.print()};
   ['fsev','fst','fmod'].forEach(function(id){var e=$(id);if(e)e.onchange=function(){S.filt[{fsev:'sev',fst:'st',fmod:'mod'}[id]]=e.value;render()}});
   var fq=$('fq');if(fq){fq.onchange=function(){S.filt.q=fq.value;render()};fq.onkeydown=function(e){if(e.key==='Enter'){S.filt.q=fq.value;render()}}}
   var mt=$('mt');if(mt)mt.onclick=function(){api('create_enrol_token',{label:$('tl').value,business_unit:$('tb').value,days:+$('td').value,max_uses:+$('tm').value}).then(function(r){S.newToken=r.token;S.audit=null;return api('overview')}).then(function(d){S.data=d;render()}).catch(function(e){$('te').textContent=e.message})};
@@ -230,10 +242,15 @@ function wire(){
 function opLoad(){$('app').innerHTML='<div class="empty">Loading...</div>';api('op_clients').then(function(c){S.clients=c.clients;S.data=null;S.org=null;opRender()}).catch(function(e){$('app').innerHTML='<div class="empty err">'+esc(e.message)+'</div>'})}
 function opRender(){
   $('who').textContent=(S.email||'')+' · operator';$('out').style.display='';$('orgsel').style.display='none';$('tabs').style.display='';$('tabs').innerHTML='<a href="#clients" class="on">All clients</a>';
-  var rows=(S.clients||[]).map(function(c){return '<tr><td><b>'+esc(c.name)+'</b>'+(c.waiting?'<div class="mono" style="color:var(--mute)">waiting to sign up: '+esc(c.waiting)+'</div>':'')+'</td><td>'+c.computers+'</td><td class="'+(c.high?'hi':'')+'">'+c.high+'</td><td>'+c.people+'</td><td>'+ago(c.last_seen)+'</td><td><button class="sm" data-open="'+esc(c.id)+'">Open</button> <button class="sm" data-ap="'+esc(c.id)+'">Add person</button></td></tr>'}).join('');
+  var rows=(S.clients||[]).map(function(c){return '<tr><td><b>'+esc(c.name)+'</b>'+(c.waiting?'<div class="mono" style="color:var(--mute)">waiting to sign up: '+esc(c.waiting)+'</div>':'')+'</td><td>'+c.computers+'</td><td class="'+(c.high?'hi':'')+'">'+c.high+'</td><td>'+c.people+'</td><td>'+ago(c.last_seen)+'</td><td style="font-size:13px">'+((c.products||[]).map(function(p){return esc(p)}).join(', ')||'<span style="color:var(--mute)">none</span>')+'</td><td><button class="sm" data-open="'+esc(c.id)+'">Open</button> <button class="sm" data-pr="'+esc(c.id)+'">Reports</button> <button class="sm" data-ap="'+esc(c.id)+'">Add person</button></td></tr>'}).join('');
   $('app').innerHTML='<h1 style="font-size:30px;margin-bottom:4px">Your clients</h1><p class="lead" style="margin:0 0 18px">One workspace per client. A client only ever sees their own.</p>'+
    '<div class="card" style="margin-bottom:14px"><h3>New client</h3><p class="lead" style="margin:4px 0 8px">Type the client\'s name and the work email of the person in charge on their side. Tell them to open this portal and create an account with that email. They land in their own workspace, and nobody else sees it.</p><div class="fl"><input id="cn" placeholder="Client name" style="min-width:240px"><input id="cm" type="email" placeholder="Their email" style="min-width:260px"><button class="pri" id="cc">Create client</button></div><div class="err" id="ce"></div><div id="cr"></div></div>'+
-   (rows?'<div class="card tw"><table><thead><tr><th>Client</th><th>Computers</th><th>High findings</th><th>People</th><th>Last report</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="card empty">No clients yet. Create the first one above.</div>');
+   '<div id="pp"></div>'+(rows?'<div class="card tw"><table><thead><tr><th>Client</th><th>Computers</th><th>High findings</th><th>People</th><th>Last report</th><th>Reports paid for</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="card empty">No clients yet. Create the first one above.</div>');
+  var ppanel=function(id){var c=S.clients.filter(function(x){return x.id===id})[0],have=c.products||[];
+    $('pp').innerHTML='<div class="card" style="margin-bottom:14px;border-color:var(--acc)"><h3>Reports for '+esc(c.name)+'</h3><p class="lead" style="margin:4px 0 8px">Tick what this client has paid for. They only see those reports, and only the findings that belong to them. Untick to switch one off.</p>'+PRODS.map(function(p){return '<label style="display:inline-flex;gap:6px;align-items:center;margin:4px 18px 4px 0;font-weight:500;color:var(--ink)"><input type="checkbox" style="width:auto" value="'+p[0]+'"'+(have.indexOf(p[0])>=0?' checked':'')+'> '+esc(p[1])+'</label>'}).join('')+'<div style="margin-top:10px"><button class="pri sm" id="ps">Save</button> <button class="sm" id="pc">Cancel</button></div><div class="err" id="pe2"></div></div>';
+    $('pc').onclick=function(){$('pp').innerHTML=''};
+    $('ps').onclick=function(){var v=[].slice.call($('pp').querySelectorAll('input:checked')).map(function(i){return i.value});api('op_set_products',{org_id:id,products:v}).then(function(){return api('op_clients')}).then(function(r){S.clients=r.clients;opRender()}).catch(function(e){$('pe2').textContent=e.message})}};
+  Array.prototype.forEach.call(document.querySelectorAll('[data-pr]'),function(b){b.onclick=function(){ppanel(b.dataset.pr)}});
   var ok=function(m){$('cr').innerHTML='<p style="margin:12px 0 0"><b>Done.</b> '+m+'</p>'};
   $('cc').onclick=function(){$('ce').textContent='';api('op_create_client',{name:$('cn').value,email:$('cm').value}).then(function(r){ok(esc(r.org.name)+' is set up. Tell '+esc(r.email)+' to open this portal and create an account with that email.');var keep=$('cr').innerHTML;return api('op_clients').then(function(c){S.clients=c.clients;opRender();$('cr').innerHTML=keep})}).catch(function(e){$('ce').textContent=e.message})};
   Array.prototype.forEach.call(document.querySelectorAll('[data-ap]'),function(b){b.onclick=function(){var m=window.prompt('Email of the person to add to this client:');if(!m)return;api('op_add_person',{org_id:b.dataset.ap,email:m}).then(function(){return api('op_clients')}).then(function(c){S.clients=c.clients;opRender()}).catch(function(e){alert(e.message)})}});
@@ -241,47 +258,171 @@ function opRender(){
 }
 function opLoadQuiet(){api('op_clients').then(function(c){S.clients=c.clients;var keep=$('cr').innerHTML;opRender();$('cr').innerHTML=keep})}
 
-/* ---------- reports ---------- */
+/* ---------- shared numbers for every report ---------- */
+var SEVR={high:3,medium:2,low:1,info:0};
+var rk=function(s){return SEVR[s]==null?-1:SEVR[s]};
+var CATS={security:['Security','Data or systems someone could reach through these agents.'],compliance:['Compliance','Rules, regulators or contracts these agents may break.'],governance:['Governance','Nobody clearly answerable for the agent, or no record of who approved it.'],commercial:['Commercial','Money spent or lost with nothing to show for it.']};
+var PRODS=[
+ ['executive','Executive briefing','For the COO and the board. Every AI agent, which are high risk and why, who owns them, what each one costs and earns, and a 30, 60 and 90 day plan per agent. Click through to the detail.','exec'],
+ ['soundings','Soundings: AI catalogue','A catalogue of every AI agent we found: what it is built with, which model, where it runs, who owns it, and the ones no register lists.','cat'],
+ ['sentinel','Sentinel: exposure map','A grid of where the security problems sit, by type of problem and by business unit, plus the agents holding keys.','map'],
+ ['keel','Keel: accountability scorecard','Each agent scored on owner, tier, business case, register entry and human sign-off. Shows who is answerable and who is not.','card'],
+ ['reckoning','Reckoning: cost and return','A statement of what the agents cost, what they earn, the net, the payback, and where money is leaking.','led']];
+function CUR(){var a=S.data.agents.filter(function(x){return x.currency})[0]||S.data.findings.filter(function(x){return x.currency})[0];return a?a.currency:'GBP'}
+function money(n,cur){if(n==null||isNaN(n))return '-';cur=cur||CUR();var a=Math.abs(n);try{return new Intl.NumberFormat('en-GB',{style:'currency',currency:cur,maximumFractionDigits:a<100?2:0}).format(n)}catch(e){return Math.round(n)+' '+cur}}
+function pkey(f){return(f.check_id||'x')+'|'+String(f.title||'').replace(/\d+/g,'#')}
+function lead(t){var m=/^(\d+)/.exec(t||'');return m?+m[1]:0}
+function groups(list){
+  var m={};list.forEach(function(f){var k=pkey(f),g=m[k];
+    if(!g)g=m[k]={key:k,check:f.check_id,module:f.module,cat:f.category||'governance',sev:f.severity,title:f.title,detail:f.detail,devs:{},us:{},refs:{},waste:0,note:'',n:0};
+    g.devs[f.device_id]=1;var u=bu(f);(g.us[u]=g.us[u]||{})[f.device_id]=1;g.n++;(f.agent_refs||[]).forEach(function(r){g.refs[r]=1});
+    if(f.waste)g.waste+=+f.waste;if(f.waste_note&&!g.note)g.note=f.waste_note;
+    if(rk(f.severity)>rk(g.sev))g.sev=f.severity;if(lead(f.title)>lead(g.title)){g.title=f.title;g.detail=f.detail}});
+  return Object.keys(m).map(function(k){var g=m[k];g.devices=Object.keys(g.devs).length;g.refList=Object.keys(g.refs);return g}).sort(function(a,b){return rk(b.sev)-rk(a.sev)||b.devices-a.devices})
+}
+function bu(f){return f.business_unit||'Unassigned'}
+function model(){
+  var d=S.data,open=d.findings.filter(function(f){return f.status==='open'&&f.severity!=='info'}),g=groups(open),m={};
+  d.agents.forEach(function(a){var k=a.agent_ref||(a.name+'|'+(a.platform||'')),u=m[k];
+    if(!u)u=m[k]=Object.assign({},a,{key:k,hosts:[],units:[],creds:0,tools:0});
+    if(u.hosts.indexOf(a.hostname)<0)u.hosts.push(a.hostname);if(u.units.indexOf(bu(a))<0)u.units.push(bu(a));
+    u.creds=Math.max(u.creds,a.credential_count||0);u.tools=Math.max(u.tools,a.tool_count||0);if(!u.owner&&a.owner)u.owner=a.owner;if(!u.dept&&a.dept)u.dept=a.dept;
+    ['benefit_pm','run_cost_pm','build_cost','payback_months'].forEach(function(c){if(u[c]==null&&a[c]!=null)u[c]=a[c]});if(!u.case_name&&a.case_name)u.case_name=a.case_name});
+  var ag=Object.keys(m).map(function(k){return m[k]}),byRef={};
+  ag.forEach(function(a){byRef[a.agent_ref||a.key]=a;
+    a.gs=g.filter(function(x){return a.agent_ref&&x.refList.indexOf(a.agent_ref)>=0});
+    a.risk=a.gs.reduce(function(r,x){return rk(x.sev)>rk(r)?x.sev:r},'none');
+    a.cat={};Object.keys(CATS).forEach(function(c){var L=a.gs.filter(function(x){return x.cat===c});a.cat[c]={n:L.length,sev:L.reduce(function(r,x){return rk(x.sev)>rk(r)?x.sev:r},'none')}});
+    a.waste=a.gs.reduce(function(n,x){return n+(x.cat==='commercial'?x.waste:0)},0);
+    a.net=(a.benefit_pm!=null&&a.run_cost_pm!=null)?a.benefit_pm-a.run_cost_pm:null});
+  var nd={};open.forEach(function(f){nd[f.device_id]=1});
+  var cost=0,ben=0,cased=0;ag.forEach(function(a){if(a.run_cost_pm!=null)cost+=a.run_cost_pm;if(a.benefit_pm!=null){ben+=a.benefit_pm;cased++}});
+  return{g:g,ag:ag,byRef:byRef,cur:CUR(),nd:Object.keys(nd).length,devs:d.devices.filter(function(x){return x.status==='active'}).length,cost:cost,ben:ben,cased:cased,waste:g.reduce(function(n,x){return n+(x.cat==='commercial'?x.waste:0)},0),
+    c:{high:g.filter(function(x){return x.sev==='high'}).length,medium:g.filter(function(x){return x.sev==='medium'}).length,low:g.filter(function(x){return x.sev==='low'}).length}}
+}
+function nm(M,r){var a=M.byRef[r];return a?a.name:r}
+function who(a){return a.owner?esc(a.owner):'<span class="hi">No owner</span>'}
+function fn(a){return a.dept||a.platform||'Unassigned'}
+function plan(a){
+  var p={d30:[],d60:[],d90:[]};
+  if(!a.owner)p.d30.push({t:'Name an owner',fix:'Give '+a.name+' one named person who answers for it.'});
+  a.gs.forEach(function(x){var s=split(x.detail),it={t:x.title,fix:s.fix||s.why};if(x.sev==='high')p.d30.push(it);else if(x.sev==='medium')p.d60.push(it);else p.d90.push(it)});
+  if(a.benefit_pm==null)p.d90.push({t:'Record what it earns',fix:'No business case is recorded for '+a.name+'. Write down what it is meant to save or earn, so its cost can be judged.'});
+  return p
+}
+function rpHead(kick,title,sub){return '<div class="noprint" style="display:flex;gap:8px;margin-bottom:14px"><button class="sm" data-back="1">&larr; All reports</button><button class="sm" id="prt">Print or save as PDF</button></div><div class="kick">'+kick+'</div><h1>'+esc(title)+'</h1><div class="m" style="color:var(--mute);margin-top:2px">'+esc(S.data.org.name)+' &middot; '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'</div>'+(sub?'<p class="big">'+sub+'</p>':'')}
+function ch(sev,t){return '<span class="chip '+SEVC[sev]+'">'+t+'</span>'}
+function planCols(p){var col=function(t,s,L){return '<div class="card" style="padding:12px 14px"><b>'+t+'</b> <span class="mono" style="color:var(--mute)">'+s+'</span>'+(L.length?'<ul style="margin:8px 0 0;padding-left:18px">'+L.map(function(x){return '<li style="margin-bottom:6px"><b>'+esc(x.t)+'</b>'+(x.fix?'<div style="color:var(--ink2);font-size:13.5px">'+esc(x.fix)+'</div>':'')+'</li>'}).join('')+'</ul>':'<p class="mono" style="color:var(--mute);margin:8px 0 0">Nothing to do.</p>')+'</div>'};return '<div class="pl3">'+col('First 30 days','high',p.d30)+col('By 60 days','medium',p.d60)+col('By 90 days','low',p.d90)+'</div>'}
+
+/* ---------- 1. Executive briefing (COO) ---------- */
+function rExec(M){
+  var ag=M.ag,hi=ag.filter(function(a){return a.risk==='high'}),F=S.rx.f||'high',X=S.rx;
+  var net=M.ben-M.cost;
+  var head=!ag.length?'No AI agents have reported in yet.':'<b>'+ag.length+' AI agents</b> are running across '+M.devs+' computers. <b class="hi">'+hi.length+' are high risk.</b>'+(M.waste>0?' About <b>'+money(M.waste,M.cur)+'</b> has been spent where it did not need to be.':'')+(ag.length-M.cased>0?' '+(ag.length-M.cased)+' have no business case, so nobody can say what they earn.':'');
+  var kp='<div class="kp"><div><b>'+ag.length+'</b><span>AI agents</span></div><div><b class="hi">'+hi.length+'</b><span>high-risk agents</span></div><div><b>'+M.c.high+'</b><span>high problems to fix</span></div><div><b>'+money(M.cost,M.cur)+'</b><span>run cost a month</span></div><div><b>'+(M.cased?money(M.ben,M.cur):'-')+'</b><span>benefit claimed a month</span></div><div><b class="'+(net<0?'hi':'ok')+'">'+(M.cased?money(net,M.cur):'-')+'</b><span>net a month</span></div></div>';
+  var cc=Object.keys(CATS).map(function(c){var L=M.g.filter(function(x){return x.cat===c}),refs={};L.forEach(function(x){x.refList.forEach(function(r){refs[r]=1})});
+    var hh=L.filter(function(x){return x.sev==='high'}).length,mm=L.filter(function(x){return x.sev==='medium'}).length,ll=L.filter(function(x){return x.sev==='low'}).length,w=L.reduce(function(n,x){return n+x.waste},0);
+    return '<div class="cc'+(X.cat===c?' on':'')+'" data-rxc="'+c+'"><div class="mono" style="color:var(--mute);text-transform:uppercase;letter-spacing:1px">'+CATS[c][0]+' impact</div><div style="font:600 30px var(--fh);margin:4px 0">'+(L.length?'<span class="hi">'+hh+'</span> <span class="md">'+mm+'</span> <span class="lo">'+ll+'</span>':'<span class="ok">None</span>')+'</div><div style="font-size:13px;color:var(--ink2)">'+CATS[c][1]+'</div><div class="mono" style="margin-top:8px;color:var(--mute)">'+Object.keys(refs).length+' agents touched'+(w>0?' &middot; '+money(w,M.cur)+' wasted':'')+'</div></div>'}).join('');
+  var catDrill='';if(X.cat){var L=M.g.filter(function(x){return x.cat===X.cat});catDrill='<div class="card" style="margin-top:12px"><h3>'+CATS[X.cat][0]+': the problems behind the numbers</h3>'+(L.length?'<div class="tw"><table><thead><tr><th>Level</th><th>Problem</th><th>Agents</th><th>Computers</th><th>What to do</th></tr></thead><tbody>'+L.map(function(x){var s=split(x.detail);return '<tr><td>'+pill(x.sev)+'</td><td><b>'+esc(x.title)+'</b><div style="color:var(--mute);font-size:13px">'+esc(s.why)+'</div></td><td>'+(x.refList.map(function(r){return esc(nm(M,r))}).join(', ')||'-')+'</td><td>'+x.devices+'</td><td>'+esc(s.fix)+'</td></tr>'}).join('')+'</tbody></table></div>':'<p class="lead">Nothing open here.</p>')+'</div>'}
+  var fl=[['high','High risk'],['medium','Medium'],['low','Low'],['none','No open problems'],['all','All']],cnt=function(k){return k==='all'?ag.length:ag.filter(function(a){return a.risk===k}).length};
+  var chips='<div class="fl noprint">'+fl.map(function(f){return '<button class="sm'+(F===f[0]?' pri':'')+'" data-rxf="'+f[0]+'">'+f[1]+' ('+cnt(f[0])+')</button>'}).join('')+'</div>';
+  var rows=ag.filter(function(a){return F==='all'||a.risk===F}).sort(function(a,b){return rk(b.risk)-rk(a.risk)||(b.gs.length-a.gs.length)}).map(function(a){var o=X.agent===a.key,why=a.gs.slice(0,2).map(function(x){return esc(x.title)}).join('; ')+(a.gs.length>2?' (+'+(a.gs.length-2)+' more)':'');
+    var imp=Object.keys(CATS).filter(function(c){return a.cat[c].n}).map(function(c){return ch(a.cat[c].sev,CATS[c][0]+' '+a.cat[c].n)}).join('');
+    var r='<tr class="row" data-rxa="'+esc(a.key)+'"><td>'+pill(a.risk==='none'?'info':a.risk).replace('Note','Clear')+'</td><td><b>'+esc(a.name)+'</b><div style="color:var(--mute);font-size:13px">'+esc(fn(a))+(a.tier?' &middot; '+esc(a.tier):'')+'</div></td><td>'+who(a)+'</td><td style="max-width:300px">'+(why||'<span style="color:var(--mute)">Nothing open</span>')+'</td><td>'+imp+'</td><td class="mono '+(a.net!=null&&a.net<0?'hi':'')+'">'+(a.net!=null?money(a.net,M.cur):'<span style="color:var(--mute)">no case</span>')+'</td></tr>';
+    if(o){var p=plan(a);r+='<tr class="det"><td colspan="6"><div class="grid g2" style="gap:12px"><div><h3 style="font-size:16px;margin-bottom:6px">Why it is '+(a.risk==='none'?'clear':a.risk+' risk')+'</h3>'+(a.gs.length?a.gs.map(function(x){var s=split(x.detail);return '<p style="margin:0 0 8px">'+pill(x.sev)+' <b>'+esc(x.title)+'</b> <span class="mono" style="color:var(--mute)">'+CATS[x.cat][0]+'</span><br><span style="color:var(--ink2);font-size:13.5px">'+esc(s.why)+'</span></p>'}).join(''):'<p class="lead">No open problems reference this agent.</p>')+'</div>'+
+      '<div><h3 style="font-size:16px;margin-bottom:6px">Return</h3><table><tbody><tr><td>Run cost a month</td><td class="mono">'+money(a.run_cost_pm,M.cur)+'</td></tr><tr><td>Benefit a month</td><td class="mono">'+(a.benefit_pm!=null?money(a.benefit_pm,M.cur):'not recorded')+'</td></tr><tr><td>Net a month</td><td class="mono">'+(a.net!=null?money(a.net,M.cur):'-')+'</td></tr><tr><td>Build cost</td><td class="mono">'+money(a.build_cost,M.cur)+'</td></tr><tr><td>Payback</td><td class="mono">'+(a.payback_months!=null?a.payback_months+' months':'-')+'</td></tr>'+(a.case_name?'<tr><td>Business case</td><td>'+esc(a.case_name)+'</td></tr>':'')+'</tbody></table><p class="mono" style="color:var(--mute);margin:8px 0 0">Runs on '+esc(a.hosts.join(', '))+'</p></div></div><h3 style="font-size:16px;margin:14px 0 6px">30, 60 and 90 days for '+esc(a.name)+'</h3>'+planCols(p)+'</td></tr>'}
+    return r}).join('');
+  var table=rows?'<div class="card tw"><table><thead><tr><th>Risk</th><th>Agent and function</th><th>Owner</th><th>Why</th><th>Impact</th><th>Net a month</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="card empty">No agents in this group.</div>';
+  var ow={};ag.forEach(function(a){var k=a.owner||'No owner';var o=ow[k]=ow[k]||{n:0,h:0,names:[],net:0,cased:0};o.n++;if(a.risk==='high')o.h++;o.names.push(a.name);if(a.net!=null){o.net+=a.net;o.cased++}});
+  var owRows=Object.keys(ow).sort(function(a,b){return(b==='No owner')-(a==='No owner')||ow[b].h-ow[a].h}).map(function(k){var o=ow[k];return '<tr><td>'+(k==='No owner'?'<b class="hi">No owner</b>':'<b>'+esc(k)+'</b>')+'</td><td>'+o.n+'</td><td class="'+(o.h?'hi':'')+'">'+o.h+'</td><td style="color:var(--ink2);font-size:13px">'+esc(o.names.slice(0,4).join(', '))+(o.names.length>4?' +'+(o.names.length-4):'')+'</td><td class="mono">'+(o.cased?money(o.net,M.cur):'-')+'</td></tr>'}).join('');
+  var fu={};ag.forEach(function(a){var k=fn(a),o=fu[k]=fu[k]||{n:0,h:0,m:0,l:0};o.n++;if(a.risk==='high')o.h++;else if(a.risk==='medium')o.m++;else if(a.risk==='low')o.l++});
+  var fk=Object.keys(fu).sort(function(a,b){return fu[b].h*3+fu[b].m-fu[a].h*3-fu[a].m}),fmx=Math.max.apply(null,fk.map(function(k){return fu[k].n}).concat([1]));
+  var fbars=fk.map(function(k){var o=fu[k];return '<div class="b2"><div class="r"><span class="nm">'+esc(k)+'</span><span class="tr"><span style="display:flex;width:'+Math.max(6,o.n/fmx*100)+'%;height:100%"><i style="background:var(--hi);flex:'+o.h+'"></i><i style="background:var(--md);flex:'+o.m+'"></i><i style="background:var(--lo);flex:'+(o.l+(o.n-o.h-o.m-o.l)*.3)+'"></i></span></span></div><div class="mono" style="color:var(--mute);margin-left:160px">'+o.n+' agents &middot; '+o.h+' high &middot; '+o.m+' medium</div></div>'}).join('');
+  var all30=0,all60=0,all90=0;ag.forEach(function(a){var p=plan(a);all30+=p.d30.length;all60+=p.d60.length;all90+=p.d90.length});
+  return '<div class="rp" style="--ra:var(--acc)">'+rpHead('Executive briefing','AI risk and return',head)+kp+
+   '<h2 style="font-size:22px;margin:30px 0 4px">Where the risk lands</h2><p class="lead" style="margin:0 0 12px">Red is high, amber medium, grey low. Click a box to see the problems behind it.</p><div class="grid g4">'+cc+'</div>'+catDrill+
+   '<h2 style="font-size:22px;margin:30px 0 4px">The agents, riskiest first</h2><p class="lead" style="margin:0 0 12px">Click an agent for why, the return, and its own 30, 60 and 90 day plan.</p>'+chips+table+
+   '<div class="grid g2" style="margin-top:30px"><div><h2 style="font-size:22px;margin-bottom:8px">Who owns what</h2><div class="card tw"><table><thead><tr><th>Owner</th><th>Agents</th><th>High</th><th>Which</th><th>Net a month</th></tr></thead><tbody>'+owRows+'</tbody></table></div></div><div><h2 style="font-size:22px;margin-bottom:8px">Which function is affected</h2><div class="card bars">'+(fbars||'<div class="empty">No agents.</div>')+'</div></div></div>'+
+   '<h2 style="font-size:22px;margin:30px 0 8px">The whole organisation in 30, 60 and 90 days</h2><div class="pl3"><div class="card stat"><div class="n hi">'+all30+'</div><div class="l">actions in the first 30 days (every high problem, every missing owner)</div></div><div class="card stat"><div class="n md">'+all60+'</div><div class="l">more by 60 days (medium problems)</div></div><div class="card stat"><div class="n">'+all90+'</div><div class="l">more by 90 days (low problems, missing business cases)</div></div></div>'+
+   '<p class="mono" style="color:var(--mute);margin-top:24px">Built from what the agents on your computers reported. Costs and benefits come from your own records of what each agent runs and earns; where none exist, we show that rather than guess.</p></div>'
+}
+
+/* ---------- 2. Soundings: catalogue ---------- */
+function rSound(M){
+  var ag=M.ag.slice().sort(function(a,b){return a.name<b.name?-1:1}),count=function(f){var o={};ag.forEach(function(a){var k=f(a)||'Unknown';o[k]=(o[k]||0)+1});return Object.keys(o).sort(function(a,b){return o[b]-o[a]}).map(function(k){return[k,o[k]]})};
+  var facet=function(t,L){return '<div><div class="mono" style="color:var(--mute);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">'+t+'</div>'+L.slice(0,8).map(function(x){return '<span class="tagx">'+esc(x[0])+' <b>'+x[1]+'</b></span>'}).join('')+'</div>'};
+  var ghost=M.g.filter(function(x){return x.module==='discover'&&x.sev==='high'});
+  var unowned=ag.filter(function(a){return !a.owner}).length,models={};ag.forEach(function(a){if(a.model)models[a.model]=1});
+  var cards=ag.map(function(a){return '<div class="catc"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font:600 17px var(--fh)">'+esc(a.name)+'</b>'+(a.creds?'<span class="chip hi">'+a.creds+' key'+(a.creds>1?'s':'')+' in files</span>':'')+'</div><div class="mono" style="color:var(--mute);margin:2px 0 8px">'+esc(a.platform||'unknown platform')+' &middot; '+esc(a.model||'model unknown')+'</div><div style="font-size:13.5px;color:var(--ink2)">'+esc(fn(a))+' &middot; '+a.tools+' tool'+(a.tools===1?'':'s')+(a.run_count?' &middot; '+a.run_count+' runs':'')+'</div><div style="margin-top:8px;font-size:13.5px">'+(a.owner?'Owner: <b>'+esc(a.owner)+'</b>':'<b class="hi">No owner named</b>')+'</div><div class="mono" style="color:var(--mute);margin-top:6px">Seen on '+esc(a.hosts.join(', '))+'</div></div>'}).join('');
+  return '<div class="rp so" style="--ra:#0E7C86">'+rpHead('Soundings &middot; what is running','AI agent catalogue','We found <b>'+ag.length+' AI agents</b> on '+M.devs+' computers, built on '+count(function(a){return a.platform}).length+' platforms and using '+Object.keys(models).length+' different models.'+(unowned?' <b class="hi">'+unowned+' have no named owner.</b>':''))+
+   '<div class="grid g4" style="margin-bottom:18px">'+facet('Built with',count(function(a){return a.platform}))+facet('Model',count(function(a){return a.model}))+facet('Function',count(fn))+facet('Business unit',count(function(a){return a.units[0]}))+'</div>'+
+   (ghost.length?'<div class="card" style="border-color:var(--hi);margin-bottom:18px"><h3 style="color:var(--hi)">Running, but on no register</h3><p class="lead" style="margin:4px 0 8px">These showed up in activity records and appear in no list your organisation keeps.</p>'+ghost.map(function(x){var s=split(x.detail);return '<p style="margin:0 0 8px"><b>'+esc(x.title)+'</b>: '+esc(x.refList.map(function(r){return nm(M,r)}).join(', '))+'<br><span style="color:var(--ink2);font-size:13.5px">'+esc(s.fix)+'</span></p>'}).join('')+'</div>':'')+
+   '<h2 style="font-size:22px;margin:6px 0 10px">The catalogue</h2><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(270px,1fr))">'+cards+'</div></div>'
+}
+
+/* ---------- 3. Sentinel: exposure map ---------- */
+function rSent(M){
+  var G=M.g.filter(function(x){return x.module==='secure'}),units={};G.forEach(function(x){Object.keys(x.us).forEach(function(u){units[u]=1})});
+  var U=Object.keys(units).sort();
+  var head=G.length?'<b>'+G.filter(function(x){return x.sev==='high'}).length+' serious weaknesses</b> in '+G.length+' kinds of security problem. Darker means worse. Each cell is the number of computers where it was found.':'No security problems are open.';
+  var grid=G.length?'<div class="tw"><table class="hm"><thead><tr><th>Weakness</th>'+U.map(function(u){return '<th>'+esc(u)+'</th>'}).join('')+'</tr></thead><tbody>'+G.map(function(x){return '<tr><td style="min-width:260px"><b>'+esc(x.title)+'</b></td>'+U.map(function(u){var n=x.us[u]?Object.keys(x.us[u]).length:0;return '<td>'+(n?'<span class="hc '+x.sev+'">'+n+'</span>':'<span class="hc z"></span>')+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>':'<p>Nothing to show.</p>';
+  var paths=G.filter(function(x){return x.sev==='high'}).map(function(x){var s=split(x.detail);return '<div class="sxp"><div><span class="hc high" style="width:auto;padding:0 8px">'+x.devices+' computer'+(x.devices>1?'s':'')+'</span> <b>'+esc(x.title)+'</b></div><p>'+esc(s.claim)+'</p><p class="fxs">'+esc(s.fix)+'</p>'+(x.refList.length?'<div class="mono" style="color:#8FA6C4">Agents: '+esc(x.refList.map(function(r){return nm(M,r)}).join(', '))+'</div>':'')+'</div>'}).join('');
+  var keyed=M.ag.filter(function(a){return a.creds>0||a.tools>=4}).sort(function(a,b){return b.creds-a.creds||b.tools-a.tools}).slice(0,15);
+  return '<div class="rp sx" style="--ra:#FF6B5E">'+rpHead('Sentinel &middot; exposure','Where an attacker could get in',head)+
+   '<h2 style="font-size:20px;margin:22px 0 8px">Exposure map</h2>'+grid+
+   (paths?'<h2 style="font-size:20px;margin:28px 0 8px">Fix these first</h2>'+paths:'')+
+   '<h2 style="font-size:20px;margin:28px 0 8px">Agents holding keys or wide tool access</h2>'+(keyed.length?'<div class="tw"><table class="hm"><thead><tr><th>Agent</th><th>Tools</th><th>Keys in files</th><th>Owner</th><th>Seen on</th></tr></thead><tbody>'+keyed.map(function(a){return '<tr><td><b>'+esc(a.name)+'</b></td><td>'+a.tools+'</td><td class="'+(a.creds?'khi':'')+'">'+a.creds+'</td><td>'+(a.owner?esc(a.owner):'<span class="khi">none</span>')+'</td><td class="mono">'+esc(a.hosts.join(', '))+'</td></tr>'}).join('')+'</tbody></table></div>':'<p>None.</p>')+'</div>'
+}
+
+/* ---------- 4. Keel: accountability scorecard ---------- */
+function rKeel(M){
+  var ag=M.ag,reg={},gate={};M.g.forEach(function(x){if(/no register lists/i.test(x.title))x.refList.forEach(function(r){reg[r]=1});if(x.check==='human_gate')x.refList.forEach(function(r){gate[r]=1})});
+  var T=['Owner named','Tier assigned','Business case','On a register','Human sign-off'];
+  ag.forEach(function(a){a.kc=[!!a.owner,!!a.tier,a.benefit_pm!=null||!!a.case_name,!reg[a.agent_ref],!gate[a.agent_ref]];a.ks=a.kc.filter(Boolean).length});
+  var owned=ag.filter(function(a){return a.owner}).length,pct=ag.length?Math.round(owned/ag.length*100):0,R=44,C=2*Math.PI*R;
+  var ring='<svg width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="60" r="'+R+'" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="60" cy="60" r="'+R+'" fill="none" stroke="'+(pct<60?'var(--hi)':pct<90?'var(--md)':'var(--ok)')+'" stroke-width="12" stroke-dasharray="'+(C*pct/100)+' '+C+'" transform="rotate(-90 60 60)" stroke-linecap="round"/><text x="60" y="66" text-anchor="middle" font-size="26" font-weight="600" fill="currentColor" font-family="Bricolage Grotesque">'+pct+'%</text></svg>';
+  var tot=T.map(function(t,i){var n=ag.filter(function(a){return a.kc[i]}).length;return '<div class="kcol"><b>'+n+'<small>/'+ag.length+'</small></b><span>'+t+'</span></div>'}).join('');
+  var rows=ag.slice().sort(function(a,b){return a.ks-b.ks||(a.name<b.name?-1:1)}).map(function(a){return '<tr><td><b>'+esc(a.name)+'</b><div style="color:var(--mute);font-size:13px">'+esc(fn(a))+'</div></td>'+a.kc.map(function(k){return '<td class="kt">'+(k?'<span class="ok">&#10003;</span>':'<span class="hi">&#10007;</span>')+'</td>'}).join('')+'<td><span class="dots">'+[0,1,2,3,4].map(function(i){return '<i class="'+(i<a.ks?'on '+(a.ks<3?'lo2':a.ks<5?'mid':'full'):'')+'"></i>'}).join('')+'</span></td><td style="font-size:13.5px">'+(a.owner?esc(a.owner):'<span class="hi">Nobody</span>')+'</td></tr>'}).join('');
+  var fu={};ag.forEach(function(a){var k=fn(a),o=fu[k]=fu[k]||{n:0,o:0,s:0};o.n++;if(a.owner)o.o++;o.s+=a.ks});
+  var gap=Object.keys(fu).sort(function(a,b){return fu[a].s/fu[a].n-fu[b].s/fu[b].n}).map(function(k){var o=fu[k];return '<tr><td><b>'+esc(k)+'</b></td><td>'+o.n+'</td><td class="'+(o.o<o.n?'hi':'')+'">'+o.o+' of '+o.n+'</td><td class="mono">'+(o.s/o.n).toFixed(1)+' / 5</td></tr>'}).join('');
+  var worst=ag.filter(function(a){return a.ks<=2}).length;
+  return '<div class="rp kl" style="--ra:#5B4BC4">'+rpHead('Keel &middot; accountability','Who answers for each agent',ag.length?'<b>'+owned+' of '+ag.length+' agents have a named owner.</b>'+(worst?' <span class="hi">'+worst+' meet two or fewer of the five basic controls.</span>':' Each is scored on five basic controls below.'):'No agents found yet.')+
+   '<div class="card" style="display:flex;gap:26px;align-items:center;flex-wrap:wrap"><div style="text-align:center">'+ring+'<div class="mono" style="color:var(--mute)">have an owner</div></div><div class="kcols">'+tot+'</div></div>'+
+   '<h2 style="font-size:22px;margin:28px 0 8px">Agent by agent, weakest first</h2><div class="card tw"><table><thead><tr><th>Agent</th>'+T.map(function(t){return '<th class="kt">'+t+'</th>'}).join('')+'<th>Score</th><th>Owner</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+   '<h2 style="font-size:22px;margin:28px 0 8px">Gaps by function</h2><div class="card tw"><table><thead><tr><th>Function</th><th>Agents</th><th>With owner</th><th>Average score</th></tr></thead><tbody>'+gap+'</tbody></table></div></div>'
+}
+
+/* ---------- 5. Reckoning: cost and return ---------- */
+function rReck(M){
+  var cur=M.cur,ag=M.ag.filter(function(a){return a.run_cost_pm!=null||a.benefit_pm!=null}),cased=ag.filter(function(a){return a.benefit_pm!=null}),nocase=ag.filter(function(a){return a.benefit_pm==null&&a.run_cost_pm>0}),net=M.ben-M.cost;
+  var mx=Math.max.apply(null,ag.map(function(a){return Math.max(a.run_cost_pm||0,a.benefit_pm||0)}).concat([1]));
+  var rows=ag.slice().sort(function(a,b){return(a.net==null)-(b.net==null)||(a.net||0)-(b.net||0)}).map(function(a){return '<tr><td><b>'+esc(a.name)+'</b><div style="color:var(--mute);font-size:12.5px">'+esc(a.case_name||fn(a))+'</div></td><td style="width:34%"><div class="bb"><i class="c" style="width:'+((a.run_cost_pm||0)/mx*100)+'%"></i></div><div class="bb"><i class="g" style="width:'+((a.benefit_pm||0)/mx*100)+'%"></i></div></td><td class="num">'+money(a.run_cost_pm,cur)+'</td><td class="num">'+(a.benefit_pm!=null?money(a.benefit_pm,cur):'<span style="color:var(--mute)">no case</span>')+'</td><td class="num '+(a.net!=null&&a.net<0?'hi':'ok')+'">'+(a.net!=null?money(a.net,cur):'-')+'</td><td class="num">'+(a.payback_months!=null?a.payback_months+' mo':'-')+'</td></tr>'}).join('');
+  var leaks=M.g.filter(function(x){return x.waste>0}).sort(function(a,b){return b.waste-a.waste});
+  var wasteTot=leaks.reduce(function(n,x){return n+x.waste},0);
+  return '<div class="rp rc" style="--ra:#2E7D32">'+rpHead('Reckoning &middot; economics','What the agents cost and what they earn',ag.length?'Agents cost <b>'+money(M.cost,cur)+'</b> a month to run. '+(cased.length?'<b>'+cased.length+'</b> have a recorded benefit, worth <b>'+money(M.ben,cur)+'</b> a month, a net of <b class="'+(net<0?'hi':'ok')+'">'+money(net,cur)+'</b>.':'<b class="hi">None has a recorded benefit, so the return cannot be measured.</b>')+(wasteTot>0?' Separately, <b>'+money(wasteTot,cur)+'</b> was spent that could have been avoided.':''):'No cost data has been reported yet.')+
+   (nocase.length?'<div class="card" style="border-color:var(--md);margin-bottom:18px"><b>'+nocase.length+' agent'+(nocase.length>1?'s':'')+' cost money with no business case:</b> '+esc(nocase.map(function(a){return a.name}).slice(0,8).join(', '))+(nocase.length>8?' and '+(nocase.length-8)+' more':'')+'. Write down what each is meant to earn, or switch it off.</div>':'')+
+   '<div class="led"><div class="ledh"><span>Statement by agent, per month</span><span class="mono"><i class="kc"></i> cost <i class="kg"></i> benefit</span></div><div class="tw"><table><thead><tr><th>Agent</th><th></th><th class="num">Cost</th><th class="num">Benefit</th><th class="num">Net</th><th class="num">Payback</th></tr></thead><tbody>'+rows+'</tbody><tfoot><tr><td><b>Total</b></td><td></td><td class="num"><b>'+money(M.cost,cur)+'</b></td><td class="num"><b>'+(M.cased?money(M.ben,cur):'-')+'</b></td><td class="num '+(net<0?'hi':'ok')+'"><b>'+(M.cased?money(net,cur):'-')+'</b></td><td></td></tr></tfoot></table></div></div>'+
+   '<h2 style="font-size:22px;margin:28px 0 8px">Where money is leaking</h2>'+(leaks.length?'<div class="card tw"><table><thead><tr><th>Problem</th><th>Agents</th><th class="num">Wasted</th></tr></thead><tbody>'+leaks.map(function(x){var s=split(x.detail);return '<tr><td><b>'+esc(x.title)+'</b><div style="color:var(--mute);font-size:13px">'+esc(x.note||s.why)+'</div><div style="font-size:13.5px;margin-top:4px">'+esc(s.fix)+'</div></td><td>'+esc(x.refList.map(function(r){return nm(M,r)}).join(', ')||'-')+'</td><td class="num hi">'+money(x.waste,cur)+'</td></tr>'}).join('')+'</tbody></table></div>':'<p class="lead">No avoidable spend found.</p>')+'</div>'
+}
+
+/* ---------- reports tab ---------- */
+S.rep=null;S.rx={};
+function vReports(){
+  var d=S.data,ent=function(p){return d.entitled.indexOf(p)>=0};
+  if(S.rep){var M=model(),f={executive:rExec,soundings:rSound,sentinel:rSent,keel:rKeel,reckoning:rReck}[S.rep];if(f&&ent(S.rep))return f(M);S.rep=null}
+  var lk={};(d.locked||[]).forEach(function(x){lk[x.module]=x.n});
+  var cards=PRODS.map(function(p){var on=ent(p[0]),mod={soundings:'discover',sentinel:'secure',keel:'govern',reckoning:'economics'}[p[0]],n=mod?lk[mod]:0;
+    return '<div class="card rep rpc rc-'+p[3]+'"><div class="mono" style="color:var(--mute);letter-spacing:1px;text-transform:uppercase">'+(on?'Included':'Not included')+'</div><h3>'+esc(p[1])+'</h3><p>'+esc(p[2])+'</p><div>'+(on?'<button class="pri sm" data-rep="'+p[0]+'">Open report</button>':'<button class="sm" disabled style="opacity:.6">Locked</button> <span class="mono" style="color:var(--mute)">'+(n?n+' open problem'+(n>1?'s':'')+' hidden. ':'')+'Ask Antara to add it.</span>')+'</div></div>'}).join('');
+  return '<p class="lead">Reports build from what your computers have reported, so they are always current. Each report shows something different. You see the ones your organisation has taken.</p><div class="grid g2" style="margin-top:14px">'+cards+'</div>'+
+   '<h3 style="margin:26px 0 8px">Data downloads</h3><div class="grid g4"><div class="card rep"><h3>Findings register (CSV)</h3><p>Every finding with owner, status and dates, to open in Excel.</p><div><button class="pri sm" data-rep="csv-f">Download</button></div></div><div class="card rep"><h3>AI inventory (CSV)</h3><p>Every AI agent found, where, with which model, tools and keys.</p><div><button class="pri sm" data-rep="csv-a">Download</button></div></div></div>'
+}
 function csv(rows,cols){var q=function(v){v=String(v==null?'':v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};return [cols.map(function(c){return c[1]}).join(',')].concat(rows.map(function(r){return cols.map(function(c){return q(r[c[0]])}).join(',')})).join('\n')}
 function save(name,text,type){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},500)}
 function report(kind){
   var d=S.data;
-  if(kind==='csv-f')return save('findings-register.csv',csv(d.findings,[['hostname','Computer'],['business_unit','Business unit'],['module','Area'],['severity','Level'],['title','Finding'],['detail','Detail'],['status','Status'],['owner','Owner'],['first_seen','First seen'],['last_seen','Last seen'],['resolved_at','Resolved']]),'text/csv');
-  if(kind==='csv-a')return save('ai-inventory.csv',csv(d.agents,[['name','Agent'],['hostname','Computer'],['business_unit','Business unit'],['platform','Built with'],['model','Model'],['tool_count','Tools'],['credential_count','Keys'],['last_seen','Last seen']]),'text/csv');
-  var mod=MODS[kind]?kind:null,w=window.open('','_blank');if(!w){alert('Allow pop-ups for this site to open the report.');return}
-  w.document.open();w.document.write(reportHTML(mod));w.document.close();
-}
-function reportHTML(mod){
-  var d=S.data,org=d.org.name,date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  var all=d.findings.filter(function(f){return f.severity!=='info'&&(!mod||f.module===mod)});
-  var open=all.filter(function(f){return f.status==='open'}),g=groups(open),wk=Date.now()-7*DAY;
-  var c={high:0,medium:0,low:0};open.forEach(function(f){c[f.severity]++});
-  var devs={};open.forEach(function(f){devs[f.device_id]=1});var nd=Object.keys(devs).length;
-  var agents=d.agents,keys=agents.reduce(function(n,a){return n+(a.credential_count||0)},0);
-  var title=mod?MODS[mod][0]+': '+MODS[mod][1]:'AI risk briefing';
-  var gh=g.filter(function(x){return x.sev==='high'}),gm=g.filter(function(x){return x.sev==='medium'}),gl=g.filter(function(x){return x.sev==='low'});
-  var head=!open.length?'Nothing needs action right now.':(gh.length?'<b>'+gh.length+' problem'+(gh.length>1?'s':'')+' need action first.</b> ':'<b>No high-level problems.</b> ')+'Across '+d.devices.filter(function(x){return x.status==='active'}).length+' computers we found '+agents.length+' AI agents and '+g.length+' kinds of open problem, on '+nd+' computers.';
-  var item=function(x){var p=split(x.detail);return '<div class="it"><div class="h">'+pill2(x.sev)+' <b>'+esc(x.title)+'</b> <span class="m">'+x.devices+' computer'+(x.devices>1?'s':'')+'</span></div>'+(p.why?'<p>'+esc(p.why)+'</p>':'')+(p.fix?'<p class="fx"><b>What to do.</b> '+esc(p.fix)+'</p>':'')+'</div>'};
-  var pill2=function(s){return '<span class="pl '+s+'">'+SEVN[s]+'</span>'};
-  var units={};open.forEach(function(f){var u=bu(f);units[u]=units[u]||{high:0,medium:0,low:0,n:0};units[u][f.severity]++;units[u].n++});
-  var us=Object.keys(units).sort(function(a,b){return units[b].high*3+units[b].medium-units[a].high*3-units[a].medium});
-  var mx=Math.max.apply(null,us.map(function(u){return units[u].n}).concat([1]));
-  var bars=us.map(function(u){var x=units[u];return '<div class="br"><span>'+esc(u)+'</span><i style="width:'+(x.n/mx*100)+'%"><b style="flex:'+x.high+';background:#B3261E"></b><b style="flex:'+x.medium+';background:#C77700"></b><b style="flex:'+x.low+';background:#8c9a94"></b></i><em>'+x.high+' high, '+x.medium+' medium, '+x.low+' low</em></div>'}).join('');
-  var newW=all.filter(function(f){return new Date(f.first_seen).getTime()>wk}).length,fixW=all.filter(function(f){return f.status==='fixed'&&f.resolved_at&&new Date(f.resolved_at).getTime()>wk}).length;
-  var plan=function(t,sub,L){return '<div class="pc"><h4>'+t+'</h4><span class="m">'+sub+'</span>'+(L.length?'<ul>'+L.map(function(x){return '<li>'+esc(x.title)+' <span class="m">('+x.devices+')</span></li>'}).join('')+'</ul>':'<p class="m">Nothing here.</p>')+'</div>'};
-  var invRows=agents.slice(0,60).map(function(a){return '<tr><td>'+esc(a.name)+'</td><td>'+esc(a.hostname)+'</td><td>'+esc(a.platform||'')+'</td><td>'+esc(a.model||'')+'</td><td>'+a.tool_count+'</td><td>'+a.credential_count+'</td></tr>'}).join('');
-  var regRows=open.slice(0,60).map(function(f){return '<tr><td>'+pill2(f.severity)+'</td><td>'+esc(f.title)+'</td><td>'+esc(f.hostname)+'</td><td>'+esc(bu(f))+'</td><td>'+esc(f.owner||'')+'</td></tr>'}).join('');
-  var css='body{font:15px/1.55 "Hanken Grotesk",system-ui,sans-serif;color:#0F1C19;background:#fff;margin:0}.pg{max-width:880px;margin:0 auto;padding:48px 36px}h1{font:600 38px/1.1 "Bricolage Grotesque",sans-serif;margin:6px 0 4px}h2{font:600 22px "Bricolage Grotesque",sans-serif;margin:36px 0 10px;border-top:2px solid #0F1C19;padding-top:14px}h4{margin:0 0 4px;font:600 15px "Bricolage Grotesque",sans-serif}.k{font:500 11px ui-monospace,monospace;letter-spacing:1.4px;text-transform:uppercase;color:#8F5200}.m{color:#5b6b65;font-size:13px}.big{font-size:19px;line-height:1.45;margin:14px 0}.st{display:flex;gap:28px;flex-wrap:wrap;margin:18px 0}.st div b{display:block;font:600 34px "Bricolage Grotesque",sans-serif}.it{padding:12px 0;border-bottom:1px solid #dde4e0;break-inside:avoid}.it p{margin:4px 0}.fx{color:#0F1C19}.pl{font-size:11px;font-weight:700;border-radius:99px;padding:1px 8px;border:1px solid}.pl.high{color:#B3261E}.pl.medium{color:#C77700}.pl.low,.pl.info{color:#6B7B75}.br{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:14px}.br span{width:150px;flex:none}.br i{height:12px;display:flex;border-radius:6px;overflow:hidden;background:#e6ece8}.br b{display:block}.br em{font-style:normal;color:#5b6b65;font-size:12.5px;white-space:nowrap}.pcs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.pc{border:1px solid #cfd8d3;border-radius:10px;padding:12px 14px}.pc ul{margin:8px 0 0;padding-left:18px}table{width:100%;border-collapse:collapse;font-size:12.5px}th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:#5b6b65;border-bottom:1px solid #0F1C19;padding:6px}td{padding:6px;border-bottom:1px solid #e3e9e5;vertical-align:top}.ft{margin-top:40px;color:#5b6b65;font-size:12px}.pr{float:right}@media print{.pr{display:none}.pg{padding:0}}@media(max-width:700px){.pcs{grid-template-columns:1fr}}';
-  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(title)+' | '+esc(org)+'</title><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"><style>'+css+'</style></head><body><div class="pg"><button class="pr" onclick="print()">Print or save as PDF</button>'+
-   '<div class="k">Antara North Star'+(mod?' · '+esc(MODS[mod][0]):'')+'</div><h1>'+esc(title)+'</h1><div class="m">'+esc(org)+' · '+date+'</div>'+
-   '<p class="big">'+head+'</p><div class="st"><div><b>'+d.devices.filter(function(x){return x.status==='active'}).length+'</b><span class="m">computers</span></div><div><b>'+agents.length+'</b><span class="m">AI agents</span></div><div><b style="color:#B3261E">'+c.high+'</b><span class="m">high</span></div><div><b style="color:#C77700">'+c.medium+'</b><span class="m">medium</span></div><div><b>'+c.low+'</b><span class="m">low</span></div><div><b>'+keys+'</b><span class="m">keys left in files</span></div></div>'+
-   (us.length?'<h2>Where the risk sits</h2>'+bars:'')+
-   (g.length?'<h2>What to fix first</h2><p class="m">The same problem on many computers is one fix. Ordered by how serious it is, then how widespread.</p>'+g.slice(0,10).map(item).join(''):'')+
-   '<h2>30, 60 and 90 days</h2><div class="pcs">'+plan('First 30 days','High level',gh)+plan('By 60 days','Medium level',gm)+plan('By 90 days','Low level',gl)+'</div>'+
-   '<h2>What changed in the last 7 days</h2><p>'+newW+' new finding'+(newW===1?'':'s')+'. '+fixW+' fixed.</p>'+
-   (!mod&&agents.length?'<h2>AI agents found</h2><div style="overflow-x:auto"><table><thead><tr><th>Agent</th><th>Computer</th><th>Built with</th><th>Model</th><th>Tools</th><th>Keys</th></tr></thead><tbody>'+invRows+'</tbody></table></div>'+(agents.length>60?'<p class="m">First 60 of '+agents.length+'. The full list is in the portal.</p>':''):'')+
-   (open.length?'<h2>Findings register</h2>'+(open.length>60?'<p class="m">First 60 of '+open.length+', most serious first in the portal. Download the full register as CSV.</p>':'')+'<div style="overflow-x:auto"><table><thead><tr><th>Level</th><th>Finding</th><th>Computer</th><th>Unit</th><th>Owner</th></tr></thead><tbody>'+regRows+'</tbody></table></div>':'')+
-   '<p class="ft">Built from findings reported by agents on your computers up to '+date+'. The agents read only and send findings, never the files or keys themselves. Antara Innovations.</p></div></body></html>';
+  if(kind==='csv-f')return save('findings-register.csv',csv(d.findings,[['hostname','Computer'],['business_unit','Business unit'],['module','Area'],['category','Impact'],['severity','Level'],['title','Finding'],['detail','Detail'],['status','Status'],['owner','Owner'],['first_seen','First seen'],['last_seen','Last seen'],['resolved_at','Resolved']]),'text/csv');
+  if(kind==='csv-a')return save('ai-inventory.csv',csv(d.agents,[['name','Agent'],['hostname','Computer'],['business_unit','Business unit'],['dept','Function'],['owner','Owner'],['tier','Tier'],['platform','Built with'],['model','Model'],['tool_count','Tools'],['credential_count','Keys'],['run_cost_pm','Run cost a month'],['benefit_pm','Benefit a month'],['last_seen','Last seen']]),'text/csv');
+  S.rep=kind;S.rx={};render();window.scrollTo(0,0)
 }
 
 sb.auth.getSession().then(function(r){if(r.data.session){S.session=r.data.session;boot()}else authView()});
