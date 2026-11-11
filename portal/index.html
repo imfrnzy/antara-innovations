@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>North Star Portal | Antara Innovations</title>
+<link rel="icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#E6ECE8;--paper2:#DCE4DF;--card:#F1F5F2;--ink:#0F1C19;--ink2:#3F544E;--mute:#4D6159;--line:rgba(15,28,25,.17);--line2:rgba(15,28,25,.08);--acc:#E8930C;--acc-t:#8F5200;--acc-soft:rgba(232,147,12,.12);--hi:#B3261E;--md:#C77700;--lo:#6B7B75;--ok:#2E7D32;--fh:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif;--fb:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;--fm:'DM Mono',ui-monospace,Menlo,monospace}
+:root[data-theme=dark]{--paper:#0B1714;--paper2:#10201C;--card:#12211D;--ink:#E4ECE8;--ink2:#AEC2BB;--mute:#86A097;--line:rgba(228,236,232,.16);--line2:rgba(228,236,232,.08);--acc:#FFB03A;--acc-t:#FFB03A;--acc-soft:rgba(255,176,58,.12);--hi:#FF7A70;--md:#FFB03A;--lo:#8FA79E;--ok:#6CCB72}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.5}
+h1,h2,h3{font-family:var(--fh);font-weight:600;letter-spacing:-.01em;margin:0}
+a{color:var(--acc-t)}
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);}
+.bar{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--fh);font-weight:600;font-size:18px;text-decoration:none;color:var(--ink)}.brand small{font-family:var(--fm);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--acc-t);margin-left:8px}
+.sp{flex:1}.who{font-size:13px;color:var(--mute)}
+button,.btn{font:inherit;font-weight:600;font-size:14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{border-color:var(--ink2)}
+.pri{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.sm{padding:4px 10px;font-size:12.5px}
+nav.tabs{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;gap:4px;overflow-x:auto}
+nav.tabs a{padding:10px 14px;text-decoration:none;color:var(--mute);font-weight:600;font-size:14px;border-bottom:2px solid transparent;white-space:nowrap}
+nav.tabs a.on{color:var(--ink);border-color:var(--acc)}
+main{max-width:1200px;margin:0 auto;padding:24px 20px 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.stat .n{font-family:var(--fh);font-size:38px;font-weight:600;line-height:1.1}.stat .l{color:var(--mute);font-size:13px;margin-top:2px}
+.mono{font-family:var(--fm);font-size:12.5px}
+.lead{color:var(--ink2);max-width:720px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--mute);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--line2);vertical-align:top}
+tr.row{cursor:pointer}tr.row:hover td{background:var(--acc-soft)}
+.tw{overflow-x:auto}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px;border:1px solid currentColor}
+.hi{color:var(--hi)}.md{color:var(--md)}.lo{color:var(--lo)}.ok{color:var(--ok)}
+.bars .r{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:13.5px}.bars .nm{width:150px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bars .tr{flex:1;height:12px;background:var(--line2);border-radius:6px;overflow:hidden;display:block}.bars .tr i{display:block;height:100%}.b2{margin:12px 0}.b2 .r{margin:0 0 2px}
+input,select{font:inherit;padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:100%}
+label{font-size:13px;color:var(--mute);font-weight:600;display:block;margin:12px 0 4px}
+.auth{max-width:420px;margin:60px auto}
+.err{color:var(--hi);font-size:14px;margin-top:10px}
+pre{background:var(--ink);color:var(--paper);padding:12px 14px;border-radius:8px;overflow-x:auto;font-family:var(--fm);font-size:12.5px;margin:6px 0;white-space:pre-wrap;word-break:break-all}
+.det{background:var(--paper2)}
+.det td{padding:14px 18px}
+.empty{padding:40px 20px;text-align:center;color:var(--mute)}
+.fl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.fl>*{width:auto;min-width:140px}
+.rep{display:flex;flex-direction:column;gap:8px}.rep h3{font-size:18px}.rep p{margin:0;color:var(--ink2);font-size:14px}
+@media(max-width:640px){main{padding:16px 14px 60px}.bars .nm{width:100px}.b2 .mono{margin-left:110px!important}}
+</style>
+</head>
+<body>
+<div class="top"><div class="bar">
+  <a class="brand" href="./">Antara North Star<small>Portal</small></a>
+  <span class="sp"></span>
+  <span class="who" id="who"></span>
+  <select id="orgsel" style="width:auto;display:none"></select>
+  <button class="sm" id="theme" title="Light or dark">Light/Dark</button>
+  <button class="sm" id="out" style="display:none">Sign out</button>
+</div>
+<nav class="tabs" id="tabs" style="display:none"></nav></div>
+<main id="app"><div class="empty">Loading...</div></main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+(function(){
+'use strict';
+var SB_URL='https://oxmoenclvifxhgwsxfop.supabase.co';
+var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94bW9lbmNsdmlmeGhnd3N4Zm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxODM2NDcsImV4cCI6MjEwNTc1OTY0N30.6gCGL67utfa0ApERu6an_wDw3I_KNnQLINO9FAQEoQA';
+var sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true}});
+var $=function(id){return document.getElementById(id)};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var S={session:null,orgs:[],org:null,data:null,tab:'overview',filt:{sev:'',st:'open',mod:'',q:''},open:null,newToken:null,audit:null};
+var DAY=864e5, MODS={discover:['Soundings','What AI is running here'],secure:['Sentinel','What it can do, and who could trick it'],govern:['Keel','Who is accountable for it'],economics:['Reckoning','What it costs and what it earns']};
+var SEVN={high:'High',medium:'Medium',low:'Low',info:'Note'}, SEVC={high:'hi',medium:'md',low:'lo',info:'lo'};
+try{var th=localStorage.getItem('ns-theme');if(th)document.documentElement.setAttribute('data-theme',th)}catch(e){}
+$('theme').onclick=function(){var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('ns-theme',t)}catch(e){}};
+
+function api(action,extra){
+  return fetch(SB_URL+'/functions/v1/ns-portal',{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+S.session.access_token,'apikey':SB_KEY},body:JSON.stringify(Object.assign({action:action,org_id:S.org&&S.org.id},extra||{}))})
+   .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('Error '+r.status));return j})});
+}
+function ago(t){if(!t)return 'never';var d=Date.now()-new Date(t).getTime();if(d<6e4)return 'just now';if(d<36e5)return Math.round(d/6e4)+' min ago';if(d<DAY)return Math.round(d/36e5)+' h ago';return Math.round(d/DAY)+' days ago'}
+function pill(s){return '<span class="pill '+SEVC[s]+'">'+SEVN[s]+'</span>'}
+function split(d){d=d||'';var a=d.split(' Why it matters: '),claim=a[0],rest=a[1]||'',b=rest.split(' What to do: ');return{claim:claim,why:b[0]||'',fix:b[1]||''}}
+
+/* ---------- sign in ---------- */
+function authView(msg){
+  $('tabs').style.display='none';$('out').style.display='none';$('orgsel').style.display='none';$('who').textContent='';
+  $('app').innerHTML='<div class="auth card"><h1 style="font-size:28px">Sign in</h1><p class="lead">See every computer that reports to you, what AI it is running, and what needs fixing.</p>'+
+  '<label>Work email</label><input id="em" type="email" autocomplete="username"><label>Password</label><input id="pw" type="password" autocomplete="current-password">'+
+  '<div style="display:flex;gap:10px;margin-top:16px"><button class="pri" id="si">Sign in</button><button id="su">Create account</button></div><div class="err" id="ae">'+esc(msg||'')+'</div>'+
+  '<p class="mono" style="color:var(--mute);margin-top:18px">New here? Click Create account with the work email Antara has on file for you. You land in your own company workspace straight away.</p></div>';
+  var go=function(up){var e=$('em').value.trim(),p=$('pw').value;$('ae').textContent='';if(!e||p.length<10){$('ae').textContent='Use your email and a password of at least 10 characters.';return}
+    (up?sb.auth.signUp({email:e,password:p}):sb.auth.signInWithPassword({email:e,password:p})).then(function(r){if(r.error){$('ae').textContent=r.error.message;return}if(!r.data.session){$('ae').textContent='Check your email to confirm the account, then sign in.';return}S.session=r.data.session;boot()})};
+  $('si').onclick=function(){go(false)};$('su').onclick=function(){go(true)};$('pw').onkeydown=function(e){if(e.key==='Enter')go(false)};
+}
+function inviteView(msg){
+  $('tabs').style.display='none';$('out').style.display='';$('who').textContent=S.email||'';
+  $('app').innerHTML='<div class="auth card"><h1 style="font-size:26px">No workspace for this email yet</h1><p class="lead">You are signed in as <b>'+esc(S.email||'')+'</b>, but Antara has not set up a workspace for this address. Ask your Antara contact to add it, then sign in again.</p><div style="margin-top:12px"><button class="pri" id="rl">Check again</button></div>'+
+  '<details style="margin-top:20px"><summary class="mono" style="cursor:pointer;color:var(--mute)">I was given a code instead</summary><label>Code</label><input id="ic" placeholder="Paste your code here"><div style="margin-top:12px"><button id="ir">Join</button></div></details><div class="err" id="ae">'+esc(msg||'')+'</div></div>';
+  $('rl').onclick=function(){boot()};
+  $('ir').onclick=function(){api('redeem_invite',{code:$('ic').value.trim()}).then(function(){boot()}).catch(function(e){$('ae').textContent=e.message})};
+}
+
+/* ---------- shell ---------- */
+var TABS=[['overview','Overview'],['computers','Computers'],['ai','AI found'],['findings','Findings'],['reports','Reports'],['add','Add computers'],['activity','Activity']];
+function shell(){
+  $('who').textContent=(S.email||'')+' · '+(S.org?S.org.role:'');$('out').style.display='';
+  var sel=$('orgsel');if(S.orgs.length>1){sel.style.display='';sel.innerHTML=S.orgs.map(function(o){return '<option value="'+esc(o.id)+'"'+(S.org&&o.id===S.org.id?' selected':'')+'>'+esc(o.name)+'</option>'}).join('')}else sel.style.display='none';
+  $('tabs').style.display='';$('tabs').innerHTML=(S.isOp?[['clients','All clients']].concat(TABS):TABS).map(function(t){return '<a href="#'+t[0]+'" class="'+(S.tab===t[0]?'on':'')+'">'+t[1]+'</a>'}).join('');
+}
+$('orgsel').onchange=function(){S.org=S.orgs.filter(function(o){return o.id===$('orgsel').value})[0];load()};
+$('out').onclick=function(){sb.auth.signOut().then(function(){S.session=null;authView()})};
+window.addEventListener('hashchange',function(){S.tab=(location.hash||'#overview').slice(1);S.open=null;if(S.tab==='clients'&&S.isOp){opLoad();return}if(S.data){if(!S.org){load();return}render()}});
+
+function boot(){
+  S.tab=(location.hash||'#overview').slice(1)||'overview';
+  api('me').then(function(m){S.email=m.email;S.orgs=m.orgs;S.isOp=m.is_operator;if(S.isOp&&(!m.orgs.length||S.tab==='clients')){S.tab='clients';return opLoad()}if(!m.orgs.length)return inviteView();S.org=S.org&&m.orgs.filter(function(o){return o.id===S.org.id})[0]||m.orgs[0];load()}).catch(function(e){if(/sign in/i.test(e.message)){sb.auth.signOut();authView('Your session ended. Please sign in again.')}else authView(e.message)});
+}
+function load(){
+  $('app').innerHTML='<div class="empty">Loading...</div>';
+  api('overview').then(function(d){S.data=d;S.org.role=d.role;render()}).catch(function(e){$('app').innerHTML='<div class="empty err">'+esc(e.message)+'</div>'});
+}
+
+/* ---------- numbers ---------- */
+function stats(){
+  var d=S.data,open=d.findings.filter(function(f){return f.status==='open'&&f.severity!=='info'});
+  var c={high:0,medium:0,low:0};open.forEach(function(f){c[f.severity]++});
+  var wk=Date.now()-7*DAY;
+  var fresh=d.devices.filter(function(x){return x.status==='active'&&x.last_seen&&Date.now()-new Date(x.last_seen).getTime()<3*DAY}).length;
+  return{open:open,c:c,fresh:fresh,active:d.devices.filter(function(x){return x.status==='active'}).length,
+    newWk:d.findings.filter(function(f){return f.severity!=='info'&&new Date(f.first_seen).getTime()>wk}).length,
+    fixedWk:d.findings.filter(function(f){return f.status==='fixed'&&f.resolved_at&&new Date(f.resolved_at).getTime()>wk}).length};
+}
+function groups(list){
+  var m={};list.forEach(function(f){var k=(f.check_id||'x');var g=m[k]||(m[k]={key:k,module:f.module,sev:f.severity,title:f.title,detail:f.detail,devs:{},n:0,rank:0});g.devs[f.device_id]=1;g.n++;if({high:3,medium:2,low:1,info:0}[f.severity]>{high:3,medium:2,low:1,info:0}[g.sev])g.sev=f.severity})
+  return Object.keys(m).map(function(k){var g=m[k];g.devices=Object.keys(g.devs).length;return g}).sort(function(a,b){var r={high:3,medium:2,low:1,info:0};return r[b.sev]-r[a.sev]||b.devices-a.devices})
+}
+function bu(f){return f.business_unit||'Unassigned'}
+
+/* ---------- views ---------- */
+function vOverview(){
+  var d=S.data,s=stats();
+  if(!d.devices.length)return '<div class="card empty"><h2>No computers yet</h2><p>Add your first computer and its findings will appear here within minutes.</p><a class="btn pri" href="#add">Add computers</a></div>';
+  var units={};s.open.forEach(function(f){var u=bu(f);units[u]=units[u]||{high:0,medium:0,low:0};units[u][f.severity]++});
+  var us=Object.keys(units).sort(function(a,b){return(units[b].high*3+units[b].medium)-(units[a].high*3+units[a].medium)}),mx=Math.max.apply(null,us.map(function(u){return units[u].high*3+units[u].medium*1.5+units[u].low*.5}).concat([1]));
+  var bars=us.map(function(u){var x=units[u],t=x.high*3+x.medium*1.5+x.low*.5;return '<div class="b2"><div class="r"><span class="nm">'+esc(u)+'</span><span class="tr"><span style="display:flex;width:'+Math.max(6,t/mx*100)+'%;height:100%"><i style="background:var(--hi);flex:'+x.high*3+'"></i><i style="background:var(--md);flex:'+x.medium*1.5+'"></i><i style="background:var(--lo);flex:'+x.low*.5+'"></i></span></span></div><div class="mono" style="color:var(--mute);margin-left:160px">'+x.high+' high · '+x.medium+' medium · '+x.low+' low</div></div>'}).join('')||'<div class="empty">Nothing open.</div>';
+  var top=groups(s.open).slice(0,6).map(function(g){var p=split(g.detail);return '<tr><td>'+pill(g.sev)+'</td><td><b>'+esc(g.title)+'</b><div style="color:var(--mute);font-size:13px">'+esc(p.fix||p.why)+'</div></td><td class="mono">'+g.devices+' computer'+(g.devices>1?'s':'')+'</td></tr>'}).join('');
+  var stale=s.active-s.fresh;
+  return '<div class="grid g4"><div class="card stat"><div class="n">'+s.fresh+'<span style="font-size:20px;color:var(--mute)"> / '+s.active+'</span></div><div class="l">computers reporting in the last 3 days'+(stale?' · '+stale+' gone quiet':'')+'</div></div>'+
+   '<div class="card stat"><div class="n">'+d.agents.length+'</div><div class="l">AI agents found</div></div>'+
+   '<div class="card stat"><div class="n"><span class="hi">'+s.c.high+'</span> <span class="md">'+s.c.medium+'</span> <span class="lo">'+s.c.low+'</span></div><div class="l">open: high, medium, low</div></div>'+
+   '<div class="card stat"><div class="n">'+s.newWk+' <span style="font-size:20px;color:var(--mute)">new</span></div><div class="l">in the last 7 days · '+s.fixedWk+' fixed</div></div></div>'+
+   '<div class="grid g2" style="margin-top:14px"><div class="card"><h3>Where the risk sits</h3><p class="lead" style="margin:4px 0 10px">By business unit. Red counts most.</p><div class="bars">'+bars+'</div></div>'+
+   '<div class="card"><h3>What to fix first</h3><p class="lead" style="margin:4px 0 6px">The same problem on many computers is one fix.</p><div class="tw"><table><tbody>'+(top||'<tr><td class="empty">Nothing open.</td></tr>')+'</tbody></table></div><div style="margin-top:12px"><a class="btn sm" href="#findings">See all findings</a> <a class="btn sm pri" href="#reports">Board briefing</a></div></div></div>';
+}
+function vComputers(){
+  var d=S.data,ed=S.org.role!=='viewer';
+  if(!d.devices.length)return '<div class="card empty">No computers yet. <a href="#add">Add computers</a></div>';
+  return '<div class="card tw"><table><thead><tr><th>Computer</th><th>Business unit</th><th>System</th><th>Last seen</th><th>AI agents</th><th>Open findings</th><th></th></tr></thead><tbody>'+d.devices.map(function(x){var q=x.last_seen&&Date.now()-new Date(x.last_seen).getTime()>3*DAY;
+    return '<tr><td><b>'+esc(x.hostname)+'</b>'+(x.status==='revoked'?' <span class="pill lo">revoked</span>':'')+'</td><td>'+esc(x.business_unit||'Unassigned')+'</td><td class="mono">'+esc(x.os||'')+'</td><td class="'+(q?'md':'')+'">'+ago(x.last_seen)+(q?' · quiet':'')+'</td><td>'+x.agents+'</td><td>'+x.open_findings+'</td><td>'+(ed&&x.status==='active'?'<button class="sm" data-rev="'+esc(x.id)+'">Revoke</button>':'')+'</td></tr>'}).join('')+'</tbody></table></div>';
+}
+function vAI(){
+  var a=S.data.agents;if(!a.length)return '<div class="card empty">No AI agents found yet.</div>';
+  return '<div class="card tw"><table><thead><tr><th>Agent</th><th>Found on</th><th>Business unit</th><th>Built with</th><th>Model</th><th>Tools</th><th>Keys</th><th>Last seen</th></tr></thead><tbody>'+a.map(function(x){return '<tr><td><b>'+esc(x.name)+'</b></td><td>'+esc(x.hostname)+'</td><td>'+esc(bu(x))+'</td><td>'+esc(x.platform||'')+'</td><td class="mono">'+esc(x.model||'')+'</td><td>'+x.tool_count+'</td><td class="'+(x.credential_count?'hi':'')+'">'+x.credential_count+'</td><td>'+ago(x.last_seen)+'</td></tr>'}).join('')+'</tbody></table></div>';
+}
+function vFindings(){
+  var f=S.filt,ed=S.org.role!=='viewer';
+  var L=S.data.findings.filter(function(x){return(!f.sev||x.severity===f.sev)&&(!f.st||x.status===f.st)&&(!f.mod||x.module===f.mod)&&(!f.q||(x.title+' '+x.hostname+' '+(x.detail||'')).toLowerCase().indexOf(f.q.toLowerCase())>=0)});
+  var r={high:3,medium:2,low:1,info:0};L.sort(function(a,b){return r[b.severity]-r[a.severity]});
+  var sel=function(id,opts,v){return '<select id="'+id+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===v?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select>'};
+  var rows=L.slice(0,300).map(function(x){var p=split(x.detail),o=S.open===x.id;
+    return '<tr class="row" data-f="'+esc(x.id)+'"><td>'+pill(x.severity)+'</td><td><b>'+esc(x.title)+'</b></td><td>'+esc(x.hostname)+'</td><td>'+esc((MODS[x.module]||[x.module||''])[0])+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.owner||'')+'</td></tr>'+
+    (o?'<tr class="det"><td colspan="6"><p style="margin:0 0 8px">'+esc(p.claim)+'</p>'+(p.why?'<p style="margin:0 0 8px"><b>Why it matters.</b> '+esc(p.why)+'</p>':'')+(p.fix?'<p style="margin:0 0 12px"><b>What to do.</b> '+esc(p.fix)+'</p>':'')+
+     '<div class="mono" style="color:var(--mute)">First seen '+ago(x.first_seen)+' · last seen '+ago(x.last_seen)+'</div>'+
+     (ed?'<div class="fl" style="margin-top:12px"><input id="fo" placeholder="Owner (name)" value="'+esc(x.owner||'')+'" style="max-width:220px"><select id="fs"><option value="open"'+(x.status==='open'?' selected':'')+'>Open</option><option value="accepted"'+(x.status==='accepted'?' selected':'')+'>Risk accepted</option><option value="fixed"'+(x.status==='fixed'?' selected':'')+'>Fixed</option></select><button class="sm pri" data-save="'+esc(x.id)+'">Save</button></div>':'')+'</td></tr>':'')}).join('');
+  return '<div class="fl">'+sel('fsev',[['','All severities'],['high','High'],['medium','Medium'],['low','Low']],f.sev)+sel('fst',[['','Any status'],['open','Open'],['accepted','Risk accepted'],['fixed','Fixed']],f.st)+sel('fmod',[['','All areas'],['discover','Soundings'],['secure','Sentinel'],['govern','Keel'],['economics','Reckoning']],f.mod)+'<input id="fq" placeholder="Search" value="'+esc(f.q)+'" style="min-width:200px"><span class="mono" style="align-self:center;color:var(--mute)">'+L.length+' shown</span></div>'+
+   (L.length?'<div class="card tw"><table><thead><tr><th>Level</th><th>What</th><th>Where</th><th>Area</th><th>Status</th><th>Owner</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="card empty">Nothing matches.</div>');
+}
+function vReports(){
+  var cards=[['board','Board briefing','The whole picture in plain words: where the risk sits, what to fix first, a 30, 60 and 90 day plan, and what changed. Print it or save as PDF.',null]];
+  Object.keys(MODS).forEach(function(k){cards.push([k,MODS[k][0]+': '+MODS[k][1],'Only the findings in this area, in the same board style.',k])});
+  cards.push(['csv-f','Findings register (CSV)','Every finding with owner, status and dates, to open in Excel.',null],['csv-a','AI inventory (CSV)','Every AI agent found, where, with which model, tools and keys.',null]);
+  return '<p class="lead">Reports build from what your computers have reported, so they are always current.</p><div class="grid g4" style="margin-top:14px">'+cards.map(function(c){return '<div class="card rep"><h3>'+esc(c[1])+'</h3><p>'+esc(c[2])+'</p><div><button class="pri sm" data-rep="'+c[0]+'">'+(c[0].indexOf('csv')===0?'Download':'Open report')+'</button></div></div>'}).join('')+'</div>';
+}
+function vAdd(){
+  var ed=S.org.role!=='viewer';if(!ed)return '<div class="card empty">Only an owner or admin can add computers.</div>';
+  var t=S.newToken,cmd=function(os){return os==='w'?'powershell -ExecutionPolicy Bypass -File install.ps1 -Token '+t:'sudo ./install.sh '+t};
+  var tk=(S.data.tokens||[]).map(function(x){return '<tr><td>'+esc(x.label||'')+'</td><td>'+esc(x.business_unit||'')+'</td><td>'+x.uses+' / '+x.max_uses+'</td><td>'+(x.revoked?'revoked':new Date(x.expires_at)<new Date()?'expired':'until '+new Date(x.expires_at).toLocaleDateString('en-GB'))+'</td><td>'+(!x.revoked?'<button class="sm" data-rt="'+esc(x.id)+'">Revoke</button>':'')+'</td></tr>'}).join('');
+  return '<div class="grid g2"><div class="card"><h3>1. Make an enrolment token</h3><p class="lead">One token can enrol many computers, for example one department. It stops working on the date you pick.</p>'+
+   '<label>Label</label><input id="tl" placeholder="e.g. Finance laptops, wave 1"><label>Business unit</label><input id="tb" placeholder="e.g. Finance"><label>Valid for (days)</label><input id="td" type="number" value="14" min="1" max="90"><label>Most computers</label><input id="tm" type="number" value="100" min="1">'+
+   '<div style="margin-top:14px"><button class="pri" id="mt">Create token</button></div><div class="err" id="te"></div>'+
+   (t?'<p style="margin-top:14px"><b>Copy it now.</b> It is shown once.</p><pre>'+esc(t)+'</pre>':'')+'</div>'+
+   '<div class="card"><h3>2. Install the agent</h3><p class="lead">Download the package, then run the line for your system. Your IT team can send the same line through Intune, Jamf or any tool that runs scripts.</p><p><a class="btn" href="downloads/antara-north-star-agent.zip" download>Download agent package</a></p>'+
+   '<p class="mono" style="margin:14px 0 0">Windows (admin, or Intune as SYSTEM)</p><pre>'+esc(t?cmd('w'):'powershell -ExecutionPolicy Bypass -File install.ps1 -Token <your token>')+'</pre><p class="mono" style="margin:10px 0 0">Mac or Linux</p><pre>'+esc(t?cmd('m'):'sudo ./install.sh <your token>')+'</pre>'+
+   '<p style="color:var(--mute);font-size:13.5px">It reads only, scans once a day, and sends findings, never the files or the keys. Computers with no Node.js installed need the full package: ask your Antara contact.</p></div></div>'+
+   (tk?'<div class="card tw" style="margin-top:14px"><h3 style="margin-bottom:8px">Your tokens</h3><table><thead><tr><th>Label</th><th>Unit</th><th>Used</th><th>Status</th><th></th></tr></thead><tbody>'+tk+'</tbody></table></div>':'')+
+   '<div class="card" style="margin-top:14px"><h3>People in this workspace</h3><div class="tw"><table><tbody>'+((S.data.people||[]).map(function(x){return '<tr><td>'+esc(x.email)+'</td><td class="mono">'+esc(x.role)+'</td></tr>'}).join(''))+'</tbody></table></div><p class="lead" style="margin:12px 0 6px">Add a colleague by email. They open this portal, create an account with that email, and land here.</p><div class="fl"><input id="pe" type="email" placeholder="colleague@company.com" style="min-width:240px"><select id="pr"><option value="viewer">Can view</option><option value="admin">Can manage</option></select><button class="sm pri" id="pa">Add</button></div><div class="err" id="pm"></div></div>';
+}
+function vActivity(){
+  if(!S.audit){api('audit').then(function(r){S.audit=r.rows;render()}).catch(function(e){$('app').innerHTML='<div class="empty err">'+esc(e.message)+'</div>'});return '<div class="empty">Loading...</div>'}
+  return '<div class="card tw"><table><thead><tr><th>When</th><th>Who</th><th>What</th><th>Detail</th></tr></thead><tbody>'+S.audit.map(function(r){return '<tr><td class="mono">'+new Date(r.ts).toLocaleString('en-GB')+'</td><td>'+esc(r.actor||'')+'</td><td>'+esc(String(r.action).replace(/_/g,' '))+'</td><td class="mono">'+esc(JSON.stringify(r.detail||{}))+'</td></tr>'}).join('')+'</tbody></table></div>';
+}
+
+function render(){
+  shell();var v={overview:vOverview,computers:vComputers,ai:vAI,findings:vFindings,reports:vReports,add:vAdd,activity:vActivity}[S.tab]||vOverview;
+  var h=v();if(S.tab==='overview')h='<h1 style="font-size:30px;margin-bottom:4px">'+esc(S.data.org.name)+'</h1><p class="lead" style="margin:0 0 18px">What AI is running across your organisation, and what needs attention.</p>'+h;
+  if(S.data.via_operator)h='<div class="card" style="margin-bottom:14px;border-color:var(--acc)"><b>Operator view.</b> You are looking at '+esc(S.data.org.name)+' read only. Everything you open here is recorded in their activity log.</div>'+h;$('app').innerHTML=h;wire();
+}
+function wire(){
+  var q=function(sel,fn){Array.prototype.forEach.call(document.querySelectorAll(sel),fn)};
+  q('[data-f]',function(e){e.onclick=function(){S.open=S.open===e.dataset.f?null:e.dataset.f;render()}});
+  q('[data-save]',function(b){b.onclick=function(){api('update_finding',{finding_id:b.dataset.save,status:$('fs').value,owner:$('fo').value}).then(function(){S.audit=null;load()}).catch(function(e){alert(e.message)})}});
+  q('[data-rev]',function(b){b.onclick=function(){if(confirm('Revoke this computer? It stops reporting.'))api('revoke_device',{device_id:b.dataset.rev}).then(function(){S.audit=null;load()})}});
+  q('[data-rt]',function(b){b.onclick=function(){api('revoke_token',{token_id:b.dataset.rt}).then(function(){load()})}});
+  q('[data-rep]',function(b){b.onclick=function(){report(b.dataset.rep)}});
+  ['fsev','fst','fmod'].forEach(function(id){var e=$(id);if(e)e.onchange=function(){S.filt[{fsev:'sev',fst:'st',fmod:'mod'}[id]]=e.value;render()}});
+  var fq=$('fq');if(fq){fq.onchange=function(){S.filt.q=fq.value;render()};fq.onkeydown=function(e){if(e.key==='Enter'){S.filt.q=fq.value;render()}}}
+  var mt=$('mt');if(mt)mt.onclick=function(){api('create_enrol_token',{label:$('tl').value,business_unit:$('tb').value,days:+$('td').value,max_uses:+$('tm').value}).then(function(r){S.newToken=r.token;S.audit=null;return api('overview')}).then(function(d){S.data=d;render()}).catch(function(e){$('te').textContent=e.message})};
+  var pa=$('pa');if(pa)pa.onclick=function(){api('add_person',{email:$('pe').value,role:$('pr').value}).then(function(){S.audit=null;load()}).catch(function(e){$('pm').textContent=e.message})};
+}
+
+/* ---------- operator console ---------- */
+function opLoad(){$('app').innerHTML='<div class="empty">Loading...</div>';api('op_clients').then(function(c){S.clients=c.clients;S.data=null;S.org=null;opRender()}).catch(function(e){$('app').innerHTML='<div class="empty err">'+esc(e.message)+'</div>'})}
+function opRender(){
+  $('who').textContent=(S.email||'')+' · operator';$('out').style.display='';$('orgsel').style.display='none';$('tabs').style.display='';$('tabs').innerHTML='<a href="#clients" class="on">All clients</a>';
+  var rows=(S.clients||[]).map(function(c){return '<tr><td><b>'+esc(c.name)+'</b>'+(c.waiting?'<div class="mono" style="color:var(--mute)">waiting to sign up: '+esc(c.waiting)+'</div>':'')+'</td><td>'+c.computers+'</td><td class="'+(c.high?'hi':'')+'">'+c.high+'</td><td>'+c.people+'</td><td>'+ago(c.last_seen)+'</td><td><button class="sm" data-open="'+esc(c.id)+'">Open</button> <button class="sm" data-ap="'+esc(c.id)+'">Add person</button></td></tr>'}).join('');
+  $('app').innerHTML='<h1 style="font-size:30px;margin-bottom:4px">Your clients</h1><p class="lead" style="margin:0 0 18px">One workspace per client. A client only ever sees their own.</p>'+
+   '<div class="card" style="margin-bottom:14px"><h3>New client</h3><p class="lead" style="margin:4px 0 8px">Type the client\'s name and the work email of the person in charge on their side. Tell them to open this portal and create an account with that email. They land in their own workspace, and nobody else sees it.</p><div class="fl"><input id="cn" placeholder="Client name" style="min-width:240px"><input id="cm" type="email" placeholder="Their email" style="min-width:260px"><button class="pri" id="cc">Create client</button></div><div class="err" id="ce"></div><div id="cr"></div></div>'+
+   (rows?'<div class="card tw"><table><thead><tr><th>Client</th><th>Computers</th><th>High findings</th><th>People</th><th>Last report</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="card empty">No clients yet. Create the first one above.</div>');
+  var ok=function(m){$('cr').innerHTML='<p style="margin:12px 0 0"><b>Done.</b> '+m+'</p>'};
+  $('cc').onclick=function(){$('ce').textContent='';api('op_create_client',{name:$('cn').value,email:$('cm').value}).then(function(r){ok(esc(r.org.name)+' is set up. Tell '+esc(r.email)+' to open this portal and create an account with that email.');var keep=$('cr').innerHTML;return api('op_clients').then(function(c){S.clients=c.clients;opRender();$('cr').innerHTML=keep})}).catch(function(e){$('ce').textContent=e.message})};
+  Array.prototype.forEach.call(document.querySelectorAll('[data-ap]'),function(b){b.onclick=function(){var m=window.prompt('Email of the person to add to this client:');if(!m)return;api('op_add_person',{org_id:b.dataset.ap,email:m}).then(function(){return api('op_clients')}).then(function(c){S.clients=c.clients;opRender()}).catch(function(e){alert(e.message)})}});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-open]'),function(b){b.onclick=function(){var c=S.clients.filter(function(x){return x.id===b.dataset.open})[0];S.org={id:c.id,name:c.name,role:'viewer'};S.tab='overview';location.hash='#overview';load()}});
+}
+function opLoadQuiet(){api('op_clients').then(function(c){S.clients=c.clients;var keep=$('cr').innerHTML;opRender();$('cr').innerHTML=keep})}
+
+/* ---------- reports ---------- */
+function csv(rows,cols){var q=function(v){v=String(v==null?'':v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};return [cols.map(function(c){return c[1]}).join(',')].concat(rows.map(function(r){return cols.map(function(c){return q(r[c[0]])}).join(',')})).join('\n')}
+function save(name,text,type){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},500)}
+function report(kind){
+  var d=S.data;
+  if(kind==='csv-f')return save('findings-register.csv',csv(d.findings,[['hostname','Computer'],['business_unit','Business unit'],['module','Area'],['severity','Level'],['title','Finding'],['detail','Detail'],['status','Status'],['owner','Owner'],['first_seen','First seen'],['last_seen','Last seen'],['resolved_at','Resolved']]),'text/csv');
+  if(kind==='csv-a')return save('ai-inventory.csv',csv(d.agents,[['name','Agent'],['hostname','Computer'],['business_unit','Business unit'],['platform','Built with'],['model','Model'],['tool_count','Tools'],['credential_count','Keys'],['last_seen','Last seen']]),'text/csv');
+  var mod=MODS[kind]?kind:null,w=window.open('','_blank');if(!w){alert('Allow pop-ups for this site to open the report.');return}
+  w.document.open();w.document.write(reportHTML(mod));w.document.close();
+}
+function reportHTML(mod){
+  var d=S.data,org=d.org.name,date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  var all=d.findings.filter(function(f){return f.severity!=='info'&&(!mod||f.module===mod)});
+  var open=all.filter(function(f){return f.status==='open'}),g=groups(open),wk=Date.now()-7*DAY;
+  var c={high:0,medium:0,low:0};open.forEach(function(f){c[f.severity]++});
+  var devs={};open.forEach(function(f){devs[f.device_id]=1});var nd=Object.keys(devs).length;
+  var agents=d.agents,keys=agents.reduce(function(n,a){return n+(a.credential_count||0)},0);
+  var title=mod?MODS[mod][0]+': '+MODS[mod][1]:'AI risk briefing';
+  var gh=g.filter(function(x){return x.sev==='high'}),gm=g.filter(function(x){return x.sev==='medium'}),gl=g.filter(function(x){return x.sev==='low'});
+  var head=!open.length?'Nothing needs action right now.':(gh.length?'<b>'+gh.length+' problem'+(gh.length>1?'s':'')+' need action first.</b> ':'<b>No high-level problems.</b> ')+'Across '+d.devices.filter(function(x){return x.status==='active'}).length+' computers we found '+agents.length+' AI agents and '+g.length+' kinds of open problem, on '+nd+' computers.';
+  var item=function(x){var p=split(x.detail);return '<div class="it"><div class="h">'+pill2(x.sev)+' <b>'+esc(x.title)+'</b> <span class="m">'+x.devices+' computer'+(x.devices>1?'s':'')+'</span></div>'+(p.why?'<p>'+esc(p.why)+'</p>':'')+(p.fix?'<p class="fx"><b>What to do.</b> '+esc(p.fix)+'</p>':'')+'</div>'};
+  var pill2=function(s){return '<span class="pl '+s+'">'+SEVN[s]+'</span>'};
+  var units={};open.forEach(function(f){var u=bu(f);units[u]=units[u]||{high:0,medium:0,low:0,n:0};units[u][f.severity]++;units[u].n++});
+  var us=Object.keys(units).sort(function(a,b){return units[b].high*3+units[b].medium-units[a].high*3-units[a].medium});
+  var mx=Math.max.apply(null,us.map(function(u){return units[u].n}).concat([1]));
+  var bars=us.map(function(u){var x=units[u];return '<div class="br"><span>'+esc(u)+'</span><i style="width:'+(x.n/mx*100)+'%"><b style="flex:'+x.high+';background:#B3261E"></b><b style="flex:'+x.medium+';background:#C77700"></b><b style="flex:'+x.low+';background:#8c9a94"></b></i><em>'+x.high+' high, '+x.medium+' medium, '+x.low+' low</em></div>'}).join('');
+  var newW=all.filter(function(f){return new Date(f.first_seen).getTime()>wk}).length,fixW=all.filter(function(f){return f.status==='fixed'&&f.resolved_at&&new Date(f.resolved_at).getTime()>wk}).length;
+  var plan=function(t,sub,L){return '<div class="pc"><h4>'+t+'</h4><span class="m">'+sub+'</span>'+(L.length?'<ul>'+L.map(function(x){return '<li>'+esc(x.title)+' <span class="m">('+x.devices+')</span></li>'}).join('')+'</ul>':'<p class="m">Nothing here.</p>')+'</div>'};
+  var invRows=agents.slice(0,60).map(function(a){return '<tr><td>'+esc(a.name)+'</td><td>'+esc(a.hostname)+'</td><td>'+esc(a.platform||'')+'</td><td>'+esc(a.model||'')+'</td><td>'+a.tool_count+'</td><td>'+a.credential_count+'</td></tr>'}).join('');
+  var regRows=open.slice(0,60).map(function(f){return '<tr><td>'+pill2(f.severity)+'</td><td>'+esc(f.title)+'</td><td>'+esc(f.hostname)+'</td><td>'+esc(bu(f))+'</td><td>'+esc(f.owner||'')+'</td></tr>'}).join('');
+  var css='body{font:15px/1.55 "Hanken Grotesk",system-ui,sans-serif;color:#0F1C19;background:#fff;margin:0}.pg{max-width:880px;margin:0 auto;padding:48px 36px}h1{font:600 38px/1.1 "Bricolage Grotesque",sans-serif;margin:6px 0 4px}h2{font:600 22px "Bricolage Grotesque",sans-serif;margin:36px 0 10px;border-top:2px solid #0F1C19;padding-top:14px}h4{margin:0 0 4px;font:600 15px "Bricolage Grotesque",sans-serif}.k{font:500 11px ui-monospace,monospace;letter-spacing:1.4px;text-transform:uppercase;color:#8F5200}.m{color:#5b6b65;font-size:13px}.big{font-size:19px;line-height:1.45;margin:14px 0}.st{display:flex;gap:28px;flex-wrap:wrap;margin:18px 0}.st div b{display:block;font:600 34px "Bricolage Grotesque",sans-serif}.it{padding:12px 0;border-bottom:1px solid #dde4e0;break-inside:avoid}.it p{margin:4px 0}.fx{color:#0F1C19}.pl{font-size:11px;font-weight:700;border-radius:99px;padding:1px 8px;border:1px solid}.pl.high{color:#B3261E}.pl.medium{color:#C77700}.pl.low,.pl.info{color:#6B7B75}.br{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:14px}.br span{width:150px;flex:none}.br i{height:12px;display:flex;border-radius:6px;overflow:hidden;background:#e6ece8}.br b{display:block}.br em{font-style:normal;color:#5b6b65;font-size:12.5px;white-space:nowrap}.pcs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.pc{border:1px solid #cfd8d3;border-radius:10px;padding:12px 14px}.pc ul{margin:8px 0 0;padding-left:18px}table{width:100%;border-collapse:collapse;font-size:12.5px}th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:#5b6b65;border-bottom:1px solid #0F1C19;padding:6px}td{padding:6px;border-bottom:1px solid #e3e9e5;vertical-align:top}.ft{margin-top:40px;color:#5b6b65;font-size:12px}.pr{float:right}@media print{.pr{display:none}.pg{padding:0}}@media(max-width:700px){.pcs{grid-template-columns:1fr}}';
+  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(title)+' | '+esc(org)+'</title><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"><style>'+css+'</style></head><body><div class="pg"><button class="pr" onclick="print()">Print or save as PDF</button>'+
+   '<div class="k">Antara North Star'+(mod?' · '+esc(MODS[mod][0]):'')+'</div><h1>'+esc(title)+'</h1><div class="m">'+esc(org)+' · '+date+'</div>'+
+   '<p class="big">'+head+'</p><div class="st"><div><b>'+d.devices.filter(function(x){return x.status==='active'}).length+'</b><span class="m">computers</span></div><div><b>'+agents.length+'</b><span class="m">AI agents</span></div><div><b style="color:#B3261E">'+c.high+'</b><span class="m">high</span></div><div><b style="color:#C77700">'+c.medium+'</b><span class="m">medium</span></div><div><b>'+c.low+'</b><span class="m">low</span></div><div><b>'+keys+'</b><span class="m">keys left in files</span></div></div>'+
+   (us.length?'<h2>Where the risk sits</h2>'+bars:'')+
+   (g.length?'<h2>What to fix first</h2><p class="m">The same problem on many computers is one fix. Ordered by how serious it is, then how widespread.</p>'+g.slice(0,10).map(item).join(''):'')+
+   '<h2>30, 60 and 90 days</h2><div class="pcs">'+plan('First 30 days','High level',gh)+plan('By 60 days','Medium level',gm)+plan('By 90 days','Low level',gl)+'</div>'+
+   '<h2>What changed in the last 7 days</h2><p>'+newW+' new finding'+(newW===1?'':'s')+'. '+fixW+' fixed.</p>'+
+   (!mod&&agents.length?'<h2>AI agents found</h2><div style="overflow-x:auto"><table><thead><tr><th>Agent</th><th>Computer</th><th>Built with</th><th>Model</th><th>Tools</th><th>Keys</th></tr></thead><tbody>'+invRows+'</tbody></table></div>'+(agents.length>60?'<p class="m">First 60 of '+agents.length+'. The full list is in the portal.</p>':''):'')+
+   (open.length?'<h2>Findings register</h2>'+(open.length>60?'<p class="m">First 60 of '+open.length+', most serious first in the portal. Download the full register as CSV.</p>':'')+'<div style="overflow-x:auto"><table><thead><tr><th>Level</th><th>Finding</th><th>Computer</th><th>Unit</th><th>Owner</th></tr></thead><tbody>'+regRows+'</tbody></table></div>':'')+
+   '<p class="ft">Built from findings reported by agents on your computers up to '+date+'. The agents read only and send findings, never the files or keys themselves. Antara Innovations.</p></div></body></html>';
+}
+
+sb.auth.getSession().then(function(r){if(r.data.session){S.session=r.data.session;boot()}else authView()});
+})();
+</script>
+</body></html>
