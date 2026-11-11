@@ -82,7 +82,7 @@ try{var th=localStorage.getItem('ns-theme');if(th)document.documentElement.setAt
 $('theme').onclick=function(){var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('ns-theme',t)}catch(e){}};
 
 function api(action,extra){
-  return fetch(SB_URL+'/functions/v1/ns-portal',{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+S.session.access_token,'apikey':SB_KEY},body:JSON.stringify(Object.assign({action:action,org_id:S.org&&S.org.id},extra||{}))})
+  return fetch(SB_URL+'/functions/v1/ns-portal',{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+S.session.access_token},body:JSON.stringify(Object.assign({action:action,org_id:S.org&&S.org.id},extra||{}))})
    .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('Error '+r.status));return j})});
 }
 function ago(t){if(!t)return 'never';var d=Date.now()-new Date(t).getTime();if(d<6e4)return 'just now';if(d<36e5)return Math.round(d/6e4)+' min ago';if(d<DAY)return Math.round(d/36e5)+' h ago';return Math.round(d/DAY)+' days ago'}
