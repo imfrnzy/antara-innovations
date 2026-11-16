@@ -672,6 +672,42 @@ vAI=function(){
   return '<p class="lead" style="margin-bottom:10px">'+a.length+' AI systems: '+Object.keys(ks).map(function(k){return ks[k]+' '+k.toLowerCase()+(ks[k]>1?'s':'')}).join(', ')+'. Each counted once even if it runs on several computers. This includes AI that people use directly, not only agents.</p><div class="card tw"><table><thead><tr><th>AI system</th><th>Kind</th><th>Found on</th><th>Function</th><th>Models</th><th>Tools</th><th>Keys</th><th>Owner</th></tr></thead><tbody>'+a.map(function(x){var ms=x.models&&typeof x.models==='object'?Object.keys(x.models):(x.model?[x.model]:[]);return '<tr><td><b>'+lnk(x)+'</b></td><td>'+esc(kindOf(x))+'</td><td class="mono">'+esc(x.hosts.join(', '))+'</td><td>'+esc(fn(x))+'</td><td class="mono">'+esc(ms.join(', ')||'not recorded')+'</td><td class="num">'+x.tools+'</td><td class="num '+(x.creds?'hi':'')+'">'+x.creds+'</td><td>'+who(x)+'</td></tr>'}).join('')+'</tbody></table></div>'
 };
 
+/* ---------- clients grouped by vertical (operator console) ---------- */
+var _opRender=opRender;
+var VERT=[['banking','Banking'],['insurance','Insurance'],['other','Manufacturing and other'],['retail','Retail and consumer'],['healthcare','Healthcare'],['energy','Energy and utilities'],['telecoms','Telecoms'],['public_sector','Public sector'],['asset_management','Asset and wealth management']];
+S.opv='';
+opRender=function(){
+  _opRender();
+  try{
+    var tb=document.querySelector('#app table tbody');
+    if(!tb||!(S.clients||[]).length)return;
+    var card=tb.closest('.card'),ind={},hi={},cnt={};
+    S.clients.forEach(function(c){var k=c.industry||'';ind[c.id]=k;hi[k]=(hi[k]||0)+(c.high||0);cnt[k]=(cnt[k]||0)+1});
+    var by={};
+    [].slice.call(tb.querySelectorAll('tr')).forEach(function(r){var b=r.querySelector('[data-open]'),k=b?(ind[b.dataset.open]||''):'';r.dataset.g=k;(by[k]=by[k]||[]).push(r)});
+    var known=VERT.map(function(v){return v[0]});
+    var order=known.filter(function(k){return by[k]}).concat(Object.keys(by).filter(function(k){return k&&known.indexOf(k)<0})).concat(by['']?['']:[]);
+    var label=function(k){var v=VERT.filter(function(x){return x[0]===k})[0];return v?v[1]:(k?k.replace(/_/g,' '):'No industry set')};
+    var cols=tb.closest('table').querySelectorAll('thead th').length||7;
+    tb.innerHTML='';
+    order.forEach(function(k){
+      var h=document.createElement('tr');h.className='grp';h.dataset.g=k;
+      h.innerHTML='<td colspan="'+cols+'" style="background:var(--paper2);font:600 15px var(--fh);padding:12px 10px;border-bottom:1px solid var(--line)">'+esc(label(k))+' <span class="mono" style="color:var(--mute);font-weight:400">&middot; '+pl(cnt[k]||0,'client')+(hi[k]?' &middot; <span class="hi">'+hi[k]+' high findings</span>':'')+'</span></td>';
+      tb.appendChild(h);
+      by[k].sort(function(a,b){return a.cells[0].textContent<b.cells[0].textContent?-1:1}).forEach(function(r){tb.appendChild(r)});
+    });
+    var apply=function(){
+      [].slice.call(tb.querySelectorAll('tr')).forEach(function(r){r.style.display=(!S.opv||r.dataset.g===S.opv)?'':'none'});
+      [].slice.call(document.querySelectorAll('[data-opv]')).forEach(function(b){b.className='sm'+((b.dataset.opv===S.opv)?' pri':'')});
+    };
+    var bar=document.createElement('div');bar.className='fl';bar.style.margin='0 0 12px';
+    bar.innerHTML='<button class="sm" data-opv="">All ('+S.clients.length+')</button>'+order.map(function(k){return '<button class="sm" data-opv="'+esc(k)+'">'+esc(label(k))+' ('+(cnt[k]||0)+')</button>'}).join('');
+    card.parentNode.insertBefore(bar,card);
+    [].slice.call(bar.querySelectorAll('[data-opv]')).forEach(function(b){b.onclick=function(){S.opv=b.dataset.opv;apply()}});
+    apply();
+  }catch(e){console.error('vertical grouping',e)}
+};
+
 sb.auth.getSession().then(function(r){if(r.data.session){S.session=r.data.session;boot()}else authView()});
 })();
 </script>
